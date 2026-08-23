@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-22T18:49:16Z",
+  "generatedAt": "2026-08-23T02:00:35Z",
   "cadence": "every 6 hours",
   "events": [
     {
@@ -216,7 +216,7 @@
       "state": "open",
       "evidence": {
         "headSha": "3aa7ef7a5b6b8fc99d0dd1e4d976e5ae3056f294",
-        "mergeCommit": "281838fda0f0a3d37ddd502b7d6a55fa59552b84"
+        "mergeCommit": "2c244ca4df9ddda89e4ca3d667c3104d14c96a3c"
       }
     },
     {
@@ -252,7 +252,7 @@
       "state": "open",
       "evidence": {
         "headSha": "0b056ce84263fd11a021cdf4bd3e3f59bbc9337b",
-        "mergeCommit": "e23f3187298ce46447c137bcceab0091c577b426"
+        "mergeCommit": "c26fb1e7726bdba4f44b7a32afa2a4004a4c2351"
       }
     },
     {
@@ -324,7 +324,7 @@
       "state": "open",
       "evidence": {
         "headSha": "71de73521bbee1cb5901cb39beb03781abec4fa2",
-        "mergeCommit": "20db3e9c95e8bbcf3ac0415a6576007de9b48bf6"
+        "mergeCommit": "84c5e42e2892c961367c3855674dda7a3f1b282d"
       }
     },
     {
@@ -360,7 +360,7 @@
       "state": "open",
       "evidence": {
         "headSha": "5294d7ba03ad6662551325724d0f5152701ba4eb",
-        "mergeCommit": "4703cc0d5ece858eb1314c23112fc2b8e8cae0fc"
+        "mergeCommit": "b0f405d229a95ee30459903772177273c6eac730"
       }
     },
     {
@@ -414,7 +414,7 @@
       "state": "open",
       "evidence": {
         "headSha": "05565da36288836ddc822e8eb377d6a9e3c198ff",
-        "mergeCommit": "f88d161c8fcfc283d0e58dc8f36a90005e9d7ff6"
+        "mergeCommit": "0fabf7d989f7018e374446a708a92944ad39e8d9"
       }
     },
     {
@@ -504,7 +504,7 @@
       "state": "open",
       "evidence": {
         "headSha": "703d457020e4a9efc09c1619f4d462ed51b8d634",
-        "mergeCommit": "81bde34980660e0001b290660b21fffca1fec679"
+        "mergeCommit": "4025b07bc540f61edeadcfcffc73546de588057d"
       }
     },
     {
