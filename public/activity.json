@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-24T13:13:30Z",
+  "generatedAt": "2026-08-24T19:00:05Z",
   "cadence": "every 6 hours",
   "events": [
     {
@@ -216,7 +216,7 @@
       "state": "open",
       "evidence": {
         "headSha": "3aa7ef7a5b6b8fc99d0dd1e4d976e5ae3056f294",
-        "mergeCommit": "c8af2be2df15f65debd10dd6d659fca436512589"
+        "mergeCommit": "86f7469d3e26a1f73c2a2db73ea3777944c7129d"
       }
     },
     {
@@ -252,7 +252,7 @@
       "state": "open",
       "evidence": {
         "headSha": "0b056ce84263fd11a021cdf4bd3e3f59bbc9337b",
-        "mergeCommit": "b9e8fbab8ffb15b5034e81eae93360b22b3c73d1"
+        "mergeCommit": "405ac1394f97771778d26ed934ac29346d539ddb"
       }
     },
     {
@@ -324,7 +324,7 @@
       "state": "open",
       "evidence": {
         "headSha": "71de73521bbee1cb5901cb39beb03781abec4fa2",
-        "mergeCommit": "684fae35dc6de59e4a3f33e6f1245657ebf808f3"
+        "mergeCommit": "6106efcfaec355f3d53f2a8a3fd42365d82e9d38"
       }
     },
     {
@@ -360,7 +360,7 @@
       "state": "open",
       "evidence": {
         "headSha": "5294d7ba03ad6662551325724d0f5152701ba4eb",
-        "mergeCommit": "4932ec66fab0c2a029a2aa11534f3640de11bd43"
+        "mergeCommit": "6246a0451b615e12640aebeb7635de36be3fcc57"
       }
     },
     {
@@ -414,7 +414,7 @@
       "state": "open",
       "evidence": {
         "headSha": "05565da36288836ddc822e8eb377d6a9e3c198ff",
-        "mergeCommit": "49032d28bc27be24011cf1c324e89e9a3def4172"
+        "mergeCommit": "645ddb669a02a0fe16eeb215db515a44e8b6b2d2"
       }
     },
     {
@@ -504,7 +504,7 @@
       "state": "open",
       "evidence": {
         "headSha": "703d457020e4a9efc09c1619f4d462ed51b8d634",
-        "mergeCommit": "8dbddfe088fc1362e151f90dabd2e04632da4f1b"
+        "mergeCommit": "c33a41e841260c929bb9bc925f4de6d5af4ff840"
       }
     },
     {
@@ -1122,7 +1122,7 @@
       "state": "open",
       "evidence": {
         "headSha": "91d722e905d87d6b32ec3a6928fcbd11bf45fad4",
-        "mergeCommit": "b363683e0c5220b791d13e3f8f7a0380a6977ea7"
+        "mergeCommit": "938f53bd51aa5aa6d8e7b2a208bfe1ca7c97ef6e"
       }
     },
     {
