@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-25T01:54:40+00:00",
+  "generatedAt": "2026-08-25T09:08:18+00:00",
   "source": "https://github.com/openclaw/openclaw",
   "authors": [
     {
@@ -133,13 +133,13 @@
       "identityRole": "Arca founder",
       "title": "fix(subagents): preserve announce drop vs none delivery reasons",
       "url": "https://github.com/openclaw/openclaw/pull/122855",
-      "state": "open",
+      "state": "merged",
       "draft": false,
       "createdAt": "2026-08-12T22:50:38Z",
-      "updatedAt": "2026-08-19T11:26:27Z",
-      "closedAt": null,
-      "mergedAt": null,
-      "headSha": "05565da36288836ddc822e8eb377d6a9e3c198ff",
+      "updatedAt": "2026-08-25T08:55:46Z",
+      "closedAt": "2026-08-25T08:55:42Z",
+      "mergedAt": "2026-08-25T08:55:42Z",
+      "headSha": "3d8baba0d1e9db41be331766f02be1fba5389440",
       "baseSha": "9b9f2ab4036ec3d1ffad44b7b21a5b6d7b4a4f83",
       "headOpenClawVersion": "2026.8.1",
       "baseOpenClawVersion": "2026.8.1",
@@ -157,11 +157,11 @@
       "priority": "P2",
       "clawSweeper": {
         "url": "https://github.com/openclaw/openclaw/pull/122855#issuecomment-5273951816",
-        "updatedAt": "2026-08-19T11:26:18Z",
+        "updatedAt": "2026-08-25T08:45:20Z",
         "overall": null,
         "proof": null,
         "patchQuality": null,
-        "result": null
+        "result": "** PASS (completed)"
       },
       "arca": {}
     },
