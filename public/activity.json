@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-25T07:09:00Z",
+  "generatedAt": "2026-08-25T13:12:05Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:openclaw/openclaw:122855:merged",
+      "type": "upstream_pr_state",
+      "project": "openclaw",
+      "repository": "openclaw/openclaw",
+      "number": 122855,
+      "title": "fix(subagents): preserve announce drop vs none delivery reasons",
+      "summary": "Merged upstream",
+      "url": "https://github.com/openclaw/openclaw/pull/122855",
+      "occurredAt": "2026-08-25T08:55:42Z",
+      "actor": "felirami",
+      "role": "author",
+      "state": "merged",
+      "evidence": {
+        "headSha": "3d8baba0d1e9db41be331766f02be1fba5389440",
+        "mergeCommit": "ccd8ede95ee3c0b9ba0db18ea9ecc67d1574a055"
+      }
+    },
     {
       "id": "github:pr:openclaw/openclaw:122804:closed",
       "type": "upstream_pr_state",
@@ -216,7 +234,7 @@
       "state": "open",
       "evidence": {
         "headSha": "3aa7ef7a5b6b8fc99d0dd1e4d976e5ae3056f294",
-        "mergeCommit": "86f7469d3e26a1f73c2a2db73ea3777944c7129d"
+        "mergeCommit": "ffe87f29aef92f2c439791afa5dfc0c06db634c4"
       }
     },
     {
@@ -234,7 +252,7 @@
       "state": "open",
       "evidence": {
         "headSha": "11d717c22bb85517f8d8e2ecf000cfc22f05b749",
-        "mergeCommit": "85b889d78fd13ed7693c3042ff59f5042dd6b0d2"
+        "mergeCommit": "09bb6d263ff4e525baba25109b33f229bd28b6ca"
       }
     },
     {
@@ -324,7 +342,7 @@
       "state": "open",
       "evidence": {
         "headSha": "71de73521bbee1cb5901cb39beb03781abec4fa2",
-        "mergeCommit": "6106efcfaec355f3d53f2a8a3fd42365d82e9d38"
+        "mergeCommit": "201647f100da50afa19efcd5152128cfa4be45e0"
       }
     },
     {
@@ -360,7 +378,7 @@
       "state": "open",
       "evidence": {
         "headSha": "5294d7ba03ad6662551325724d0f5152701ba4eb",
-        "mergeCommit": "6246a0451b615e12640aebeb7635de36be3fcc57"
+        "mergeCommit": "49deccfa6a82223418798e9d4a04697f0a238407"
       }
     },
     {
