@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26T07:11:17+00:00",
+  "generatedAt": "2026-08-26T13:19:17+00:00",
   "source": "https://github.com/openclaw/openclaw",
   "authors": [
     {
@@ -61,7 +61,7 @@
       "state": "open",
       "draft": false,
       "createdAt": "2026-08-13T21:22:38Z",
-      "updatedAt": "2026-08-26T01:37:42Z",
+      "updatedAt": "2026-08-26T13:00:28Z",
       "closedAt": null,
       "mergedAt": null,
       "headSha": "71de73521bbee1cb5901cb39beb03781abec4fa2",
@@ -81,11 +81,11 @@
       "priority": "P1",
       "clawSweeper": {
         "url": "https://github.com/openclaw/openclaw/pull/123321#issuecomment-5286613089",
-        "updatedAt": "2026-08-22T09:35:27Z",
+        "updatedAt": "2026-08-26T13:00:20Z",
         "overall": null,
         "proof": null,
         "patchQuality": null,
-        "result": "** FAIL (failed) — execution before step 1 `run`: `live-proof package manager pnpm is unavailable after its official installer (curl -fsSL https://get.pnpm.io/install.sh | sh -): command failed without output`"
+        "result": "** PASS (completed)"
       },
       "arca": {}
     },
@@ -174,7 +174,7 @@
       "state": "merged",
       "draft": false,
       "createdAt": "2026-08-12T21:40:06Z",
-      "updatedAt": "2026-08-26T06:19:53Z",
+      "updatedAt": "2026-08-26T08:19:24Z",
       "closedAt": "2026-08-26T06:19:38Z",
       "mergedAt": "2026-08-26T06:19:38Z",
       "headSha": "580143307d1a5fb42d87fb87338922d6819bf719",
