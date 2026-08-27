@@ -73,3 +73,15 @@ test('deploys exact main commits to Cloudflare without resyncing domains', () =>
   assert.match(workflow, /CLOUDFLARE_API_TOKEN/);
   assert.match(workflow, /CLOUDFLARE_ACCOUNT_ID/);
 });
+
+test('scheduled receipt refreshes dispatch a production deploy when data changes', () => {
+  for (const path of [
+    '.github/workflows/refresh-public-activity.yml',
+    '.github/workflows/refresh-openclaw-ledger.yml',
+  ]) {
+    const workflow = read(path);
+    assert.match(workflow, /actions:\s*write/);
+    assert.match(workflow, /changed=true/);
+    assert.match(workflow, /gh workflow run deploy-cloudflare\.yml --ref main/);
+  }
+});

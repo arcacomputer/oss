@@ -10,7 +10,8 @@ const licensed = [
   { repository: "arcabotai/openclaw-tui-deliver-stuck-spinner", spdx: "MIT" },
   { repository: "felirami/orthovoxel-studio", spdx: "MIT" },
   { repository: "felirami/openchina", spdx: "MIT" },
-  { repository: "arcabotai/oss", spdx: "MIT" },
+  { repository: "arcacomputer/headlong-agent-findings", spdx: "MIT" },
+  { repository: "arcacomputer/oss", spdx: "MIT" },
 ];
 
 const elizaMergedBaseline = { felirami: 15, arcabotai: 1 };

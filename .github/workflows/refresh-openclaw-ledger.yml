@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: refresh-openclaw-ledger
@@ -27,9 +28,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
       - name: Commit changed ledger snapshot
+        id: commit
         run: |
           if git diff --quiet -- public/openclaw-prs.json; then
             echo "No OpenClaw ledger changes."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "Cad from Arca"
@@ -37,3 +40,9 @@ jobs:
           git add public/openclaw-prs.json
           git commit -m "chore: refresh OpenClaw ledger"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Deploy refreshed main
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-cloudflare.yml --ref main

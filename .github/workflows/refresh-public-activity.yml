@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  actions: write
 
 concurrency:
   group: refresh-public-activity
@@ -30,9 +31,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
       - name: Commit changed public receipts
+        id: commit
         run: |
           if git diff --quiet -- public/activity.json; then
             echo "No public activity changes."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "Cad from Arca"
@@ -40,3 +43,9 @@ jobs:
           git add public/activity.json
           git commit -m "chore: refresh public activity"
           git push
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Deploy refreshed main
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run deploy-cloudflare.yml --ref main

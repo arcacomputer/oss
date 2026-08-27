@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "Arca OSS",
   "canonical": "https://oss.arcabot.ai",
-  "source": "https://github.com/arcabotai/oss",
+  "source": "https://github.com/arcacomputer/oss",
   "policy": {
     "licensedOnly": true,
     "publicDoesNotMeanOpenSource": true,
@@ -84,8 +84,15 @@
       "status": "published"
     },
     {
+      "name": "Headlong Agent Findings",
+      "repository": "https://github.com/arcacomputer/headlong-agent-findings",
+      "role": "publisher",
+      "license": "MIT",
+      "status": "published findings"
+    },
+    {
       "name": "Arca OSS Index",
-      "repository": "https://github.com/arcabotai/oss",
+      "repository": "https://github.com/arcacomputer/oss",
       "role": "publisher",
       "license": "MIT",
       "status": "live index"

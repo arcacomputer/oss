@@ -49,6 +49,19 @@ test("merged PRs keep exact upstream state and receipt", () => {
   assert.equal(event.state, "merged");
   assert.equal(event.occurredAt, pull.merged_at);
   assert.equal(event.evidence.headSha, pull.head.sha);
+  assert.equal(event.evidence.mergeCommit, pull.merge_commit_sha);
+});
+
+test("open PRs ignore GitHub's mutable synthetic merge commit", () => {
+  const event = normalizePullRequest({
+    ...pull,
+    state: "open",
+    closed_at: null,
+    merged_at: null,
+    merge_commit_sha: "mutable-test-merge",
+  });
+  assert.equal(event.state, "open");
+  assert.equal(event.evidence.mergeCommit, null);
 });
 
 test("prior state transitions remain visible for monitored PRs", () => {
@@ -58,9 +71,11 @@ test("prior state transitions remain visible for monitored PRs", () => {
     id: "github:pr:openclaw/openclaw:107243:open",
     state: "open",
     occurredAt: pull.created_at,
+    evidence: { ...merged.evidence, mergeCommit: "old-synthetic-merge" },
   };
   const result = mergeEvents([merged], [opened]);
   assert.deepEqual(result.map((event) => event.state), ["merged", "open"]);
+  assert.equal(result[1].evidence.mergeCommit, null);
 });
 
 test("the public feed keeps more than fifty receipts", () => {

@@ -1,11 +1,11 @@
 # Arca OSS
 
-Arca OSS is the public engineering index for Arca Systems. It documents open-source repositories Arca maintains, external open-source projects Arca supports, and upstream contribution records.
+Arca OSS is the public engineering index for Arca Computer. It documents open-source repositories Arca maintains, external open-source projects Arca supports, and upstream contribution records.
 
 ## Canonical sources
 
 - [Arca OSS website](https://oss.arcabot.ai)
-- [Source repository](https://github.com/arcabotai/oss)
+- [Source repository](https://github.com/arcacomputer/oss)
 - [Machine-readable index](https://oss.arcabot.ai/oss.json)
 - [Arca on GitHub](https://github.com/arcabotai)
 - [OpenClaw contribution ledger](https://github.com/arcabotai/arca-openclaw-contributions)
@@ -24,7 +24,8 @@ Arca OSS is the public engineering index for Arca Systems. It documents open-sou
 - [OpenClaw TUI Field Fix](https://github.com/arcabotai/openclaw-tui-deliver-stuck-spinner) — MIT-licensed diagnostic artifact.
 - [OrthoVoxel Studio](https://github.com/felirami/orthovoxel-studio) — MIT-licensed desktop pixel-art and voxel reconstruction tool.
 - [OpenChina](https://github.com/felirami/openchina) — MIT-licensed model behavior testing CLI.
-- [Arca OSS Index](https://github.com/arcabotai/oss) — MIT-licensed source and claim checks for this index.
+- [Headlong Agent Findings](https://github.com/arcacomputer/headlong-agent-findings) — MIT-licensed persistent-agent experiment findings, reliability lessons, and safe reproduction guidance.
+- [Arca OSS Index](https://github.com/arcacomputer/oss) — MIT-licensed source and claim checks for this index.
 
 ## Upstream contribution evidence
 

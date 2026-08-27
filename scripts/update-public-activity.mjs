@@ -76,7 +76,9 @@ export function normalizePullRequest(details) {
     state,
     evidence: {
       headSha: details.head.sha,
-      mergeCommit: details.merge_commit_sha || null,
+      // GitHub exposes a synthetic, mutable test-merge SHA for open PRs.
+      // It is not an immutable receipt and was causing pointless feed churn.
+      mergeCommit: details.merged_at ? details.merge_commit_sha : null,
     },
   };
 }
@@ -93,7 +95,13 @@ export function mergeEvents(currentEvents, previousEvents = [], maxEvents = MAX_
       currentPrKeys.has(`${event.repository}#${event.number}`),
   );
   const byId = new Map();
-  for (const event of [...preservedTransitions, ...currentEvents]) byId.set(event.id, event);
+  for (const event of [...preservedTransitions, ...currentEvents]) {
+    const stableEvent =
+      event.type === "upstream_pr_state" && event.state !== "merged"
+        ? { ...event, evidence: { ...event.evidence, mergeCommit: null } }
+        : event;
+    byId.set(stableEvent.id, stableEvent);
+  }
   return [...byId.values()]
     .sort((a, b) => b.occurredAt.localeCompare(a.occurredAt) || a.id.localeCompare(b.id))
     .slice(0, maxEvents);

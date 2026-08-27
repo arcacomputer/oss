@@ -349,7 +349,7 @@ export default function Home() {
       </section>
 
       <section className="closing">
-        <p className="eyebrow">Arca Systems · Santiago, Chile</p>
+        <p className="eyebrow">Arca Computer · Santiago, Chile</p>
         <h2>Build in public.<br />Keep the provenance.</h2>
         <div className="closing-links">
           <a className="button button-primary" href="https://github.com/arcabotai">Browse GitHub <Arrow /></a>
@@ -360,7 +360,7 @@ export default function Home() {
       <footer>
         <span>ARCA OSS / PUBLIC ENGINEERING INDEX</span>
         <span>Independent work. No implied upstream affiliation.</span>
-        <span><a href="https://github.com/arcabotai/oss">Source <Arrow /></a> · <a href="/oss.json">JSON index</a> · <a href="mailto:arca@arcabot.ai">arca@arcabot.ai</a></span>
+        <span><a href="https://github.com/arcacomputer/oss">Source <Arrow /></a> · <a href="/oss.json">JSON index</a> · <a href="mailto:contact@arca.computer">contact@arca.computer</a></span>
       </footer>
     </main>
   );

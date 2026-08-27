@@ -202,9 +202,21 @@ export const ownedProjects: OwnedProject[] = [
     proof: "The test suites, provider adapters, scoring boundaries, npm package, and license are public.",
   },
   {
+    name: "Headlong Agent Findings",
+    repository: "arcacomputer/headlong-agent-findings",
+    url: "https://github.com/arcacomputer/headlong-agent-findings",
+    role: "publisher",
+    kind: "persistent-agent research",
+    license: "MIT",
+    status: "published findings",
+    description:
+      "Sanitized findings from a bounded persistent-agent experiment, including reliability failures and a RepoRelay case study.",
+    proof: "The report, measured outputs, limitations, reproduction guide, and privacy methodology are public.",
+  },
+  {
     name: "Arca OSS Index",
-    repository: "arcabotai/oss",
-    url: "https://github.com/arcabotai/oss",
+    repository: "arcacomputer/oss",
+    url: "https://github.com/arcacomputer/oss",
     role: "publisher",
     kind: "public engineering index",
     license: "MIT",
