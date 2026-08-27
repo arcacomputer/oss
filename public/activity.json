@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-27T06:48:23Z",
+  "generatedAt": "2026-08-27T09:49:28Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:openclaw/openclaw:122984:merged",
+      "type": "upstream_pr_state",
+      "project": "openclaw",
+      "repository": "openclaw/openclaw",
+      "number": 122984,
+      "title": "fix(plugins): allow install when outgoing channel schema disagrees",
+      "summary": "Merged upstream",
+      "url": "https://github.com/openclaw/openclaw/pull/122984",
+      "occurredAt": "2026-08-27T08:03:56Z",
+      "actor": "felirami",
+      "role": "author",
+      "state": "merged",
+      "evidence": {
+        "headSha": "c3ea15fe614b20e4754df23ac63b06a873186214",
+        "mergeCommit": "0c313d712839670f3ac60f8fd238af7e308cdc18"
+      }
+    },
     {
       "id": "github:pr:openclaw/openclaw:122827:merged",
       "type": "upstream_pr_state",
