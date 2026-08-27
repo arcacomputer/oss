@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-26T20:05:56+00:00",
+  "generatedAt": "2026-08-27T09:55:35+00:00",
   "source": "https://github.com/openclaw/openclaw",
   "authors": [
     {
@@ -61,7 +61,7 @@
       "state": "open",
       "draft": false,
       "createdAt": "2026-08-13T21:22:38Z",
-      "updatedAt": "2026-08-26T13:00:28Z",
+      "updatedAt": "2026-08-27T04:12:03Z",
       "closedAt": null,
       "mergedAt": null,
       "headSha": "71de73521bbee1cb5901cb39beb03781abec4fa2",
@@ -95,35 +95,34 @@
       "identityRole": "Arca founder",
       "title": "fix(plugins): allow install when outgoing channel schema disagrees",
       "url": "https://github.com/openclaw/openclaw/pull/122984",
-      "state": "open",
+      "state": "merged",
       "draft": false,
       "createdAt": "2026-08-13T04:14:56Z",
-      "updatedAt": "2026-08-26T16:01:51Z",
-      "closedAt": null,
-      "mergedAt": null,
-      "headSha": "5294d7ba03ad6662551325724d0f5152701ba4eb",
-      "baseSha": "9c4224c54e3ff91383184c78e72ec45fd44aba3b",
+      "updatedAt": "2026-08-27T08:04:01Z",
+      "closedAt": "2026-08-27T08:03:56Z",
+      "mergedAt": "2026-08-27T08:03:56Z",
+      "headSha": "c3ea15fe614b20e4754df23ac63b06a873186214",
+      "baseSha": "42ce03e72e34adeb34a79c91f534a906df46f882",
       "headOpenClawVersion": "2026.8.1",
       "baseOpenClawVersion": "2026.8.1",
       "labels": [
         "cli",
-        "size: S",
-        "proof: sufficient",
+        "size: XL",
         "P2",
-        "rating: 🦐 gold shrimp",
+        "rating: 🦪 silver shellfish",
         "merge-risk: 🚨 compatibility",
-        "status: ⏳ waiting on author"
+        "status: 📣 needs proof"
       ],
-      "ratingLabel": "🦐 gold shrimp",
-      "statusLabel": "⏳ waiting on author",
+      "ratingLabel": "🦪 silver shellfish",
+      "statusLabel": "📣 needs proof",
       "priority": "P2",
       "clawSweeper": {
         "url": "https://github.com/openclaw/openclaw/pull/122984#issuecomment-5275961939",
-        "updatedAt": "2026-08-26T16:01:39Z",
+        "updatedAt": "2026-08-27T07:37:11Z",
         "overall": null,
         "proof": null,
         "patchQuality": null,
-        "result": "** PASS (completed)"
+        "result": "** FAIL (failed) — step 1 `expect_output` `Install a plugin or hook pack`: `expected terminal output was not visible within 30 seconds: \"Install a plugin or hook pack\"`"
       },
       "arca": {}
     },
