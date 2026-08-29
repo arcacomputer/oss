@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-27T09:49:28Z",
+  "generatedAt": "2026-08-29T16:44:14Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:97871:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 97871,
+      "title": "fix(desktop): surface Tailscale SSH browser checks",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/97871",
+      "occurredAt": "2026-08-29T12:04:37Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "headSha": "b787cec664eeb3c1d3fd8a4a740ea5a9a70f226e",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:openclaw/openclaw:122984:merged",
       "type": "upstream_pr_state",
