@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-29T07:08:45+00:00",
+  "generatedAt": "2026-08-30T05:29:47+00:00",
   "source": "https://github.com/openclaw/openclaw",
   "authors": [
     {
@@ -61,7 +61,7 @@
       "state": "open",
       "draft": false,
       "createdAt": "2026-08-13T21:22:38Z",
-      "updatedAt": "2026-08-28T06:17:16Z",
+      "updatedAt": "2026-08-29T23:29:47Z",
       "closedAt": null,
       "mergedAt": null,
       "headSha": "71de73521bbee1cb5901cb39beb03781abec4fa2",
@@ -72,16 +72,16 @@
         "channel: feishu",
         "size: S",
         "P1",
-        "rating: 🧂 unranked krab",
+        "rating: 🦪 silver shellfish",
         "merge-risk: 🚨 message-delivery",
         "status: 📣 needs proof"
       ],
-      "ratingLabel": "🧂 unranked krab",
+      "ratingLabel": "🦪 silver shellfish",
       "statusLabel": "📣 needs proof",
       "priority": "P1",
       "clawSweeper": {
         "url": "https://github.com/openclaw/openclaw/pull/123321#issuecomment-5286613089",
-        "updatedAt": "2026-08-28T06:17:09Z",
+        "updatedAt": "2026-08-29T23:29:40Z",
         "overall": null,
         "proof": null,
         "patchQuality": null,
