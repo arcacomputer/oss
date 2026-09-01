@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-01T05:09:05Z",
+  "generatedAt": "2026-09-01T16:41:31Z",
   "cadence": "every 6 hours",
   "events": [
     {
@@ -279,7 +279,7 @@
       "project": "django",
       "repository": "django/django",
       "number": 21800,
-      "title": "Fixed #37044 -- Documented FileField.upload_to access control.",
+      "title": "Fixed #37044 -- Documented FileField access control.",
       "summary": "Opened upstream",
       "url": "https://github.com/django/django/pull/21800",
       "occurredAt": "2026-08-18T21:27:16Z",
@@ -287,7 +287,7 @@
       "role": "author",
       "state": "open",
       "evidence": {
-        "headSha": "1b8945b58fc8202c688c7308fedc9f2febd61a88",
+        "headSha": "8527841b9fa441655debf72f5636e7aa3b20d96e",
         "mergeCommit": null
       }
     },
