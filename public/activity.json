@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-29T16:44:14Z",
+  "generatedAt": "2026-09-01T05:09:05Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:triton-lang/triton:11362:closed",
+      "type": "upstream_pr_state",
+      "project": "triton",
+      "repository": "triton-lang/triton",
+      "number": 11362,
+      "title": "Validate Autotuner prune_configs_by[\"top_k\"] values",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/triton-lang/triton/pull/11362",
+      "occurredAt": "2026-09-01T03:16:03Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "headSha": "3aa7ef7a5b6b8fc99d0dd1e4d976e5ae3056f294",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:97871:open",
       "type": "upstream_pr_state",
@@ -166,24 +184,6 @@
       }
     },
     {
-      "id": "github:pr:triton-lang/triton:11362:closed",
-      "type": "upstream_pr_state",
-      "project": "triton",
-      "repository": "triton-lang/triton",
-      "number": 11362,
-      "title": "Validate Autotuner prune_configs_by[\"top_k\"] values",
-      "summary": "Closed upstream without merge",
-      "url": "https://github.com/triton-lang/triton/pull/11362",
-      "occurredAt": "2026-08-18T22:38:46Z",
-      "actor": "arcabotai",
-      "role": "author",
-      "state": "closed",
-      "evidence": {
-        "headSha": "3aa7ef7a5b6b8fc99d0dd1e4d976e5ae3056f294",
-        "mergeCommit": null
-      }
-    },
-    {
       "id": "github:pr:huggingface/tokenizers:2342:closed",
       "type": "upstream_pr_state",
       "project": "tokenizers",
@@ -269,7 +269,7 @@
       "role": "author",
       "state": "open",
       "evidence": {
-        "headSha": "56373a6611ac67577c0ac703d1b59ab2d8e1a787",
+        "headSha": "52e86480c3797a90365f9e2e3696520305f6bbcd",
         "mergeCommit": null
       }
     },
@@ -287,7 +287,7 @@
       "role": "author",
       "state": "open",
       "evidence": {
-        "headSha": "078d6874b23e8224827725a675a40507c874e1eb",
+        "headSha": "1b8945b58fc8202c688c7308fedc9f2febd61a88",
         "mergeCommit": null
       }
     },
