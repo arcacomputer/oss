@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-01T16:41:31Z",
+  "generatedAt": "2026-09-04T20:46:22Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:openssl/openssl:32422:closed",
+      "type": "upstream_pr_state",
+      "project": "openssl",
+      "repository": "openssl/openssl",
+      "number": 32422,
+      "title": "doc: add missing const to PEM write SYNOPSIS",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/openssl/openssl/pull/32422",
+      "occurredAt": "2026-09-04T17:37:52Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "headSha": "11d717c22bb85517f8d8e2ecf000cfc22f05b749",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:triton-lang/triton:11362:closed",
       "type": "upstream_pr_state",
@@ -162,24 +180,6 @@
       "state": "closed",
       "evidence": {
         "headSha": "0b056ce84263fd11a021cdf4bd3e3f59bbc9337b",
-        "mergeCommit": null
-      }
-    },
-    {
-      "id": "github:pr:openssl/openssl:32422:closed",
-      "type": "upstream_pr_state",
-      "project": "openssl",
-      "repository": "openssl/openssl",
-      "number": 32422,
-      "title": "doc: add missing const to PEM write SYNOPSIS",
-      "summary": "Closed upstream without merge",
-      "url": "https://github.com/openssl/openssl/pull/32422",
-      "occurredAt": "2026-08-18T22:38:48Z",
-      "actor": "arcabotai",
-      "role": "author",
-      "state": "closed",
-      "evidence": {
-        "headSha": "7755cdd6accf1b87da37767f48a68e0eef23a699",
         "mergeCommit": null
       }
     },
