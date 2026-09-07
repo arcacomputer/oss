@@ -2,11 +2,51 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   buildPullRequestQuery,
+  github,
   isInternalRepository,
   mergeEvents,
   normalizePullRequest,
   payloadFor,
 } from "./update-public-activity.mjs";
+
+test("GitHub requests retry transient server failures", async () => {
+  const statuses = [500, 502, 200];
+  let attempts = 0;
+  const result = await github("/repos/huggingface/tokenizers/pulls/2342", {}, {
+    fetchImpl: async () => {
+      const status = statuses[attempts++];
+      return {
+        ok: status === 200,
+        status,
+        headers: { get: () => null },
+        json: async () => ({ number: 2342 }),
+      };
+    },
+    sleep: async () => {},
+  });
+
+  assert.equal(attempts, 3);
+  assert.deepEqual(result, { number: 2342 });
+});
+
+test("GitHub requests do not retry permanent client failures", async () => {
+  let attempts = 0;
+  await assert.rejects(
+    github("/repos/example/missing", {}, {
+      fetchImpl: async () => {
+        attempts += 1;
+        return {
+          ok: false,
+          status: 404,
+          headers: { get: () => null },
+        };
+      },
+      sleep: async () => {},
+    }),
+    /GitHub returned 404/,
+  );
+  assert.equal(attempts, 1);
+});
 
 const pull = {
   number: 107243,

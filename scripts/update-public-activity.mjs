@@ -33,12 +33,31 @@ function githubHeaders(accept = "application/vnd.github+json") {
   };
 }
 
-async function github(pathname, params = {}) {
+export async function github(pathname, params = {}, options = {}) {
   const url = new URL(`${API}${pathname}`);
   for (const [key, value] of Object.entries(params)) url.searchParams.set(key, String(value));
-  const response = await fetch(url, { headers: githubHeaders() });
-  if (!response.ok) throw new Error(`${url.pathname}: GitHub returned ${response.status}`);
-  return response.json();
+
+  const fetchImpl = options.fetchImpl || fetch;
+  const sleep = options.sleep || ((milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds)));
+  const maxAttempts = options.maxAttempts || 3;
+
+  for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
+    const response = await fetchImpl(url, { headers: githubHeaders() });
+    if (response.ok) return response.json();
+
+    const retryable = response.status === 429 || response.status >= 500;
+    if (!retryable || attempt === maxAttempts) {
+      throw new Error(`${url.pathname}: GitHub returned ${response.status} after ${attempt} attempt(s)`);
+    }
+
+    const retryAfter = Number(response.headers.get("retry-after"));
+    const delay = Number.isFinite(retryAfter) && retryAfter > 0
+      ? retryAfter * 1000
+      : 1000 * 2 ** (attempt - 1);
+    await sleep(delay);
+  }
+
+  throw new Error(`${url.pathname}: GitHub request exhausted retries`);
 }
 
 export function buildPullRequestQuery(identity, ownedLogins) {
