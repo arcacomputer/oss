@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-07T21:34:01+00:00",
+  "generatedAt": "2026-09-15T17:04:35+00:00",
   "source": "https://github.com/openclaw/openclaw",
   "authors": [
     {
@@ -253,7 +253,7 @@
       "mergedAt": null,
       "headSha": "733f61daa7c08c84c488f49a0ee37315247ca3c4",
       "baseSha": "3807eb9c582545e3ba15da41a28be9c79d4b0517",
-      "headOpenClawVersion": "2026.8.1",
+      "headOpenClawVersion": null,
       "baseOpenClawVersion": "2026.8.1",
       "labels": [
         "app: web-ui",
