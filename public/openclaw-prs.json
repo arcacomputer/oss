@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T17:04:38+00:00",
+  "generatedAt": "2026-09-16T21:22:10+00:00",
   "source": "https://github.com/openclaw/openclaw",
   "authors": [
     {
@@ -103,7 +103,7 @@
       "mergedAt": "2026-08-27T08:03:56Z",
       "headSha": "c3ea15fe614b20e4754df23ac63b06a873186214",
       "baseSha": "42ce03e72e34adeb34a79c91f534a906df46f882",
-      "headOpenClawVersion": null,
+      "headOpenClawVersion": "2026.8.1",
       "baseOpenClawVersion": "2026.8.1",
       "labels": [
         "cli",
@@ -366,7 +366,7 @@
       "headSha": "c6e26379d6a68403bbd98025be91284436549155",
       "baseSha": "6c9b31e4d5604a82f2d9cfba64bb8a7cbb0e2de8",
       "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": null,
+      "baseOpenClawVersion": "2026.7.2",
       "labels": [
         "cli",
         "commands",
@@ -492,8 +492,8 @@
       "mergedAt": null,
       "headSha": "3072762c82526c0fce27804c6b3839f0002db49a",
       "baseSha": "202dea59bdf5d0bf3bb1b50424ee8a68af9efae8",
-      "headOpenClawVersion": null,
-      "baseOpenClawVersion": null,
+      "headOpenClawVersion": "2026.7.2",
+      "baseOpenClawVersion": "2026.7.2",
       "labels": [
         "extensions: memory-core",
         "size: S"
@@ -558,7 +558,7 @@
       "headSha": "fb137a71e7288e7e166a717bfec8ae8f2fecf562",
       "baseSha": "7c72fef247a956b09b4c0a01e39a8362f5fd71df",
       "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": null,
+      "baseOpenClawVersion": "2026.7.2",
       "labels": [
         "gateway",
         "stale",
@@ -642,7 +642,7 @@
       "mergedAt": null,
       "headSha": "be8ca9eefbf9317beaa8f7b061310e30a11c011e",
       "baseSha": "67ef07863fbb24d751e20f022e216118924ae15d",
-      "headOpenClawVersion": null,
+      "headOpenClawVersion": "2026.7.2",
       "baseOpenClawVersion": "2026.7.2",
       "labels": [
         "gateway",
