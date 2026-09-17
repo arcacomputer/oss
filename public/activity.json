@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-04T20:46:22Z",
+  "generatedAt": "2026-09-17T11:42:07Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:openclaw/openclaw:150660:open",
+      "type": "upstream_pr_state",
+      "project": "openclaw",
+      "repository": "openclaw/openclaw",
+      "number": 150660,
+      "title": "improve: correct spelling typos in docs, comments, and an identifier",
+      "summary": "Opened upstream",
+      "url": "https://github.com/openclaw/openclaw/pull/150660",
+      "occurredAt": "2026-09-17T06:02:13Z",
+      "actor": "felirami",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "headSha": "b39fd8cdc280852df8c0a7fa19c5c2a3abaf6a9a",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:openssl/openssl:32422:closed",
       "type": "upstream_pr_state",
