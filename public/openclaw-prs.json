@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-16T21:22:10+00:00",
+  "generatedAt": "2026-09-17T11:48:05+00:00",
   "source": "https://github.com/openclaw/openclaw",
   "authors": [
     {
@@ -14,6 +14,46 @@
     }
   ],
   "pullRequests": [
+    {
+      "number": 150660,
+      "author": "felirami",
+      "identityRole": "Arca founder",
+      "title": "improve: correct spelling typos in docs, comments, and an identifier",
+      "url": "https://github.com/openclaw/openclaw/pull/150660",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-09-17T06:02:13Z",
+      "updatedAt": "2026-09-17T08:53:31Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "b39fd8cdc280852df8c0a7fa19c5c2a3abaf6a9a",
+      "baseSha": "9edc73fc2f9bd9f6908452ae0d40030d2afd3657",
+      "headOpenClawVersion": "2026.9.4",
+      "baseOpenClawVersion": "2026.9.4",
+      "labels": [
+        "docs",
+        "agents",
+        "size: XS",
+        "extensions: kilocode",
+        "P3",
+        "rating: 🦪 silver shellfish",
+        "status: 📣 needs proof",
+        "fleet",
+        "channel: reef"
+      ],
+      "ratingLabel": "🦪 silver shellfish",
+      "statusLabel": "📣 needs proof",
+      "priority": "P3",
+      "clawSweeper": {
+        "url": "https://github.com/openclaw/openclaw/pull/150660#issuecomment-5709791969",
+        "updatedAt": "2026-09-17T08:53:22Z",
+        "overall": null,
+        "proof": null,
+        "patchQuality": null,
+        "result": null
+      },
+      "arca": {}
+    },
     {
       "number": 123676,
       "author": "felirami",
@@ -61,7 +101,7 @@
       "state": "open",
       "draft": false,
       "createdAt": "2026-08-13T21:22:38Z",
-      "updatedAt": "2026-09-07T21:23:12Z",
+      "updatedAt": "2026-09-17T11:01:02Z",
       "closedAt": null,
       "mergedAt": null,
       "headSha": "71de73521bbee1cb5901cb39beb03781abec4fa2",
