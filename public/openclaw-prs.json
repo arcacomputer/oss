@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T11:48:05+00:00",
+  "generatedAt": "2026-09-18T04:50:04+00:00",
   "source": "https://github.com/openclaw/openclaw",
   "authors": [
     {
@@ -23,11 +23,11 @@
       "state": "open",
       "draft": false,
       "createdAt": "2026-09-17T06:02:13Z",
-      "updatedAt": "2026-09-17T08:53:31Z",
+      "updatedAt": "2026-09-18T03:24:45Z",
       "closedAt": null,
       "mergedAt": null,
       "headSha": "b39fd8cdc280852df8c0a7fa19c5c2a3abaf6a9a",
-      "baseSha": "9edc73fc2f9bd9f6908452ae0d40030d2afd3657",
+      "baseSha": "278cc5420cbc66cdfcea5d4494353bce8b553290",
       "headOpenClawVersion": "2026.9.4",
       "baseOpenClawVersion": "2026.9.4",
       "labels": [
@@ -101,15 +101,16 @@
       "state": "open",
       "draft": false,
       "createdAt": "2026-08-13T21:22:38Z",
-      "updatedAt": "2026-09-17T11:01:02Z",
+      "updatedAt": "2026-09-18T03:46:57Z",
       "closedAt": null,
       "mergedAt": null,
       "headSha": "71de73521bbee1cb5901cb39beb03781abec4fa2",
-      "baseSha": "ffa8a1d89264281c2944a203661db9275d98d435",
+      "baseSha": "57034eb5e70b33bcf1e11ba782693d0d0889bb83",
       "headOpenClawVersion": "2026.8.1",
-      "baseOpenClawVersion": "2026.8.1",
+      "baseOpenClawVersion": "2026.9.4",
       "labels": [
         "channel: feishu",
+        "stale",
         "size: S",
         "P1",
         "rating: 🦪 silver shellfish",
