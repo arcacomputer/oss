@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-17T11:42:07Z",
+  "generatedAt": "2026-09-25T11:51:52Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:igneelsaphira/kuro-postales-de-chile:1:merged",
+      "type": "upstream_pr_state",
+      "project": "kuro-postales-de-chile",
+      "repository": "igneelsaphira/kuro-postales-de-chile",
+      "number": 1,
+      "title": "Añade retratos animados a los diálogos",
+      "summary": "Merged upstream",
+      "url": "https://github.com/igneelsaphira/kuro-postales-de-chile/pull/1",
+      "occurredAt": "2026-09-25T06:47:13Z",
+      "actor": "felirami",
+      "role": "author",
+      "state": "merged",
+      "evidence": {
+        "headSha": "1ef895d25fe46026ddb49c92b498d3e77bec381d",
+        "mergeCommit": "df8fa65873a173454e88a4460f56a9a6cd79c678"
+      }
+    },
     {
       "id": "github:pr:openclaw/openclaw:150660:open",
       "type": "upstream_pr_state",
