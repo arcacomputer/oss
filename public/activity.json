@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-25T11:51:52Z",
+  "generatedAt": "2026-09-26T23:04:36Z",
   "cadence": "every 6 hours",
   "events": [
     {
@@ -22,6 +22,24 @@
       }
     },
     {
+      "id": "github:release:arcacomputer/openclaw-concentrateai:391869549",
+      "type": "release",
+      "project": "Concentrate.ai for OpenClaw",
+      "repository": "arcacomputer/openclaw-concentrateai",
+      "number": null,
+      "title": "Concentrate AI Provider 1.2.1",
+      "summary": "Published v1.2.1",
+      "url": "https://github.com/arcacomputer/openclaw-concentrateai/releases/tag/v1.2.1",
+      "occurredAt": "2026-09-19T01:10:12Z",
+      "actor": "felirami",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 391869549,
+        "tag": "v1.2.1"
+      }
+    },
+    {
       "id": "github:pr:openclaw/openclaw:150660:open",
       "type": "upstream_pr_state",
       "project": "openclaw",
@@ -37,6 +55,60 @@
       "evidence": {
         "headSha": "b39fd8cdc280852df8c0a7fa19c5c2a3abaf6a9a",
         "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:release:arcacomputer/openclaw-concentrateai:387978418",
+      "type": "release",
+      "project": "Concentrate.ai for OpenClaw",
+      "repository": "arcacomputer/openclaw-concentrateai",
+      "number": null,
+      "title": "Concentrate AI Provider 1.1.0",
+      "summary": "Published v1.1.0",
+      "url": "https://github.com/arcacomputer/openclaw-concentrateai/releases/tag/v1.1.0",
+      "occurredAt": "2026-09-13T17:36:05Z",
+      "actor": "felirami",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 387978418,
+        "tag": "v1.1.0"
+      }
+    },
+    {
+      "id": "github:release:arcacomputer/openclaw-concentrateai:387964461",
+      "type": "release",
+      "project": "Concentrate.ai for OpenClaw",
+      "repository": "arcacomputer/openclaw-concentrateai",
+      "number": null,
+      "title": "Concentrate AI for OpenClaw 1.0.1",
+      "summary": "Published v1.0.1",
+      "url": "https://github.com/arcacomputer/openclaw-concentrateai/releases/tag/v1.0.1",
+      "occurredAt": "2026-09-13T16:45:04Z",
+      "actor": "felirami",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 387964461,
+        "tag": "v1.0.1"
+      }
+    },
+    {
+      "id": "github:release:arcacomputer/openclaw-concentrateai:387873480",
+      "type": "release",
+      "project": "Concentrate.ai for OpenClaw",
+      "repository": "arcacomputer/openclaw-concentrateai",
+      "number": null,
+      "title": "1.0.0 RC1: verified plugin, ClawHub authentication pending",
+      "summary": "Published v1.0.0-rc.1",
+      "url": "https://github.com/arcacomputer/openclaw-concentrateai/releases/tag/v1.0.0-rc.1",
+      "occurredAt": "2026-09-13T11:08:27Z",
+      "actor": "felirami",
+      "role": "publisher",
+      "state": "prerelease",
+      "evidence": {
+        "releaseId": 387873480,
+        "tag": "v1.0.0-rc.1"
       }
     },
     {
@@ -382,6 +454,24 @@
       }
     },
     {
+      "id": "github:release:arcacomputer/clueside:371566714",
+      "type": "release",
+      "project": "Clueside",
+      "repository": "arcacomputer/clueside",
+      "number": null,
+      "title": "v1.4.0",
+      "summary": "Published v1.4.0",
+      "url": "https://github.com/arcacomputer/clueside/releases/tag/v1.4.0",
+      "occurredAt": "2026-08-17T06:43:59Z",
+      "actor": "github-actions[bot]",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 371566714,
+        "tag": "v1.4.0"
+      }
+    },
+    {
       "id": "github:pr:openclaw/openclaw:105029:closed",
       "type": "upstream_pr_state",
       "project": "openclaw",
@@ -418,6 +508,114 @@
       }
     },
     {
+      "id": "github:release:arcacomputer/clueside:371457609",
+      "type": "release",
+      "project": "Clueside",
+      "repository": "arcacomputer/clueside",
+      "number": null,
+      "title": "v1.3.2",
+      "summary": "Published v1.3.2",
+      "url": "https://github.com/arcacomputer/clueside/releases/tag/v1.3.2",
+      "occurredAt": "2026-08-16T23:11:14Z",
+      "actor": "github-actions[bot]",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 371457609,
+        "tag": "v1.3.2"
+      }
+    },
+    {
+      "id": "github:release:arcacomputer/clueside:371445718",
+      "type": "release",
+      "project": "Clueside",
+      "repository": "arcacomputer/clueside",
+      "number": null,
+      "title": "v1.3.1",
+      "summary": "Published v1.3.1",
+      "url": "https://github.com/arcacomputer/clueside/releases/tag/v1.3.1",
+      "occurredAt": "2026-08-16T22:02:52Z",
+      "actor": "github-actions[bot]",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 371445718,
+        "tag": "v1.3.1"
+      }
+    },
+    {
+      "id": "github:release:arcacomputer/clueside:371428534",
+      "type": "release",
+      "project": "Clueside",
+      "repository": "arcacomputer/clueside",
+      "number": null,
+      "title": "v1.3.0",
+      "summary": "Published v1.3.0",
+      "url": "https://github.com/arcacomputer/clueside/releases/tag/v1.3.0",
+      "occurredAt": "2026-08-16T20:36:32Z",
+      "actor": "github-actions[bot]",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 371428534,
+        "tag": "v1.3.0"
+      }
+    },
+    {
+      "id": "github:release:arcacomputer/clueside:371195230",
+      "type": "release",
+      "project": "Clueside",
+      "repository": "arcacomputer/clueside",
+      "number": null,
+      "title": "v1.2.0",
+      "summary": "Published v1.2.0",
+      "url": "https://github.com/arcacomputer/clueside/releases/tag/v1.2.0",
+      "occurredAt": "2026-08-16T00:47:21Z",
+      "actor": "github-actions[bot]",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 371195230,
+        "tag": "v1.2.0"
+      }
+    },
+    {
+      "id": "github:release:arcacomputer/clueside:371169814",
+      "type": "release",
+      "project": "Clueside",
+      "repository": "arcacomputer/clueside",
+      "number": null,
+      "title": "v1.1.0",
+      "summary": "Published v1.1.0",
+      "url": "https://github.com/arcacomputer/clueside/releases/tag/v1.1.0",
+      "occurredAt": "2026-08-15T22:11:36Z",
+      "actor": "github-actions[bot]",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 371169814,
+        "tag": "v1.1.0"
+      }
+    },
+    {
+      "id": "github:release:arcacomputer/clueside:370767265",
+      "type": "release",
+      "project": "Clueside",
+      "repository": "arcacomputer/clueside",
+      "number": null,
+      "title": "v1.0.8",
+      "summary": "Published v1.0.8",
+      "url": "https://github.com/arcacomputer/clueside/releases/tag/v1.0.8",
+      "occurredAt": "2026-08-14T18:59:13Z",
+      "actor": "github-actions[bot]",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 370767265,
+        "tag": "v1.0.8"
+      }
+    },
+    {
       "id": "github:pr:openclaw/openclaw:123676:open",
       "type": "upstream_pr_state",
       "project": "openclaw",
@@ -436,6 +634,24 @@
       }
     },
     {
+      "id": "github:release:arcacomputer/clueside:370289983",
+      "type": "release",
+      "project": "Clueside",
+      "repository": "arcacomputer/clueside",
+      "number": null,
+      "title": "v1.0.7",
+      "summary": "Published v1.0.7",
+      "url": "https://github.com/arcacomputer/clueside/releases/tag/v1.0.7",
+      "occurredAt": "2026-08-14T01:00:18Z",
+      "actor": "github-actions[bot]",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 370289983,
+        "tag": "v1.0.7"
+      }
+    },
+    {
       "id": "github:pr:openclaw/openclaw:123321:open",
       "type": "upstream_pr_state",
       "project": "openclaw",
@@ -451,6 +667,42 @@
       "evidence": {
         "headSha": "71de73521bbee1cb5901cb39beb03781abec4fa2",
         "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:release:arcacomputer/clueside:370210336",
+      "type": "release",
+      "project": "Clueside",
+      "repository": "arcacomputer/clueside",
+      "number": null,
+      "title": "v1.0.6",
+      "summary": "Published v1.0.6",
+      "url": "https://github.com/arcacomputer/clueside/releases/tag/v1.0.6",
+      "occurredAt": "2026-08-13T20:58:48Z",
+      "actor": "github-actions[bot]",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 370210336,
+        "tag": "v1.0.6"
+      }
+    },
+    {
+      "id": "github:release:arcacomputer/clueside:370189596",
+      "type": "release",
+      "project": "Clueside",
+      "repository": "arcacomputer/clueside",
+      "number": null,
+      "title": "v1.0.5",
+      "summary": "Published v1.0.5",
+      "url": "https://github.com/arcacomputer/clueside/releases/tag/v1.0.5",
+      "occurredAt": "2026-08-13T20:19:48Z",
+      "actor": "github-actions[bot]",
+      "role": "publisher",
+      "state": "released",
+      "evidence": {
+        "releaseId": 370189596,
+        "tag": "v1.0.5"
       }
     },
     {

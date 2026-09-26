@@ -214,6 +214,45 @@ export const ownedProjects: OwnedProject[] = [
     proof: "The report, measured outputs, limitations, reproduction guide, and privacy methodology are public.",
   },
   {
+    name: "Clueside",
+    repository: "arcacomputer/clueside",
+    url: "https://github.com/arcacomputer/clueside",
+    role: "maintainer",
+    kind: "browser privacy tooling",
+    license: "MIT",
+    status: "maintained",
+    description:
+      "A Manifest V3 Chrome extension that scores page images for AI generation with on-device ONNX inference, so no image bytes leave the browser.",
+    proof:
+      "The extension source, fusion policy, evaluation harness, tests, third-party model notices, and tagged release zips are public.",
+  },
+  {
+    name: "poidh Ultra",
+    repository: "arcacomputer/poidhultra",
+    url: "https://github.com/arcacomputer/poidhultra",
+    role: "maintainer",
+    kind: "bounty infrastructure",
+    license: "MIT",
+    status: "pre-launch preview",
+    description:
+      "A monorepo for a modern poidh client, independently implemented indexing, shared community services, and maintainer-reviewed upstream maintenance.",
+    proof:
+      "The source, upstream review accounting, launch runbook, and read-only preview are public. Shared production launch stays gated on the documented prerequisites.",
+  },
+  {
+    name: "Concentrate.ai for OpenClaw",
+    repository: "arcacomputer/openclaw-concentrateai",
+    url: "https://github.com/arcacomputer/openclaw-concentrateai",
+    role: "maintainer",
+    kind: "OpenClaw provider plugin",
+    license: "MIT",
+    status: "published on ClawHub · compatibility testing",
+    description:
+      "A provider plugin connecting OpenClaw to Concentrate's Responses API, with streaming, tools, reasoning, structured output, and image input where the selected upstream model supports them.",
+    proof:
+      "The source, changelog, release verification report, and full test record including retained failures are public. No npm release is claimed.",
+  },
+  {
     name: "Arca OSS Index",
     repository: "arcacomputer/oss",
     url: "https://github.com/arcacomputer/oss",
