@@ -91,6 +91,27 @@
       "status": "published findings"
     },
     {
+      "name": "Clueside",
+      "repository": "https://github.com/arcacomputer/clueside",
+      "role": "maintainer",
+      "license": "MIT",
+      "status": "maintained"
+    },
+    {
+      "name": "poidh Ultra",
+      "repository": "https://github.com/arcacomputer/poidhultra",
+      "role": "maintainer",
+      "license": "MIT",
+      "status": "pre-launch preview"
+    },
+    {
+      "name": "Concentrate.ai for OpenClaw",
+      "repository": "https://github.com/arcacomputer/openclaw-concentrateai",
+      "role": "maintainer",
+      "license": "MIT",
+      "status": "published on ClawHub · compatibility testing"
+    },
+    {
       "name": "Arca OSS Index",
       "repository": "https://github.com/arcacomputer/oss",
       "role": "publisher",

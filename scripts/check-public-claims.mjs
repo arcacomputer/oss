@@ -11,6 +11,9 @@ const licensed = [
   { repository: "felirami/orthovoxel-studio", spdx: "MIT" },
   { repository: "felirami/openchina", spdx: "MIT" },
   { repository: "arcacomputer/headlong-agent-findings", spdx: "MIT" },
+  { repository: "arcacomputer/clueside", spdx: "MIT" },
+  { repository: "arcacomputer/poidhultra", spdx: "MIT" },
+  { repository: "arcacomputer/openclaw-concentrateai", spdx: "MIT" },
   { repository: "arcacomputer/oss", spdx: "MIT" },
 ];
 
