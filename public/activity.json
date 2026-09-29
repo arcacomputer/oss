@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T23:17:07Z",
+  "generatedAt": "2026-09-29T05:44:46Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:97871:merged",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 97871,
+      "title": "fix(desktop): surface Tailscale SSH browser checks",
+      "summary": "Merged upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/97871",
+      "occurredAt": "2026-09-29T02:32:26Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "merged",
+      "evidence": {
+        "headSha": "ce55f3c5e9168474c920c2d784ef1a407639eccb",
+        "mergeCommit": "e4956f5a122bef41d26724f85399a57f6834ed6a"
+      }
+    },
     {
       "id": "github:pr:igneelsaphira/kuro-postales-de-chile:1:merged",
       "type": "upstream_pr_state",
