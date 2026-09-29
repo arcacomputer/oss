@@ -148,6 +148,21 @@
       "role": "upstream contributor",
       "evidence": "https://github.com/NousResearch/hermes-agent/pull/76400",
       "originPullRequest": "https://github.com/NousResearch/hermes-agent/pull/74779",
+      "pullRequests": [
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/pull/97871",
+          "title": "fix(desktop): surface Tailscale SSH browser checks",
+          "state": "merged",
+          "author": "arcabotai",
+          "mergedAt": "2026-09-29T02:32:26Z",
+          "mergedBy": "OutThisLife",
+          "headSha": "ce55f3c5e9168474c920c2d784ef1a407639eccb",
+          "mergeCommit": "e4956f5a122bef41d26724f85399a57f6834ed6a",
+          "issue": "https://github.com/NousResearch/hermes-agent/issues/97867",
+          "summary": "Desktop safely classifies Tailscale SSH browser checks and gives Terminal guidance instead of a generic timeout without exposing the one-time authentication URL.",
+          "releaseStatus": "unverified"
+        }
+      ],
       "mergedCredits": [
         "https://github.com/NousResearch/hermes-agent/pull/76400"
       ],
