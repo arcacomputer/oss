@@ -1,8 +1,80 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-06T06:21:29Z",
+  "generatedAt": "2026-10-13T14:12:25Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:137783:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 137783,
+      "title": "fix(bot-desktop): keep attaching to the dock Chrome after DevToolsActivePort is deleted",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/137783",
+      "occurredAt": "2026-10-13T11:30:28Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "headSha": "023af3d231b247d5f59f10b822dcab4c5a522264",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:137756:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 137756,
+      "title": "fix(config): ignore a non-mapping agent: section instead of crashing load_config",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/137756",
+      "occurredAt": "2026-10-13T10:23:56Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "headSha": "322a5cbf808e2d9bcbcd2cd6eeecc60257965c13",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:137658:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 137658,
+      "title": "fix(compression): keep a user turn merged after a todo snapshot (#137652)",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/137658",
+      "occurredAt": "2026-10-13T06:33:16Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "headSha": "cfaf6ec8dbe9e1002846bbf6eeab43b84369b52e",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:137619:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 137619,
+      "title": "fix(tools): MCP stdio cleanup no longer SIGTERMs a cron worker spawned during the connect window (#134611)",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/137619",
+      "occurredAt": "2026-10-13T04:58:08Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "headSha": "bd35ad83ca262a069ddd503fd56a12093b78faa4",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:openclaw/openclaw:150660:closed",
       "type": "upstream_pr_state",
