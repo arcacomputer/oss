@@ -23,7 +23,9 @@ The previous Next.js site fetched the OpenClaw contribution ledger with one-hour
 - `public/activity.json` refreshes every six hours
 - `public/openclaw-prs.json` refreshes hourly
 - each workflow validates claims and commits only when public evidence changes
-- every committed refresh can trigger a deterministic Cloudflare build after production automation is enabled
+- every committed refresh triggers the Cloudflare deployment workflow; the live site advances only after checks, the dependency audit, upload, and promotion succeed
+
+Hermes contribution receipts distinguish our directly authored merge from maintainer-incorporated commit credit. Both accepted contributions are verified in the `v0.21.6` source tag; that does not establish inclusion in a packaged Desktop binary.
 
 A temporary upstream outage cannot erase the public record because `lib/data.ts` retains its curated fallback.
 
@@ -57,7 +59,7 @@ npm audit
 
 ## Deployment boundary
 
-`wrangler.json` defines no custom-domain routes and disables `workers.dev` and preview URLs. Production remains on Vercel until a matched Cloudflare canary is reviewed and approved for cutover.
+Production is the `arca-oss` Cloudflare Worker serving `oss.arcabot.ai`. Its custom domain is already attached. `wrangler.json` defines no routes and disables `workers.dev` and preview URLs. Routine deployments upload and promote an exact Git commit without changing DNS or domain attachments.
 
 ## License
 

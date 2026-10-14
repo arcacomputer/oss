@@ -160,13 +160,23 @@
           "mergeCommit": "e4956f5a122bef41d26724f85399a57f6834ed6a",
           "issue": "https://github.com/NousResearch/hermes-agent/issues/97867",
           "summary": "Desktop safely classifies Tailscale SSH browser checks and gives Terminal guidance instead of a generic timeout without exposing the one-time authentication URL.",
-          "releaseStatus": "unverified"
+          "releaseStatus": "source-tag-verified"
         }
       ],
       "mergedCredits": [
         "https://github.com/NousResearch/hermes-agent/pull/76400"
       ],
       "creditBoundary": "Maintainer PR #76400 cherry-picked the origin PR with authorship preserved. Five merged commits are authored by Cad from Arca; the contributor map credits @arcabotai.",
+      "sourceRelease": {
+        "tag": "v0.21.6",
+        "commit": "818c13be1dc4fd28987e1e881a9408224afd4535",
+        "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v0.21.6",
+        "mergeCommits": [
+          "e4956f5a122bef41d26724f85399a57f6834ed6a",
+          "8b8ebc26bb5a433c1975615c7c8e4a0182d94f36"
+        ],
+        "binaryReleaseStatus": "unverified"
+      },
       "affiliated": false
     },
     {

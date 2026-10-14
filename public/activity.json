@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-13T22:45:42Z",
+  "generatedAt": "2026-10-14T02:08:45Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:138134:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 138134,
+      "title": "fix(pm): drop exclude-newer from seeded/replayed uv.lock on user machines",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/138134",
+      "occurredAt": "2026-10-14T01:26:43Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "headSha": "2cf0eea87d55a1cb4a8719550f0180362008d84b",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:138068:open",
       "type": "upstream_pr_state",

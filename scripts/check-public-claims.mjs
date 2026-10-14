@@ -193,6 +193,26 @@ for (const expected of clickClackMergeCredits) {
   );
 }
 
+const hermesIndex = JSON.parse(
+  await readFile(new URL("../public/oss.json", import.meta.url), "utf8"),
+).supportedProjects.find((project) => project.name === "Hermes Agent");
+const hermesAuthoredReceipt = hermesIndex.pullRequests.find((pr) => pr.url.endsWith("/97871"));
+const hermesAuthoredPr = await github("repos/NousResearch/hermes-agent/pulls/97871");
+assert.equal(hermesAuthoredPr.user.login, hermesAuthoredReceipt.author, "Hermes #97871: author changed");
+assert.equal(hermesAuthoredPr.merged_at, hermesAuthoredReceipt.mergedAt, "Hermes #97871: merge receipt changed");
+assert.equal(hermesAuthoredPr.merge_commit_sha, hermesAuthoredReceipt.mergeCommit, "Hermes #97871: merge commit changed");
+assert.equal(hermesAuthoredReceipt.releaseStatus, "source-tag-verified");
+const sourceRelease = hermesIndex.sourceRelease;
+assert.equal(sourceRelease.binaryReleaseStatus, "unverified", "Source ancestry does not prove Desktop binary packaging");
+const hermesReleaseCommit = await github(`repos/NousResearch/hermes-agent/commits/${sourceRelease.tag}`);
+assert.equal(hermesReleaseCommit.sha, sourceRelease.commit, "Hermes source tag moved from the verified commit");
+assert.deepEqual(sourceRelease.mergeCommits, [hermesAuthoredReceipt.mergeCommit, hermesMergeCredit.mergeCommit]);
+for (const sha of sourceRelease.mergeCommits) {
+  const comparison = await github(`repos/NousResearch/hermes-agent/compare/${sha}...${sourceRelease.commit}`);
+  assert.ok(["ahead", "identical"].includes(comparison.status), `Hermes merge ${sha}: not contained in source release`);
+  assert.equal(comparison.merge_base_commit.sha, sha, `Hermes merge ${sha}: ancestry not proven`);
+}
+
 const hermesPr = await github(`repos/NousResearch/hermes-agent/pulls/${hermesMergeCredit.number}`);
 assert.ok(hermesPr.merged_at, `Hermes Agent PR #${hermesMergeCredit.number}: expected merged state`);
 assert.equal(

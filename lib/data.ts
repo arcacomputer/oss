@@ -348,7 +348,7 @@ export const supportPrograms: SupportProgram[] = [
         url: "https://github.com/NousResearch/hermes-agent/pull/97871",
       },
     ],
-    note: "Hermes merged five Cad-authored commits through maintainer PR #76400, with @arcabotai mapped in the contributor record. Directly authored PR #97871 also merged: Desktop classifies Tailscale SSH browser checks safely and gives Terminal guidance instead of a generic timeout, without exposing the one-time authentication URL. Release inclusion is unverified. Arca is an independent contributor, not a Nous Research maintainer or affiliate.",
+    note: "Hermes merged five Cad-authored commits through maintainer PR #76400, with @arcabotai mapped in the contributor record. Directly authored PR #97871 also merged: Desktop classifies Tailscale SSH browser checks safely and gives Terminal guidance instead of a generic timeout, without exposing the one-time authentication URL. Both contributions are included in the v0.21.6 source tag; packaged Desktop binary inclusion is unverified. Arca is an independent contributor, not a Nous Research maintainer or affiliate.",
   },
   {
     name: "SlimeVR CheeseCake",
