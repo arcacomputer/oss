@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-14T02:08:45Z",
+  "generatedAt": "2026-10-14T04:54:26Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:138161:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 138161,
+      "title": "fix(pm): stop contained Node builds hanging on hidden stdin prompts",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/138161",
+      "occurredAt": "2026-10-14T02:37:05Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "headSha": "39b6a771e5fb0c8f30e27796451439f8e978f91a",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:138134:open",
       "type": "upstream_pr_state",
