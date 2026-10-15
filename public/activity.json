@@ -1,8 +1,44 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T04:39:26Z",
+  "generatedAt": "2026-10-15T21:23:33Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:139430:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 139430,
+      "title": "fix(matrix): don't require mautrix[encryption] deps when E2EE is off",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/139430",
+      "occurredAt": "2026-10-15T20:35:53Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "headSha": "19519e8d5ea24081efa914ef44434348f04d7765",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:139394:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 139394,
+      "title": "fix(gateway): rollback.restore keeps hand-edits unless --all, like the other /rollback paths",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/139394",
+      "occurredAt": "2026-10-15T19:41:21Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "headSha": "e51948575c84d2376174245db869109f5b91cf9c",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:138681:open",
       "type": "upstream_pr_state",
