@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-15T21:23:33Z",
+  "generatedAt": "2026-10-16T04:32:22Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:huggingface/tokenizers:2342:closed",
+      "type": "upstream_pr_state",
+      "project": "tokenizers",
+      "repository": "huggingface/tokenizers",
+      "number": 2342,
+      "title": "docs: note that WordPiece training uses BPE",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/huggingface/tokenizers/pull/2342",
+      "occurredAt": "2026-10-16T01:47:33Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "headSha": "52e86480c3797a90365f9e2e3696520305f6bbcd",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:139430:open",
       "type": "upstream_pr_state",
@@ -522,24 +540,6 @@
       "state": "closed",
       "evidence": {
         "headSha": "0b056ce84263fd11a021cdf4bd3e3f59bbc9337b",
-        "mergeCommit": null
-      }
-    },
-    {
-      "id": "github:pr:huggingface/tokenizers:2342:closed",
-      "type": "upstream_pr_state",
-      "project": "tokenizers",
-      "repository": "huggingface/tokenizers",
-      "number": 2342,
-      "title": "docs: note that WordPiece training uses BPE",
-      "summary": "Closed upstream without merge",
-      "url": "https://github.com/huggingface/tokenizers/pull/2342",
-      "occurredAt": "2026-08-18T22:38:44Z",
-      "actor": "arcabotai",
-      "role": "author",
-      "state": "closed",
-      "evidence": {
-        "headSha": "56373a6611ac67577c0ac703d1b59ab2d8e1a787",
         "mergeCommit": null
       }
     },
