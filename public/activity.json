@@ -1,8 +1,26 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-16T04:32:22Z",
+  "generatedAt": "2026-10-17T04:26:25Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:138681:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 138681,
+      "title": "fix(agent): image eviction keeps batching when uploads alone breach the ceiling (#133999)",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/138681",
+      "occurredAt": "2026-10-16T21:41:29Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "headSha": "28088c594692a2223ca294d19d5ecf177dd94c78",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:huggingface/tokenizers:2342:closed",
       "type": "upstream_pr_state",
