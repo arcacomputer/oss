@@ -1,8 +1,98 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T11:05:37Z",
+  "generatedAt": "2026-10-19T13:15:58Z",
   "cadence": "every 6 hours",
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:137619:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 137619,
+      "title": "fix(tools): MCP stdio cleanup no longer SIGTERMs a cron worker spawned during the connect window (#134611)",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/137619",
+      "occurredAt": "2026-10-19T09:12:07Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "headSha": "bd35ad83ca262a069ddd503fd56a12093b78faa4",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:138134:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 138134,
+      "title": "fix(pm): drop exclude-newer from seeded/replayed uv.lock on user machines",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/138134",
+      "occurredAt": "2026-10-19T09:11:47Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "headSha": "2cf0eea87d55a1cb4a8719550f0180362008d84b",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:138161:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 138161,
+      "title": "fix(pm): stop contained Node builds hanging on hidden stdin prompts",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/138161",
+      "occurredAt": "2026-10-19T09:11:29Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "headSha": "39b6a771e5fb0c8f30e27796451439f8e978f91a",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:137756:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 137756,
+      "title": "fix(config): ignore a non-mapping agent: section instead of crashing load_config",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/137756",
+      "occurredAt": "2026-10-19T09:11:16Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "headSha": "322a5cbf808e2d9bcbcd2cd6eeecc60257965c13",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:138068:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 138068,
+      "title": "fix(agent): exclude Kubernetes cluster DNS from is_local_endpoint mDNS match",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/138068",
+      "occurredAt": "2026-10-19T07:37:10Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "headSha": "ebeb892409403a4e3e27d037cb10c2f3ec43a224",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:140461:closed",
       "type": "upstream_pr_state",
