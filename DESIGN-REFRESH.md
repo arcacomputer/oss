@@ -1,4 +1,6 @@
-# Arca OSS — Visual Refresh Brief
+# Arca OSS — Historical Visual Exploration
+
+> Superseded by the editorial refresh described in [DESIGN.md](DESIGN.md). The source-map artwork and dark hero described below are retained as historical context.
 
 **Scope:** Graphics lead deliverable only. No application code changes.  
 **Audience for this doc:** Frontend engineer integrating the hero source-map field.

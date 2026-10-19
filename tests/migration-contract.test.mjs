@@ -23,7 +23,7 @@ test('uses Astro static output and Cloudflare Workers Static Assets', () => {
 
 test('preserves the observed single-page rendering and public assets', () => {
   assert.ok(existsSync(join(root, 'src/pages/index.astro')));
-  assert.match(read('src/layouts/BaseLayout.astro'), /Arca OSS — public software, upstream work, receipts/);
+  assert.match(read('src/layouts/BaseLayout.astro'), /Arca OSS — Tools, contributions &amp; open-source work/);
   const css = read('src/styles/global.css');
   assert.match(css, /font-family:\s*Arial,\s*Helvetica,\s*sans-serif/);
   for (const asset of ['activity.json', 'oss.json', 'llms.txt', 'robots.txt', 'sitemap.xml', 'og.png']) {
@@ -53,15 +53,15 @@ test('prevents Cloudflare beacon injection without weakening CSP', async () => {
   assert.match(response.headers.get('cache-control') || '', /no-transform/);
 });
 
-test('improves long-page mobile navigation without changing the visual system', () => {
+test('keeps accessible mobile navigation and expandable public records', () => {
   const home = read('src/react-pages/Home.tsx');
   const css = read('src/styles/global.css');
   assert.match(home, /<details className="mobile-section-nav"/);
-  assert.match(home, /ledger\.pullRequests\.slice\(0, LEDGER_INITIAL_LIMIT\)/);
+  assert.match(home, /ledger\.pullRequests\.slice\(\s*0,\s*LEDGER_INITIAL_LIMIT\s*,?\s*\)/);
   assert.match(home, /<details className="ledger-more"/);
   assert.match(home, /className="section-return"/);
   assert.match(css, /\.mobile-section-nav summary[^}]*min-height:\s*44px/s);
-  assert.match(css, /\.ledger-more summary[^}]*min-height:\s*44px/s);
+  assert.match(css, /\.ledger-more\s*>\s*summary[^}]*min-height:\s*66px/s);
 });
 
 test('deploys exact main commits to Cloudflare without resyncing domains', () => {

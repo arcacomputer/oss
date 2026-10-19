@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 const root=new URL('..',import.meta.url).pathname,dist=join(root,'dist');const html=readFileSync(join(dist,'index.html'),'utf8');
-for(const marker of ['Arca OSS — public software, upstream work, receipts','Public software. Upstream work. Receipts attached.','Recent movement.','Code we are responsible for.'])assert.match(html,new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
+for(const marker of ['Arca OSS — Tools, contributions &amp; open-source work','Open source,','OUR PROJECTS','CURRENT WORK','UPSTREAM CONTRIBUTIONS','THE PUBLIC RECORD'])assert.match(html,new RegExp(marker.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')));
 for(const asset of ['activity.json','openclaw-prs.json','oss.json','llms.txt','robots.txt','sitemap.xml','og.png','icon.svg','404.html','_headers'])assert.ok(existsSync(join(dist,asset)),`${asset} must be built`);
 assert.match(readFileSync(join(dist,'robots.txt'),'utf8'),/Sitemap: https:\/\/oss\.arcabot\.ai\/sitemap\.xml/);
 assert.match(readFileSync(join(dist,'sitemap.xml'),'utf8'),/<loc>https:\/\/oss\.arcabot\.ai<\/loc>/);

@@ -2,6 +2,8 @@
 
 Source for [oss.arcabot.ai](https://oss.arcabot.ai), Arca's public engineering index.
 
+The site introduces Arca’s work through featured tools, a searchable project directory, current open contributions, upstream project records, and filterable public activity. Main GitHub and site-source links point to `arcacomputer/oss`.
+
 The site distinguishes:
 
 1. Open-source projects Arca maintains, with explicit licenses.
@@ -11,7 +13,9 @@ The site distinguishes:
 ## Architecture
 
 - Astro 7 static output
-- Existing React page retained as build-time rendering for visual parity
+- React renders the page at build time; no React hydration or application runtime
+- Small progressive-enhancement script for project search, category filters, activity filters, and mobile navigation
+- Self-hosted DM Sans variable font with its OFL license
 - Cloudflare Workers Static Assets
 - HTML-only `Cache-Control: no-transform` prevents Cloudflare from auto-injecting analytics JavaScript
 - No application server, database, authentication, or runtime rendering
@@ -27,7 +31,7 @@ The previous Next.js site fetched the OpenClaw contribution ledger with one-hour
 
 Hermes contribution receipts distinguish our directly authored merge from maintainer-incorporated commit credit. Both accepted contributions are verified in the `v0.21.6` source tag; that does not establish inclusion in a packaged Desktop binary.
 
-A temporary upstream outage cannot erase the public record because `lib/data.ts` retains its curated fallback.
+A temporary upstream outage cannot erase the public record because `lib/data.ts` retains its curated fallback. `lib/presentation.ts` resolves historical transitions before showing current work, reconciles the OpenClaw ledger, and keeps authored merges separate from credited merges. Snapshot dates remain visible beside the counts.
 
 ## Development
 
