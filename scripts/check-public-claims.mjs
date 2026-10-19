@@ -24,11 +24,7 @@ const elizaArcabotPr = {
   headSha: "cc591dbf8ad94e9180ecb655cea7eb42f96e97e2",
   mergeCommit: "bc0752eea6f3d84b38ba4dc0f8484bc09be29e15",
 };
-const slimeVrMergedPrs = [
-  { number: 1, author: "felirami", headSha: "670a25491332ea444dab8419c54138172c7d704d", mergeCommit: "c8699d3565fe83927988167a4de217c4ea4ccb81" },
-  { number: 6, author: "felirami", headSha: "f4a6de07da991a692889acc7dd77dd5aa9a08f4e", mergeCommit: "ee51f530e06f0385ae3ddc4a5256048cb2d55393" },
-  { number: 9, author: "felirami", headSha: "d1b9939b3cc90d6e1831d291dae9cf44b322ba55", mergeCommit: "b8a4a2da6e3266131136ac96ae59257572a2d2a6" },
-];
+
 
 const prs = [104192, 104492, 104893, 105029];
 const founderMergedPr = {
@@ -113,7 +109,7 @@ for (const expected of licensed) {
 }
 
 for (const [author, count] of Object.entries(elizaMergedBaseline)) {
-  const query = encodeURIComponent(`repo:elizaOS/eliza is:pr is:merged author:${author}`);
+  const query = encodeURIComponent(`repo:elizaOS/eliza is:pr is:merged author:${author} created:>=2026-02-12`);
   const result = await github(`search/issues?q=${query}&per_page=100`);
   assert.ok(result.total_count >= count, `elizaOS: expected at least ${count} merged PRs by ${author}`);
 }
@@ -122,16 +118,6 @@ assert.ok(elizaPr.merged_at, `elizaOS PR #${elizaArcabotPr.number}: expected mer
 assert.equal(elizaPr.user?.login, elizaArcabotPr.author, `elizaOS PR #${elizaArcabotPr.number}: author changed`);
 assert.equal(elizaPr.head?.sha, elizaArcabotPr.headSha, `elizaOS PR #${elizaArcabotPr.number}: head changed`);
 assert.equal(elizaPr.merge_commit_sha, elizaArcabotPr.mergeCommit, `elizaOS PR #${elizaArcabotPr.number}: merge commit changed`);
-
-const slimeVrLicense = await github("repos/Sorakage033/SlimeVR-CheeseCake/license");
-assert.equal(slimeVrLicense.license?.spdx_id, "Apache-2.0", "SlimeVR CheeseCake: expected Apache-2.0 license");
-for (const expected of slimeVrMergedPrs) {
-  const pr = await github(`repos/Sorakage033/SlimeVR-CheeseCake/pulls/${expected.number}`);
-  assert.ok(pr.merged_at, `SlimeVR CheeseCake PR #${expected.number}: expected merged state`);
-  assert.equal(pr.user?.login, expected.author, `SlimeVR CheeseCake PR #${expected.number}: author changed`);
-  assert.equal(pr.head?.sha, expected.headSha, `SlimeVR CheeseCake PR #${expected.number}: head changed`);
-  assert.equal(pr.merge_commit_sha, expected.mergeCommit, `SlimeVR CheeseCake PR #${expected.number}: merge commit changed`);
-}
 
 for (const number of prs) {
   const pr = await github(`repos/openclaw/openclaw/pulls/${number}`);
@@ -259,6 +245,26 @@ assert.ok(hypersnapPr.merged_at, "Hypersnap PR #10: expected merged upstream PR"
 const activity = JSON.parse(
   await readFile(new URL("../public/activity.json", import.meta.url), "utf8"),
 );
+const index = JSON.parse(await readFile(new URL("../public/oss.json", import.meta.url), "utf8"));
+const inventory = JSON.parse(await readFile(new URL("../public/github-repositories.json", import.meta.url), "utf8"));
+const identities = new Map(index.contributionIdentities.map((identity) => [identity.login.toLowerCase(), identity]));
+const owners = new Set(index.ownedRepositoryOwners.map((owner) => owner.toLowerCase()));
+assert.equal(index.githubTracking.since, "2026-02-12", "Tracking: Arca cutoff changed");
+assert.deepEqual([...identities.keys()].sort(), ["arcabotai", "felirami"], "Tracking: expected both account identities");
+assert.ok(Number.isFinite(Date.parse(activity.checkedAt)), "Public activity: verification date missing");
+assert.deepEqual(activity.source.identities, index.contributionIdentities.map(({ login, since, role }) => ({ login, since, role })), "Public activity: tracking identities changed");
+assert.equal(inventory.schemaVersion, 1, "Repository inventory: unsupported schema version");
+assert.ok(Number.isFinite(Date.parse(inventory.checkedAt)), "Repository inventory: verification date missing");
+assert.deepEqual(inventory.sources.map((source) => source.login.toLowerCase()).sort(), [...owners].sort(), "Repository inventory: missing tracked owner");
+assert.equal(new Set(inventory.repositories.map((repo) => repo.repository.toLowerCase())).size, inventory.repositories.length, "Repository inventory: duplicate repository");
+for (const source of inventory.sources) {
+  assert.equal(source.publicRepositoryCount, inventory.repositories.filter((repo) => repo.owner.toLowerCase() === source.login.toLowerCase()).length, `${source.login}: repository count mismatch`);
+}
+for (const repo of inventory.repositories) {
+  assert.equal(repo.visibility, "public", `${repo.repository}: repository must be public`);
+  assert.ok(owners.has(repo.owner.toLowerCase()), `${repo.repository}: untracked owner`);
+  assert.equal(repo.url.toLowerCase(), `https://github.com/${repo.repository}`.toLowerCase(), `${repo.repository}: invalid public URL`);
+}
 const activityTypes = new Set([
   "upstream_pr_state",
   "upstream_credit",
@@ -268,12 +274,17 @@ const activityTypes = new Set([
 ]);
 assert.equal(activity.schemaVersion, 1, "Public activity: unsupported schema version");
 assert.equal(activity.cadence, "every 6 hours", "Public activity: cadence changed");
-assert.ok(activity.events.length > 0 && activity.events.length <= 200, "Public activity: expected 1-200 bounded events");
+assert.ok(activity.events.length > 0, "Public activity: expected retained public records");
 assert.equal(new Set(activity.events.map((event) => event.id)).size, activity.events.length, "Public activity: duplicate event IDs");
 for (const [index, event] of activity.events.entries()) {
   assert.ok(activityTypes.has(event.type), `Public activity ${event.id}: unsupported type`);
   assert.match(event.url, /^https:\/\/github\.com\//, `Public activity ${event.id}: evidence URL must be public GitHub`);
   assert.ok(!Number.isNaN(Date.parse(event.occurredAt)), `Public activity ${event.id}: invalid timestamp`);
+  if (["upstream_pr_state", "upstream_credit", "review_submitted"].includes(event.type)) {
+    const identity = identities.get(event.actor.toLowerCase());
+    assert.ok(identity, `Public activity ${event.id}: untracked author`);
+    assert.ok(Date.parse(event.createdAt || event.occurredAt) >= Date.parse(identity.since), `Public activity ${event.id}: contribution predates tracking cutoff`);
+  }
   if (index > 0) {
     assert.ok(
       activity.events[index - 1].occurredAt >= event.occurredAt,
@@ -324,7 +335,7 @@ assert.ok(
 );
 console.log(
   `Verified ${licensed.length} licensed repositories, at least ${Object.values(elizaMergedBaseline).reduce((sum, count) => sum + count, 0)} merged elizaOS PRs, ` +
-    `${slimeVrMergedPrs.length} merged SlimeVR CheeseCake PRs, ${prs.length} sampled OpenClaw PR records, ` +
+    `${prs.length} sampled OpenClaw PR records, ` +
     `1 merged founder PR, 1 merged Crabbox PR, 1 open Buzz PR, ${publicLedger.pullRequests.length} live ledger records, ` +
     `${activity.events.length} public activity events, ${clickClackMergeCredits.length} merged ClickClack co-author credits, ` +
     `1 merged Hermes Agent authorship receipt, and 2 upstream reviews.`,

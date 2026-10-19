@@ -1,5 +1,7 @@
 import activityJson from "@/public/activity.json";
 import openClawLedgerJson from "@/public/openclaw-prs.json";
+import ossIndex from "@/public/oss.json";
+import repositoryInventoryJson from "@/public/github-repositories.json";
 
 export type ActivityEventType =
   | "upstream_pr_state"
@@ -18,6 +20,8 @@ export type ActivityEvent = {
   summary: string;
   url: string;
   occurredAt: string;
+  createdAt?: string;
+  updatedAt?: string;
   actor: string;
   role: string;
   state: string;
@@ -27,6 +31,11 @@ export type ActivityFeed = {
   schemaVersion: number;
   generatedAt: string;
   cadence: string;
+  checkedAt?: string;
+  source?: {
+    identities: Array<{ login: string; since: string; role: string }>;
+    ownedRepositoryOwners: string[];
+  };
   events: ActivityEvent[];
 };
 
@@ -86,6 +95,7 @@ export type PullRequestRecord = {
   url: string;
   state: "open" | "closed" | "merged";
   updatedAt: string;
+  createdAt?: string;
   mergedAt: string | null;
   headSha: string;
   ratingLabel: string | null;
@@ -114,7 +124,8 @@ export const ownedProjects: OwnedProject[] = [
     status: "maintained",
     description:
       "Deterministic OpenClaw diagnostics and guarded repairs, with optional AI explanation that never becomes executable shell.",
-    proof: "The CLI, installer, tests, security model, capability contract, and releases are public.",
+    proof:
+      "The CLI, installer, tests, security model, capability contract, and releases are public.",
   },
   {
     name: "Hypersnap Doctor",
@@ -126,7 +137,8 @@ export const ownedProjects: OwnedProject[] = [
     status: "maintained",
     description:
       "Independent diagnostics, safe repair, and sanitized support tooling for Hypersnap and Snapchain node operators.",
-    proof: "The operator CLI, installer, safety model, and local test suite are public.",
+    proof:
+      "The operator CLI, installer, safety model, and local test suite are public.",
   },
   {
     name: "A3Stack",
@@ -138,7 +150,8 @@ export const ownedProjects: OwnedProject[] = [
     status: "maintained",
     description:
       "A TypeScript SDK joining agent identity, payments, data, and MCP tooling without pretending those layers already fit together.",
-    proof: "Source, examples, package manifests, and license live in the repository.",
+    proof:
+      "Source, examples, package manifests, and license live in the repository.",
   },
 
   {
@@ -151,7 +164,8 @@ export const ownedProjects: OwnedProject[] = [
     status: "public prototype",
     description:
       "A source-labelled knowledge agent and bundle for Hypersnap, Snapchain, and Farcaster-fork operators.",
-    proof: "The prototype, source corpus, roadmap, and unfinished bot-hardening boundaries are public.",
+    proof:
+      "The prototype, source corpus, roadmap, and unfinished bot-hardening boundaries are public.",
   },
   {
     name: "OpenClaw Contributions",
@@ -163,7 +177,8 @@ export const ownedProjects: OwnedProject[] = [
     status: "live ledger",
     description:
       "A machine-readable, evidence-backed record of upstream issues, technical comments, proofs, and pull requests.",
-    proof: "Every record requires a public URL. Open, closed, and merged work stay distinct.",
+    proof:
+      "Every record requires a public URL. Open, closed, and merged work stay distinct.",
   },
   {
     name: "OpenClaw TUI Field Fix",
@@ -175,7 +190,8 @@ export const ownedProjects: OwnedProject[] = [
     status: "archived finding",
     description:
       "A root-cause write-up and runnable local patch for the OpenClaw TUI stuck-spinner delivery failure.",
-    proof: "The symptom, exact version boundary, upstream trackers, patch, and reproduction are public.",
+    proof:
+      "The symptom, exact version boundary, upstream trackers, patch, and reproduction are public.",
   },
   {
     name: "OrthoVoxel Studio",
@@ -187,7 +203,8 @@ export const ownedProjects: OwnedProject[] = [
     status: "maintained",
     description:
       "A desktop pixel-art tool for rebuilding voxel models from orthographic views and exporting directional sprite sheets.",
-    proof: "The original implementation, Electron app, Playwright verification, and license are public.",
+    proof:
+      "The original implementation, Electron app, Playwright verification, and license are public.",
   },
   {
     name: "OpenChina",
@@ -199,7 +216,8 @@ export const ownedProjects: OwnedProject[] = [
     status: "published",
     description:
       "A CLI harness for comparing whether language models refuse, evade, deny, or substantively answer a documented historical question.",
-    proof: "The test suites, provider adapters, scoring boundaries, npm package, and license are public.",
+    proof:
+      "The test suites, provider adapters, scoring boundaries, npm package, and license are public.",
   },
   {
     name: "Headlong Agent Findings",
@@ -211,7 +229,8 @@ export const ownedProjects: OwnedProject[] = [
     status: "published findings",
     description:
       "Sanitized findings from a bounded persistent-agent experiment, including reliability failures and a RepoRelay case study.",
-    proof: "The report, measured outputs, limitations, reproduction guide, and privacy methodology are public.",
+    proof:
+      "The report, measured outputs, limitations, reproduction guide, and privacy methodology are public.",
   },
   {
     name: "Clueside",
@@ -262,7 +281,8 @@ export const ownedProjects: OwnedProject[] = [
     status: "live index",
     description:
       "The source, machine-readable records, claim checks, and refresh jobs behind this public index.",
-    proof: "The site source, activity feed, claims validator, CI, and license are public.",
+    proof:
+      "The site source, activity feed, claims validator, CI, and license are public.",
   },
 ];
 
@@ -317,9 +337,11 @@ export const supportPrograms: SupportProgram[] = [
     url: "https://github.com/elizaOS/eliza",
     logo: "/upstream/eliza.png",
     role: "upstream contributor",
-    scope: "onboarding security · OAuth · transaction safety · runtime and UI reliability · tests and CI",
+    scope:
+      "onboarding security · OAuth · transaction safety · runtime and UI reliability · tests and CI",
     status: "active · merged contributions",
-    evidence: "https://github.com/elizaOS/eliza/pulls?q=is%3Apr+is%3Amerged+author%3Afelirami",
+    evidence:
+      "https://github.com/elizaOS/eliza/pulls?q=is%3Apr+is%3Amerged+author%3Afelirami+created%3A%3E%3D2026-02-12",
     evidenceLabel: "15 merged PRs by @felirami",
     additionalEvidence: [
       {
@@ -334,7 +356,8 @@ export const supportPrograms: SupportProgram[] = [
     url: "https://github.com/NousResearch/hermes-agent",
     logo: "/upstream/hermes.png",
     role: "upstream contributor",
-    scope: "remote profile mapping · SSH token boundaries · Tailscale browser-check guidance · lifecycle tests",
+    scope:
+      "remote profile mapping · SSH token boundaries · Tailscale browser-check guidance · lifecycle tests",
     status: "merged contributions",
     evidence: "https://github.com/NousResearch/hermes-agent/pull/76400",
     evidenceLabel: "merged PR #76400",
@@ -349,21 +372,6 @@ export const supportPrograms: SupportProgram[] = [
       },
     ],
     note: "Hermes merged five Cad-authored commits through maintainer PR #76400, with @arcabotai mapped in the contributor record. Directly authored PR #97871 also merged: Desktop classifies Tailscale SSH browser checks safely and gives Terminal guidance instead of a generic timeout, without exposing the one-time authentication URL. Both contributions are included in the v0.21.6 source tag; packaged Desktop binary inclusion is unverified. Arca is an independent contributor, not a Nous Research maintainer or affiliate.",
-  },
-  {
-    name: "SlimeVR CheeseCake",
-    url: "https://github.com/Sorakage033/SlimeVR-CheeseCake",
-    logo: "/upstream/slimevr.png",
-    role: "upstream contributor",
-    scope: "hardware documentation · 3D-printing instructions · fabrication assets · battery guidance",
-    status: "3 merged contributions",
-    evidence: "https://github.com/Sorakage033/SlimeVR-CheeseCake/pull/1",
-    evidenceLabel: "merged PR #1",
-    additionalEvidence: [
-      { label: "merged PR #6", url: "https://github.com/Sorakage033/SlimeVR-CheeseCake/pull/6" },
-      { label: "merged PR #9", url: "https://github.com/Sorakage033/SlimeVR-CheeseCake/pull/9" },
-    ],
-    note: "Felirami authored three merged documentation and fabrication-asset pull requests. Arca does not claim SlimeVR CheeseCake ownership or maintenance.",
   },
   {
     name: "OpenClaw",
@@ -382,7 +390,8 @@ export const supportPrograms: SupportProgram[] = [
     logo: "/upstream/crabbox.jpg",
     logoStyle: "wide",
     role: "upstream contributor",
-    scope: "Blaxel lifecycle policy · document-safe labels · filesystem path correctness",
+    scope:
+      "Blaxel lifecycle policy · document-safe labels · filesystem path correctness",
     status: "merged contribution",
     evidence: "https://github.com/openclaw/crabbox/pull/1192",
     evidenceLabel: "merged PR #1192",
@@ -411,7 +420,8 @@ export const supportPrograms: SupportProgram[] = [
     logo: "/upstream/hypersnap.png",
     logoStyle: "wide",
     role: "tooling maintainer · upstream reviewer",
-    scope: "operator CLI · diagnostics · safe repair · requested-changes review",
+    scope:
+      "operator CLI · diagnostics · safe repair · requested-changes review",
     status: "active",
     evidence: "https://github.com/arcabotai/hypersnap",
     evidenceLabel: "operator toolkit",
@@ -484,7 +494,8 @@ const fallbackLedger: OpenClawLedger = {
       number: 107304,
       author: "felirami",
       identityRole: "Arca founder",
-      title: "fix(zai): Coding Plan chat turns always fail with fake rate-limit when system prompt carries OpenClaw signature line",
+      title:
+        "fix(zai): Coding Plan chat turns always fail with fake rate-limit when system prompt carries OpenClaw signature line",
       url: "https://github.com/openclaw/openclaw/pull/107304",
       state: "closed",
       updatedAt: "2026-07-15T02:30:52Z",
@@ -497,7 +508,8 @@ const fallbackLedger: OpenClawLedger = {
       number: 107276,
       author: "arcabotai",
       identityRole: "Arca agent identity",
-      title: "fix(memory-core): preserve canonical embedding cache on migration",
+      title:
+        "fix(memory-core): preserve canonical embedding cache on migration",
       url: "https://github.com/openclaw/openclaw/pull/107276",
       state: "closed",
       updatedAt: "2026-07-14T08:37:48Z",
@@ -510,7 +522,8 @@ const fallbackLedger: OpenClawLedger = {
       number: 107243,
       author: "felirami",
       identityRole: "Arca founder",
-      title: "fix(memory-core): preserve canonical cache rows during legacy migration",
+      title:
+        "fix(memory-core): preserve canonical cache rows during legacy migration",
       url: "https://github.com/openclaw/openclaw/pull/107243",
       state: "merged",
       updatedAt: "2026-07-14T16:40:40Z",
@@ -531,7 +544,11 @@ const fallbackLedger: OpenClawLedger = {
       headSha: "fb137a71e7288e7e166a717bfec8ae8f2fecf562",
       ratingLabel: "🦞 diamond lobster",
       statusLabel: "👀 ready for maintainer look",
-      arca: { workStatus: "active repair", currentWork: "Exact-head Gateway/MCP proof passes; awaiting upstream review." },
+      arca: {
+        workStatus: "active repair",
+        currentWork:
+          "Exact-head Gateway/MCP proof passes; awaiting upstream review.",
+      },
     },
     {
       number: 104893,
@@ -545,7 +562,11 @@ const fallbackLedger: OpenClawLedger = {
       headSha: "574cc1ea367cc3c24fd81334833988cfc4dd86c3",
       ratingLabel: "🦐 gold shrimp",
       statusLabel: null,
-      arca: { workStatus: "merged", currentWork: "Merged upstream after implementation and live Discord proof." },
+      arca: {
+        workStatus: "merged",
+        currentWork:
+          "Merged upstream after implementation and live Discord proof.",
+      },
     },
     {
       number: 104492,
@@ -559,7 +580,11 @@ const fallbackLedger: OpenClawLedger = {
       headSha: "1d7a7be25af3f4a4ef9ce2aa9c07699508cce405",
       ratingLabel: "🦪 silver shellfish",
       statusLabel: "📣 needs proof",
-      arca: { workStatus: "active proof", currentWork: "Focused gateway tests pass; upstream proof boundary is being reassessed." },
+      arca: {
+        workStatus: "active proof",
+        currentWork:
+          "Focused gateway tests pass; upstream proof boundary is being reassessed.",
+      },
     },
     {
       number: 104192,
@@ -573,15 +598,31 @@ const fallbackLedger: OpenClawLedger = {
       headSha: "02a66be2410cd70c97e7d9305024c7fb5496ea63",
       ratingLabel: "🦞 diamond lobster",
       statusLabel: "👀 ready for maintainer look",
-      arca: { workStatus: "superseded", currentWork: "Closed unmerged after equivalent current-main work landed upstream." },
+      arca: {
+        workStatus: "superseded",
+        currentWork:
+          "Closed unmerged after equivalent current-main work landed upstream.",
+      },
     },
   ],
 };
 
 export function getOpenClawLedger(): OpenClawLedger {
   const ledger = openClawLedgerJson as OpenClawLedger;
-  if (!Array.isArray(ledger.pullRequests)) return fallbackLedger;
-  return ledger;
+  const source = Array.isArray(ledger.pullRequests) ? ledger : fallbackLedger;
+  return {
+    ...source,
+    pullRequests: source.pullRequests.filter(
+      (pr) =>
+        Boolean(pr.author) &&
+        trackingIdentities.some(
+          (identity) =>
+            identity.login.toLowerCase() === pr.author!.toLowerCase() &&
+            Date.parse(pr.createdAt || pr.updatedAt) >=
+              Date.parse(identity.since),
+        ),
+    ),
+  };
 }
 
 const emptyActivityFeed: ActivityFeed = {
@@ -601,8 +642,56 @@ export function getActivityFeed(): ActivityFeed {
         typeof event.id === "string" &&
         typeof event.url === "string" &&
         typeof event.title === "string" &&
-        !Number.isNaN(Date.parse(event.occurredAt)),
+        !Number.isNaN(Date.parse(event.occurredAt)) &&
+        (event.type === "release" ||
+          event.type === "project_published" ||
+          trackingIdentities.some(
+            (identity) =>
+              identity.login.toLowerCase() === event.actor.toLowerCase() &&
+              Date.parse(event.createdAt || event.occurredAt) >=
+                Date.parse(identity.since),
+          )),
     )
     .sort((a, b) => Date.parse(b.occurredAt) - Date.parse(a.occurredAt));
   return { ...feed, events };
+}
+
+export const trackingIdentities = ossIndex.contributionIdentities;
+export const trackingSince = ossIndex.githubTracking.since;
+export type GithubRepository = {
+  name: string;
+  repository: string;
+  url: string;
+  owner: string;
+  description: string | null;
+  visibility: "public";
+  fork: boolean;
+  archived: boolean;
+  defaultBranch: string | null;
+  createdAt: string;
+  license: string | null;
+  licenseUrl: string | null;
+};
+export type GithubRepositoryInventory = {
+  schemaVersion: number;
+  checkedAt: string;
+  sources: Array<{
+    login: string;
+    type: "user" | "organization";
+    publicRepositoryCount: number;
+  }>;
+  repositories: GithubRepository[];
+};
+export function getRepositoryInventory(): GithubRepositoryInventory {
+  const inventory = repositoryInventoryJson as GithubRepositoryInventory;
+  const owners = new Set(
+    ossIndex.ownedRepositoryOwners.map((owner) => owner.toLowerCase()),
+  );
+  return {
+    ...inventory,
+    repositories: inventory.repositories.filter(
+      (repo) =>
+        repo.visibility === "public" && owners.has(repo.owner.toLowerCase()),
+    ),
+  };
 }

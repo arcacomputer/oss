@@ -1,5 +1,5 @@
 import type { ActivityEvent, PullRequestRecord, SupportProgram } from "./data";
-import { currentWork, latestActivity } from "./presentation";
+import { latestActivity, latestPullRequestStates } from "./presentation";
 
 export type ContributionProject = {
   repository: string;
@@ -20,6 +20,16 @@ export type ContributionProject = {
   allReceipts: ActivityEvent[];
   /** Curated receipts have no fabricated event dates or contribution counts. */
   curatedEvidence: Array<{ label: string; url: string }>;
+};
+
+export type ContributionScope = {
+  authors: readonly string[];
+  since: string;
+};
+
+const defaultScope: ContributionScope = {
+  authors: ["felirami", "arcabotai"],
+  since: "2026-02-12",
 };
 
 const internalOwners = new Set(["arcabotai", "arcacomputer", "felirami"]);
@@ -69,46 +79,39 @@ function readableName(value: string): string {
     .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
-function ledgerEvent(pr: PullRequestRecord): ActivityEvent {
-  const repository = repositoryFromUrl(pr.url);
-  return {
-    id: `ledger:pr:${repository}:${pr.number}`,
-    type: "upstream_pr_state",
-    project: repository.split("/")[1] || repository,
-    repository,
-    number: pr.number,
-    title: pr.title,
-    summary:
-      pr.arca?.currentWork ||
-      (pr.state === "merged"
-        ? "Merged upstream"
-        : pr.state === "open"
-          ? "Open upstream"
-          : "Closed upstream without merge"),
-    url: pr.url,
-    occurredAt:
-      pr.state === "merged" ? pr.mergedAt || pr.updatedAt : pr.updatedAt,
-    actor: pr.author || "arcabotai",
-    role: "author",
-    state: pr.state,
-  };
-}
-
 /** Group upstream work by project while keeping authored merges, credit, and closed work distinct. */
 export function getContributionDirectory(
   events: ActivityEvent[],
   ledgerPrs: PullRequestRecord[],
   supportPrograms: SupportProgram[],
+  scope: ContributionScope = defaultScope,
 ): { active: ContributionProject[]; past: ContributionProject[] } {
+  const authors = new Set(scope.authors.map((author) => author.toLowerCase()));
+  const since = Date.parse(scope.since);
+  const isInScope = (actor: string | undefined, date: string) =>
+    typeof actor === "string" &&
+    authors.has(actor.toLowerCase()) &&
+    Date.parse(date) >= since;
   const relevantEvents = events.filter(
     (event) =>
       isUpstream(event.repository) &&
+      isInScope(event.actor, event.occurredAt) &&
+      (event.type !== "upstream_pr_state" ||
+        isInScope(
+          event.actor,
+          event.createdAt ?? event.occurredAt,
+        )) &&
       ["upstream_pr_state", "upstream_credit", "review_submitted"].includes(
         event.type,
       ),
   );
-  const upstreamLedger = ledgerPrs.filter((pr) =>
-    isUpstream(repositoryFromUrl(pr.url)),
+  const upstreamLedger = ledgerPrs.filter(
+    (pr): pr is PullRequestRecord & { author: string } =>
+      isUpstream(repositoryFromUrl(pr.url)) &&
+      isInScope(
+        pr.author,
+        pr.createdAt ?? pr.updatedAt,
+      ),
   );
   const programs = new Map(
     supportPrograms.map((program) => [
@@ -117,26 +120,12 @@ export function getContributionDirectory(
     ]),
   );
 
-  // PR states represent the latest transition; the ledger is an authoritative current snapshot.
-  const latestPrs = new Map(
-    latestActivity(
-      relevantEvents.filter((event) => event.type === "upstream_pr_state"),
-    ).map((event) => [receiptUrl(event.url), event]),
-  );
-  const latestLedger = new Map<string, PullRequestRecord>();
-  for (const pr of upstreamLedger) {
-    const key = receiptUrl(pr.url);
-    const previous = latestLedger.get(key);
-    if (!previous || Date.parse(pr.updatedAt) > Date.parse(previous.updatedAt))
-      latestLedger.set(key, pr);
-  }
-  for (const [key, pr] of latestLedger) latestPrs.set(key, ledgerEvent(pr));
-
-  const openItems = currentWork(relevantEvents, upstreamLedger);
-  const mergedItems = [...latestPrs.values()].filter(
+  const latestPrs = latestPullRequestStates(relevantEvents, upstreamLedger);
+  const openItems = latestPrs.filter((event) => event.state === "open");
+  const mergedItems = latestPrs.filter(
     (event) => event.state === "merged" && event.role === "author",
   );
-  const closedItems = [...latestPrs.values()].filter(
+  const closedItems = latestPrs.filter(
     (event) => event.state === "closed",
   );
   const creditItems = latestActivity(
@@ -210,25 +199,6 @@ export function getContributionDirectory(
     }
   }
 
-  // Older curated contributions can predate the activity feed. Keep their links visible,
-  // without turning a status label into synthetic merged PR events or totals.
-  const curatedHistory = new Set<string>();
-  for (const program of supportPrograms) {
-    const repository = repositoryFromUrl(program.url);
-    const links = [
-      program.evidence,
-      ...(program.additionalEvidence || []).map((item) => item.url),
-    ];
-    if (
-      isUpstream(repository) &&
-      /merged/i.test(program.status) &&
-      links.some((url) => /\/pull\/\d+(?:[/?#]|$)/.test(url))
-    ) {
-      curatedHistory.add(repository.toLowerCase());
-      projectFor(repository);
-    }
-  }
-
   for (const project of projects.values()) {
     for (const category of Object.keys(categories) as Array<
       keyof typeof categories
@@ -266,7 +236,7 @@ export function getContributionDirectory(
           project.creditItems.length +
           project.reviewedItems.length +
           project.closedItems.length >
-          0 || curatedHistory.has(project.repository.toLowerCase()),
+        0,
     ),
   };
 }

@@ -69,8 +69,6 @@ export const contributionDescriptions: Record<string, string> = {
     "Plugin installation, message delivery, and agent context fixes, backed by bug reports, reproduction steps, and pull requests.",
   "elizaOS/eliza":
     "Safer onboarding and transactions, more reliable Google sign-in, and fixes to the runtime, interface, and tests.",
-  "Sorakage033/SlimeVR-CheeseCake":
-    "Clearer hardware documentation, 3D-printing instructions, fabrication files, and battery guidance for tracker builders.",
   "openclaw/crabbox":
     "Sandbox lifecycle rules, labels that preserve document content, and correct filesystem paths.",
   "openclaw/clickclack":
@@ -86,8 +84,6 @@ export const contributionOutcomeLabels: Record<string, string> = {
   "NousResearch/hermes-agent": "Improved SSH profiles and Tailscale guidance",
   "openclaw/openclaw": "Merged plugin, messaging, and agent context fixes",
   "elizaOS/eliza": "Merged sign-in, safety, and reliability fixes",
-  "Sorakage033/SlimeVR-CheeseCake":
-    "Three merged documentation and fabrication contributions",
   "openclaw/crabbox": "Merged sandbox lifecycle and filesystem fixes",
   "openclaw/clickclack": "Two merged capabilities with co-author credit",
 };

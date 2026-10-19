@@ -2,13 +2,19 @@
 
 Source for [oss.arcabot.ai](https://oss.arcabot.ai), Arca's public engineering index.
 
-The site provides three clear paths: a visible directory of Arca projects, upstream projects with current open PRs, and a separate directory of past contributions. Search and category/outcome filters help visitors explore each listing, with detailed PR records and activity available through native disclosures. Main GitHub and site-source links point to `arcacomputer/oss`.
+The site provides clear paths to Arca projects, current upstream PRs, past contributions, and a public GitHub repository inventory. Search and category/outcome filters help visitors explore each listing, with detailed evidence available through native disclosures. Main GitHub and site-source links point to `arcacomputer/oss`.
 
 The site distinguishes:
 
 1. Open-source projects Arca maintains, with explicit licenses.
 2. External OSS projects Arca supports, with precise role and attribution boundaries.
 3. Upstream work, keeping open, merged, closed, superseded, reviewed, and co-authored records distinct.
+
+## GitHub tracking scope
+
+Authored upstream PR tracking covers public external repositories for `felirami` and `arcabotai`, with PRs created on or after February 12, 2026. Repositories owned by either user or `arcacomputer` are excluded from upstream contributions. Earlier receipts, including the 2023 SlimeVR contribution, are outside this scope.
+
+The repository inventory covers all currently public repositories owned by `felirami`, `arcabotai`, and the `arcacomputer` organization, regardless of creation date. It labels forks, archived repositories, and detected licenses separately; public visibility alone does not establish an open-source license or Arca authorship. Reviews and coauthor credits are selected, verified receipts, not a complete discovery of those activities.
 
 ## Architecture
 
@@ -24,14 +30,14 @@ The site distinguishes:
 
 The previous Next.js site fetched the OpenClaw contribution ledger with one-hour ISR. The Astro site uses committed, reviewable snapshots:
 
-- `public/activity.json` refreshes every six hours
+- `npm run refresh:activity` refreshes `public/activity.json` and `public/github-repositories.json` every six hours through the activity workflow
 - `public/openclaw-prs.json` refreshes hourly
-- each workflow validates claims and commits only when public evidence changes
+- each workflow validates claims and commits the public snapshots, including successful `checkedAt` freshness updates
 - every committed refresh triggers the Cloudflare deployment workflow; the live site advances only after checks, the dependency audit, upload, and promotion succeed
 
 Hermes contribution receipts distinguish our directly authored merge from maintainer-incorporated commit credit. Both accepted contributions are verified in the `v0.21.6` source tag; that does not establish inclusion in a packaged Desktop binary.
 
-A temporary upstream outage cannot erase the public record because `lib/data.ts` retains its curated fallback. `lib/presentation.ts` resolves historical transitions before showing current work, reconciles the OpenClaw ledger, and keeps authored merges separate from credited merges. `lib/contributions.ts` groups that evidence by upstream project while retaining older curated contributions, reviews, and closed proposals. `lib/catalog.ts` provides plain-language project descriptions and lifecycle labels. Snapshot dates remain visible beside the counts.
+A failed refresh leaves the last committed public snapshots intact. `lib/data.ts` provides curated fallback evidence within the tracking scope. `lib/presentation.ts` resolves historical transitions before showing current work, reconciles the OpenClaw ledger, and keeps authored merges separate from credited merges. `lib/contributions.ts` groups in-scope evidence by upstream project, including selected reviews and closed proposals. `lib/catalog.ts` provides plain-language project descriptions and lifecycle labels. Collection paginates GitHub results and fails explicitly on incomplete results; the activity snapshot has no 200-event cap. Snapshot check dates remain visible beside the counts.
 
 ## Development
 
@@ -56,6 +62,7 @@ npm audit
 
 - `/oss.json`
 - `/activity.json`
+- `/github-repositories.json`
 - `/openclaw-prs.json`
 - `/llms.txt`
 - `/robots.txt`

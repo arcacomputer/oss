@@ -1,8 +1,158 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-18T11:05:37Z",
+  "generatedAt": "2026-10-19T18:20:54Z",
+  "checkedAt": "2026-10-19T18:20:54Z",
   "cadence": "every 6 hours",
+  "source": {
+    "identities": [
+      {
+        "login": "arcabotai",
+        "since": "2026-02-12",
+        "role": "Arca agent identity"
+      },
+      {
+        "login": "felirami",
+        "since": "2026-02-12",
+        "role": "Arca founder"
+      }
+    ],
+    "ownedRepositoryOwners": [
+      "arcabotai",
+      "felirami",
+      "arcacomputer"
+    ],
+    "organization": {
+      "login": "arcacomputer",
+      "url": "https://github.com/arcacomputer"
+    }
+  },
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:141617:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 141617,
+      "title": "fix(compression): a system-only head's compaction opens on a user turn",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/141617",
+      "occurredAt": "2026-10-19T15:23:43Z",
+      "createdAt": "2026-10-19T15:23:43Z",
+      "updatedAt": "2026-10-19T17:38:39Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "15cb2f35bf32bf55715fb60256ea0d06dcae5ea3",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:137619:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 137619,
+      "title": "fix(tools): MCP stdio cleanup no longer SIGTERMs a cron worker spawned during the connect window (#134611)",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/137619",
+      "occurredAt": "2026-10-19T09:12:07Z",
+      "createdAt": "2026-10-13T04:58:08Z",
+      "updatedAt": "2026-10-19T09:13:02Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "bd35ad83ca262a069ddd503fd56a12093b78faa4",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:138134:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 138134,
+      "title": "fix(pm): drop exclude-newer from seeded/replayed uv.lock on user machines",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/138134",
+      "occurredAt": "2026-10-19T09:11:47Z",
+      "createdAt": "2026-10-14T01:26:43Z",
+      "updatedAt": "2026-10-19T09:12:28Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "2cf0eea87d55a1cb4a8719550f0180362008d84b",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:138161:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 138161,
+      "title": "fix(pm): stop contained Node builds hanging on hidden stdin prompts",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/138161",
+      "occurredAt": "2026-10-19T09:11:29Z",
+      "createdAt": "2026-10-14T02:37:05Z",
+      "updatedAt": "2026-10-19T09:11:29Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "39b6a771e5fb0c8f30e27796451439f8e978f91a",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:137756:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 137756,
+      "title": "fix(config): ignore a non-mapping agent: section instead of crashing load_config",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/137756",
+      "occurredAt": "2026-10-19T09:11:16Z",
+      "createdAt": "2026-10-13T10:23:56Z",
+      "updatedAt": "2026-10-19T09:11:16Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "322a5cbf808e2d9bcbcd2cd6eeecc60257965c13",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:138068:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 138068,
+      "title": "fix(agent): exclude Kubernetes cluster DNS from is_local_endpoint mDNS match",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/138068",
+      "occurredAt": "2026-10-19T07:37:10Z",
+      "createdAt": "2026-10-13T22:26:27Z",
+      "updatedAt": "2026-10-19T07:37:31Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "ebeb892409403a4e3e27d037cb10c2f3ec43a224",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:140461:closed",
       "type": "upstream_pr_state",
@@ -13,10 +163,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/NousResearch/hermes-agent/pull/140461",
       "occurredAt": "2026-10-18T08:56:53Z",
+      "createdAt": "2026-10-17T10:17:57Z",
+      "updatedAt": "2026-10-18T08:56:53Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "c8d860f195b5154176eaee1b545a75dd2ac1795f",
         "mergeCommit": null
       }
@@ -31,10 +184,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/NousResearch/hermes-agent/pull/140741",
       "occurredAt": "2026-10-18T01:30:36Z",
+      "createdAt": "2026-10-17T20:32:23Z",
+      "updatedAt": "2026-10-18T01:41:22Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "09c079c4e76d0f0c44c0777159f723aea87e4f70",
         "mergeCommit": null
       }
@@ -67,10 +223,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/NousResearch/hermes-agent/pull/139394",
       "occurredAt": "2026-10-17T17:43:24Z",
+      "createdAt": "2026-10-15T19:41:21Z",
+      "updatedAt": "2026-10-17T17:43:24Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "e51948575c84d2376174245db869109f5b91cf9c",
         "mergeCommit": null
       }
@@ -103,10 +262,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/NousResearch/hermes-agent/pull/137783",
       "occurredAt": "2026-10-17T07:21:02Z",
+      "createdAt": "2026-10-13T11:30:28Z",
+      "updatedAt": "2026-10-17T07:21:02Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "023af3d231b247d5f59f10b822dcab4c5a522264",
         "mergeCommit": null
       }
@@ -121,10 +283,13 @@
       "summary": "Opened upstream",
       "url": "https://github.com/NousResearch/hermes-agent/pull/140351",
       "occurredAt": "2026-10-17T06:54:17Z",
+      "createdAt": "2026-10-17T06:54:17Z",
+      "updatedAt": "2026-10-17T10:18:50Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "516d1b04791a4da9eb4316c702bd62b9185d58e1",
         "mergeCommit": null
       }
@@ -139,10 +304,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/NousResearch/hermes-agent/pull/138681",
       "occurredAt": "2026-10-16T21:41:29Z",
+      "createdAt": "2026-10-14T23:34:32Z",
+      "updatedAt": "2026-10-17T10:01:50Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "28088c594692a2223ca294d19d5ecf177dd94c78",
         "mergeCommit": null
       }
@@ -157,10 +325,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/huggingface/tokenizers/pull/2342",
       "occurredAt": "2026-10-16T01:47:33Z",
+      "createdAt": "2026-08-18T21:27:39Z",
+      "updatedAt": "2026-10-16T01:47:33Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "52e86480c3797a90365f9e2e3696520305f6bbcd",
         "mergeCommit": null
       }
@@ -175,10 +346,13 @@
       "summary": "Opened upstream",
       "url": "https://github.com/NousResearch/hermes-agent/pull/139430",
       "occurredAt": "2026-10-15T20:35:53Z",
+      "createdAt": "2026-10-15T20:35:53Z",
+      "updatedAt": "2026-10-15T21:17:09Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "19519e8d5ea24081efa914ef44434348f04d7765",
         "mergeCommit": null
       }
@@ -229,10 +403,13 @@
       "summary": "Opened upstream",
       "url": "https://github.com/NousResearch/hermes-agent/pull/138489",
       "occurredAt": "2026-10-14T16:32:14Z",
+      "createdAt": "2026-10-14T16:32:14Z",
+      "updatedAt": "2026-10-18T07:48:07Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "e25d6ae782149d070076e82eee2e69f67ed2e3da",
         "mergeCommit": null
       }
@@ -337,10 +514,13 @@
       "summary": "Opened upstream",
       "url": "https://github.com/NousResearch/hermes-agent/pull/137658",
       "occurredAt": "2026-10-13T06:33:16Z",
+      "createdAt": "2026-10-13T06:33:16Z",
+      "updatedAt": "2026-10-14T21:57:56Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "f13f27b5673a76d11147e0b853a1094e1cc90cbd",
         "mergeCommit": null
       }
@@ -373,10 +553,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/150660",
       "occurredAt": "2026-10-06T05:04:54Z",
+      "createdAt": "2026-09-17T06:02:13Z",
+      "updatedAt": "2026-10-06T05:04:58Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "b39fd8cdc280852df8c0a7fa19c5c2a3abaf6a9a",
         "mergeCommit": null
       }
@@ -391,10 +574,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/NousResearch/hermes-agent/pull/97871",
       "occurredAt": "2026-09-29T02:32:26Z",
+      "createdAt": "2026-08-29T12:04:37Z",
+      "updatedAt": "2026-09-29T02:32:27Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "ce55f3c5e9168474c920c2d784ef1a407639eccb",
         "mergeCommit": "e4956f5a122bef41d26724f85399a57f6834ed6a"
       }
@@ -409,10 +595,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/igneelsaphira/kuro-postales-de-chile/pull/1",
       "occurredAt": "2026-09-25T06:47:13Z",
+      "createdAt": "2026-09-25T06:34:45Z",
+      "updatedAt": "2026-09-25T06:47:13Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "1ef895d25fe46026ddb49c92b498d3e77bec381d",
         "mergeCommit": "df8fa65873a173454e88a4460f56a9a6cd79c678"
       }
@@ -517,10 +706,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openssl/openssl/pull/32422",
       "occurredAt": "2026-09-04T17:37:52Z",
+      "createdAt": "2026-08-18T21:03:10Z",
+      "updatedAt": "2026-09-04T17:37:52Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "11d717c22bb85517f8d8e2ecf000cfc22f05b749",
         "mergeCommit": null
       }
@@ -535,10 +727,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/triton-lang/triton/pull/11362",
       "occurredAt": "2026-09-01T03:16:03Z",
+      "createdAt": "2026-08-18T21:15:48Z",
+      "updatedAt": "2026-09-01T03:16:03Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "3aa7ef7a5b6b8fc99d0dd1e4d976e5ae3056f294",
         "mergeCommit": null
       }
@@ -571,10 +766,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/openclaw/openclaw/pull/122984",
       "occurredAt": "2026-08-27T08:03:56Z",
+      "createdAt": "2026-08-13T04:14:56Z",
+      "updatedAt": "2026-08-29T01:40:33Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "c3ea15fe614b20e4754df23ac63b06a873186214",
         "mergeCommit": "0c313d712839670f3ac60f8fd238af7e308cdc18"
       }
@@ -589,10 +787,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/openclaw/openclaw/pull/122827",
       "occurredAt": "2026-08-26T06:19:38Z",
+      "createdAt": "2026-08-12T21:40:06Z",
+      "updatedAt": "2026-08-26T08:19:24Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "580143307d1a5fb42d87fb87338922d6819bf719",
         "mergeCommit": "e7b67c709db9c3796d07467adff6656d80439e27"
       }
@@ -607,10 +808,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/122460",
       "occurredAt": "2026-08-26T02:09:18Z",
+      "createdAt": "2026-08-12T05:28:29Z",
+      "updatedAt": "2026-08-26T02:09:18Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "703d457020e4a9efc09c1619f4d462ed51b8d634",
         "mergeCommit": null
       }
@@ -625,10 +829,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/openclaw/openclaw/pull/122855",
       "occurredAt": "2026-08-25T08:55:42Z",
+      "createdAt": "2026-08-12T22:50:38Z",
+      "updatedAt": "2026-08-25T09:28:04Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "3d8baba0d1e9db41be331766f02be1fba5389440",
         "mergeCommit": "ccd8ede95ee3c0b9ba0db18ea9ecc67d1574a055"
       }
@@ -643,10 +850,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/122804",
       "occurredAt": "2026-08-21T14:15:46Z",
+      "createdAt": "2026-08-12T20:42:22Z",
+      "updatedAt": "2026-08-21T14:15:46Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "2a603ba0572c55c6a0732e63f4f156b78b694f84",
         "mergeCommit": null
       }
@@ -661,10 +871,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/openclaw/openclaw/pull/123676",
       "occurredAt": "2026-08-20T09:54:32Z",
+      "createdAt": "2026-08-14T13:51:06Z",
+      "updatedAt": "2026-08-20T09:54:35Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "a4040009698d300622536f59b9ba5de031b28c4f",
         "mergeCommit": "975228306010f14b0517539f4fe818ac398d35ea"
       }
@@ -715,10 +928,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/111117",
       "occurredAt": "2026-08-18T22:37:14Z",
+      "createdAt": "2026-07-19T01:51:40Z",
+      "updatedAt": "2026-08-18T22:37:19Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "c6e26379d6a68403bbd98025be91284436549155",
         "mergeCommit": null
       }
@@ -733,10 +949,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/numpy/numpy/pull/32337",
       "occurredAt": "2026-08-18T21:48:14Z",
+      "createdAt": "2026-08-18T21:47:26Z",
+      "updatedAt": "2026-08-18T21:48:15Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "14e517e9e130a14b9093fd8fc331c9b2273bdae5",
         "mergeCommit": null
       }
@@ -769,10 +988,13 @@
       "summary": "Opened upstream",
       "url": "https://github.com/django/django/pull/21800",
       "occurredAt": "2026-08-18T21:27:16Z",
+      "createdAt": "2026-08-18T21:27:16Z",
+      "updatedAt": "2026-09-01T20:32:56Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "8527841b9fa441655debf72f5636e7aa3b20d96e",
         "mergeCommit": null
       }
@@ -823,10 +1045,13 @@
       "summary": "Opened upstream",
       "url": "https://github.com/apache/kafka/pull/23195",
       "occurredAt": "2026-08-18T21:01:01Z",
+      "createdAt": "2026-08-18T21:01:01Z",
+      "updatedAt": "2026-09-01T03:15:33Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "0b056ce84263fd11a021cdf4bd3e3f59bbc9337b",
         "mergeCommit": null
       }
@@ -859,10 +1084,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/105029",
       "occurredAt": "2026-08-17T03:41:33Z",
+      "createdAt": "2026-07-12T05:47:08Z",
+      "updatedAt": "2026-08-17T03:41:33Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "fb137a71e7288e7e166a717bfec8ae8f2fecf562",
         "mergeCommit": null
       }
@@ -877,10 +1105,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/openclaw/openclaw/pull/122457",
       "occurredAt": "2026-08-16T23:53:36Z",
+      "createdAt": "2026-08-12T05:25:20Z",
+      "updatedAt": "2026-08-16T23:53:39Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "5b43481130184bf454cd4c29211acd9c15fc2639",
         "mergeCommit": "1e7874ef14e625c3eb5e538807afbcb1377a33d0"
       }
@@ -1039,10 +1270,13 @@
       "summary": "Opened upstream",
       "url": "https://github.com/openclaw/openclaw/pull/123321",
       "occurredAt": "2026-08-13T21:22:38Z",
+      "createdAt": "2026-08-13T21:22:38Z",
+      "updatedAt": "2026-10-19T07:38:22Z",
       "actor": "felirami",
       "role": "author",
       "state": "open",
       "evidence": {
+        "author": "felirami",
         "headSha": "71de73521bbee1cb5901cb39beb03781abec4fa2",
         "mergeCommit": null
       }
@@ -1093,10 +1327,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/elizaOS/eliza/pull/18505",
       "occurredAt": "2026-08-13T06:23:47Z",
+      "createdAt": "2026-08-12T03:45:20Z",
+      "updatedAt": "2026-08-13T06:23:47Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "7dd21dccc6b3550ab6209f4b12947670c09d77e4",
         "mergeCommit": null
       }
@@ -1129,10 +1366,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/elizaOS/eliza/pull/18522",
       "occurredAt": "2026-08-12T22:56:34Z",
+      "createdAt": "2026-08-12T04:19:15Z",
+      "updatedAt": "2026-08-12T22:56:34Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "69806f9864c68eed9d3ee03255a50ed61e71b574",
         "mergeCommit": null
       }
@@ -1147,10 +1387,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18523",
       "occurredAt": "2026-08-12T22:53:18Z",
+      "createdAt": "2026-08-12T04:20:31Z",
+      "updatedAt": "2026-08-12T22:59:10Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "d768019c12cef7cef1c47fc8274c1223da3b77cf",
         "mergeCommit": "2de0c1ef6a968ec6c9ada6f4785ff3d9cc7d42ac"
       }
@@ -1219,10 +1462,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/122461",
       "occurredAt": "2026-08-12T19:48:02Z",
+      "createdAt": "2026-08-12T05:28:58Z",
+      "updatedAt": "2026-08-12T19:48:02Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "733f61daa7c08c84c488f49a0ee37315247ca3c4",
         "mergeCommit": null
       }
@@ -1273,10 +1519,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/elizaOS/eliza/pull/18503",
       "occurredAt": "2026-08-12T05:26:13Z",
+      "createdAt": "2026-08-12T03:44:32Z",
+      "updatedAt": "2026-08-12T05:26:13Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "e8af669461fda25d2b90a5234e81678a0d400d6c",
         "mergeCommit": null
       }
@@ -1309,10 +1558,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18516",
       "occurredAt": "2026-08-12T05:11:51Z",
+      "createdAt": "2026-08-12T04:06:28Z",
+      "updatedAt": "2026-08-12T05:11:51Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "49ef346f401ba3f806129df2eb37db0e64170e6e",
         "mergeCommit": "c4b1a1559f9497732b585decf4e62a24b82bba5b"
       }
@@ -1327,10 +1579,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18519",
       "occurredAt": "2026-08-12T05:11:46Z",
+      "createdAt": "2026-08-12T04:12:58Z",
+      "updatedAt": "2026-08-12T05:12:15Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "b6a61e773c0c7292c5e3a3c8d2c9e5bace7a4b8f",
         "mergeCommit": "584fdf974d0c6912146415fb62be26e4f029cbb2"
       }
@@ -1345,10 +1600,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18504",
       "occurredAt": "2026-08-12T05:10:40Z",
+      "createdAt": "2026-08-12T03:44:34Z",
+      "updatedAt": "2026-08-12T05:10:41Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "a43f6e83b5b5673ed45f7951634d4a68f79ac40f",
         "mergeCommit": "96d10ebe17c9f8d48f6d0ea2478d7a9eb7e850f8"
       }
@@ -1363,10 +1621,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18506",
       "occurredAt": "2026-08-12T05:10:36Z",
+      "createdAt": "2026-08-12T03:46:22Z",
+      "updatedAt": "2026-08-12T05:10:36Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "a369994727baf4b57be9a00c9cf4dd46a3b18466",
         "mergeCommit": "a4c1956c1cc1a760ba9fd7da36b383198766ae87"
       }
@@ -1381,10 +1642,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18508",
       "occurredAt": "2026-08-12T05:10:32Z",
+      "createdAt": "2026-08-12T03:48:03Z",
+      "updatedAt": "2026-08-12T05:10:32Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "7eef5d3a1594b2d309f234884607dbe492e69756",
         "mergeCommit": "911cb397a1be8067b38ad71cf21cc28edecca104"
       }
@@ -1399,10 +1663,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18509",
       "occurredAt": "2026-08-12T05:10:27Z",
+      "createdAt": "2026-08-12T03:48:28Z",
+      "updatedAt": "2026-08-12T05:10:28Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "1546e83c7014991e606e42f409c8a35fce3ef124",
         "mergeCommit": "b16246e79d4f0f28411ed4b77e23ff405d8d4ade"
       }
@@ -1417,10 +1684,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18514",
       "occurredAt": "2026-08-12T05:10:24Z",
+      "createdAt": "2026-08-12T04:06:07Z",
+      "updatedAt": "2026-08-12T05:10:24Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "0d6973ad4e78df636db126d0e1be0dee565454df",
         "mergeCommit": "5dd02983b41b2725ffca95d0718d65de0ab58e88"
       }
@@ -1435,10 +1705,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18501",
       "occurredAt": "2026-08-12T05:09:14Z",
+      "createdAt": "2026-08-12T03:42:16Z",
+      "updatedAt": "2026-08-12T05:09:14Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "bff872b4e382693b38f67ed4130c9785f24e1cdd",
         "mergeCommit": "7440d36d7a9d7b83a5286848d72595be0ec04a8c"
       }
@@ -1453,10 +1726,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18502",
       "occurredAt": "2026-08-12T05:09:10Z",
+      "createdAt": "2026-08-12T03:43:53Z",
+      "updatedAt": "2026-08-12T05:09:10Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "61001e06e34fd3d74153eef47c06e5fa5bab6b0e",
         "mergeCommit": "f0caa8e00d91a529acfe912bd0d890af547224a4"
       }
@@ -1471,10 +1747,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18282",
       "occurredAt": "2026-08-12T05:03:45Z",
+      "createdAt": "2026-08-10T09:05:04Z",
+      "updatedAt": "2026-08-12T05:03:47Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "98a1fc2008ac19ca758127855472cf84978ccec0",
         "mergeCommit": "7ea655220fe20b93347747b4a403848b92daf1d4"
       }
@@ -1489,10 +1768,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/elizaOS/eliza/pull/18511",
       "occurredAt": "2026-08-12T04:43:25Z",
+      "createdAt": "2026-08-12T03:50:42Z",
+      "updatedAt": "2026-08-12T05:24:27Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "5dfa18961df31ad1aac792d6fdf204976eb55e36",
         "mergeCommit": null
       }
@@ -1507,10 +1789,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/elizaOS/eliza/pull/18513",
       "occurredAt": "2026-08-12T04:36:28Z",
+      "createdAt": "2026-08-12T04:05:38Z",
+      "updatedAt": "2026-08-12T04:36:28Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "2d70a267b4ce17aefd0e71a3c2372b8589c284b8",
         "mergeCommit": null
       }
@@ -1579,10 +1864,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/elizaOS/eliza/pull/18181",
       "occurredAt": "2026-08-11T05:45:28Z",
+      "createdAt": "2026-08-09T16:02:30Z",
+      "updatedAt": "2026-10-10T10:21:08Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "2a727f721694ba086e04f7fac42dbdd93aeeadcd",
         "mergeCommit": null
       }
@@ -1615,10 +1903,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18186",
       "occurredAt": "2026-08-10T01:55:51Z",
+      "createdAt": "2026-08-09T16:55:39Z",
+      "updatedAt": "2026-08-10T01:55:53Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "2d190944d5f93603097e4c4289e28838d7e71dc9",
         "mergeCommit": "a936194ecad1557c5e80d0a71161566b585306ab"
       }
@@ -1633,10 +1924,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18191",
       "occurredAt": "2026-08-10T00:36:10Z",
+      "createdAt": "2026-08-09T17:52:43Z",
+      "updatedAt": "2026-08-10T00:36:12Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "7ea5f2b6b95f820379a8f8d328660942f2100ba5",
         "mergeCommit": "f8592911fc714ca1df120fae34a716823f08454c"
       }
@@ -1651,10 +1945,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18216",
       "occurredAt": "2026-08-09T22:32:22Z",
+      "createdAt": "2026-08-09T22:31:35Z",
+      "updatedAt": "2026-08-09T22:32:24Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "7a784cd668bfdfa2129ec92c5d8e48500294851a",
         "mergeCommit": "1a558d3078dd6f58685d938d798edd614ebba4fa"
       }
@@ -1723,10 +2020,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18178",
       "occurredAt": "2026-08-09T15:27:28Z",
+      "createdAt": "2026-08-09T15:11:25Z",
+      "updatedAt": "2026-08-10T01:36:46Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "393926a230b3d9ed7f7e5e4d4ef3dc6f24bc1eca",
         "mergeCommit": "54a20d2a5d5e09b73f31992227b81da114578cf6"
       }
@@ -1741,10 +2041,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/elizaOS/eliza/pull/18101",
       "occurredAt": "2026-08-09T06:11:21Z",
+      "createdAt": "2026-08-09T00:34:40Z",
+      "updatedAt": "2026-08-09T06:11:22Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "cc591dbf8ad94e9180ecb655cea7eb42f96e97e2",
         "mergeCommit": "bc0752eea6f3d84b38ba4dc0f8484bc09be29e15"
       }
@@ -1777,10 +2080,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/104492",
       "occurredAt": "2026-08-05T05:03:52Z",
+      "createdAt": "2026-07-11T13:33:32Z",
+      "updatedAt": "2026-08-05T05:03:57Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "be8ca9eefbf9317beaa8f7b061310e30a11c011e",
         "mergeCommit": null
       }
@@ -1813,10 +2119,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/NousResearch/hermes-agent/pull/74779",
       "occurredAt": "2026-08-01T21:30:36Z",
+      "createdAt": "2026-07-30T10:53:33Z",
+      "updatedAt": "2026-08-01T21:30:36Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "521d48bd844e7c8469f13117745f44031755e7d1",
         "mergeCommit": null
       }
@@ -1873,10 +2182,13 @@
       "summary": "Opened upstream",
       "url": "https://github.com/block/buzz/pull/3963",
       "occurredAt": "2026-07-31T17:34:55Z",
+      "createdAt": "2026-07-31T17:34:55Z",
+      "updatedAt": "2026-08-19T18:46:41Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "91d722e905d87d6b32ec3a6928fcbd11bf45fad4",
         "mergeCommit": null
       }
@@ -1909,10 +2221,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/openclaw/crabbox/pull/1192",
       "occurredAt": "2026-07-27T12:53:42Z",
+      "createdAt": "2026-07-24T05:44:41Z",
+      "updatedAt": "2026-07-27T12:54:06Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "013974334b62a05b917fd605212175007d97412b",
         "mergeCommit": "08a5f9ac92426369c2c3a6fcbdc8669802d41202"
       }
@@ -1999,10 +2314,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/107963",
       "occurredAt": "2026-07-19T10:05:11Z",
+      "createdAt": "2026-07-15T03:25:34Z",
+      "updatedAt": "2026-07-19T10:05:11Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "a4e3041b8660fadcd1615e5d15b30d30e859e666",
         "mergeCommit": null
       }
@@ -2073,10 +2391,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/clickclack/pull/78",
       "occurredAt": "2026-07-17T03:21:14Z",
+      "createdAt": "2026-07-14T18:31:28Z",
+      "updatedAt": "2026-07-17T12:20:18Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "5a20a79973c8e807f7d92d739c5f0c7a7d1281cd",
         "mergeCommit": null
       }
@@ -2109,10 +2430,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/107901",
       "occurredAt": "2026-07-15T03:27:44Z",
+      "createdAt": "2026-07-15T01:40:00Z",
+      "updatedAt": "2026-07-15T03:27:44Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "1dab58ea4d0a61221c9d7884b5a8bc9d1c043511",
         "mergeCommit": null
       }
@@ -2127,10 +2451,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/openclaw/openclaw/pull/107243",
       "occurredAt": "2026-07-14T16:40:36Z",
+      "createdAt": "2026-07-14T07:13:08Z",
+      "updatedAt": "2026-07-14T16:40:40Z",
       "actor": "felirami",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "felirami",
         "headSha": "e35ddb3ce365c07419365d5b799bbb45b65ac38e",
         "mergeCommit": "c1191cdf2fbbea4cc9797d7f110a4e0acf50d3c7"
       }
@@ -2145,10 +2472,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/107304",
       "occurredAt": "2026-07-14T09:40:22Z",
+      "createdAt": "2026-07-14T08:37:46Z",
+      "updatedAt": "2026-07-15T02:30:52Z",
       "actor": "felirami",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "felirami",
         "headSha": "179050b9ef194efc7bc68b3d5375233600f09b8f",
         "mergeCommit": null
       }
@@ -2163,10 +2493,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/107276",
       "occurredAt": "2026-07-14T08:37:48Z",
+      "createdAt": "2026-07-14T08:00:54Z",
+      "updatedAt": "2026-07-14T08:37:48Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "3072762c82526c0fce27804c6b3839f0002db49a",
         "mergeCommit": null
       }
@@ -2181,10 +2514,13 @@
       "summary": "Merged upstream",
       "url": "https://github.com/openclaw/openclaw/pull/104893",
       "occurredAt": "2026-07-13T10:23:28Z",
+      "createdAt": "2026-07-12T02:13:43Z",
+      "updatedAt": "2026-07-13T10:23:31Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "merged",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "574cc1ea367cc3c24fd81334833988cfc4dd86c3",
         "mergeCommit": "0e5ed900b0f84d313b7df11d038fd546baf301bb"
       }
@@ -2199,10 +2535,13 @@
       "summary": "Closed upstream without merge",
       "url": "https://github.com/openclaw/openclaw/pull/104192",
       "occurredAt": "2026-07-12T09:08:56Z",
+      "createdAt": "2026-07-11T05:31:54Z",
+      "updatedAt": "2026-07-12T09:08:56Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "closed",
       "evidence": {
+        "author": "arcabotai",
         "headSha": "02a66be2410cd70c97e7d9305024c7fb5496ea63",
         "mergeCommit": null
       }

@@ -2300,3 +2300,264 @@ em {
     display: none;
   }
 }
+.tracking-panel {
+  padding-top: 9px;
+  padding-bottom: 8px;
+}
+.tracking-surface {
+  padding: 23px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+.tracking-intro {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+.tracking-intro h2 {
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  flex-shrink: 0;
+}
+.tracking-intro > p {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 790px;
+}
+.tracking-sources {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 25px;
+}
+.tracking-source {
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+  min-width: 0;
+}
+.tracking-profile {
+  display: inline-block;
+  min-height: 44px;
+  font-size: 19px;
+  font-weight: 550;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.tracking-source > p {
+  font-size: 15px;
+  margin-top: 12px;
+  color: #4b6040;
+}
+.tracking-source > p strong {
+  font-size: 22px;
+  font-weight: 500;
+  margin-right: 4px;
+}
+.tracking-source > span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 5px;
+  line-height: 1.8;
+}
+.tracking-query {
+  display: inline-block;
+  min-height: 44px;
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  line-height: 1.8;
+  padding: 6px 0;
+  margin-top: 8px;
+}
+.tracking-checked {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 18px;
+}
+.repository-inventory {
+  scroll-margin-top: 110px;
+  margin-top: 25px;
+  border: 1px solid #cbd7bf;
+  border-radius: 6px;
+  background: #f2f5e9;
+}
+.repository-inventory > summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 60px;
+  padding: 17px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  list-style: none;
+}
+.repository-inventory > summary::-webkit-details-marker {
+  display: none;
+}
+.repository-inventory > summary > span {
+  font-size: 13px;
+  color: var(--muted);
+  margin-left: auto;
+}
+.repository-inventory > summary::after {
+  content: "+";
+  font-size: 22px;
+  flex-shrink: 0;
+}
+.repository-inventory[open] > summary::after {
+  content: "−";
+}
+.repository-inventory[open] > summary {
+  border-bottom: 1px solid var(--line);
+}
+.repository-inventory-body {
+  padding: 24px;
+  max-height: 680px;
+  overflow: auto;
+}
+.repository-inventory-body > p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.85;
+}
+.owner-repositories {
+  margin-top: 25px;
+}
+.owner-repositories h3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 21px;
+  margin-bottom: 14px;
+}
+.owner-repositories h3 > span {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.owner-repositories li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  padding: 15px 0;
+  border-top: 1px solid var(--line);
+}
+.owner-repositories li > div:first-child {
+  min-width: 0;
+}
+.owner-repositories li a {
+  font-size: 16px;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  overflow-wrap: anywhere;
+}
+.owner-repositories li p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-top: 5px;
+  overflow-wrap: anywhere;
+}
+.inventory-labels {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: 13px;
+  flex-shrink: 0;
+  max-width: 220px;
+  color: #657850;
+}
+.inventory-labels > .license {
+  font-size: 13px;
+  white-space: normal;
+  text-align: right;
+}
+@media (max-width: 940px) {
+  .tracking-intro {
+    display: block;
+  }
+  .tracking-intro > p {
+    margin-top: 12px;
+  }
+  .tracking-sources {
+    gap: 20px;
+  }
+}
+@media (max-width: 700px) {
+  .tracking-panel {
+    padding-top: 22px;
+    padding-bottom: 0;
+  }
+  .tracking-surface {
+    padding: 21px;
+  }
+  .tracking-intro h2 {
+    font-size: 21px;
+  }
+  .tracking-intro p {
+    font-size: 14px;
+  }
+  .tracking-sources {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .tracking-source {
+    padding-top: 18px;
+  }
+  .tracking-source > p {
+    font-size: 15px;
+  }
+  .tracking-source > span {
+    font-size: 13px;
+  }
+  .tracking-checked {
+    font-size: 13px;
+    line-height: 1.85;
+  }
+  .repository-inventory > summary {
+    padding: 17px 15px;
+    display: grid;
+    grid-template-columns: 1fr 13px;
+    gap: 7px 12px;
+    font-size: 15px;
+  }
+  .repository-inventory > summary > span {
+    grid-column: 1;
+    font-size: 13px;
+    margin-left: 0;
+  }
+  .repository-inventory > summary::after {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+  .repository-inventory-body {
+    padding: 18px;
+    max-height: 600px;
+  }
+  .owner-repositories h3 {
+    display: block;
+    font-size: 20px;
+  }
+  .owner-repositories h3 > span {
+    display: block;
+    margin-top: 7px;
+  }
+  .owner-repositories li {
+    display: block;
+  }
+  .inventory-labels {
+    justify-content: flex-start;
+    max-width: none;
+    margin-top: 10px;
+  }
+  .inventory-labels > .license {
+    text-align: left;
+  }
+}

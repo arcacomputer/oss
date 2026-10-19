@@ -69,6 +69,37 @@ test("distinct submitted reviews retain their receipts alongside the PR state", 
   assert.deepEqual(currentWork(events, []), [opened]);
 });
 
+test("reopened PR snapshots supersede closed transitions while keeping occurrence-date display order", () => {
+  const closed = event(1, "closed", "2026-10-01T10:00:00Z", { updatedAt: "2026-10-01T10:00:00Z" });
+  const reopened = event(1, "open", "2026-07-01T10:00:00Z", { updatedAt: "2026-10-19T10:00:00Z" });
+  const other = event(2, "merged", "2026-10-10T10:00:00Z");
+  assert.deepEqual(latestActivity([closed, reopened, other]), [other, reopened]);
+  assert.deepEqual(currentWork([closed, reopened, other], []), [reopened]);
+});
+
+test("a stale ledger cannot resurrect open PRs or override more recent verified feed states", () => {
+  const events = [
+    event(1, "merged", "2026-10-18T10:00:00Z", { updatedAt: "2026-10-19T10:00:00Z" }),
+    event(2, "open", "2026-07-01T10:00:00Z", { updatedAt: "2026-10-19T10:00:00Z" }),
+    event(3, "merged", "2026-07-02T10:00:00Z"),
+    event(3, "closed", "2026-10-18T10:00:00Z", { updatedAt: "2026-10-19T10:00:00Z" }),
+    event(4, "closed", "2026-10-01T10:00:00Z"),
+  ];
+  const ledger = [
+    pr(1, "open", "2026-10-17T10:00:00Z"),
+    pr(2, "closed", "2026-10-17T10:00:00Z"),
+    pr(3, "merged", "2026-10-17T10:00:00Z"),
+    pr(4, "merged", "2026-10-19T10:00:00Z"),
+    pr(5, "open", "2026-10-19T10:00:00Z", { author: undefined }),
+  ];
+  assert.deepEqual(currentWork(events, ledger).map((item) => item.number), [2]);
+  assert.deepEqual(contributionSummary(events, ledger), {
+    mergedCount: 2,
+    mergedCreditCount: 0,
+    openCount: 1,
+  });
+});
+
 test("merge totals deduplicate PR receipts and ledger entries while separating upstream credits", () => {
   const events = [
     event(1, "merged", "2026-10-01T10:00:00Z"),
@@ -87,7 +118,7 @@ test("merge totals deduplicate PR receipts and ledger entries while separating u
   });
 });
 
-test("current work resolves closed transitions and lets the ledger override stale feed states", () => {
+test("current work resolves closed transitions and lets a newer ledger override stale feed states", () => {
   const events = [
     event(1, "open", "2026-10-03T10:00:00Z"),
     event(2, "open", "2026-10-01T10:00:00Z"),
@@ -97,7 +128,7 @@ test("current work resolves closed transitions and lets the ledger override stal
     event(6, "open", "2026-10-01T10:00:00Z"),
   ];
   const ledger = [
-    pr(1, "closed", "2026-10-01T10:00:00Z"),
+    pr(1, "closed", "2026-10-04T10:00:00Z"),
     pr(3, "open", "2026-10-03T10:00:00Z", { arca: { currentWork: "Addressing maintainer feedback" } }),
     pr(5, "open", "2026-10-05T10:00:00Z"),
     pr(6, "merged", "2026-10-03T10:00:00Z"),

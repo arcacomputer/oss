@@ -26,7 +26,8 @@ export function latestActivity(events: ActivityEvent[]): ActivityEvent[] {
     const previous = latest.get(key);
     if (
       !previous ||
-      timestamp(event.occurredAt) > timestamp(previous.occurredAt)
+      timestamp(event.updatedAt ?? event.occurredAt) >
+        timestamp(previous.updatedAt ?? previous.occurredAt)
     ) {
       latest.set(key, event);
     }
@@ -36,18 +37,19 @@ export function latestActivity(events: ActivityEvent[]): ActivityEvent[] {
   );
 }
 
-/** The ledger is a current snapshot; feed entries are historical transitions. */
-export function currentWork(
+/** Prefer the most recently updated verified PR snapshot across both sources. */
+export function latestPullRequestStates(
   events: ActivityEvent[],
   ledgerPrs: PullRequestRecord[],
 ): ActivityEvent[] {
-  const work = new Map(
+  const states = new Map(
     latestActivity(
       events.filter((event) => event.type === "upstream_pr_state"),
     ).map((event) => [canonicalUrl(event.url), event]),
   );
   const ledger = new Map<string, PullRequestRecord>();
   for (const pr of ledgerPrs) {
+    if (!pr.author) continue;
     const key = canonicalUrl(pr.url);
     const previous = ledger.get(key);
     if (!previous || timestamp(pr.updatedAt) > timestamp(previous.updatedAt))
@@ -55,31 +57,51 @@ export function currentWork(
   }
 
   for (const [key, pr] of ledger) {
-    if (pr.state !== "open") {
-      work.delete(key);
-      continue;
-    }
+    const existing = states.get(key);
+    if (
+      existing &&
+      timestamp(existing.updatedAt ?? existing.occurredAt) >
+        timestamp(pr.updatedAt)
+    ) continue;
     const repository = new URL(pr.url).pathname
       .split("/")
       .slice(1, 3)
       .join("/");
-    work.set(key, {
+    states.set(key, {
       id: `ledger:pr:${repository}:${pr.number}`,
       type: "upstream_pr_state",
       project: repository.split("/")[1] || repository,
       repository,
       number: pr.number,
       title: pr.title,
-      summary: pr.arca?.currentWork || pr.statusLabel || "Open upstream",
+      summary:
+        pr.arca?.currentWork ||
+        (pr.state === "merged"
+          ? "Merged upstream"
+          : pr.state === "closed"
+            ? "Closed upstream without merge"
+            : pr.statusLabel || "Open upstream"),
       url: pr.url,
-      occurredAt: pr.updatedAt,
-      actor: pr.author || "arcabotai",
+      occurredAt:
+        pr.state === "merged" ? pr.mergedAt || pr.updatedAt : pr.updatedAt,
+      createdAt: pr.createdAt,
+      updatedAt: pr.updatedAt,
+      actor: pr.author!,
       role: "author",
-      state: "open",
+      state: pr.state,
     });
   }
 
-  return latestActivity([...work.values()]).filter(
+  return [...states.values()].sort(
+    (a, b) => timestamp(b.occurredAt) - timestamp(a.occurredAt),
+  );
+}
+
+export function currentWork(
+  events: ActivityEvent[],
+  ledgerPrs: PullRequestRecord[],
+): ActivityEvent[] {
+  return latestPullRequestStates(events, ledgerPrs).filter(
     (event) => event.state === "open",
   );
 }
@@ -90,7 +112,7 @@ export function contributionSummary(
   ledgerPrs: PullRequestRecord[],
 ) {
   const merged = new Set(
-    events
+    latestPullRequestStates(events, ledgerPrs)
       .filter(
         (event) =>
           event.type === "upstream_pr_state" &&
@@ -99,9 +121,6 @@ export function contributionSummary(
       )
       .map((event) => canonicalUrl(event.url)),
   );
-  for (const pr of ledgerPrs) {
-    if (pr.state === "merged") merged.add(canonicalUrl(pr.url));
-  }
   const credits = new Set(
     events
       .filter(

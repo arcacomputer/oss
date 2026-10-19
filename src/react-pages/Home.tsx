@@ -4,6 +4,9 @@ import {
   getOpenClawLedger,
   ownedProjects,
   supportPrograms,
+  getRepositoryInventory,
+  trackingIdentities,
+  trackingSince,
 } from "@/lib/data";
 import {
   contributionSummary,
@@ -20,6 +23,11 @@ import {
   projectStatusLabels,
   contributionDescriptions,
 } from "@/lib/catalog";
+
+import {
+  TrackingSources,
+  RepositoryInventory,
+} from "@/src/components/GitHubTracking";
 
 const SITE_SOURCE = "https://github.com/arcacomputer/oss";
 const LEDGER_INITIAL_LIMIT = 6;
@@ -204,10 +212,7 @@ function HistoryProject({ project }: { project: ContributionProject }) {
   const credits = project.creditItems.length;
   const reviews = project.reviewedItems.length;
   const closed = project.closedItems.length;
-  const curatedMerge = project.curatedEvidence.filter((item) =>
-    /merged/i.test(item.label),
-  );
-  const accepted = merged > 0 || credits > 0 || curatedMerge.length > 0;
+  const accepted = merged > 0 || credits > 0;
   const historyReceipts = project.allReceipts.filter(
     (event) => event.state !== "open",
   );
@@ -239,11 +244,9 @@ function HistoryProject({ project }: { project: ContributionProject }) {
             ? "Merged contributions"
             : credits
               ? "Credited merges"
-              : curatedMerge.length
-                ? "Merged contributions"
-                : reviews
-                  ? "Code review"
-                  : "Closed proposals"}
+              : reviews
+                ? "Code review"
+                : "Closed proposals"}
         </span>
       </div>
       <p>
@@ -269,13 +272,6 @@ function HistoryProject({ project }: { project: ContributionProject }) {
           <span>
             <strong>{reviews}</strong> submitted{" "}
             {reviews === 1 ? "review" : "reviews"}
-          </span>
-        ) : null}
-        {!merged && !credits && curatedMerge.length > 0 ? (
-          <span>
-            {project.name === "SlimeVR CheeseCake"
-              ? "3 merged documentation contributions"
-              : "Merged work in the linked records"}
           </span>
         ) : null}
         {closed > 0 ? (
@@ -329,14 +325,17 @@ export default function Home() {
     feed.events,
     ledger.pullRequests,
     supportPrograms,
+    {
+      authors: trackingIdentities.map((identity) => identity.login),
+      since: trackingSince,
+    },
   );
+  const repositoryInventory = getRepositoryInventory();
   const activeProjects = [...directory.active].sort(
     (a, b) => b.openItems.length - a.openItems.length,
   );
   const historyRank = (project: ContributionProject) =>
-    project.mergedItems.length +
-    project.creditItems.length +
-    (project.repository === "Sorakage033/SlimeVR-CheeseCake" ? 3 : 0);
+    project.mergedItems.length + project.creditItems.length;
   const pastProjects = [...directory.past].sort(
     (a, b) =>
       Number(historyRank(b) > 0) - Number(historyRank(a) > 0) ||
@@ -480,11 +479,16 @@ export default function Home() {
             Public, verifiable work
           </span>
           <p>
-            Activity checked {day(feed.generatedAt)} · OpenClaw checked{" "}
-            {day(ledger.generatedAt)}
+            Activity checked {day(feed.checkedAt || feed.generatedAt)} ·
+            OpenClaw checked {day(ledger.generatedAt)}
           </p>
           <a href="#records">View the full record</a>
         </div>
+        <TrackingSources
+          feed={feed}
+          inventory={repositoryInventory}
+          since={trackingSince}
+        />
         <section
           className="section tools-section container"
           id="projects"
@@ -552,6 +556,7 @@ export default function Home() {
             Every listed project has an explicit open-source license.
             Prototypes, previews, and archived findings are labelled.
           </p>
+          <RepositoryInventory inventory={repositoryInventory} />
         </section>
         <section
           className="section current-section"
@@ -804,7 +809,7 @@ export default function Home() {
                         <div>
                           <a href={pr.url}>{pr.title}</a>
                           <span className="receipt-meta">
-                            #{pr.number} · @{pr.author ?? "arcabotai"}
+                            #{pr.number} · @{pr.author}
                           </span>
                         </div>
                         <Status state={pr.state} />
