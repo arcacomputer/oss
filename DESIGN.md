@@ -6,17 +6,17 @@ The site helps visitors understand what Arca builds, where it contributes, and w
 
 An editorial directory with a clear hierarchy: warm paper (`#f6f5ef`), forest green (`#173b2f`), fine rules, and generous space. Lime (`#d5f478`) is a small accent. Self-hosted DM Sans handles interface and body text; Georgia italic gives the main headline a human accent.
 
-Use direct labels, visible button boundaries, and real project identity. A forest overview introduces three navigation paths; white project panels on paper and sage sections distinguish Arca projects from upstream work. Keep body descriptions at 16–18px, primary actions at 15px with 44–48px targets, and supporting labels at least 13px. Avoid repeated arrows, decorative terminals, invented diagrams, and ornamental project artwork.
+Use direct labels, visible button boundaries, and real project identity. A forest overview introduces two navigation paths; white project panels on paper and sage sections distinguish software Arca makes from external OSS contributions. Keep body descriptions at 16–18px, primary actions at 15px with 44–48px targets, and supporting labels at least 13px. Avoid repeated arrows, decorative terminals, invented diagrams, and ornamental project artwork.
 
 ## Information architecture
 
 - Explain Arca's open-source work immediately.
-- Give visitors three explicit routes in the opening: Arca projects, Working on now, and Past contributions. On mobile these become three prominent destination buttons.
-- Show all licensed Arca projects in a visible directory with search, category filters, purpose, lifecycle, license, and a clear View project button. Order tools first, then research and public records.
-- Group open contributions by upstream project and explain the contribution area before exposing individual PR titles. Show current open PR counts and a visible expansion control.
-- Give past contributions a separate searchable directory. Show accepted work first, with authored merges, credited merges, reviews, and closed proposals kept distinct. Filters select projects with each kind of work; a project may have several kinds of history and also current work. Apply the February 12, 2026 cutoff consistently, including curated receipts; the 2023 SlimeVR contribution is outside this scope.
-- Make the public repository inventory accessible alongside the curated Arca project directory. Cover currently public repositories owned by `felirami`, `arcabotai`, and `arcacomputer`, including repositories created before the contribution cutoff. Label forks, archives, and detected licenses explicitly. Do not equate a public repository with licensed OSS or original Arca work.
-- Keep the full activity feed and OpenClaw ledger accessible without making them the first reading task.
+- Give visitors two explicit routes in the opening: Software we make (`#projects`) and Projects we contribute to (`#contributions`). Preserve the same distinction in mobile destination buttons.
+- Show licensed software Arca makes in a visible directory with search, category filters, purpose, lifecycle, license, and a clear View project button. Include tools, Ardea Knowledge Steward, and OpenChina. Put Headlong Agent Findings, the OpenClaw contribution ledger, the TUI field fix, and this index in a compact Public records resource list, preserving their underlying project evidence.
+- Within Projects we contribute to, group current open contributions by upstream project and explain the contribution area before exposing individual PR titles. Show current open PR counts and a visible expansion control.
+- Follow current work with a searchable past-contributions directory under the same destination. Show accepted work first, with authored merges, credited merges, reviews, and closed proposals kept distinct. A project may have several kinds of history and also current work. Apply the February 12, 2026 cutoff consistently, including curated receipts; the 2023 SlimeVR contribution is outside this scope.
+- Place all GitHub tracking sources and the full repository inventory in Public records. Cover currently public repositories owned by `felirami`, `arcabotai`, and `arcacomputer`, including repositories created before the contribution cutoff. Label forks, archives, and detected licenses explicitly. Public personal repositories do not automatically belong in Software we make.
+- Keep the full activity feed and OpenClaw ledger accessible through Public records without making them the first reading task.
 
 ## Evidence and interaction
 

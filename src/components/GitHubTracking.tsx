@@ -21,13 +21,10 @@ export function TrackingSources({
 }) {
   if (!inventory.checkedAt) return null;
   return (
-    <section
-      className="tracking-panel container"
-      aria-labelledby="tracking-title"
-    >
+    <section className="tracking-panel" aria-labelledby="tracking-title">
       <div className="tracking-surface">
         <div className="tracking-intro">
-          <h2 id="tracking-title">Tracked GitHub sources</h2>
+          <h3 id="tracking-title">Tracked GitHub sources</h3>
           <p>
             Authored external pull requests since {date(`${since}T00:00:00Z`)}.
             Reviews and merge credits are selected verified records.
@@ -115,7 +112,10 @@ export function RepositoryInventory({
     <details className="repository-inventory" id="repository-inventory">
       <summary>
         All tracked public repositories{" "}
-        <span>{inventory.repositories.length} repositories · {inventory.sources.length} owners</span>
+        <span>
+          {inventory.repositories.length} repositories ·{" "}
+          {inventory.sources.length} owners
+        </span>
       </summary>
       <div className="repository-inventory-body">
         <p>

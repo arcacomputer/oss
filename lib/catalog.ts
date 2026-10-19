@@ -9,7 +9,7 @@ export const projectCategories: Record<string, ProjectCategory> = {
   "OpenClaw TUI Field Fix": "records",
   "OrthoVoxel Studio": "tools",
   OpenChina: "research",
-  "Headlong Agent Findings": "research",
+  "Headlong Agent Findings": "records",
   Clueside: "tools",
   "poidh Ultra": "tools",
   "Concentrate.ai for OpenClaw": "tools",

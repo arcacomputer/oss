@@ -2,13 +2,9 @@
 
 Source for [oss.arcabot.ai](https://oss.arcabot.ai), Arca's public engineering index.
 
-The site provides clear paths to Arca projects, current upstream PRs, past contributions, and a public GitHub repository inventory. Search and category/outcome filters help visitors explore each listing, with detailed evidence available through native disclosures. Main GitHub and site-source links point to `arcacomputer/oss`.
+The site has two primary destinations: **Software we make** (`#projects`) for Arca's licensed software, and **Projects we contribute to** (`#contributions`) for external OSS work, with current and past contributions beneath it. Search and category/outcome filters help visitors explore each listing. **Public records** holds the GitHub tracking sources, full public repository inventory, and detailed evidence. Main GitHub and site-source links point to `arcacomputer/oss`.
 
-The site distinguishes:
-
-1. Open-source projects Arca maintains, with explicit licenses.
-2. External OSS projects Arca supports, with precise role and attribution boundaries.
-3. Upstream work, keeping open, merged, closed, superseded, reviewed, and co-authored records distinct.
+The software directory and external contributions are separate. Software we make includes tools, Ardea Knowledge Steward, and OpenChina. Headlong Agent Findings, the OpenClaw contribution ledger, the TUI field fix, and this index appear as compact resources in Public records; their underlying project evidence remains available. Contribution records distinguish open, merged, closed, superseded, reviewed, and co-authored work with precise attribution. Public personal repositories are supporting records, not automatically software made by Arca.
 
 ## GitHub tracking scope
 

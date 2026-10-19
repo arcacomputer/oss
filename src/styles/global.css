@@ -36,13 +36,15 @@ h1,
 h2,
 h3,
 h4,
+h5,
 p {
   margin: 0;
 }
 h1,
 h2,
 h3,
-h4 {
+h4,
+h5 {
   line-height: 1.15;
   font-weight: 550;
 }
@@ -706,7 +708,7 @@ em {
   height: 100%;
   object-fit: contain;
 }
-.current-card h3 {
+.current-card h4 {
   font-size: 27px;
   letter-spacing: -0.6px;
   margin-bottom: 14px;
@@ -992,7 +994,7 @@ em {
   min-width: 0;
   flex: 1;
 }
-.history-project h3 {
+.history-project h4 {
   font-size: 23px;
   letter-spacing: -0.5px;
   line-height: 1.3;
@@ -1070,7 +1072,7 @@ em {
   padding-top: 16px;
   margin-top: 9px;
 }
-.curated-records h4 {
+.curated-records h5 {
   font-size: 14px;
   margin-bottom: 10px;
 }
@@ -1411,7 +1413,7 @@ em {
   .current-card {
     padding: 23px 18px;
   }
-  .current-card h3 {
+  .current-card h4 {
     font-size: 25px;
   }
   .project-receipts > summary {
@@ -1535,7 +1537,7 @@ em {
     grid-column: 1;
     margin-bottom: 20px;
   }
-  .current-card h3 {
+  .current-card h4 {
     grid-column: 1;
     margin-bottom: 12px;
   }
@@ -1588,7 +1590,7 @@ em {
   .history-project {
     padding: 22px 19px;
   }
-  .history-project h3 {
+  .history-project h4 {
     font-size: 22px;
   }
   .history-project-top > .status {
@@ -1936,7 +1938,7 @@ em {
     margin-left: auto;
     margin-right: 0;
   }
-  .current-card h3 {
+  .current-card h4 {
     font-size: 27px;
   }
   .current-card > p {
@@ -2020,7 +2022,7 @@ em {
   .history-project-top {
     gap: 11px;
   }
-  .history-project h3 {
+  .history-project h4 {
     font-size: 24px;
     line-height: 1.3;
   }
@@ -2316,7 +2318,7 @@ em {
   gap: 30px;
   margin-bottom: 20px;
 }
-.tracking-intro h2 {
+.tracking-intro h3 {
   font-size: 20px;
   letter-spacing: -0.4px;
   flex-shrink: 0;
@@ -2498,7 +2500,7 @@ em {
   .tracking-surface {
     padding: 21px;
   }
-  .tracking-intro h2 {
+  .tracking-intro h3 {
     font-size: 21px;
   }
   .tracking-intro p {
@@ -2559,5 +2561,122 @@ em {
   }
   .inventory-labels > .license {
     text-align: left;
+  }
+}
+
+.contributions-section {
+  background: #e9efdf;
+  border-top: 1px solid #cbd7bf;
+}
+.contributions-intro {
+  padding-top: 58px;
+}
+.contributions-intro .section-heading {
+  margin-bottom: 25px;
+}
+.contribution-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.contribution-navigation .button {
+  gap: 16px;
+  min-height: 50px;
+}
+.contribution-navigation span {
+  font-size: 13px;
+  opacity: 0.8;
+  font-weight: 400;
+}
+.contributions-section .current-section {
+  background: transparent;
+  border: 0;
+  padding-top: 42px;
+  padding-bottom: 42px;
+}
+.contributions-section .history-section {
+  border-top: 1px solid #cbd7bf;
+  padding-top: 42px;
+}
+.contributions-section .section-heading h3 {
+  font-size: 32px;
+  letter-spacing: -0.9px;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+.record-projects {
+  margin-bottom: 28px;
+  border: 1px solid #c9d4bb;
+  border-radius: 7px;
+  background: #f6f8ef;
+  padding: 0 25px;
+}
+.record-projects > li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 35px;
+  padding: 24px 0;
+}
+.record-projects > li + li {
+  border-top: 1px solid #d5dec9;
+}
+.record-projects h3 {
+  font-size: 21px;
+  font-weight: 500;
+  letter-spacing: -0.4px;
+  margin-bottom: 8px;
+}
+.record-projects p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.75;
+  max-width: 750px;
+}
+.record-project-meta {
+  display: block;
+  font-size: 13px;
+  color: #61744c;
+  margin-top: 9px;
+}
+.record-projects .button {
+  flex-shrink: 0;
+  font-size: 14px;
+}
+.records-section .tracking-panel {
+  margin-top: 28px;
+  padding: 0;
+}
+@media (max-width: 700px) {
+  .contributions-intro {
+    padding-top: 42px;
+  }
+  .contribution-navigation {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .contribution-navigation .button {
+    justify-content: space-between;
+    padding: 13px 15px;
+  }
+  .contributions-section .section-heading h3 {
+    font-size: 28px;
+    letter-spacing: -0.7px;
+  }
+  .contributions-section .current-section,
+  .contributions-section .history-section {
+    padding-top: 35px;
+    padding-bottom: 35px;
+  }
+  .record-projects {
+    padding: 0 18px;
+  }
+  .record-projects > li {
+    display: block;
+    padding: 23px 0;
+  }
+  .record-projects .button {
+    margin-top: 17px;
   }
 }

@@ -142,7 +142,7 @@ function CurrentProject({ project }: { project: ContributionProject }) {
         <RepoMark project={project} />
         <span className="status status-open">In progress</span>
       </div>
-      <h3>{project.name}</h3>
+      <h4>{project.name}</h4>
       <p>{activeDescription(project)}</p>
       <div className="current-card-count">
         <strong>{project.openItems.length}</strong> open{" "}
@@ -234,7 +234,7 @@ function HistoryProject({ project }: { project: ContributionProject }) {
       <div className="history-project-top">
         <RepoMark project={project} />
         <div>
-          <h3>{project.name}</h3>
+          <h4>{project.name}</h4>
           <span className="repo-name">{project.repository}</span>
         </div>
         <span
@@ -295,7 +295,7 @@ function HistoryProject({ project }: { project: ContributionProject }) {
           </ul>
           {additionalEvidence.length > 0 ? (
             <div className="curated-records">
-              <h4>Selected public evidence</h4>
+              <h5>Selected public evidence</h5>
               {additionalEvidence.map((item) => (
                 <a key={item.url} href={item.url}>
                   {item.label}
@@ -347,7 +347,24 @@ export default function Home() {
     research: 1,
     records: 2,
   };
-  const sortedProjects = [...ownedProjects].sort(
+  const softwareProjects = ownedProjects.filter(
+    (project) => projectCategories[project.name] !== "records",
+  );
+  const recordProjects = ownedProjects.filter(
+    (project) => projectCategories[project.name] === "records",
+  );
+  const contributionProjectCount = new Set(
+    [...directory.active, ...directory.past].map(
+      (project) => project.repository,
+    ),
+  ).size;
+  const recordActions: Record<string, string> = {
+    "Headlong Agent Findings": "Read findings",
+    "OpenClaw Contributions": "Open contribution ledger",
+    "OpenClaw TUI Field Fix": "Read investigation",
+    "Arca OSS Index": "View site source",
+  };
+  const sortedProjects = [...softwareProjects].sort(
     (a, b) =>
       categoryOrder[projectCategories[a.name]] -
       categoryOrder[projectCategories[b.name]],
@@ -360,13 +377,10 @@ export default function Home() {
   const nav = (
     <>
       <a href="#projects" data-section-link="projects">
-        Arca projects
+        Software we make
       </a>
-      <a href="#current-work" data-section-link="current-work">
-        Working on now
-      </a>
-      <a href="#past-work" data-section-link="past-work">
-        Past contributions
+      <a href="#contributions" data-section-link="contributions">
+        Projects we contribute to
       </a>
     </>
   );
@@ -420,16 +434,15 @@ export default function Home() {
                 <em>Software we improve.</em>
               </h1>
               <p className="hero-description">
-                We build open-source tools, contribute fixes to the projects we
-                use, and publish what we learn. Here’s what’s ours, what’s in
-                progress, and what we’ve contributed.
+                Explore software built by Arca and our contributions to
+                open-source projects maintained by other teams.
               </p>
               <div className="hero-actions">
                 <a className="button button-lime" href="#projects">
-                  Explore Arca projects
+                  Explore our software
                 </a>
-                <a className="button button-hero-outline" href="#current-work">
-                  See work in progress
+                <a className="button button-hero-outline" href="#contributions">
+                  Explore contributions
                 </a>
               </div>
               <p className="hero-note">Independent team · Santiago, Chile</p>
@@ -444,30 +457,25 @@ export default function Home() {
                   <Icon kind="code" />
                 </span>
                 <span>
-                  <strong>Arca projects</strong>
-                  <small>Tools, research & public records we publish.</small>
+                  <strong>Software we make</strong>
+                  <small>
+                    Tools, infrastructure, and software prototypes built by
+                    Arca.
+                  </small>
                 </span>
-                <span className="route-count">{ownedProjects.length}</span>
+                <span className="route-count">{softwareProjects.length}</span>
               </a>
-              <a href="#current-work">
+              <a href="#contributions">
                 <span className="route-icon">
                   <Icon kind="branch" />
                 </span>
                 <span>
-                  <strong>Working on now</strong>
-                  <small>Projects with open contributions.</small>
+                  <strong>Projects we contribute to</strong>
+                  <small>
+                    Fixes, features, and reviews for other teams’ OSS.
+                  </small>
                 </span>
-                <span className="route-count">{directory.active.length}</span>
-              </a>
-              <a href="#past-work">
-                <span className="route-icon">
-                  <Icon kind="check" />
-                </span>
-                <span>
-                  <strong>Past contributions</strong>
-                  <small>Merged work, reviews & past proposals.</small>
-                </span>
-                <span className="route-count">{directory.past.length}</span>
+                <span className="route-count">{contributionProjectCount}</span>
               </a>
               <p>Every project and contribution links to its public source.</p>
             </nav>
@@ -484,11 +492,6 @@ export default function Home() {
           </p>
           <a href="#records">View the full record</a>
         </div>
-        <TrackingSources
-          feed={feed}
-          inventory={repositoryInventory}
-          since={trackingSince}
-        />
         <section
           className="section tools-section container"
           id="projects"
@@ -497,27 +500,26 @@ export default function Home() {
           <div className="section-heading">
             <div>
               <p className="eyebrow">BUILT & PUBLISHED BY ARCA</p>
-              <h2 id="projects-title">Arca projects</h2>
+              <h2 id="projects-title">Software we make</h2>
               <p>
-                Software you can use, research you can inspect, and public
-                records you can follow.
+                Open-source tools, infrastructure, and software prototypes built
+                and published by Arca.
               </p>
             </div>
             <span className="section-total">
-              {ownedProjects.length} licensed projects
+              {softwareProjects.length} licensed software projects
             </span>
           </div>
           <div className="directory-toolbar" data-project-controls hidden>
             <div
               className="filter-buttons"
               role="group"
-              aria-label="Filter Arca projects"
+              aria-label="Filter our software"
             >
               {[
                 ["all", "All projects"],
                 ["tools", "Tools & infrastructure"],
                 ["research", "Research & prototypes"],
-                ["records", "Public records"],
               ].map(([value, label]) => (
                 <button
                   type="button"
@@ -531,17 +533,17 @@ export default function Home() {
             </div>
             <label className="search-box">
               <Icon kind="search" />
-              <span className="sr-only">Search Arca projects</span>
+              <span className="sr-only">Search our software</span>
               <input
                 type="search"
-                placeholder="Find a project…"
+                placeholder="Find software…"
                 data-project-search
               />
             </label>
           </div>
           <div id="project-directory">
             <p className="result-count" data-project-count aria-live="polite">
-              Showing all {ownedProjects.length} projects
+              Showing all {softwareProjects.length} software projects
             </p>
             <div className="tool-grid">
               {sortedProjects.map((project) => (
@@ -553,142 +555,174 @@ export default function Home() {
             </p>
           </div>
           <p className="section-note">
-            Every listed project has an explicit open-source license.
-            Prototypes, previews, and archived findings are labelled.
+            Every software project listed here has an explicit open-source
+            license. Prototypes and previews are labelled. Our reports and
+            investigations are in <a href="#records">Public records</a>.
           </p>
-          <RepositoryInventory inventory={repositoryInventory} />
         </section>
         <section
-          className="section current-section"
-          id="current-work"
-          aria-labelledby="current-title"
+          className="contributions-section"
+          id="contributions"
+          aria-labelledby="contributions-title"
         >
-          <div className="container">
+          <div className="contributions-intro container">
             <div className="section-heading">
               <div>
                 <p className="eyebrow">
-                  <span className="dot" />
-                  UPSTREAM / IN PROGRESS
+                  CONTRIBUTIONS TO OTHER OPEN-SOURCE PROJECTS
                 </p>
-                <h2 id="current-title">Working on now</h2>
+                <h2 id="contributions-title">Projects we contribute to</h2>
                 <p>
-                  These are projects we contribute to. Their maintainers review
-                  and decide what lands.
+                  Fixes, features, and code reviews we contribute to software
+                  maintained by other teams. Follow work in progress or explore
+                  the results of past contributions.
                 </p>
               </div>
-              <span className="section-total">
-                {work.length} open PRs · {directory.active.length} projects
+            </div>
+            <nav
+              className="contribution-navigation"
+              aria-label="Contribution status"
+            >
+              <a className="button button-primary" href="#current-work">
+                In progress <span>{work.length} open PRs</span>
+              </a>
+              <a className="button button-secondary" href="#past-work">
+                Past contributions <span>{directory.past.length} projects</span>
+              </a>
+            </nav>
+          </div>
+          <section
+            className="section current-section"
+            id="current-work"
+            aria-labelledby="current-title"
+          >
+            <div className="container">
+              <div className="section-heading">
+                <div>
+                  <p className="eyebrow">
+                    <span className="dot" />
+                    UPSTREAM / IN PROGRESS
+                  </p>
+                  <h3 id="current-title">In progress</h3>
+                  <p>
+                    Open pull requests, grouped by the project they improve.
+                    Upstream maintainers review and decide what lands.
+                  </p>
+                </div>
+                <span className="section-total">
+                  {work.length} open PRs · {directory.active.length} projects
+                </span>
+              </div>
+              <div className="current-grid">
+                {activeProjects.map((project) => (
+                  <CurrentProject key={project.repository} project={project} />
+                ))}
+              </div>
+              <div className="current-footnote">
+                <p>
+                  <strong>Open for upstream review.</strong> A pull request is
+                  open in our dated snapshots. Open its public record to check
+                  the latest upstream status.
+                </p>
+                <a className="button button-secondary" href="#past-work">
+                  See past contributions
+                </a>
+              </div>
+            </div>
+          </section>
+          <section
+            className="section history-section container"
+            id="past-work"
+            aria-labelledby="history-title"
+          >
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">UPSTREAM / PAST WORK</p>
+                <h3 id="history-title">Past contributions</h3>
+                <p>
+                  Changes that landed, code we reviewed, and proposals we made.
+                  Each result is labelled.
+                </p>
+              </div>
+              <div className="history-totals">
+                <strong>
+                  {summary.mergedCount}
+                  <small>authored merges in snapshots</small>
+                </strong>
+                <strong>
+                  {summary.mergedCreditCount}
+                  <small>additional credited merges</small>
+                </strong>
+              </div>
+            </div>
+            <div className="history-guide">
+              <span>
+                <i className="legend-dot legend-merged" />
+                <strong>Merged</strong> Accepted upstream
+              </span>
+              <span>
+                <i className="legend-dot legend-review" />
+                <strong>Reviewed / credited</strong> Role stated in the record
+              </span>
+              <span>
+                <i className="legend-dot legend-closed" />
+                <strong>Closed</strong> Proposal without a merge
               </span>
             </div>
-            <div className="current-grid">
-              {activeProjects.map((project) => (
-                <CurrentProject key={project.repository} project={project} />
-              ))}
-            </div>
-            <div className="current-footnote">
-              <p>
-                <strong>Open for upstream review.</strong> A pull request is
-                open in our dated snapshots. Open its public record to check the
-                latest upstream status.
-              </p>
-              <a className="button button-secondary" href="#past-work">
-                See past contributions
-              </a>
-            </div>
-          </div>
-        </section>
-        <section
-          className="section history-section container"
-          id="past-work"
-          aria-labelledby="history-title"
-        >
-          <div className="section-heading">
-            <div>
-              <p className="eyebrow">UPSTREAM / PAST WORK</p>
-              <h2 id="history-title">Past contributions</h2>
-              <p>
-                Changes that landed, code we reviewed, and proposals we made.
-                Each result is labelled.
-              </p>
-            </div>
-            <div className="history-totals">
-              <strong>
-                {summary.mergedCount}
-                <small>authored merges in snapshots</small>
-              </strong>
-              <strong>
-                {summary.mergedCreditCount}
-                <small>additional credited merges</small>
-              </strong>
-            </div>
-          </div>
-          <div className="history-guide">
-            <span>
-              <i className="legend-dot legend-merged" />
-              <strong>Merged</strong> Accepted upstream
-            </span>
-            <span>
-              <i className="legend-dot legend-review" />
-              <strong>Reviewed / credited</strong> Role stated in the record
-            </span>
-            <span>
-              <i className="legend-dot legend-closed" />
-              <strong>Closed</strong> Proposal without a merge
-            </span>
-          </div>
-          <div
-            className="directory-toolbar history-toolbar"
-            data-history-controls
-            hidden
-          >
             <div
-              className="filter-buttons"
-              role="group"
-              aria-label="Filter past contributions"
+              className="directory-toolbar history-toolbar"
+              data-history-controls
+              hidden
             >
-              {[
-                ["all", "All projects"],
-                ["accepted", "With merged work"],
-                ["review", "With reviews"],
-                ["closed", "With closed proposals"],
-              ].map(([value, label]) => (
-                <button
-                  type="button"
-                  key={value}
-                  data-history-filter={value}
-                  aria-pressed={value === "all"}
-                >
-                  {label}
-                </button>
+              <div
+                className="filter-buttons"
+                role="group"
+                aria-label="Filter past contributions"
+              >
+                {[
+                  ["all", "All projects"],
+                  ["accepted", "With merged work"],
+                  ["review", "With reviews"],
+                  ["closed", "With closed proposals"],
+                ].map(([value, label]) => (
+                  <button
+                    type="button"
+                    key={value}
+                    data-history-filter={value}
+                    aria-pressed={value === "all"}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <label className="search-box">
+                <Icon kind="search" />
+                <span className="sr-only">Search past contributions</span>
+                <input
+                  type="search"
+                  placeholder="Find an OSS project…"
+                  data-history-search
+                />
+              </label>
+            </div>
+            <p className="result-count" data-history-count aria-live="polite">
+              {directory.past.length} projects with past work. Projects can also
+              have work in progress.
+            </p>
+            <div className="history-grid">
+              {pastProjects.map((project) => (
+                <HistoryProject key={project.repository} project={project} />
               ))}
             </div>
-            <label className="search-box">
-              <Icon kind="search" />
-              <span className="sr-only">Search past contributions</span>
-              <input
-                type="search"
-                placeholder="Find an OSS project…"
-                data-history-search
-              />
-            </label>
-          </div>
-          <p className="result-count" data-history-count aria-live="polite">
-            {directory.past.length} projects with past work. Projects can also
-            have work in progress.
-          </p>
-          <div className="history-grid">
-            {pastProjects.map((project) => (
-              <HistoryProject key={project.repository} project={project} />
-            ))}
-          </div>
-          <p className="filter-empty" data-history-empty hidden>
-            No projects match this filter. Try another category or search.
-          </p>
-          <p className="section-note">
-            Counts reflect the linked records in this index.
-            Maintainer-incorporated credit is kept separate from directly
-            authored merges.
-          </p>
+            <p className="filter-empty" data-history-empty hidden>
+              No projects match this filter. Try another category or search.
+            </p>
+            <p className="section-note">
+              Counts reflect the linked records in this index.
+              Maintainer-incorporated credit is kept separate from directly
+              authored merges.
+            </p>
+          </section>
         </section>
         <section
           className="section records-section"
@@ -699,10 +733,11 @@ export default function Home() {
             <div className="records-heading">
               <div>
                 <p className="eyebrow">THE PUBLIC RECORD</p>
-                <h2 id="records-title">Want the details?</h2>
+                <h2 id="records-title">Public records</h2>
                 <p>
-                  The full activity trail and OpenClaw ledger are here when you
-                  need them.
+                  Reports, investigations, and the evidence behind our work.
+                  Inspect the sources and see how our GitHub activity is
+                  tracked.
                 </p>
               </div>
               <div className="record-downloads">
@@ -714,6 +749,30 @@ export default function Home() {
                 </a>
               </div>
             </div>
+            <ul className="record-projects">
+              {recordProjects.map((project) => (
+                <li key={project.repository}>
+                  <div>
+                    <h3>{project.name}</h3>
+                    <p>
+                      {projectDescriptions[project.name] ?? project.description}
+                    </p>
+                    <span className="record-project-meta">
+                      {projectStatusLabels[project.name]} · {project.license}
+                    </span>
+                  </div>
+                  <a className="button button-secondary" href={project.url}>
+                    {recordActions[project.name] ?? "View record"}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <TrackingSources
+              feed={feed}
+              inventory={repositoryInventory}
+              since={trackingSince}
+            />
+            <RepositoryInventory inventory={repositoryInventory} />
             <details className="activity-disclosure" id="activity">
               <summary>
                 Browse the activity feed{" "}

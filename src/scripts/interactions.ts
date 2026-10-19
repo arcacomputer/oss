@@ -163,7 +163,7 @@ document.addEventListener("keydown", (event) => {
 const links = [
   ...document.querySelectorAll<HTMLAnchorElement>("[data-section-link]"),
 ];
-const sections = ["projects", "current-work", "past-work"]
+const sections = ["projects", "contributions"]
   .map((id) => document.getElementById(id))
   .filter((section): section is HTMLElement => section !== null);
 const visible = new Set<string>();
