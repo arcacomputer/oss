@@ -21,7 +21,7 @@ test('uses Astro static output and Cloudflare Workers Static Assets', () => {
   assert.equal(wrangler.assets.run_worker_first, true);
 });
 
-test('preserves the observed single-page rendering and public assets', () => {
+test('preserves the single-page rendering and public assets', () => {
   assert.ok(existsSync(join(root, 'src/pages/index.astro')));
   assert.match(read('src/layouts/BaseLayout.astro'), /Arca OSS — Tools, contributions &amp; open-source work/);
   const css = read('src/styles/global.css');
@@ -60,6 +60,8 @@ test('keeps accessible mobile navigation and expandable public records', () => {
   assert.match(home, /ledger\.pullRequests\.slice\(\s*0,\s*LEDGER_INITIAL_LIMIT\s*,?\s*\)/);
   assert.match(home, /<details className="ledger-more"/);
   assert.match(home, /className="section-return"/);
+  assert.match(home, /id="past-work"/);
+  assert.match(home, /id="current-work"/);
   assert.match(css, /\.mobile-section-nav summary[^}]*min-height:\s*44px/s);
   assert.match(css, /\.ledger-more\s*>\s*summary[^}]*min-height:\s*66px/s);
 });

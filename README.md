@@ -2,7 +2,7 @@
 
 Source for [oss.arcabot.ai](https://oss.arcabot.ai), Arca's public engineering index.
 
-The site introduces Arca’s work through featured tools, a searchable project directory, current open contributions, upstream project records, and filterable public activity. Main GitHub and site-source links point to `arcacomputer/oss`.
+The site provides three clear paths: a visible directory of Arca projects, upstream projects with current open PRs, and a separate directory of past contributions. Search and category/outcome filters help visitors explore each listing, with detailed PR records and activity available through native disclosures. Main GitHub and site-source links point to `arcacomputer/oss`.
 
 The site distinguishes:
 
@@ -31,7 +31,7 @@ The previous Next.js site fetched the OpenClaw contribution ledger with one-hour
 
 Hermes contribution receipts distinguish our directly authored merge from maintainer-incorporated commit credit. Both accepted contributions are verified in the `v0.21.6` source tag; that does not establish inclusion in a packaged Desktop binary.
 
-A temporary upstream outage cannot erase the public record because `lib/data.ts` retains its curated fallback. `lib/presentation.ts` resolves historical transitions before showing current work, reconciles the OpenClaw ledger, and keeps authored merges separate from credited merges. Snapshot dates remain visible beside the counts.
+A temporary upstream outage cannot erase the public record because `lib/data.ts` retains its curated fallback. `lib/presentation.ts` resolves historical transitions before showing current work, reconciles the OpenClaw ledger, and keeps authored merges separate from credited merges. `lib/contributions.ts` groups that evidence by upstream project while retaining older curated contributions, reviews, and closed proposals. `lib/catalog.ts` provides plain-language project descriptions and lifecycle labels. Snapshot dates remain visible beside the counts.
 
 ## Development
 
