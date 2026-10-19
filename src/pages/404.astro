@@ -2,5 +2,11 @@
 import BaseLayout from '@/src/layouts/BaseLayout.astro';
 ---
 <BaseLayout>
-  <main class="not-found"><p class="eyebrow">404 / NO RECORD</p><h1>This path left no receipt.</h1><a class="button" href="/">Return to the index</a></main>
+  <main class="not-found">
+    <a class="not-found-brand" href="/" aria-label="Arca OSS home">Arca OSS</a>
+    <p class="eyebrow">404 / PAGE NOT FOUND</p>
+    <h1>This page took a <em>wrong turn.</em></h1>
+    <p>Find your way back to our tools, contributions, and work in the open.</p>
+    <a class="button" href="/">Back to Arca OSS</a>
+  </main>
 </BaseLayout>

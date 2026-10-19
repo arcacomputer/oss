@@ -1,11 +1,13 @@
 {
-  "generatedAt": "2026-10-19T13:27:46+00:00",
+  "generatedAt": "2026-10-19T19:10:04Z",
+  "checkedAt": "2026-10-19T19:10:04Z",
   "source": "https://github.com/openclaw/openclaw",
+  "upstreamGeneratedAt": "2026-10-19T13:27:46+00:00",
   "authors": [
     {
       "login": "arcabotai",
       "role": "Arca agent identity",
-      "since": null
+      "since": "2026-02-12"
     },
     {
       "login": "felirami",
@@ -28,30 +30,9 @@
       "mergedAt": null,
       "headSha": "b39fd8cdc280852df8c0a7fa19c5c2a3abaf6a9a",
       "baseSha": "278cc5420cbc66cdfcea5d4494353bce8b553290",
-      "headOpenClawVersion": "2026.9.4",
-      "baseOpenClawVersion": "2026.9.4",
-      "labels": [
-        "docs",
-        "agents",
-        "size: XS",
-        "extensions: kilocode",
-        "P3",
-        "rating: 🦪 silver shellfish",
-        "status: 📣 needs proof",
-        "fleet",
-        "channel: reef"
-      ],
+      "mergeCommit": null,
       "ratingLabel": "🦪 silver shellfish",
       "statusLabel": "📣 needs proof",
-      "priority": "P3",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/150660#issuecomment-5709791969",
-        "updatedAt": "2026-10-06T05:03:51Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": null
-      },
       "arca": {}
     },
     {
@@ -68,28 +49,9 @@
       "mergedAt": "2026-08-20T09:54:32Z",
       "headSha": "a4040009698d300622536f59b9ba5de031b28c4f",
       "baseSha": "a2fe7c395d90a01801655822b59583fc2d6d53e2",
-      "headOpenClawVersion": "2026.8.1",
-      "baseOpenClawVersion": "2026.8.1",
-      "labels": [
-        "agents",
-        "size: M",
-        "proof: sufficient",
-        "P1",
-        "rating: 🦞 diamond lobster",
-        "merge-risk: 🚨 compatibility",
-        "status: 👀 ready for maintainer look"
-      ],
+      "mergeCommit": "975228306010f14b0517539f4fe818ac398d35ea",
       "ratingLabel": "🦞 diamond lobster",
       "statusLabel": "👀 ready for maintainer look",
-      "priority": "P1",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/123676#issuecomment-5294465086",
-        "updatedAt": "2026-08-20T09:32:46Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": "** PASS (completed)"
-      },
       "arca": {}
     },
     {
@@ -106,28 +68,9 @@
       "mergedAt": null,
       "headSha": "71de73521bbee1cb5901cb39beb03781abec4fa2",
       "baseSha": "57034eb5e70b33bcf1e11ba782693d0d0889bb83",
-      "headOpenClawVersion": "2026.8.1",
-      "baseOpenClawVersion": "2026.9.4",
-      "labels": [
-        "channel: feishu",
-        "stale",
-        "size: S",
-        "P1",
-        "rating: 🦪 silver shellfish",
-        "merge-risk: 🚨 message-delivery",
-        "status: 📣 needs proof"
-      ],
+      "mergeCommit": null,
       "ratingLabel": "🦪 silver shellfish",
       "statusLabel": "📣 needs proof",
-      "priority": "P1",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/123321#issuecomment-5286613089",
-        "updatedAt": "2026-10-18T00:36:02Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": null
-      },
       "arca": {}
     },
     {
@@ -144,27 +87,9 @@
       "mergedAt": "2026-08-27T08:03:56Z",
       "headSha": "c3ea15fe614b20e4754df23ac63b06a873186214",
       "baseSha": "42ce03e72e34adeb34a79c91f534a906df46f882",
-      "headOpenClawVersion": "2026.8.1",
-      "baseOpenClawVersion": "2026.8.1",
-      "labels": [
-        "cli",
-        "size: XL",
-        "P2",
-        "rating: 🦪 silver shellfish",
-        "merge-risk: 🚨 compatibility",
-        "status: 📣 needs proof"
-      ],
+      "mergeCommit": "0c313d712839670f3ac60f8fd238af7e308cdc18",
       "ratingLabel": "🦪 silver shellfish",
       "statusLabel": "📣 needs proof",
-      "priority": "P2",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/122984#issuecomment-5275961939",
-        "updatedAt": "2026-08-27T07:37:11Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": "** FAIL (failed) — step 1 `expect_output` `Install a plugin or hook pack`: `expected terminal output was not visible within 30 seconds: \"Install a plugin or hook pack\"`"
-      },
       "arca": {}
     },
     {
@@ -181,28 +106,9 @@
       "mergedAt": "2026-08-25T08:55:42Z",
       "headSha": "3d8baba0d1e9db41be331766f02be1fba5389440",
       "baseSha": "9b9f2ab4036ec3d1ffad44b7b21a5b6d7b4a4f83",
-      "headOpenClawVersion": "2026.8.1",
-      "baseOpenClawVersion": "2026.8.1",
-      "labels": [
-        "agents",
-        "size: M",
-        "proof: sufficient",
-        "P2",
-        "rating: 🐚 platinum hermit",
-        "merge-risk: 🚨 session-state",
-        "status: 👀 ready for maintainer look"
-      ],
+      "mergeCommit": "ccd8ede95ee3c0b9ba0db18ea9ecc67d1574a055",
       "ratingLabel": "🐚 platinum hermit",
       "statusLabel": "👀 ready for maintainer look",
-      "priority": "P2",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/122855#issuecomment-5273951816",
-        "updatedAt": "2026-08-25T08:45:20Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": "** PASS (completed)"
-      },
       "arca": {}
     },
     {
@@ -219,28 +125,9 @@
       "mergedAt": "2026-08-26T06:19:38Z",
       "headSha": "580143307d1a5fb42d87fb87338922d6819bf719",
       "baseSha": "48e026161eb835e4cacbab6dd8dcdcb98e50f125",
-      "headOpenClawVersion": "2026.8.1",
-      "baseOpenClawVersion": "2026.8.1",
-      "labels": [
-        "channel: slack",
-        "size: M",
-        "proof: sufficient",
-        "P1",
-        "rating: 🐚 platinum hermit",
-        "merge-risk: 🚨 message-delivery",
-        "status: 👀 ready for maintainer look"
-      ],
+      "mergeCommit": "e7b67c709db9c3796d07467adff6656d80439e27",
       "ratingLabel": "🐚 platinum hermit",
       "statusLabel": "👀 ready for maintainer look",
-      "priority": "P1",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/122827#issuecomment-5273456616",
-        "updatedAt": "2026-08-19T11:23:46Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": "** FAIL (failed) — execution before step 1 `run`: `live-proof package manager pnpm is unavailable after its official installer (curl -fsSL https://get.pnpm.io/install.sh | sh -): command failed without output`"
-      },
       "arca": {}
     },
     {
@@ -257,27 +144,9 @@
       "mergedAt": null,
       "headSha": "2a603ba0572c55c6a0732e63f4f156b78b694f84",
       "baseSha": "99a98270774c4eb8ca26968dacbb4672ee7556cd",
-      "headOpenClawVersion": "2026.8.1",
-      "baseOpenClawVersion": "2026.8.1",
-      "labels": [
-        "size: S",
-        "close:already-fixed",
-        "proof: sufficient",
-        "P2",
-        "rating: 🐚 platinum hermit",
-        "status: 👀 ready for maintainer look"
-      ],
+      "mergeCommit": null,
       "ratingLabel": "🐚 platinum hermit",
       "statusLabel": "👀 ready for maintainer look",
-      "priority": "P2",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/122804#issuecomment-5272858073",
-        "updatedAt": "2026-08-18T21:06:43Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": "** FAIL (failed) — execution before step 1 `run`: `live-proof package manager pnpm is unavailable after its official installer (curl -fsSL https://get.pnpm.io/install.sh | sh -): command failed without output`"
-      },
       "arca": {}
     },
     {
@@ -294,27 +163,9 @@
       "mergedAt": null,
       "headSha": "733f61daa7c08c84c488f49a0ee37315247ca3c4",
       "baseSha": "3807eb9c582545e3ba15da41a28be9c79d4b0517",
-      "headOpenClawVersion": "2026.8.1",
-      "baseOpenClawVersion": "2026.8.1",
-      "labels": [
-        "app: web-ui",
-        "size: S",
-        "P2",
-        "rating: 🧂 unranked krab",
-        "merge-risk: 🚨 session-state",
-        "status: 📣 needs proof"
-      ],
+      "mergeCommit": null,
       "ratingLabel": "🧂 unranked krab",
       "statusLabel": "📣 needs proof",
-      "priority": "P2",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/122461#issuecomment-5263000782",
-        "updatedAt": "2026-08-12T06:05:53Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": null
-      },
       "arca": {}
     },
     {
@@ -331,27 +182,9 @@
       "mergedAt": null,
       "headSha": "703d457020e4a9efc09c1619f4d462ed51b8d634",
       "baseSha": "3807eb9c582545e3ba15da41a28be9c79d4b0517",
-      "headOpenClawVersion": "2026.8.1",
-      "baseOpenClawVersion": "2026.8.1",
-      "labels": [
-        "size: S",
-        "proof: sufficient",
-        "P2",
-        "rating: 🦐 gold shrimp",
-        "merge-risk: 🚨 session-state",
-        "status: ⏳ waiting on author"
-      ],
+      "mergeCommit": null,
       "ratingLabel": "🦐 gold shrimp",
       "statusLabel": "⏳ waiting on author",
-      "priority": "P2",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/122460#issuecomment-5263100113",
-        "updatedAt": "2026-08-25T15:35:41Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": "** PASS (completed)"
-      },
       "arca": {}
     },
     {
@@ -368,28 +201,9 @@
       "mergedAt": "2026-08-16T23:53:36Z",
       "headSha": "5b43481130184bf454cd4c29211acd9c15fc2639",
       "baseSha": "fecb377da68dde57fac4a96d6765ce96d00227e6",
-      "headOpenClawVersion": "2026.8.1",
-      "baseOpenClawVersion": "2026.8.1",
-      "labels": [
-        "agents",
-        "size: M",
-        "proof: sufficient",
-        "P1",
-        "rating: 🦞 diamond lobster",
-        "merge-risk: 🚨 compatibility",
-        "status: 👀 ready for maintainer look"
-      ],
+      "mergeCommit": "1e7874ef14e625c3eb5e538807afbcb1377a33d0",
       "ratingLabel": "🦞 diamond lobster",
       "statusLabel": "👀 ready for maintainer look",
-      "priority": "P1",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/122457#issuecomment-5263056249",
-        "updatedAt": "2026-08-16T23:50:50Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": null
-      },
       "arca": {}
     },
     {
@@ -406,28 +220,9 @@
       "mergedAt": null,
       "headSha": "c6e26379d6a68403bbd98025be91284436549155",
       "baseSha": "6c9b31e4d5604a82f2d9cfba64bb8a7cbb0e2de8",
-      "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": "2026.7.2",
-      "labels": [
-        "cli",
-        "commands",
-        "size: M",
-        "P2",
-        "rating: 🦪 silver shellfish",
-        "merge-risk: 🚨 compatibility",
-        "status: 📣 needs proof"
-      ],
+      "mergeCommit": null,
       "ratingLabel": "🦪 silver shellfish",
       "statusLabel": "📣 needs proof",
-      "priority": "P2",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/111117#issuecomment-5013751360",
-        "updatedAt": "2026-08-18T22:36:46Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": null
-      },
       "arca": {}
     },
     {
@@ -444,27 +239,9 @@
       "mergedAt": null,
       "headSha": "a4e3041b8660fadcd1615e5d15b30d30e859e666",
       "baseSha": "30738a3c3ba3178c66609460bb717e5b6e0f338d",
-      "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": "2026.7.2",
-      "labels": [
-        "size: S",
-        "P2",
-        "rating: 🦪 silver shellfish",
-        "merge-risk: 🚨 compatibility",
-        "status: 📣 needs proof",
-        "triage: needs-pr-context"
-      ],
+      "mergeCommit": null,
       "ratingLabel": "🦪 silver shellfish",
       "statusLabel": "📣 needs proof",
-      "priority": "P2",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/107963#issuecomment-4988834256",
-        "updatedAt": "2026-07-16T06:21:01Z",
-        "overall": "🦪 silver shellfish",
-        "proof": "🦪 silver shellfish",
-        "patchQuality": "🦐 gold shrimp",
-        "result": "blocked until real behavior proof from a real setup is added."
-      },
       "arca": {}
     },
     {
@@ -481,16 +258,9 @@
       "mergedAt": null,
       "headSha": "1dab58ea4d0a61221c9d7884b5a8bc9d1c043511",
       "baseSha": "c69486deae5b08d5da0b05b7be6b07400dd7d072",
-      "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": "2026.7.2",
-      "labels": [
-        "size: XS",
-        "triage: needs-pr-context"
-      ],
+      "mergeCommit": null,
       "ratingLabel": null,
       "statusLabel": null,
-      "priority": null,
-      "clawSweeper": null,
       "arca": {}
     },
     {
@@ -507,16 +277,9 @@
       "mergedAt": null,
       "headSha": "179050b9ef194efc7bc68b3d5375233600f09b8f",
       "baseSha": "88e5dc121934b3573470242ff2aecff67a40c0bd",
-      "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": "2026.7.2",
-      "labels": [
-        "size: M",
-        "extensions: zai"
-      ],
+      "mergeCommit": null,
       "ratingLabel": null,
       "statusLabel": null,
-      "priority": null,
-      "clawSweeper": null,
       "arca": {}
     },
     {
@@ -533,16 +296,9 @@
       "mergedAt": null,
       "headSha": "3072762c82526c0fce27804c6b3839f0002db49a",
       "baseSha": "202dea59bdf5d0bf3bb1b50424ee8a68af9efae8",
-      "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": "2026.7.2",
-      "labels": [
-        "extensions: memory-core",
-        "size: S"
-      ],
+      "mergeCommit": null,
       "ratingLabel": null,
       "statusLabel": null,
-      "priority": null,
-      "clawSweeper": null,
       "arca": {}
     },
     {
@@ -559,29 +315,9 @@
       "mergedAt": "2026-07-14T16:40:36Z",
       "headSha": "e35ddb3ce365c07419365d5b799bbb45b65ac38e",
       "baseSha": "bb6874fddfac2bd77748e86ddd6cf8579110c2b4",
-      "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": "2026.7.2",
-      "labels": [
-        "extensions: memory-core",
-        "size: S",
-        "proof: sufficient",
-        "P0",
-        "rating: 🦐 gold shrimp",
-        "merge-risk: 🚨 compatibility",
-        "merge-risk: 🚨 availability",
-        "status: ⏳ waiting on author"
-      ],
+      "mergeCommit": "c1191cdf2fbbea4cc9797d7f110a4e0acf50d3c7",
       "ratingLabel": "🦐 gold shrimp",
       "statusLabel": "⏳ waiting on author",
-      "priority": "P0",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/107243#issuecomment-4968977642",
-        "updatedAt": "2026-07-14T12:31:36Z",
-        "overall": "🦐 gold shrimp",
-        "proof": "🦞 diamond lobster",
-        "patchQuality": "🦐 gold shrimp",
-        "result": "needs maintainer review before merge."
-      },
       "arca": {}
     },
     {
@@ -598,29 +334,9 @@
       "mergedAt": null,
       "headSha": "fb137a71e7288e7e166a717bfec8ae8f2fecf562",
       "baseSha": "7c72fef247a956b09b4c0a01e39a8362f5fd71df",
-      "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": "2026.7.2",
-      "labels": [
-        "gateway",
-        "stale",
-        "size: M",
-        "proof: sufficient",
-        "P2",
-        "rating: 🦐 gold shrimp",
-        "merge-risk: 🚨 security-boundary",
-        "status: ⏳ waiting on author"
-      ],
+      "mergeCommit": null,
       "ratingLabel": "🦐 gold shrimp",
       "statusLabel": "⏳ waiting on author",
-      "priority": "P2",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/105029#issuecomment-4950160120",
-        "updatedAt": "2026-08-02T09:07:12Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": null
-      },
       "arca": {
         "workStatus": "active repair",
         "workedOnVersion": "2026.7.2",
@@ -641,28 +357,9 @@
       "mergedAt": "2026-07-13T10:23:28Z",
       "headSha": "574cc1ea367cc3c24fd81334833988cfc4dd86c3",
       "baseSha": "5eb52493c71cbab41bf1baf62bb61f1e724e1efc",
-      "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": "2026.7.2",
-      "labels": [
-        "channel: discord",
-        "channel: mattermost",
-        "size: M",
-        "P2",
-        "rating: 🦐 gold shrimp",
-        "merge-risk: 🚨 compatibility",
-        "status: 📣 needs proof"
-      ],
+      "mergeCommit": "0e5ed900b0f84d313b7df11d038fd546baf301bb",
       "ratingLabel": "🦐 gold shrimp",
       "statusLabel": "📣 needs proof",
-      "priority": "P2",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/104893#issuecomment-4949668354",
-        "updatedAt": "2026-07-13T04:05:17Z",
-        "overall": "🦐 gold shrimp",
-        "proof": "🦐 gold shrimp",
-        "patchQuality": "🦞 diamond lobster",
-        "result": "blocked until stronger real behavior proof is added."
-      },
       "arca": {
         "workStatus": "awaiting maintainer",
         "workedOnVersion": "2026.7.2",
@@ -683,26 +380,9 @@
       "mergedAt": null,
       "headSha": "be8ca9eefbf9317beaa8f7b061310e30a11c011e",
       "baseSha": "67ef07863fbb24d751e20f022e216118924ae15d",
-      "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": "2026.7.2",
-      "labels": [
-        "gateway",
-        "size: S",
-        "P1",
-        "rating: 🦪 silver shellfish",
-        "status: 📣 needs proof"
-      ],
+      "mergeCommit": null,
       "ratingLabel": "🦪 silver shellfish",
       "statusLabel": "📣 needs proof",
-      "priority": "P1",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/104492#issuecomment-4946284603",
-        "updatedAt": "2026-08-05T05:03:29Z",
-        "overall": null,
-        "proof": null,
-        "patchQuality": null,
-        "result": null
-      },
       "arca": {
         "workStatus": "active proof",
         "workedOnVersion": "2026.7.2",
@@ -723,29 +403,9 @@
       "mergedAt": null,
       "headSha": "02a66be2410cd70c97e7d9305024c7fb5496ea63",
       "baseSha": "aa12e71de7b4ef80f6275b9c4a7d3485d6f250e0",
-      "headOpenClawVersion": "2026.7.2",
-      "baseOpenClawVersion": "2026.7.2",
-      "labels": [
-        "cli",
-        "size: M",
-        "proof: sufficient",
-        "P2",
-        "rating: 🦞 diamond lobster",
-        "merge-risk: 🚨 auth-provider",
-        "merge-risk: 🚨 security-boundary",
-        "status: 👀 ready for maintainer look"
-      ],
+      "mergeCommit": null,
       "ratingLabel": "🦞 diamond lobster",
       "statusLabel": "👀 ready for maintainer look",
-      "priority": "P2",
-      "clawSweeper": {
-        "url": "https://github.com/openclaw/openclaw/pull/104192#issuecomment-4942793304",
-        "updatedAt": "2026-07-11T19:20:31Z",
-        "overall": "🦞 diamond lobster",
-        "proof": "🦞 diamond lobster",
-        "patchQuality": "🦞 diamond lobster",
-        "result": "ready for maintainer review."
-      },
       "arca": {
         "workStatus": "closed upstream",
         "workedOnVersion": "2026.7.2",

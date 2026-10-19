@@ -1,367 +1,936 @@
-import Image from "@/src/compat/NextImage";
+import type { ActivityEvent, OwnedProject } from "@/lib/data";
 import {
-  clickClackMergeCredits,
   getActivityFeed,
   getOpenClawLedger,
-  hermesMergeCredits,
   ownedProjects,
   supportPrograms,
+  getRepositoryInventory,
+  trackingIdentities,
+  trackingSince,
 } from "@/lib/data";
+import {
+  contributionSummary,
+  currentWork,
+  latestActivity,
+} from "@/lib/presentation";
+import {
+  getContributionDirectory,
+  type ContributionProject,
+} from "@/lib/contributions";
+import {
+  projectCategories,
+  projectDescriptions,
+  projectStatusLabels,
+  contributionDescriptions,
+} from "@/lib/catalog";
 
-const MOVEMENT_LIMIT = 8;
+import {
+  TrackingSources,
+  RepositoryInventory,
+} from "@/src/components/GitHubTracking";
+
+const SITE_SOURCE = "https://github.com/arcacomputer/oss";
 const LEDGER_INITIAL_LIMIT = 6;
 
-const KIND_LABELS: Record<string, string> = {
-  upstream_pr_state: "pull request",
-  upstream_credit: "co-author credit",
-  review_submitted: "review",
-  release: "release",
-  project_published: "project",
-};
-
-const KIND_CLASSES: Record<string, string> = {
-  upstream_pr_state: "kind-pr",
-  upstream_credit: "kind-credit",
-  review_submitted: "kind-review",
-  release: "kind-release",
-  project_published: "kind-release",
-};
-
-const STATE_CLASSES: Record<string, string> = {
-  open: "state-open",
-  merged: "state-merged",
-  closed: "state-closed",
-  changes_requested: "state-review",
-  published: "state-published",
-  released: "state-published",
-  prerelease: "state-review",
-};
-
-function kindLabel(type: string, role?: string) {
-  if (type === "upstream_credit" && role === "commit author") return "commit authorship";
-  return KIND_LABELS[type] ?? type.replace(/_/g, " ");
-}
-
-function stateClass(state: string) {
-  return STATE_CLASSES[state] ?? "state-other";
-}
-
-function stateLabel(state: string) {
-  return state.replace(/_/g, " ");
-}
-
-function movementDay(iso: string) {
-  return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
-}
-
-function Arrow() {
-  return <span aria-hidden="true">↗</span>;
-}
-
-function StateMark({ state }: { state: "open" | "closed" | "merged" }) {
-  return <span className={`state state-${state}`}>{state}</span>;
-}
-
-function publicBoundary(pr: Awaited<ReturnType<typeof getOpenClawLedger>>["pullRequests"][number]) {
-  if (pr.state === "merged") {
-    return `Merged upstream${pr.mergedAt ? ` on ${new Date(pr.mergedAt).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })}` : ""}.`;
-  }
-  if (pr.state === "closed") {
-    return "Closed upstream without merge; preserved in the authored-work record.";
-  }
-  return pr.arca?.currentWork ?? pr.statusLabel ?? "See public record.";
-}
-
-function PullRequestRow({ pr }: { pr: Awaited<ReturnType<typeof getOpenClawLedger>>["pullRequests"][number] }) {
+function Mark() {
   return (
-    <a className="pr-row" href={pr.url}>
-      <span className="pr-title">
-        <span className="pr-kicker"><strong>#{pr.number}</strong><small>@{pr.author ?? "arcabotai"}</small></span>
-        {pr.title}
-      </span>
-      <span><StateMark state={pr.state} />{pr.ratingLabel && <small>{pr.ratingLabel}</small>}</span>
-      <span className="pr-work">{publicBoundary(pr)}</span>
-      <code>{pr.headSha.slice(0, 12)}</code>
-    </a>
+    <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
+      <path d="M10 51 26 13h12l16 38H40l-8-22-8 22Z" fill="currentColor" />
+      <path d="M24 39h16v7H24Z" fill="var(--lime)" />
+    </svg>
+  );
+}
+function Icon({ kind }: { kind: "code" | "branch" | "check" | "search" }) {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+    >
+      {kind === "code" ? (
+        <>
+          <path d="m7 7-5 5 5 5m10-10 5 5-5 5M14 4l-4 16" />
+        </>
+      ) : kind === "branch" ? (
+        <>
+          <circle cx="6" cy="5" r="2" />
+          <circle cx="18" cy="5" r="2" />
+          <circle cx="6" cy="19" r="2" />
+          <path d="M6 7v10m12-10v2a5 5 0 0 1-5 5H6" />
+        </>
+      ) : kind === "check" ? (
+        <>
+          <rect x="3" y="3" width="18" height="18" rx="4" />
+          <path d="m7 12 3 3 7-7" />
+        </>
+      ) : (
+        <>
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="m16 16 5 5" />
+        </>
+      )}
+    </svg>
+  );
+}
+function day(iso: string) {
+  return new Date(iso).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  });
+}
+function Status({ state }: { state: string }) {
+  const labels: Record<string, string> = {
+    open: "Open PR",
+    merged: "Merged",
+    closed: "Closed without merge",
+    changes_requested: "Review submitted",
+    released: "Released",
+    prerelease: "Prerelease",
+  };
+  return (
+    <span className={`status status-${state}`}>
+      {labels[state] ?? state.replaceAll("_", " ")}
+    </span>
+  );
+}
+function RepoMark({ project }: { project: ContributionProject }) {
+  return (
+    <span className="repo-mark">
+      {project.logo ? (
+        <img src={project.logo} alt="" width="48" height="48" loading="lazy" />
+      ) : (
+        <Icon kind="code" />
+      )}
+    </span>
+  );
+}
+function Receipt({ event }: { event: ActivityEvent }) {
+  return (
+    <li className="receipt">
+      <div>
+        <a href={event.url}>{event.title}</a>
+        <span className="receipt-meta">
+          #{event.number} · @{event.actor} · {event.role} ·{" "}
+          {day(event.occurredAt)}
+        </span>
+      </div>
+      <Status state={event.state} />
+    </li>
+  );
+}
+function activeDescription(project: ContributionProject) {
+  if (project.repository === "NousResearch/hermes-agent")
+    return "Improving the reliability of agent workflows, remote access, and integrations.";
+  if (project.repository === "openclaw/openclaw")
+    return "Improving streaming messages so text stays visible in Feishu replies.";
+  if (project.repository === "block/buzz")
+    return "Making ACP startup failures easier to diagnose, alongside upstream code review.";
+  return project.description;
+}
+function CurrentProject({ project }: { project: ContributionProject }) {
+  return (
+    <article className="current-card">
+      <div className="current-card-top">
+        <RepoMark project={project} />
+        <span className="status status-open">In progress</span>
+      </div>
+      <h4>{project.name}</h4>
+      <p>{activeDescription(project)}</p>
+      <div className="current-card-count">
+        <strong>{project.openItems.length}</strong> open{" "}
+        {project.openItems.length === 1 ? "pull request" : "pull requests"}
+      </div>
+      <details className="project-receipts">
+        <summary>
+          View open pull requests <span>{project.openItems.length}</span>
+        </summary>
+        <ul>
+          {project.openItems.map((event) => (
+            <Receipt key={event.id} event={event} />
+          ))}
+        </ul>
+      </details>
+      <a className="repo-text-link" href={project.url}>
+        Visit {project.name} on GitHub
+      </a>
+    </article>
+  );
+}
+function ProjectCard({ project }: { project: OwnedProject }) {
+  const category = projectCategories[project.name] ?? "tools";
+  return (
+    <article
+      className={`tool-card tool-card-${category}`}
+      data-project-category={category}
+      data-project-name={`${project.name} ${project.description} ${project.kind}`}
+    >
+      <div className="tool-topline">
+        <span className="tool-category">
+          {category === "research"
+            ? "Research & prototypes"
+            : category === "records"
+              ? "Public records"
+              : project.kind}
+        </span>
+        <span className="license">{project.license}</span>
+      </div>
+      <h3>{project.name}</h3>
+      <p>{projectDescriptions[project.name] ?? project.description}</p>
+      <div className="tool-status">
+        <span className="dot" />
+        {projectStatusLabels[project.name] ?? project.status}
+      </div>
+      <div className="tool-actions">
+        <a
+          className="button button-secondary"
+          href={project.url}
+          aria-label={`View ${project.name} project`}
+        >
+          View project
+        </a>
+        <details className="project-proof">
+          <summary aria-label={`About ${project.name}`}>
+            About this project
+          </summary>
+          <p>{project.proof}</p>
+          <p>Arca’s role: {project.role}.</p>
+        </details>
+      </div>
+    </article>
+  );
+}
+function HistoryProject({ project }: { project: ContributionProject }) {
+  const merged = project.mergedItems.length;
+  const credits = project.creditItems.length;
+  const reviews = project.reviewedItems.length;
+  const closed = project.closedItems.length;
+  const accepted = merged > 0 || credits > 0;
+  const historyReceipts = project.allReceipts.filter(
+    (event) => event.state !== "open",
+  );
+  const historicalUrls = new Set(historyReceipts.map((event) => event.url));
+  const additionalEvidence = project.curatedEvidence.filter(
+    (item) => !historicalUrls.has(item.url) && !/^open /i.test(item.label),
+  );
+  const kinds = [
+    accepted ? "accepted" : "",
+    reviews ? "review" : "",
+    closed ? "closed" : "",
+  ].join(" ");
+  return (
+    <article
+      className="history-project"
+      data-history-kind={kinds}
+      data-history-name={`${project.name} ${project.repository} ${project.description}`}
+    >
+      <div className="history-project-top">
+        <RepoMark project={project} />
+        <div>
+          <h4>{project.name}</h4>
+          <span className="repo-name">{project.repository}</span>
+        </div>
+        <span
+          className={`status ${accepted ? "status-merged" : reviews ? "status-changes_requested" : "status-closed"}`}
+        >
+          {merged
+            ? "Merged contributions"
+            : credits
+              ? "Credited merges"
+              : reviews
+                ? "Code review"
+                : "Closed proposals"}
+        </span>
+      </div>
+      <p>
+        {contributionDescriptions[project.repository] ??
+          (project.closedItems[0]
+            ? `Proposed changes: ${project.closedItems[0].title.replace(/^(fix|docs|feat|chore|improve)(\([^)]*\))?:\s*/i, "")}.`
+            : project.description)}
+      </p>
+      <div className="history-facts">
+        {merged > 0 ? (
+          <span>
+            <strong>{merged}</strong> authored{" "}
+            {merged === 1 ? "merge" : "merges"}
+          </span>
+        ) : null}
+        {credits > 0 ? (
+          <span>
+            <strong>{credits}</strong> credited{" "}
+            {credits === 1 ? "merge" : "merges"}
+          </span>
+        ) : null}
+        {reviews > 0 ? (
+          <span>
+            <strong>{reviews}</strong> submitted{" "}
+            {reviews === 1 ? "review" : "reviews"}
+          </span>
+        ) : null}
+        {closed > 0 ? (
+          <span>
+            <strong>{closed}</strong> closed{" "}
+            {closed === 1 ? "proposal" : "proposals"}
+            {!accepted && !reviews ? " · no merge claimed" : ""}
+          </span>
+        ) : null}
+      </div>
+      <details className="history-records">
+        <summary>
+          View contribution records{" "}
+          <span>{historyReceipts.length + additionalEvidence.length}</span>
+        </summary>
+        <div>
+          <ul>
+            {historyReceipts.map((event) => (
+              <Receipt key={event.id} event={event} />
+            ))}
+          </ul>
+          {additionalEvidence.length > 0 ? (
+            <div className="curated-records">
+              <h5>Selected public evidence</h5>
+              {additionalEvidence.map((item) => (
+                <a key={item.url} href={item.url}>
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          ) : null}
+          {project.note ? (
+            <p className="attribution-note">{project.note}</p>
+          ) : null}
+          <a className="repo-text-link" href={project.url}>
+            Visit project repository
+          </a>
+        </div>
+      </details>
+    </article>
   );
 }
 
 export default function Home() {
-  const ledger = getOpenClawLedger();
-  const clickClackMerged = clickClackMergeCredits.length;
-  const hermesMerged = hermesMergeCredits.length;
   const feed = getActivityFeed();
-  const mergedUpstreamPrEvents = feed.events.filter(
-    (event) => event.type === "upstream_pr_state" && event.state === "merged",
+  const ledger = getOpenClawLedger();
+  const summary = contributionSummary(feed.events, ledger.pullRequests);
+  const work = currentWork(feed.events, ledger.pullRequests);
+  const activity = latestActivity(feed.events);
+  const directory = getContributionDirectory(
+    feed.events,
+    ledger.pullRequests,
+    supportPrograms,
+    {
+      authors: trackingIdentities.map((identity) => identity.login),
+      since: trackingSince,
+    },
   );
-  const latestReceiptEvent = feed.events.find(
-    (event) =>
-      event.state === "merged" &&
-      (event.type === "upstream_pr_state" || event.type === "upstream_credit"),
+  const repositoryInventory = getRepositoryInventory();
+  const activeProjects = [...directory.active].sort(
+    (a, b) => b.openItems.length - a.openItems.length,
   );
-  const latestReceipt = latestReceiptEvent
-    ? {
-        label: `@${latestReceiptEvent.actor} · ${latestReceiptEvent.repository} #${latestReceiptEvent.number}`,
-        url: latestReceiptEvent.url,
-        at: latestReceiptEvent.occurredAt,
-      }
-    : null;
-  const receiptDate = latestReceipt
-    ? new Date(latestReceipt.at).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" })
-    : null;
-  const movementEvents = feed.events.slice(0, MOVEMENT_LIMIT);
-  const primaryPullRequests = ledger.pullRequests.slice(0, LEDGER_INITIAL_LIMIT);
+  const historyRank = (project: ContributionProject) =>
+    project.mergedItems.length + project.creditItems.length;
+  const pastProjects = [...directory.past].sort(
+    (a, b) =>
+      Number(historyRank(b) > 0) - Number(historyRank(a) > 0) ||
+      historyRank(b) - historyRank(a) ||
+      b.reviewedItems.length - a.reviewedItems.length,
+  );
+  const categoryOrder: Record<string, number> = {
+    tools: 0,
+    research: 1,
+    records: 2,
+  };
+  const softwareProjects = ownedProjects.filter(
+    (project) => projectCategories[project.name] !== "records",
+  );
+  const recordProjects = ownedProjects.filter(
+    (project) => projectCategories[project.name] === "records",
+  );
+  const contributionProjectCount = new Set(
+    [...directory.active, ...directory.past].map(
+      (project) => project.repository,
+    ),
+  ).size;
+  const recordActions: Record<string, string> = {
+    "Headlong Agent Findings": "Read findings",
+    "OpenClaw Contributions": "Open contribution ledger",
+    "OpenClaw TUI Field Fix": "Read investigation",
+    "Arca OSS Index": "View site source",
+  };
+  const sortedProjects = [...softwareProjects].sort(
+    (a, b) =>
+      categoryOrder[projectCategories[a.name]] -
+      categoryOrder[projectCategories[b.name]],
+  );
+  const primaryPullRequests = ledger.pullRequests.slice(
+    0,
+    LEDGER_INITIAL_LIMIT,
+  );
   const remainingPullRequests = ledger.pullRequests.slice(LEDGER_INITIAL_LIMIT);
-  const feedGenerated =
-    feed.generatedAt && !Number.isNaN(Date.parse(feed.generatedAt))
-      ? new Date(feed.generatedAt).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short", timeZone: "UTC" })
-      : null;
-
+  const nav = (
+    <>
+      <a href="#projects" data-section-link="projects">
+        Software we make
+      </a>
+      <a href="#contributions" data-section-link="contributions">
+        Projects we contribute to
+      </a>
+    </>
+  );
   return (
-    <main>
-      <a className="skip-link" href="#content">Skip to content</a>
+    <>
+      <a className="skip-link" href="#content">
+        Skip to content
+      </a>
       <header className="site-header">
-        <a className="wordmark" href="#top">
-          <span className="wordmark-glyph" aria-hidden="true">A/</span>
-          <span>Arca OSS</span>
-        </a>
-        <nav aria-label="Primary navigation">
-          <a href="#movement">Movement</a>
-          <a href="#maintained">Maintained</a>
-          <a href="#support">Supported</a>
-          <a href="#ledger">Ledger</a>
-          <a href="#method">Method</a>
-        </nav>
-        <details className="mobile-section-nav">
-          <summary>Sections</summary>
-          <div>
-            <a href="#movement">Movement</a>
-            <a href="#maintained">Maintained</a>
-            <a href="#support">Supported</a>
-            <a href="#ledger">Ledger</a>
-            <a href="#method">Method</a>
-          </div>
-        </details>
-        <a className="header-link" href="https://github.com/arcabotai">GitHub <Arrow /></a>
+        <div className="header-inner">
+          <a className="wordmark" href="#top" aria-label="Arca OSS home">
+            <span className="brand-symbol">
+              <Mark />
+            </span>
+            <span>
+              arca<span className="brand-divider">/</span>
+              <span className="brand-subtitle">open source</span>
+            </span>
+          </a>
+          <nav aria-label="Primary navigation">{nav}</nav>
+          <a
+            className="button header-github"
+            href={SITE_SOURCE}
+            aria-label="Arca OSS source on GitHub"
+          >
+            Site source
+          </a>
+          <details className="mobile-section-nav">
+            <summary aria-label="Open navigation">
+              <span />
+              <span />
+            </summary>
+            <nav aria-label="Mobile navigation">
+              {nav}
+              <a href={SITE_SOURCE}>Site source on GitHub</a>
+            </nav>
+          </details>
+        </div>
       </header>
-
-      <section className="hero" id="top" aria-labelledby="hero-title">
-        <div className="hero-copy" id="content" tabIndex={-1}>
-          <p className="eyebrow"><span className="signal-dot" /> public engineering index</p>
-          <h1 id="hero-title">Software should<br />leave receipts.</h1>
-          <p className="lede">
-            Arca publishes tools, operational research, and upstream fixes. This is the index:
-            what we maintain, where we contribute, and what actually landed.
+      <main id="top">
+        <section
+          className="overview-hero container"
+          aria-labelledby="hero-title"
+        >
+          <div className="hero-surface">
+            <div className="hero-copy" id="content" tabIndex={-1}>
+              <p className="eyebrow">ARCA / OPEN-SOURCE WORK</p>
+              <h1 id="hero-title">
+                Tools we build.
+                <br />
+                <em>Software we improve.</em>
+              </h1>
+              <p className="hero-description">
+                Explore software built by Arca and our contributions to
+                open-source projects maintained by other teams.
+              </p>
+              <div className="hero-actions">
+                <a className="button button-lime" href="#projects">
+                  Explore our software
+                </a>
+                <a className="button button-hero-outline" href="#contributions">
+                  Explore contributions
+                </a>
+              </div>
+              <p className="hero-note">Independent team · Santiago, Chile</p>
+            </div>
+            <nav
+              className="explore-panel"
+              aria-label="Explore our open-source work"
+            >
+              <h2>Find your way around</h2>
+              <a href="#projects">
+                <span className="route-icon">
+                  <Icon kind="code" />
+                </span>
+                <span>
+                  <strong>Software we make</strong>
+                  <small>
+                    Tools, infrastructure, and software prototypes built by
+                    Arca.
+                  </small>
+                </span>
+                <span className="route-count">{softwareProjects.length}</span>
+              </a>
+              <a href="#contributions">
+                <span className="route-icon">
+                  <Icon kind="branch" />
+                </span>
+                <span>
+                  <strong>Projects we contribute to</strong>
+                  <small>
+                    Fixes, features, and reviews for other teams’ OSS.
+                  </small>
+                </span>
+                <span className="route-count">{contributionProjectCount}</span>
+              </a>
+              <p>Every project and contribution links to its public source.</p>
+            </nav>
+          </div>
+        </section>
+        <div className="snapshot-bar container">
+          <span>
+            <span className="dot" />
+            Public, verifiable work
+          </span>
+          <p>
+            Activity checked {day(feed.checkedAt || feed.generatedAt)} ·
+            OpenClaw checked {day(ledger.generatedAt)}
           </p>
-          <div className="hero-actions">
-            <a className="button button-primary" href="#maintained">Browse maintained code</a>
-            <a className="button" href="https://github.com/arcabotai/arca-openclaw-contributions">
-              Inspect upstream ledger <Arrow />
-            </a>
-          </div>
-          <p className="honesty-line">Public repository ≠ open source. We list a project as OSS only when it carries an explicit license.</p>
+          <a href="#records">View the full record</a>
         </div>
-
-        <div className="source-map" aria-label="Map of Arca's open-source work and upstream support">
-          <div className="map-label">SOURCE MAP / 001</div>
-          <div className="map-grid" aria-hidden="true">
-            <div className="map-plate" />
-            <div className="map-node map-core"><span>ARCA</span><strong>OSS</strong><small>Santiago</small></div>
-            <div className="map-node map-a3"><small>maintain</small><strong>A3Stack</strong><span>MIT</span></div>
-            <div className="map-node map-hyper"><small>maintain</small><strong>Hypersnap Doctor</strong><span>MIT</span></div>
-            <div className="map-node map-claw"><small>support</small><strong>OpenClaw</strong><span>{ledger.pullRequests.length} PRs</span></div>
-            <div className="map-node map-proof"><small>accepted</small><strong>Hermes + ClickClack</strong><span>{hermesMerged + clickClackMerged} receipts</span></div>
+        <section
+          className="section tools-section container"
+          id="projects"
+          aria-labelledby="projects-title"
+        >
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">BUILT & PUBLISHED BY ARCA</p>
+              <h2 id="projects-title">Software we make</h2>
+              <p>
+                Open-source tools, infrastructure, and software prototypes built
+                and published by Arca.
+              </p>
+            </div>
+            <span className="section-total">
+              {softwareProjects.length} licensed software projects
+            </span>
           </div>
-          <div className="map-footer"><span>licensed code</span><span>upstream work</span><span>public proof</span></div>
-        </div>
-      </section>
-
-      <section className="measure-strip" aria-label="Current public record summary">
-        <div><strong>{ownedProjects.length}</strong><span>licensed Arca projects</span></div>
-        <div><strong>{ledger.pullRequests.length}</strong><span>Arca-associated OpenClaw PRs</span></div>
-        <div><strong>{mergedUpstreamPrEvents.length}</strong><span>merged upstream PRs</span></div>
-        <div><strong>{clickClackMerged + hermesMerged}</strong><span>merged commit-credit receipts</span></div>
-        <div className="measure-source">
-          <span>source</span>
-          <a href="#support">public receipts <Arrow /></a>
-          {latestReceipt && receiptDate && (
-            <p className="measure-latest">
-              latest receipt · <a href={latestReceipt.url}>{latestReceipt.label} <Arrow /></a> merged <time dateTime={latestReceipt.at}>{receiptDate}</time>
+          <div className="directory-toolbar" data-project-controls hidden>
+            <div
+              className="filter-buttons"
+              role="group"
+              aria-label="Filter our software"
+            >
+              {[
+                ["all", "All projects"],
+                ["tools", "Tools & infrastructure"],
+                ["research", "Research & prototypes"],
+              ].map(([value, label]) => (
+                <button
+                  type="button"
+                  key={value}
+                  data-project-filter={value}
+                  aria-pressed={value === "all"}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+            <label className="search-box">
+              <Icon kind="search" />
+              <span className="sr-only">Search our software</span>
+              <input
+                type="search"
+                placeholder="Find software…"
+                data-project-search
+              />
+            </label>
+          </div>
+          <div id="project-directory">
+            <p className="result-count" data-project-count aria-live="polite">
+              Showing all {softwareProjects.length} software projects
             </p>
-          )}
-        </div>
-      </section>
-
-      <section className="section movement-section" id="movement" aria-labelledby="movement-title">
-        <div className="section-heading">
-          <p className="section-number">01 / MOVEMENT</p>
-          <h2 id="movement-title">Recent movement.</h2>
-          <div className="movement-aside">
-            <p>Merged, closed, open, review, and authorship credit stay distinct here. Every row links its canonical public evidence.</p>
-            <p className="movement-feedmeta">
-              <a href="/activity.json">/activity.json</a>
-              {" · "}
-              {feed.cadence}
-              {feedGenerated && feed.generatedAt && (
-                <>
-                  {" · generated "}
-                  <time dateTime={feed.generatedAt}>{feedGenerated} UTC</time>
-                </>
-              )}
+            <div className="tool-grid">
+              {sortedProjects.map((project) => (
+                <ProjectCard key={project.repository} project={project} />
+              ))}
+            </div>
+            <p className="filter-empty" data-project-empty hidden>
+              No matching projects. Try a different name or category.
             </p>
           </div>
-        </div>
-        {movementEvents.length > 0 ? (
-          <div className="movement-list">
-            {movementEvents.map((event) => (
-              <a className="movement-row" href={event.url} key={event.id}>
-                <time className="movement-time" dateTime={event.occurredAt}>{movementDay(event.occurredAt)}</time>
-                <div className="movement-main">
-                  <div className="movement-chips">
-                    <span className={`kind ${KIND_CLASSES[event.type] ?? "kind-release"}`}>{kindLabel(event.type, event.role)}</span>
-                    <span className={`state ${stateClass(event.state)}`}>{stateLabel(event.state)}</span>
-                  </div>
-                  <h3>{event.title}</h3>
-                  <p className="movement-meta">
-                    @{event.actor} · {event.role} · {event.repository}{typeof event.number === "number" ? ` #${event.number}` : ""}
+          <p className="section-note">
+            Every software project listed here has an explicit open-source
+            license. Prototypes and previews are labelled. Our reports and
+            investigations are in <a href="#records">Public records</a>.
+          </p>
+        </section>
+        <section
+          className="contributions-section"
+          id="contributions"
+          aria-labelledby="contributions-title"
+        >
+          <div className="contributions-intro container">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">
+                  CONTRIBUTIONS TO OTHER OPEN-SOURCE PROJECTS
+                </p>
+                <h2 id="contributions-title">Projects we contribute to</h2>
+                <p>
+                  Fixes, features, and code reviews we contribute to software
+                  maintained by other teams. Follow work in progress or explore
+                  the results of past contributions.
+                </p>
+              </div>
+            </div>
+            <nav
+              className="contribution-navigation"
+              aria-label="Contribution status"
+            >
+              <a className="button button-primary" href="#current-work">
+                In progress <span>{work.length} open PRs</span>
+              </a>
+              <a className="button button-secondary" href="#past-work">
+                Past contributions <span>{directory.past.length} projects</span>
+              </a>
+            </nav>
+          </div>
+          <section
+            className="section current-section"
+            id="current-work"
+            aria-labelledby="current-title"
+          >
+            <div className="container">
+              <div className="section-heading">
+                <div>
+                  <p className="eyebrow">
+                    <span className="dot" />
+                    UPSTREAM / IN PROGRESS
+                  </p>
+                  <h3 id="current-title">In progress</h3>
+                  <p>
+                    Open pull requests, grouped by the project they improve.
+                    Upstream maintainers review and decide what lands.
                   </p>
                 </div>
-                <span className="row-arrow" aria-hidden="true">↗</span>
-              </a>
-            ))}
-          </div>
-        ) : (
-          <p className="movement-empty">No public events recorded yet.</p>
-        )}
-        <p className="ledger-footnote">
-          Newest {movementEvents.length} of {feed.events.length} public events. The machine-readable feed at{" "}
-          <a href="/activity.json">/activity.json</a> carries the full record.
-        </p>
-        <a className="section-return" href="#top">Back to top ↑</a>
-      </section>
-
-      <section className="section" id="maintained" aria-labelledby="maintained-title">
-        <div className="section-heading">
-          <p className="section-number">02 / MAINTAINED</p>
-          <h2 id="maintained-title">Code we are responsible for.</h2>
-          <p>Licensed projects we maintain, steward, or publish, with the source and our responsibility made clear.</p>
-        </div>
-        <div className="project-ledger">
-          {ownedProjects.map((project, index) => (
-            <a className="project-row" href={project.url} key={project.repository}>
-              <div className="row-index">{String(index + 1).padStart(2, "0")}</div>
-              <div className="row-main">
-                <div className="row-title"><h3>{project.name}</h3><span>{project.kind}</span></div>
-                <p>{project.description}</p>
-                <small>{project.proof}</small>
+                <span className="section-total">
+                  {work.length} open PRs · {directory.active.length} projects
+                </span>
               </div>
-              <div className="row-meta">
-                <span className="role">{project.role}</span>
-                <span>{project.license}</span>
-                <span>{project.status}</span>
-                <span className="repo-name">{project.repository}</span>
+              <div className="current-grid">
+                {activeProjects.map((project) => (
+                  <CurrentProject key={project.repository} project={project} />
+                ))}
               </div>
-              <span className="row-arrow" aria-hidden="true">↗</span>
-            </a>
-          ))}
-        </div>
-        <a className="section-return" href="#top">Back to top ↑</a>
-      </section>
-
-      <section className="section section-band support-section" id="support" aria-labelledby="support-title">
-        <div className="section-heading">
-          <p className="section-number">03 / SUPPORTED</p>
-          <h2 id="support-title">Projects we help carry.</h2>
-          <p>Each entry names our role and links to the public work behind it.</p>
-        </div>
-        <div className="support-grid">
-          {supportPrograms.map((program) => (
-            <article className="support-record" key={program.name}>
-              <div className="record-topline"><span className="signal-dot" /><span>{program.status}</span><span>independent</span></div>
-              <div className={`record-brand ${program.logoStyle === "wide" ? "record-brand-wide" : ""}`}>
-                <Image src={program.logo} alt={`${program.name} logo`} width={96} height={96} />
+              <div className="current-footnote">
+                <p>
+                  <strong>Open for upstream review.</strong> A pull request is
+                  open in our dated snapshots. Open its public record to check
+                  the latest upstream status.
+                </p>
+                <a className="button button-secondary" href="#past-work">
+                  See past contributions
+                </a>
               </div>
-              <h3><a href={program.url}>{program.name} <Arrow /></a></h3>
-              <p className="record-role">{program.role}</p>
-              <p>{program.scope}</p>
-              <div className="record-proof">
-                <span>Evidence</span>
-                <div className="record-links">
-                  <a href={program.evidence}>{program.evidenceLabel} <Arrow /></a>
-                  {program.additionalEvidence?.map((evidence) => (
-                    <a href={evidence.url} key={evidence.url}>{evidence.label} <Arrow /></a>
+            </div>
+          </section>
+          <section
+            className="section history-section container"
+            id="past-work"
+            aria-labelledby="history-title"
+          >
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">UPSTREAM / PAST WORK</p>
+                <h3 id="history-title">Past contributions</h3>
+                <p>
+                  Changes that landed, code we reviewed, and proposals we made.
+                  Each result is labelled.
+                </p>
+              </div>
+              <div className="history-totals">
+                <strong>
+                  {summary.mergedCount}
+                  <small>authored merges in snapshots</small>
+                </strong>
+                <strong>
+                  {summary.mergedCreditCount}
+                  <small>additional credited merges</small>
+                </strong>
+              </div>
+            </div>
+            <div className="history-guide">
+              <span>
+                <i className="legend-dot legend-merged" />
+                <strong>Merged</strong> Accepted upstream
+              </span>
+              <span>
+                <i className="legend-dot legend-review" />
+                <strong>Reviewed / credited</strong> Role stated in the record
+              </span>
+              <span>
+                <i className="legend-dot legend-closed" />
+                <strong>Closed</strong> Proposal without a merge
+              </span>
+            </div>
+            <div
+              className="directory-toolbar history-toolbar"
+              data-history-controls
+              hidden
+            >
+              <div
+                className="filter-buttons"
+                role="group"
+                aria-label="Filter past contributions"
+              >
+                {[
+                  ["all", "All projects"],
+                  ["accepted", "With merged work"],
+                  ["review", "With reviews"],
+                  ["closed", "With closed proposals"],
+                ].map(([value, label]) => (
+                  <button
+                    type="button"
+                    key={value}
+                    data-history-filter={value}
+                    aria-pressed={value === "all"}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <label className="search-box">
+                <Icon kind="search" />
+                <span className="sr-only">Search past contributions</span>
+                <input
+                  type="search"
+                  placeholder="Find an OSS project…"
+                  data-history-search
+                />
+              </label>
+            </div>
+            <p className="result-count" data-history-count aria-live="polite">
+              {directory.past.length} projects with past work. Projects can also
+              have work in progress.
+            </p>
+            <div className="history-grid">
+              {pastProjects.map((project) => (
+                <HistoryProject key={project.repository} project={project} />
+              ))}
+            </div>
+            <p className="filter-empty" data-history-empty hidden>
+              No projects match this filter. Try another category or search.
+            </p>
+            <p className="section-note">
+              Counts reflect the linked records in this index.
+              Maintainer-incorporated credit is kept separate from directly
+              authored merges.
+            </p>
+          </section>
+        </section>
+        <section
+          className="section records-section"
+          id="records"
+          aria-labelledby="records-title"
+        >
+          <div className="container">
+            <div className="records-heading">
+              <div>
+                <p className="eyebrow">THE PUBLIC RECORD</p>
+                <h2 id="records-title">Public records</h2>
+                <p>
+                  Reports, investigations, and the evidence behind our work.
+                  Inspect the sources and see how our GitHub activity is
+                  tracked.
+                </p>
+              </div>
+              <div className="record-downloads">
+                <a className="button button-secondary" href="/activity.json">
+                  Activity JSON
+                </a>
+                <a className="button button-secondary" href="/oss.json">
+                  Project index JSON
+                </a>
+              </div>
+            </div>
+            <ul className="record-projects">
+              {recordProjects.map((project) => (
+                <li key={project.repository}>
+                  <div>
+                    <h3>{project.name}</h3>
+                    <p>
+                      {projectDescriptions[project.name] ?? project.description}
+                    </p>
+                    <span className="record-project-meta">
+                      {projectStatusLabels[project.name]} · {project.license}
+                    </span>
+                  </div>
+                  <a className="button button-secondary" href={project.url}>
+                    {recordActions[project.name] ?? "View record"}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <TrackingSources
+              feed={feed}
+              inventory={repositoryInventory}
+              since={trackingSince}
+            />
+            <RepositoryInventory inventory={repositoryInventory} />
+            <details className="activity-disclosure" id="activity">
+              <summary>
+                Browse the activity feed{" "}
+                <span>{activity.length} recorded items</span>
+              </summary>
+              <div className="activity-content">
+                <div
+                  className="filter-buttons"
+                  role="group"
+                  aria-label="Filter activity"
+                  data-activity-controls
+                  hidden
+                >
+                  {[
+                    ["all", "Latest activity"],
+                    ["merged", "Merged"],
+                    ["open", "Open"],
+                    ["closed", "Closed"],
+                    ["released", "Releases"],
+                  ].map(([value, label]) => (
+                    <button
+                      type="button"
+                      key={value}
+                      data-activity-filter={value}
+                      aria-pressed={value === "all"}
+                    >
+                      {label}
+                    </button>
                   ))}
                 </div>
+                <ul className="activity-list">
+                  {activity.map((event, i) => (
+                    <li
+                      key={event.id}
+                      data-activity-item
+                      data-activity-state={event.state}
+                      hidden={i >= 6}
+                    >
+                      <div className="activity-event">
+                        <div>
+                          <span className="receipt-meta">
+                            {event.repository} · {day(event.occurredAt)}
+                          </span>
+                          <a href={event.url}>{event.title}</a>
+                          <span className="receipt-meta">
+                            @{event.actor} · {event.role}
+                          </span>
+                        </div>
+                        <Status state={event.state} />
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+                <p className="filter-empty" data-activity-empty hidden>
+                  No entries with this status in the snapshot.
+                </p>
+                <div className="activity-bottom">
+                  <span data-activity-count aria-live="polite">
+                    Showing {Math.min(6, activity.length)} of {activity.length}{" "}
+                    recorded items
+                  </span>
+                  <button
+                    type="button"
+                    className="button button-secondary"
+                    data-activity-more
+                    hidden
+                  >
+                    Show more activity
+                  </button>
+                  <noscript>
+                    <a href="/activity.json">Read all activity</a>
+                  </noscript>
+                </div>
               </div>
-              <small>{program.note}</small>
-            </article>
-          ))}
-          <article className="support-record support-policy">
-            <div className="record-topline"><span>how we describe the work</span></div>
-            <h3>Clear roles, public evidence.</h3>
-            <p>Every role on this page links to a public record. We keep authored work, reviews, merged code, and maintenance responsibilities distinct without implying affiliation with the projects we support.</p>
-          </article>
-        </div>
-        <a className="section-return" href="#top">Back to top ↑</a>
-      </section>
-
-      <section className="section ledger-section" id="ledger" aria-labelledby="ledger-title">
-        <div className="section-heading ledger-heading">
-          <div>
-            <p className="section-number">04 / UPSTREAM LEDGER</p>
-            <h2 id="ledger-title">OpenClaw pull requests.</h2>
+            </details>
+            <details className="ledger-more" id="ledger">
+              <summary>
+                OpenClaw pull request ledger{" "}
+                <span>{ledger.pullRequests.length} pull requests</span>
+              </summary>
+              <div className="ledger-content">
+                <p>
+                  Snapshot: {day(ledger.generatedAt)}.{" "}
+                  <a href="https://github.com/arcabotai/arca-openclaw-contributions">
+                    Visit the source ledger
+                  </a>
+                  .
+                </p>
+                <ul>
+                  {[...primaryPullRequests, ...remainingPullRequests].map(
+                    (pr) => (
+                      <li className="ledger-row" key={pr.number}>
+                        <div>
+                          <a href={pr.url}>{pr.title}</a>
+                          <span className="receipt-meta">
+                            #{pr.number} · @{pr.author}
+                          </span>
+                        </div>
+                        <Status state={pr.state} />
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </div>
+            </details>
           </div>
-          <div className="refresh-note">
-            <span>snapshot source</span>
-            <a href="https://github.com/arcabotai/arca-openclaw-contributions">arcabotai/arca-openclaw-contributions <Arrow /></a>
-            <time dateTime={ledger.generatedAt}>{new Date(ledger.generatedAt).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short", timeZone: "UTC" })} UTC</time>
-          </div>
-        </div>
-        <div className="pr-table">
-          <div className="pr-row pr-head" aria-hidden="true">
-            <span>PR</span><span>State</span><span>Evidence / current boundary</span><span>Head</span>
-          </div>
-          {primaryPullRequests.map((pr) => <PullRequestRow pr={pr} key={pr.number} />)}
-        </div>
-        {remainingPullRequests.length > 0 && (
-          <details className="ledger-more">
-            <summary>Show remaining {remainingPullRequests.length} pull requests</summary>
-            <div className="pr-table">
-              {remainingPullRequests.map((pr) => <PullRequestRow pr={pr} key={pr.number} />)}
+        </section>
+        <section className="about-section" id="about">
+          <div className="container about-layout">
+            <div>
+              <p className="eyebrow">ABOUT ARCA</p>
+              <h2>
+                Independent builders.
+                <br />
+                <em>Work you can inspect.</em>
+              </h2>
             </div>
-          </details>
-        )}
-        <p className="ledger-footnote">An authored PR is work. A merged PR is upstream code. A closed PR stays in the record instead of being quietly airbrushed.</p>
-        <a className="section-return" href="#top">Back to top ↑</a>
-      </section>
-
-      <section className="section section-band method-section" id="method" aria-labelledby="method-title">
-        <div className="section-heading">
-          <p className="section-number">05 / METHOD</p>
-          <h2 id="method-title">Evidence before adjectives.</h2>
+            <div>
+              <p>
+                We’re a small team in Santiago, Chile. We make practical tools,
+                contribute to the software we depend on, and publish our
+                findings.
+              </p>
+              <p>
+                For every project here, we show our role, its status, and the
+                public source. Use the code, follow a contribution, or help
+                improve it.
+              </p>
+              <div className="about-actions">
+                <a className="button button-lime" href="https://arcabot.ai">
+                  About Arca
+                </a>
+                <a className="button button-hero-outline" href={SITE_SOURCE}>
+                  Improve this site
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer className="site-footer container">
+        <a className="wordmark" href="#top">
+          <span className="brand-symbol">
+            <Mark />
+          </span>
+          <span>
+            arca<span className="brand-divider">/</span>
+            <span className="brand-subtitle">open source</span>
+          </span>
+        </a>
+        <div>
+          <a href={SITE_SOURCE}>Site source</a>
+          <a href="mailto:contact@arca.computer">Contact Arca</a>
+          <a className="section-return" href="#top">
+            Back to top
+          </a>
         </div>
-        <ol className="method-list">
-          <li><span>01</span><div><h3>Inspect the real system.</h3><p>Source, runtime, issue history, and current ownership before proposed code.</p></div></li>
-          <li><span>02</span><div><h3>Prove the boundary.</h3><p>Reproduction first. Exact-head tests and production-path evidence where the change warrants it.</p></div></li>
-          <li><span>03</span><div><h3>Keep attribution clean.</h3><p>Open is not merged. Public is not automatically OSS. Support is not affiliation.</p></div></li>
-          <li><span>04</span><div><h3>Publish the receipt.</h3><p>Repository, PR, commit, issue, transcript, or a clear statement that evidence does not exist yet.</p></div></li>
-        </ol>
-      </section>
-
-      <section className="closing">
-        <p className="eyebrow">Arca Computer · Santiago, Chile</p>
-        <h2>Build in public.<br />Keep the provenance.</h2>
-        <div className="closing-links">
-          <a className="button button-primary" href="https://github.com/arcabotai">Browse GitHub <Arrow /></a>
-          <a className="button" href="https://arcabot.ai">Back to arcabot.ai <Arrow /></a>
-        </div>
-      </section>
-
-      <footer>
-        <span>ARCA OSS / PUBLIC ENGINEERING INDEX</span>
-        <span>Independent work. No implied upstream affiliation.</span>
-        <span><a href="https://github.com/arcacomputer/oss">Source <Arrow /></a> · <a href="/oss.json">JSON index</a> · <a href="mailto:contact@arca.computer">contact@arca.computer</a></span>
       </footer>
-    </main>
+    </>
   );
 }

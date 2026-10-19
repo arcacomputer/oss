@@ -15,13 +15,13 @@
       "login": "arcabotai",
       "role": "Arca agent identity",
       "since": "2026-02-12",
-      "scope": "all account activity"
+      "scope": "public authored pull requests since 2026-02-12"
     },
     {
       "login": "felirami",
       "role": "Arca founder",
       "since": "2026-02-12",
-      "scope": "activity since 2026-02-12"
+      "scope": "public authored pull requests since 2026-02-12"
     }
   ],
   "ownedRepositoryOwners": [
@@ -180,40 +180,6 @@
       "affiliated": false
     },
     {
-      "name": "SlimeVR CheeseCake",
-      "upstream": "https://github.com/Sorakage033/SlimeVR-CheeseCake",
-      "role": "upstream contributor",
-      "evidence": "https://github.com/Sorakage033/SlimeVR-CheeseCake/pull/1",
-      "pullRequests": [
-        {
-          "url": "https://github.com/Sorakage033/SlimeVR-CheeseCake/pull/1",
-          "state": "merged",
-          "author": "felirami",
-          "mergedAt": "2023-09-28T04:47:39Z",
-          "headSha": "670a25491332ea444dab8419c54138172c7d704d",
-          "mergeCommit": "c8699d3565fe83927988167a4de217c4ea4ccb81"
-        },
-        {
-          "url": "https://github.com/Sorakage033/SlimeVR-CheeseCake/pull/6",
-          "state": "merged",
-          "author": "felirami",
-          "mergedAt": "2023-12-04T08:42:23Z",
-          "headSha": "f4a6de07da991a692889acc7dd77dd5aa9a08f4e",
-          "mergeCommit": "ee51f530e06f0385ae3ddc4a5256048cb2d55393"
-        },
-        {
-          "url": "https://github.com/Sorakage033/SlimeVR-CheeseCake/pull/9",
-          "state": "merged",
-          "author": "felirami",
-          "mergedAt": "2023-12-11T22:30:48Z",
-          "headSha": "d1b9939b3cc90d6e1831d291dae9cf44b322ba55",
-          "mergeCommit": "b8a4a2da6e3266131136ac96ae59257572a2d2a6"
-        }
-      ],
-      "license": "Apache-2.0",
-      "affiliated": false
-    },
-    {
       "name": "OpenClaw",
       "upstream": "https://github.com/openclaw/openclaw",
       "role": "upstream contributor",
@@ -325,5 +291,22 @@
   },
   "liveLedgers": [
     "https://raw.githubusercontent.com/arcabotai/arca-openclaw-contributions/main/data/openclaw-prs.json"
-  ]
+  ],
+  "githubTracking": {
+    "since": "2026-02-12",
+    "users": [
+      "felirami",
+      "arcabotai"
+    ],
+    "organizations": [
+      "arcacomputer"
+    ],
+    "pullRequestScope": "public authored pull requests to external repositories",
+    "reviewScope": "selected verified public reviews and merge credits",
+    "repositoryScope": "current public repositories owned by the two accounts and organization"
+  },
+  "organization": {
+    "login": "arcacomputer",
+    "url": "https://github.com/arcacomputer"
+  }
 }

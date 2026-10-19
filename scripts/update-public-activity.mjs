@@ -7,8 +7,8 @@ const INDEX_PATH = path.join(ROOT, "public", "oss.json");
 const OUTPUT_PATH = path.join(ROOT, "public", "activity.json");
 const API = "https://api.github.com";
 const DEFAULT_SINCE = "2026-02-12";
-const MAX_SEARCH_RESULTS = 100;
-const MAX_EVENTS = 200;
+const SEARCH_PAGE_SIZE = 100;
+const MAX_SEARCH_RESULTS = 1000;
 
 function isoNow() {
   return new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
@@ -63,7 +63,7 @@ export async function github(pathname, params = {}, options = {}) {
 export function buildPullRequestQuery(identity, ownedLogins) {
   const since = identity.since || DEFAULT_SINCE;
   const exclusions = [...ownedLogins].map((login) => `-user:${login}`).join(" ");
-  return `is:pr author:${identity.login} created:>=${since} ${exclusions}`.trim();
+  return `is:pr is:public author:${identity.login} created:>=${since} ${exclusions}`.trim();
 }
 
 export function isInternalRepository(repository, ownedLogins) {
@@ -90,10 +90,13 @@ export function normalizePullRequest(details) {
           : "Opened upstream",
     url: details.html_url,
     occurredAt,
+    createdAt: details.created_at,
+    updatedAt: details.updated_at || details.created_at,
     actor: details.user.login,
     role: "author",
     state,
     evidence: {
+      author: details.user.login,
       headSha: details.head.sha,
       // GitHub exposes a synthetic, mutable test-merge SHA for open PRs.
       // It is not an immutable receipt and was causing pointless feed churn.
@@ -102,7 +105,7 @@ export function normalizePullRequest(details) {
   };
 }
 
-export function mergeEvents(currentEvents, previousEvents = [], maxEvents = MAX_EVENTS) {
+export function mergeEvents(currentEvents, previousEvents = []) {
   const currentPrKeys = new Set(
     currentEvents
       .filter((event) => event.type === "upstream_pr_state")
@@ -122,20 +125,22 @@ export function mergeEvents(currentEvents, previousEvents = [], maxEvents = MAX_
     byId.set(stableEvent.id, stableEvent);
   }
   return [...byId.values()]
-    .sort((a, b) => b.occurredAt.localeCompare(a.occurredAt) || a.id.localeCompare(b.id))
-    .slice(0, maxEvents);
+    .sort((a, b) => b.occurredAt.localeCompare(a.occurredAt) || a.id.localeCompare(b.id));
 }
 
-export function payloadFor(events, previous = null, generatedAt = isoNow()) {
-  const stable = { schemaVersion: 1, events };
+export function payloadFor(events, previous = null, checkedAt = isoNow(), options = {}) {
+  const source = options.source ?? previous?.source;
+  const stable = { schemaVersion: 1, ...(source ? { source } : {}), events };
   const previousStable = previous
-    ? { schemaVersion: previous.schemaVersion, events: previous.events }
+    ? { schemaVersion: previous.schemaVersion, ...(previous.source ? { source: previous.source } : {}), events: previous.events }
     : null;
   const unchanged = previousStable && JSON.stringify(previousStable) === JSON.stringify(stable);
   return {
     schemaVersion: 1,
-    generatedAt: unchanged ? previous.generatedAt : generatedAt,
+    generatedAt: unchanged ? previous.generatedAt : checkedAt,
+    checkedAt,
     cadence: "every 6 hours",
+    ...(source ? { source } : {}),
     events,
   };
 }
@@ -146,8 +151,23 @@ function parsePullRequestUrl(url) {
   return { repository: `${match[1]}/${match[2]}`, number: Number(match[3]) };
 }
 
-async function collectPullRequests(index, repoCache) {
+function identitiesByLogin(index) {
+  return new Map((index.contributionIdentities || []).map((identity) => [identity.login.toLowerCase(), identity]));
+}
+
+function withinIdentityPeriod(value, identity) {
+  const timestamp = Date.parse(value);
+  const since = Date.parse(identity.since || DEFAULT_SINCE);
+  if (!Number.isFinite(timestamp) || !Number.isFinite(since)) {
+    throw new Error(`${identity.login}: invalid contribution date or cutoff`);
+  }
+  return timestamp >= since;
+}
+
+export async function collectPullRequests(index, repoCache = new Map(), options = {}) {
+  const githubImpl = options.githubImpl || github;
   const identities = index.contributionIdentities || [];
+  const knownIdentities = identitiesByLogin(index);
   const ownedLogins = new Set([
     ...identities.map((identity) => identity.login.toLowerCase()),
     ...(index.ownedRepositoryOwners || []).map((login) => login.toLowerCase()),
@@ -156,19 +176,51 @@ async function collectPullRequests(index, repoCache) {
 
   for (const identity of identities) {
     const query = buildPullRequestQuery(identity, ownedLogins);
-    const result = await github("/search/issues", {
-      q: query,
-      per_page: MAX_SEARCH_RESULTS,
-      sort: "created",
-      order: "desc",
-    });
-    if (result.total_count > MAX_SEARCH_RESULTS) {
-      throw new Error(`${identity.login}: ${result.total_count} PRs exceed the bounded search limit`);
+    const seen = new Set();
+    let totalCount = 0;
+    for (let page = 1; page === 1 || page <= Math.ceil(totalCount / SEARCH_PAGE_SIZE); page += 1) {
+      const result = await githubImpl("/search/issues", {
+        q: query,
+        per_page: SEARCH_PAGE_SIZE,
+        page,
+        sort: "created",
+        order: "desc",
+      });
+      if (result.incomplete_results) throw new Error(`${identity.login}: GitHub returned incomplete PR search results`);
+      if (!Number.isInteger(result.total_count) || result.total_count < 0 || !Array.isArray(result.items)) {
+        throw new Error(`${identity.login}: invalid PR search response`);
+      }
+      totalCount = Math.max(totalCount, result.total_count);
+      if (totalCount > MAX_SEARCH_RESULTS) {
+        throw new Error(`${identity.login}: ${totalCount} PRs exceed GitHub's ${MAX_SEARCH_RESULTS}-result search limit; partition the search before refreshing`);
+      }
+      for (const item of result.items) {
+        const repository = item.repository_url?.split("/repos/")[1];
+        if (!repository || !Number.isInteger(item.number)) throw new Error(`${identity.login}: invalid PR search item`);
+        const key = `${repository.toLowerCase()}#${item.number}`;
+        seen.add(key);
+        if (isInternalRepository(repository, ownedLogins)) continue;
+        const existing = candidates.get(key);
+        if (existing && existing.identity.login.toLowerCase() !== identity.login.toLowerCase()) {
+          throw new Error(`${repository}#${item.number}: GitHub returned the same PR for different authors`);
+        }
+        candidates.set(key, { repository, number: item.number, identity });
+      }
     }
-    for (const item of result.items) {
-      const repository = item.repository_url.split("/repos/")[1];
-      if (!repository || isInternalRepository(repository, ownedLogins)) continue;
-      candidates.set(`${repository}#${item.number}`, { repository, number: item.number });
+    if (seen.size < totalCount) throw new Error(`${identity.login}: PR search returned ${seen.size} of ${totalCount} results`);
+  }
+
+  // Curated receipts supplement search indexing, but never expand the account or date scope.
+  for (const project of index.supportedProjects || []) {
+    for (const expected of project.pullRequests || []) {
+      const identity = knownIdentities.get(expected.author?.toLowerCase());
+      if (!identity) continue;
+      const knownDate = expected.createdAt || expected.created_at || expected.mergedAt;
+      if (knownDate && !withinIdentityPeriod(knownDate, identity)) continue;
+      const { repository, number } = parsePullRequestUrl(expected.url);
+      if (isInternalRepository(repository, ownedLogins)) continue;
+      const key = `${repository.toLowerCase()}#${number}`;
+      if (!candidates.has(key)) candidates.set(key, { repository, number, identity });
     }
   }
 
@@ -176,22 +228,35 @@ async function collectPullRequests(index, repoCache) {
   for (const candidate of candidates.values()) {
     let repo = repoCache.get(candidate.repository);
     if (!repo) {
-      repo = await github(`/repos/${candidate.repository}`);
+      repo = await githubImpl(`/repos/${candidate.repository}`);
       repoCache.set(candidate.repository, repo);
     }
-    if (repo.private) continue;
-    const details = await github(`/repos/${candidate.repository}/pulls/${candidate.number}`);
+    if (repo.private !== false) continue;
+    const details = await githubImpl(`/repos/${candidate.repository}/pulls/${candidate.number}`);
+    const author = details.user?.login?.toLowerCase();
+    if (!knownIdentities.has(author) || author !== candidate.identity.login.toLowerCase()) {
+      throw new Error(`${candidate.repository}#${candidate.number}: PR author does not match @${candidate.identity.login}`);
+    }
+    if (!withinIdentityPeriod(details.created_at, candidate.identity)) continue;
+    if (details.base.repo.private || isInternalRepository(details.base.repo.full_name, ownedLogins)) continue;
     events.push(normalizePullRequest(details));
   }
   return events;
 }
 
-async function collectCredits(index) {
+export async function collectCredits(index, options = {}) {
+  const githubImpl = options.githubImpl || github;
+  const identities = identitiesByLogin(index);
   const events = [];
   for (const credit of index.mergedUpstreamCredits || []) {
+    const actor = credit.actor || "arcabotai";
+    const identity = identities.get(actor.toLowerCase());
+    if (!identity) throw new Error(`${credit.url}: credit actor is not a tracked account`);
+    if (!withinIdentityPeriod(credit.mergedAt, identity)) continue;
     const { repository, number } = parsePullRequestUrl(credit.url);
-    const details = await github(`/repos/${repository}/pulls/${number}`);
+    const details = await githubImpl(`/repos/${repository}/pulls/${number}`);
     if (!details.merged_at) throw new Error(`${credit.url}: expected merged upstream credit`);
+    if (details.base.repo.private !== false || !withinIdentityPeriod(details.merged_at, identity)) continue;
     if (details.merge_commit_sha !== credit.mergeCommit) {
       throw new Error(`${credit.url}: merge commit no longer matches the curated receipt`);
     }
@@ -207,8 +272,8 @@ async function collectCredits(index) {
           ? "Merged upstream with Cad authorship preserved"
           : "Merged with public Arca co-author credit",
       url: credit.url,
-      occurredAt: credit.mergedAt,
-      actor: "arcabotai",
+      occurredAt: details.merged_at,
+      actor,
       role: credit.credit,
       state: "merged",
       evidence: {
@@ -221,17 +286,22 @@ async function collectCredits(index) {
   return events;
 }
 
-async function collectReviews(index) {
+export async function collectReviews(index, options = {}) {
+  const githubImpl = options.githubImpl || github;
+  const identities = identitiesByLogin(index);
   const events = [];
   for (const project of index.supportedProjects || []) {
     for (const expected of project.reviews || []) {
       const { repository, number } = parsePullRequestUrl(expected.url);
       const [details, reviews] = await Promise.all([
-        github(`/repos/${repository}/pulls/${number}`),
-        github(`/repos/${repository}/pulls/${number}/reviews`, { per_page: 100 }),
+        githubImpl(`/repos/${repository}/pulls/${number}`),
+        githubImpl(`/repos/${repository}/pulls/${number}/reviews`, { per_page: 100 }),
       ]);
       const review = reviews.find((item) => item.html_url === expected.url);
       if (!review) throw new Error(`${expected.url}: public review not found`);
+      const identity = identities.get(review.user?.login?.toLowerCase());
+      if (!identity) throw new Error(`${expected.url}: review author is not a tracked account`);
+      if (details.base.repo.private !== false || !withinIdentityPeriod(review.submitted_at, identity)) continue;
       if (review.state !== expected.state) throw new Error(`${expected.url}: review state changed`);
       events.push({
         id: `github:review:${repository}:${number}:${review.id}`,
@@ -298,9 +368,19 @@ export async function main() {
     collectReleases(index, repoCache),
   ]);
   const events = mergeEvents(groups.flat(), previous?.events || []);
-  const payload = payloadFor(events, previous);
+  const payload = payloadFor(events, previous, isoNow(), {
+    source: {
+      identities: (index.contributionIdentities || []).map(({ login, since, role }) => ({
+        login,
+        since: since || DEFAULT_SINCE,
+        role,
+      })),
+      ownedRepositoryOwners: index.ownedRepositoryOwners || [],
+      ...(index.organization ? { organization: index.organization } : {}),
+    },
+  });
   await writeFile(OUTPUT_PATH, `${JSON.stringify(payload, null, 2)}\n`);
-  console.log(`updated ${events.length} public activity events at ${payload.generatedAt}`);
+  console.log(`checked ${events.length} public activity events at ${payload.checkedAt}; content updated at ${payload.generatedAt}`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

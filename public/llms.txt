@@ -7,7 +7,11 @@ Arca OSS is the public engineering index for Arca Computer. It documents open-so
 - [Arca OSS website](https://oss.arcabot.ai)
 - [Source repository](https://github.com/arcacomputer/oss)
 - [Machine-readable index](https://oss.arcabot.ai/oss.json)
-- [Arca on GitHub](https://github.com/arcabotai)
+- [Arca agent identity](https://github.com/arcabotai)
+- [Arca founder](https://github.com/felirami)
+- [Arca organization](https://github.com/arcacomputer)
+- [Verified public activity](https://oss.arcabot.ai/activity.json)
+- [Public repository inventory](https://oss.arcabot.ai/github-repositories.json)
 - [OpenClaw contribution ledger](https://github.com/arcabotai/arca-openclaw-contributions)
 - [Live OpenClaw PR data](https://raw.githubusercontent.com/arcabotai/arca-openclaw-contributions/main/data/openclaw-prs.json)
 - [ClickClack origin PR #78](https://github.com/openclaw/clickclack/pull/78)
@@ -29,9 +33,8 @@ Arca OSS is the public engineering index for Arca Computer. It documents open-so
 
 ## Upstream contribution evidence
 
-- [elizaOS merged PRs by felirami](https://github.com/elizaOS/eliza/pulls?q=is%3Apr+is%3Amerged+author%3Afelirami) — fifteen directly authored merged pull requests covering security, OAuth, transaction safety, runtime reliability, UI behavior, tests, and CI.
+- [elizaOS merged PRs by felirami](https://github.com/elizaOS/eliza/pulls?q=is%3Apr+is%3Amerged+author%3Afelirami+created%3A%3E%3D2026-02-12) — fifteen directly authored merged pull requests covering security, OAuth, transaction safety, runtime reliability, UI behavior, tests, and CI.
 - [elizaOS PR #18101](https://github.com/elizaOS/eliza/pull/18101) — directly authored merged security fix by `@arcabotai` for Telegram browser onboarding continuation.
-- [SlimeVR CheeseCake PR #1](https://github.com/Sorakage033/SlimeVR-CheeseCake/pull/1), [#6](https://github.com/Sorakage033/SlimeVR-CheeseCake/pull/6), and [#9](https://github.com/Sorakage033/SlimeVR-CheeseCake/pull/9) — three merged hardware-documentation and fabrication-asset contributions authored by `@felirami`.
 - [ClickClack PR #91](https://github.com/openclaw/clickclack/pull/91) — merged integration-history helpers extracted from Arca's closed connector proposal; the implementation commit retains `Cad from Arca <cad@arcabot.ai>` as co-author, and the changelog thanks `@arcabotai`.
 - [ClickClack PR #92](https://github.com/openclaw/clickclack/pull/92) — merged typed agent-progress SDK contracts with the same co-author and changelog credit.
 - [ClickClack PR #78](https://github.com/openclaw/clickclack/pull/78) — original Hermes connector proposal; closed without merge and preserved as the provenance source for #91 and #92.
@@ -40,3 +43,5 @@ Arca OSS is the public engineering index for Arca Computer. It documents open-so
 ## Evidence policy
 
 Public source is not automatically open source; a project is listed as OSS only with an explicit license. Authored, open, closed, superseded, merged, and co-authored work remain distinct. Support and co-author credit do not imply upstream maintenance or affiliation.
+
+Authored external public PRs are tracked for @felirami and @arcabotai from February 12, 2026, using PR creation dates. Repositories owned by those accounts or arcacomputer are excluded from upstream contributions. Reviews and merge credits are selected verified evidence rather than a complete review history. The separate repository inventory covers current public repositories under all three owners regardless of age, with licenses, forks, and archived status labelled; inclusion there does not establish Arca authorship or open-source licensing. Snapshots expose their last verification time.
