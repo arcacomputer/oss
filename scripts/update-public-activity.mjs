@@ -124,7 +124,7 @@ export function mergeEvents(currentEvents, previousEvents = []) {
         : event;
     byId.set(stableEvent.id, stableEvent);
   }
-  return [...byId.values()]
+  return applyContributionOutcomes([...byId.values()])
     .sort((a, b) => b.occurredAt.localeCompare(a.occurredAt) || a.id.localeCompare(b.id));
 }
 
@@ -146,8 +146,9 @@ export function payloadFor(events, previous = null, checkedAt = isoNow(), option
 }
 
 function parsePullRequestUrl(url) {
-  const match = new URL(url).pathname.match(/^\/([^/]+)\/([^/]+)\/pull\/(\d+)/);
-  if (!match) throw new Error(`Unsupported pull-request URL: ${url}`);
+  const parsed = new URL(url);
+  const match = parsed.pathname.match(/^\/([^/]+)\/([^/]+)\/pull\/(\d+)$/);
+  if (parsed.origin !== "https://github.com" || !match) throw new Error(`Unsupported pull-request URL: ${url}`);
   return { repository: `${match[1]}/${match[2]}`, number: Number(match[3]) };
 }
 
@@ -244,22 +245,73 @@ export async function collectPullRequests(index, repoCache = new Map(), options 
   return events;
 }
 
+export function applyContributionOutcomes(events) {
+  const byOrigin = new Map();
+  for (const event of events) {
+    const accepted = (event.type === "upstream_credit" && event.state === "merged") ||
+      (event.type === "upstream_manual_integration" && event.state === "integrated");
+    if (!accepted || !event.evidence?.landedCommits?.length) continue;
+    const origin = event.evidence.originPullRequest;
+    if (!origin) continue;
+    const outcome = byOrigin.get(origin) || { kind: event.evidence.outcome, context: event.evidence.context || "", receipts: [] };
+    if (!outcome.receipts.some((receipt) => receipt.url === event.url)) outcome.receipts.push({
+      url: event.url, number: event.number,
+      ...(event.evidence.prAuthor ? { prAuthor: event.evidence.prAuthor } : {}),
+      landedCommits: event.evidence.landedCommits,
+    });
+    byOrigin.set(origin, outcome);
+  }
+  return events.map((event) => {
+    const { contributionOutcome: _old, ...clean } = event;
+    const outcome = event.type === "upstream_pr_state" && event.state === "closed" ? byOrigin.get(event.url) : null;
+    return outcome ? { ...clean, contributionOutcome: outcome } : clean;
+  });
+}
+
+function requireReceipt(condition, message) {
+  if (!condition) throw new Error(message);
+}
+
+export async function verifyLandedCommits(repository, credit, target, githubImpl = github) {
+  requireReceipt(["commit author", "co-author"].includes(credit.credit), `${credit.url}: unsupported credit role`);
+  requireReceipt(credit.landedCommits?.length > 0, `${credit.url}: missing landed authorship evidence`);
+  for (const receipt of credit.landedCommits) {
+    requireReceipt(/^[0-9a-f]{40}$/.test(receipt.sha) && receipt.author?.name && receipt.author?.email, `${credit.url}: invalid landed authorship evidence`);
+    const commit = await githubImpl(`/repos/${repository}/commits/${receipt.sha}`);
+    requireReceipt(commit.sha === receipt.sha, `${credit.url}: landed commit mismatch`);
+    if (credit.credit === "co-author") {
+      const trailer = `Co-authored-by: ${receipt.author.name} <${receipt.author.email}>`;
+      requireReceipt(commit.commit?.message?.split(/\r?\n/).includes(trailer), `${credit.url}: co-author trailer missing`);
+    } else {
+      requireReceipt(commit.commit?.author?.name === receipt.author.name && commit.commit?.author?.email === receipt.author.email, `${credit.url}: commit author changed`);
+    }
+    const comparison = await githubImpl(`/repos/${repository}/compare/${receipt.sha}...${target}`);
+    requireReceipt(["ahead", "identical"].includes(comparison.status) && comparison.merge_base_commit?.sha === receipt.sha, `${credit.url}: landed ancestry not proven`);
+  }
+}
+
 export async function collectCredits(index, options = {}) {
   const githubImpl = options.githubImpl || github;
   const identities = identitiesByLogin(index);
   const events = [];
   for (const credit of index.mergedUpstreamCredits || []) {
+    if (!credit.landedCommits?.length) throw new Error(`${credit.url}: missing landed authorship evidence`);
     const actor = credit.actor || "arcabotai";
     const identity = identities.get(actor.toLowerCase());
     if (!identity) throw new Error(`${credit.url}: credit actor is not a tracked account`);
     if (!withinIdentityPeriod(credit.mergedAt, identity)) continue;
     const { repository, number } = parsePullRequestUrl(credit.url);
     const details = await githubImpl(`/repos/${repository}/pulls/${number}`);
-    if (!details.merged_at) throw new Error(`${credit.url}: expected merged upstream credit`);
+    if (details.merged !== true || !details.merged_at) throw new Error(`${credit.url}: expected merged upstream credit`);
     if (details.base.repo.private !== false || !withinIdentityPeriod(details.merged_at, identity)) continue;
+    requireReceipt(details.user?.login === credit.prAuthor, `${credit.url}: replacement PR author changed`);
+    const origin = parsePullRequestUrl(credit.originPullRequest);
+    requireReceipt(origin.repository === repository && ["incorporated", "partially_incorporated"].includes(credit.outcome), `${credit.url}: invalid origin/outcome`);
+    requireReceipt(credit.provenanceText && details.body?.includes(credit.provenanceText) && (credit.provenanceText.includes(`#${origin.number}`) || credit.provenanceText.includes(credit.originPullRequest)), `${credit.url}: origin incorporation credit missing`);
     if (details.merge_commit_sha !== credit.mergeCommit) {
       throw new Error(`${credit.url}: merge commit no longer matches the curated receipt`);
     }
+    await verifyLandedCommits(repository, credit, credit.mergeCommit, githubImpl);
     events.push({
       id: `github:credit:${repository}:${number}:${credit.credit}`,
       type: "upstream_credit",
@@ -269,14 +321,19 @@ export async function collectCredits(index, options = {}) {
       title: details.title,
       summary:
         credit.credit === "commit author"
-          ? "Merged upstream with Cad authorship preserved"
-          : "Merged with public Arca co-author credit",
+          ? `Merged upstream with @${actor} commit authorship preserved`
+          : `Merged with public @${actor} co-author credit`,
       url: credit.url,
       occurredAt: details.merged_at,
       actor,
       role: credit.credit,
       state: "merged",
       evidence: {
+        originPullRequest: credit.originPullRequest,
+        outcome: credit.outcome,
+        context: credit.context || "",
+        prAuthor: details.user.login,
+        landedCommits: credit.landedCommits,
         implementationCommit: credit.implementationCommit,
         additionalImplementationCommits: credit.additionalImplementationCommits || [],
         mergeCommit: credit.mergeCommit,
@@ -284,6 +341,36 @@ export async function collectCredits(index, options = {}) {
     });
   }
   return events;
+}
+
+export async function collectManualIntegrations(index, options = {}) {
+  const githubImpl = options.githubImpl || github;
+  const identities = identitiesByLogin(index);
+  const events = new Map();
+  for (const credit of index.manuallyIntegratedContributions || []) {
+    const identity = identities.get(credit.actor?.toLowerCase());
+    requireReceipt(identity, `${credit.url}: integration actor is not a tracked account`);
+    if (!withinIdentityPeriod(credit.integratedAt, identity)) continue;
+    const { repository, number } = parsePullRequestUrl(credit.originPullRequest);
+    const original = await githubImpl(`/repos/${repository}/pulls/${number}`);
+    requireReceipt(original.base.repo.private === false && original.merged === false && !original.merged_at, `${credit.url}: expected public unmerged original`);
+    requireReceipt(credit.landedCommits?.length > 0, `${credit.url}: missing landed authorship evidence`);
+    for (const receipt of credit.landedCommits) {
+      requireReceipt(receipt.branch && /^[0-9a-f]{40}$/.test(receipt.targetCommit), `${credit.url}: missing pinned integration branch tip`);
+      await verifyLandedCommits(repository, { ...credit, landedCommits: [receipt] }, receipt.targetCommit, githubImpl);
+      const commit = await githubImpl(`/repos/${repository}/commits/${receipt.sha}`);
+      requireReceipt(commit.commit?.message?.split(/\r?\n/).includes(`Merged-from: ${credit.originPullRequest}`), `${credit.url}: integration origin trailer missing`);
+    }
+    events.set(credit.originPullRequest, {
+      id: `github:integration:${repository}:${number}`,
+      type: "upstream_manual_integration", project: credit.project, repository, number,
+      title: credit.title, summary: "Manually integrated upstream", url: credit.originPullRequest,
+      occurredAt: credit.integratedAt, actor: credit.actor, role: credit.credit, state: "integrated",
+      evidence: { originPullRequest: credit.originPullRequest, outcome: "manually_integrated",
+        context: credit.context || "", landedCommits: credit.landedCommits },
+    });
+  }
+  return [...events.values()];
 }
 
 export async function collectReviews(index, options = {}) {
@@ -364,6 +451,7 @@ export async function main() {
   const groups = await Promise.all([
     collectPullRequests(index, repoCache),
     collectCredits(index),
+    collectManualIntegrations(index),
     collectReviews(index),
     collectReleases(index, repoCache),
   ]);

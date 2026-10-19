@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { validateContributionClaims } from "./contribution-claims.mjs";
 
 const licensed = [
   { repository: "arcabotai/clawfix", spdx: "MIT" },
@@ -246,6 +247,9 @@ const activity = JSON.parse(
   await readFile(new URL("../public/activity.json", import.meta.url), "utf8"),
 );
 const index = JSON.parse(await readFile(new URL("../public/oss.json", import.meta.url), "utf8"));
+const incorporated = await validateContributionClaims(index, activity, {
+  githubImpl: (pathname) => github(pathname.replace(/^\//, "")),
+});
 const inventory = JSON.parse(await readFile(new URL("../public/github-repositories.json", import.meta.url), "utf8"));
 const identities = new Map(index.contributionIdentities.map((identity) => [identity.login.toLowerCase(), identity]));
 const owners = new Set(index.ownedRepositoryOwners.map((owner) => owner.toLowerCase()));
@@ -268,6 +272,7 @@ for (const repo of inventory.repositories) {
 const activityTypes = new Set([
   "upstream_pr_state",
   "upstream_credit",
+  "upstream_manual_integration",
   "release",
   "project_published",
   "review_submitted",
@@ -280,7 +285,7 @@ for (const [index, event] of activity.events.entries()) {
   assert.ok(activityTypes.has(event.type), `Public activity ${event.id}: unsupported type`);
   assert.match(event.url, /^https:\/\/github\.com\//, `Public activity ${event.id}: evidence URL must be public GitHub`);
   assert.ok(!Number.isNaN(Date.parse(event.occurredAt)), `Public activity ${event.id}: invalid timestamp`);
-  if (["upstream_pr_state", "upstream_credit", "review_submitted"].includes(event.type)) {
+  if (["upstream_pr_state", "upstream_credit", "upstream_manual_integration", "review_submitted"].includes(event.type)) {
     const identity = identities.get(event.actor.toLowerCase());
     assert.ok(identity, `Public activity ${event.id}: untracked author`);
     assert.ok(Date.parse(event.createdAt || event.occurredAt) >= Date.parse(identity.since), `Public activity ${event.id}: contribution predates tracking cutoff`);
@@ -338,5 +343,5 @@ console.log(
     `${prs.length} sampled OpenClaw PR records, ` +
     `1 merged founder PR, 1 merged Crabbox PR, 1 open Buzz PR, ${publicLedger.pullRequests.length} live ledger records, ` +
     `${activity.events.length} public activity events, ${clickClackMergeCredits.length} merged ClickClack co-author credits, ` +
-    `1 merged Hermes Agent authorship receipt, and 2 upstream reviews.`,
+    `${incorporated.creditedMerges} verified replacement credits, ${incorporated.manualIntegrations} manual integrations, and 2 upstream reviews.`,
 );

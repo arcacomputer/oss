@@ -6,10 +6,22 @@ import repositoryInventoryJson from "@/public/github-repositories.json";
 export type ActivityEventType =
   | "upstream_pr_state"
   | "upstream_credit"
+  | "upstream_manual_integration"
   | "review_submitted"
   | "release"
   | "project_published";
 
+export type LandedCommitReceipt = {
+  sha: string;
+  author: { name: string; email: string };
+  branch?: string;
+  targetCommit?: string;
+};
+export type ContributionOutcome = {
+  kind: "incorporated" | "partially_incorporated" | "manually_integrated";
+  context: string;
+  receipts: Array<{ url: string; number?: number; prAuthor?: string; landedCommits: LandedCommitReceipt[] }>;
+};
 export type ActivityEvent = {
   id: string;
   type: ActivityEventType;
@@ -25,6 +37,15 @@ export type ActivityEvent = {
   actor: string;
   role: string;
   state: string;
+  contributionOutcome?: ContributionOutcome;
+  evidence?: {
+    originPullRequest?: string;
+    outcome?: ContributionOutcome["kind"];
+    context?: string;
+    prAuthor?: string;
+    landedCommits?: LandedCommitReceipt[];
+    [key: string]: unknown;
+  };
 };
 
 export type ActivityFeed = {
@@ -69,6 +90,8 @@ export type SupportProgram = {
 };
 
 export type UpstreamMergeCredit = {
+  actor: string;
+  prAuthor: string;
   project: string;
   number: number;
   title: string;
@@ -79,6 +102,7 @@ export type UpstreamMergeCredit = {
   mergeCommit: string;
   originUrl: string;
   credit: "co-author" | "commit author";
+  landedCommits: LandedCommitReceipt[];
 };
 
 export type ContributionIdentity = {
@@ -286,50 +310,27 @@ export const ownedProjects: OwnedProject[] = [
   },
 ];
 
-export const clickClackMergeCredits: UpstreamMergeCredit[] = [
-  {
-    project: "ClickClack",
-    number: 91,
-    title: "feat: add integration history helpers",
-    url: "https://github.com/openclaw/clickclack/pull/91",
-    mergedAt: "2026-07-17T04:25:50Z",
-    implementationCommit: "79d96964549d020143d50cbc4794ad460bf1ed87",
-    mergeCommit: "3e1d2841a314c139c1f053605dbb6d94d9e81a07",
-    originUrl: "https://github.com/openclaw/clickclack/pull/78",
-    credit: "co-author",
-  },
-  {
-    project: "ClickClack",
-    number: 92,
-    title: "feat: add typed agent progress events",
-    url: "https://github.com/openclaw/clickclack/pull/92",
-    mergedAt: "2026-07-17T04:37:02Z",
-    implementationCommit: "068ce38bf1e93e8caec8090dcbc573fb4a48bf45",
-    mergeCommit: "064a46fc73e11dff15cc2af03e631a28b42ddef1",
-    originUrl: "https://github.com/openclaw/clickclack/pull/78",
-    credit: "co-author",
-  },
-];
-
-export const hermesMergeCredits: UpstreamMergeCredit[] = [
-  {
-    project: "Hermes Agent",
-    number: 76400,
-    title: "fix(desktop): map SSH profiles to remote profiles",
-    url: "https://github.com/NousResearch/hermes-agent/pull/76400",
-    mergedAt: "2026-08-01T21:30:17Z",
-    implementationCommit: "e1c1af9378d441e89a0e3cf4bd6979565168ef42",
-    additionalImplementationCommits: [
-      "84838ec21ba4b049d6ca66b1c1bf7f2fb5f42300",
-      "e2095dd77ea4211a2c4ad75c9069193acca2a155",
-      "ffd9a9e78fbf135e6029c921e67b53460a55044d",
-      "c444915f21d3a85220adbdb64069626c7281b8d9",
-    ],
-    mergeCommit: "8b8ebc26bb5a433c1975615c7c8e4a0182d94f36",
-    originUrl: "https://github.com/NousResearch/hermes-agent/pull/74779",
-    credit: "commit author",
-  },
-];
+// oss.json is the single curated receipt source; legacy exports remain compatible.
+export const upstreamMergeCredits: UpstreamMergeCredit[] = ossIndex.mergedUpstreamCredits.map((credit) => ({
+  ...credit,
+  number: credit.pullRequest,
+  title: `${credit.project} #${credit.pullRequest}`,
+  originUrl: credit.originPullRequest,
+  credit: credit.credit as UpstreamMergeCredit["credit"],
+}));
+export const clickClackMergeCredits = upstreamMergeCredits.filter((credit) => credit.project === "ClickClack");
+export const hermesMergeCredits = upstreamMergeCredits.filter((credit) => credit.project === "Hermes Agent");
+export type ManualIntegrationContribution = {
+  project: string;
+  title: string;
+  originPullRequest: string;
+  actor: string;
+  credit: "commit author";
+  integratedAt: string;
+  context: string;
+  landedCommits: LandedCommitReceipt[];
+};
+export const manualIntegrationContributions = ossIndex.manuallyIntegratedContributions as ManualIntegrationContribution[];
 
 export const supportPrograms: SupportProgram[] = [
   {
@@ -339,7 +340,7 @@ export const supportPrograms: SupportProgram[] = [
     role: "upstream contributor",
     scope:
       "onboarding security · OAuth · transaction safety · runtime and UI reliability · tests and CI",
-    status: "active · merged contributions",
+    status: "historical · merged contributions",
     evidence:
       "https://github.com/elizaOS/eliza/pulls?q=is%3Apr+is%3Amerged+author%3Afelirami+created%3A%3E%3D2026-02-12",
     evidenceLabel: "15 merged PRs by @felirami",
@@ -349,7 +350,7 @@ export const supportPrograms: SupportProgram[] = [
         url: "https://github.com/elizaOS/eliza/pull/18101",
       },
     ],
-    note: "Sixteen directly authored pull requests have merged across Arca's @felirami and @arcabotai identities. Arca contributes upstream but does not claim elizaOS ownership or maintenance.",
+    note: "Sixteen directly authored pull requests have merged across Arca's @felirami and @arcabotai identities. Two historical replacements also retain felirami co-author credit, counted separately from authored merges. This is a historical contribution record, not new elizaOS work or a claim of ownership or maintenance.",
   },
   {
     name: "Hermes Agent",
@@ -371,7 +372,7 @@ export const supportPrograms: SupportProgram[] = [
         url: "https://github.com/NousResearch/hermes-agent/pull/97871",
       },
     ],
-    note: "Hermes merged five Cad-authored commits through maintainer PR #76400, with @arcabotai mapped in the contributor record. Directly authored PR #97871 also merged: Desktop classifies Tailscale SSH browser checks safely and gives Terminal guidance instead of a generic timeout, without exposing the one-time authentication URL. Both contributions are included in the v0.21.6 source tag; packaged Desktop binary inclusion is unverified. Arca is an independent contributor, not a Nous Research maintainer or affiliate.",
+    note: "Hermes merged five Cad-authored commits through maintainer PR #76400, with @arcabotai mapped in the contributor record; the companion token-root anchor is by Sora-bluesky. Directly authored PR #97871 also merged: Desktop classifies Tailscale SSH browser checks safely and gives Terminal guidance instead of a generic timeout, without exposing the one-time authentication URL. Both contributions are included in the v0.21.6 source tag; packaged Desktop binary inclusion is unverified. Later replacements #139854, #140249 and #140984 preserve Arca commit authorship, separately from maintainer follow-ups and other batch changes; their release inclusion is unverified. Arca is an independent contributor, not a Nous Research maintainer or affiliate.",
   },
   {
     name: "OpenClaw",

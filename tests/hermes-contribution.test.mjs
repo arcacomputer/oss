@@ -25,7 +25,8 @@ test("Hermes Tailscale contribution preserves authored, credited, and release bo
     ],
     binaryReleaseStatus: "unverified",
   });
-  assert.deepEqual(hermes.mergedCredits, ["https://github.com/NousResearch/hermes-agent/pull/76400"]);
+  assert.deepEqual(hermes.mergedCredits, [76400, 139854, 140249, 140984].map(number => `https://github.com/NousResearch/hermes-agent/pull/${number}`));
+  assert.ok(!hermes.sourceRelease.mergeCommits.includes("837213a0548ea5088dda4499c8adb090f9be63b6"), "later incorporation is not retroactively part of v0.21.6");
 
   const activity = JSON.parse(await read("../public/activity.json"));
   const receipts = activity.events.filter((event) => event.url === url && event.state === "merged");

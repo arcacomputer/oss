@@ -303,13 +303,23 @@ test("curated credits use the verified merge date and the credited account cutof
       mergedAt: pull.merged_at,
       mergeCommit: pull.merge_commit_sha,
       credit: "co-author",
+      originPullRequest: "https://github.com/openclaw/openclaw/pull/1",
+      prAuthor: "felirami",
+      outcome: "incorporated",
+      provenanceText: "Extracted from #1 by @arcabotai",
+      landedCommits: [{ sha: "a".repeat(40), author: { name: "Cad from Arca", email: "cad@arcabot.ai" } }],
     }],
   };
-  const events = await collectCredits(creditIndex, { githubImpl: async () => pull });
+  const githubImpl = async (pathname) => {
+    if (pathname.includes("/compare/")) return { status: "ahead", merge_base_commit: { sha: "a".repeat(40) } };
+    if (pathname.includes("/commits/")) return { sha: "a".repeat(40), commit: { message: "Co-authored-by: Cad from Arca <cad@arcabot.ai>" } };
+    return { ...pull, merged: true, body: "Extracted from #1 by @arcabotai" };
+  };
+  const events = await collectCredits(creditIndex, { githubImpl });
   assert.equal(events[0].actor, "arcabotai");
   assert.equal(events[0].occurredAt, pull.merged_at);
   assert.deepEqual(await collectCredits(creditIndex, {
-    githubImpl: async () => ({ ...pull, merged_at: "2026-02-11T23:59:59Z" }),
+    githubImpl: async () => ({ ...pull, merged: true, merged_at: "2026-02-11T23:59:59Z" }),
   }), []);
 });
 

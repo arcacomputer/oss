@@ -749,6 +749,11 @@ em {
   font-weight: 500;
   white-space: nowrap;
 }
+.status-outcome {
+  white-space: normal;
+  max-width: 100%;
+  text-align: center;
+}
 .status-open {
   background: #e7f1d9;
   border-color: #c9ddb3;

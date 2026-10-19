@@ -240,6 +240,41 @@ test("owned repositories and releases never appear as upstream contribution proj
   assert.equal(directory.past[0].closedItems[0].state, "closed");
 });
 
+test("incorporated origins and manual receipts stay distinct from failed proposals and authored merges", async () => {
+  const feed = JSON.parse(await read("../public/activity.json"));
+  const index = JSON.parse(await read("../public/oss.json"));
+  const expected = {
+    "NousResearch/hermes-agent": { 74779: [76400], 138681: [139854], 139394: [140249], 140461: [140984] },
+    "elizaOS/eliza": { 18503: [18538], 18522: [18818] },
+    "openclaw/clickclack": { 78: [91, 92] },
+  };
+  assert.equal(index.mergedUpstreamCredits.length, 8);
+  for (const [repository, origins] of Object.entries(expected)) {
+    for (const [number, replacements] of Object.entries(origins)) {
+      const original = feed.events.find((event) => event.repository === repository && event.number === Number(number) && event.state === "closed");
+      assert.equal(original.evidence.mergeCommit, null);
+      assert.deepEqual(original.contributionOutcome.receipts.map((item) => item.number).sort((a,b) => a-b), replacements);
+    }
+  }
+  const directory = getContributionDirectory(feed.events, [], []);
+  const projects = directory.past;
+  assert.equal(projects.reduce((sum,p) => sum + p.incorporatedItems.length, 0), 8);
+  assert.equal(projects.reduce((sum,p) => sum + p.creditItems.length, 0), 8);
+  const openssl = projects.find((p) => p.repository === "openssl/openssl");
+  assert.equal(openssl.manualItems.length, 1);
+  assert.equal(openssl.closedItems.length, 0);
+  assert.equal(openssl.mergedItems.length, 0);
+  assert.equal(openssl.manualItems[0].evidence.landedCommits.length, 2);
+  const { contributionSummary } = await import(presentationUrl);
+  const summary = contributionSummary([...feed.events, ...feed.events], []);
+  assert.equal(summary.mergedCount, 26);
+  assert.equal(summary.mergedCreditCount, 8);
+  assert.equal(summary.manualIntegrationCount, 1);
+  assert.equal(directory.active.find((p) => p.repository === "apache/kafka").openItems[0].number, 23195);
+  assert.equal(directory.active.find((p) => p.repository === "django/django").openItems[0].number, 21800);
+  assert.ok(!feed.events.some((e) => e.contributionOutcome && ((e.repository === "openclaw/openclaw") || (e.repository === "elizaOS/eliza" && e.number === 18181) || e.number === 140741)));
+});
+
 test("committed snapshots expose in-scope upstream projects without legacy curated history", async () => {
   const feed = JSON.parse(await read("../public/activity.json"));
   const ledger = JSON.parse(await read("../public/openclaw-prs.json"));
@@ -268,5 +303,6 @@ test("committed snapshots expose in-scope upstream projects without legacy curat
   const clickClack = directory.past.find((item) => item.name === "ClickClack");
   assert.equal(clickClack.mergedItems.length, 0);
   assert.equal(clickClack.creditItems.length, 2);
-  assert.equal(clickClack.closedItems.length, 1);
+  assert.equal(clickClack.closedItems.length, 0);
+  assert.equal(clickClack.incorporatedItems.length, 1);
 });
