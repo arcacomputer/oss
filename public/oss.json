@@ -8,7 +8,9 @@
     "publicDoesNotMeanOpenSource": true,
     "authoredPullRequestDoesNotMeanMerged": true,
     "coauthorCreditDoesNotMeanPullRequestAuthorship": true,
-    "supportDoesNotImplyAffiliation": true
+    "supportDoesNotImplyAffiliation": true,
+    "originalPrStateSeparateFromContributionOutcome": true,
+    "manualIntegrationsSeparateFromMergedPullRequests": true
   },
   "contributionIdentities": [
     {
@@ -140,7 +142,12 @@
         "arcabotai": 1,
         "total": 16
       },
-      "affiliated": false
+      "affiliated": false,
+      "mergedCredits": [
+        "https://github.com/elizaOS/eliza/pull/18538",
+        "https://github.com/elizaOS/eliza/pull/18818"
+      ],
+      "status": "historical contributions"
     },
     {
       "name": "Hermes Agent",
@@ -164,7 +171,10 @@
         }
       ],
       "mergedCredits": [
-        "https://github.com/NousResearch/hermes-agent/pull/76400"
+        "https://github.com/NousResearch/hermes-agent/pull/76400",
+        "https://github.com/NousResearch/hermes-agent/pull/139854",
+        "https://github.com/NousResearch/hermes-agent/pull/140249",
+        "https://github.com/NousResearch/hermes-agent/pull/140984"
       ],
       "creditBoundary": "Maintainer PR #76400 cherry-picked the origin PR with authorship preserved. Five merged commits are authored by Cad from Arca; the contributor map credits @arcabotai.",
       "sourceRelease": {
@@ -247,6 +257,16 @@
       ],
       "creditBoundary": "The origin PR closed unmerged. Two maintainer-authored replacement PRs merged with Cad co-author trailers and changelog thanks to @arcabotai.",
       "affiliated": false
+    },
+    {
+      "name": "OpenSSL",
+      "upstream": "https://github.com/openssl/openssl",
+      "role": "upstream contributor",
+      "status": "historical manual integration",
+      "manualIntegrationOrigins": [
+        "https://github.com/openssl/openssl/pull/32422"
+      ],
+      "affiliated": false
     }
   ],
   "mergedUpstreamCredits": [
@@ -264,7 +284,49 @@
         "c444915f21d3a85220adbdb64069626c7281b8d9"
       ],
       "mergeCommit": "8b8ebc26bb5a433c1975615c7c8e4a0182d94f36",
-      "credit": "commit author"
+      "credit": "commit author",
+      "actor": "arcabotai",
+      "prAuthor": "teknium1",
+      "outcome": "incorporated",
+      "provenanceText": "Salvaged from #74779 by @arcabotai with authorship preserved",
+      "landedCommits": [
+        {
+          "sha": "d6be88fbc87ebda9f899c227cabb71e9a0ed11a4",
+          "author": {
+            "name": "Cad from Arca",
+            "email": "cad@arcabot.ai"
+          }
+        },
+        {
+          "sha": "e2c6f2ebc4468e7e7839d611c2b0393e08a2cd3c",
+          "author": {
+            "name": "Cad from Arca",
+            "email": "cad@arcabot.ai"
+          }
+        },
+        {
+          "sha": "6d3cb23d24fa7f58daf7552d4f33347e943a4aa7",
+          "author": {
+            "name": "Cad from Arca",
+            "email": "cad@arcabot.ai"
+          }
+        },
+        {
+          "sha": "5cb19d7af5bb5b247ec4e340bb11f30ba438a2cc",
+          "author": {
+            "name": "Cad from Arca",
+            "email": "cad@arcabot.ai"
+          }
+        },
+        {
+          "sha": "f3cb7c0e01b2b315372cdf7590fe898ba27475df",
+          "author": {
+            "name": "Cad from Arca",
+            "email": "cad@arcabot.ai"
+          }
+        }
+      ],
+      "context": "Five Cad-authored commits were incorporated; the separate token-root anchor is by Sora-bluesky."
     },
     {
       "project": "ClickClack",
@@ -273,7 +335,22 @@
       "mergedAt": "2026-07-17T04:25:50Z",
       "implementationCommit": "79d96964549d020143d50cbc4794ad460bf1ed87",
       "mergeCommit": "3e1d2841a314c139c1f053605dbb6d94d9e81a07",
-      "credit": "co-author"
+      "credit": "co-author",
+      "originPullRequest": "https://github.com/openclaw/clickclack/pull/78",
+      "actor": "arcabotai",
+      "prAuthor": "steipete",
+      "outcome": "partially_incorporated",
+      "context": "Generic history helpers and typed progress were extracted. The Hermes-specific connector was declined.",
+      "provenanceText": "This extracts the reusable integration capabilities surfaced by https://github.com/openclaw/clickclack/pull/78. Thanks @arcabotai for identifying the need and for the original implementation direction.",
+      "landedCommits": [
+        {
+          "sha": "3e1d2841a314c139c1f053605dbb6d94d9e81a07",
+          "author": {
+            "name": "Cad from Arca",
+            "email": "cad@arcabot.ai"
+          }
+        }
+      ]
     },
     {
       "project": "ClickClack",
@@ -282,7 +359,156 @@
       "mergedAt": "2026-07-17T04:37:02Z",
       "implementationCommit": "068ce38bf1e93e8caec8090dcbc573fb4a48bf45",
       "mergeCommit": "064a46fc73e11dff15cc2af03e631a28b42ddef1",
-      "credit": "co-author"
+      "credit": "co-author",
+      "originPullRequest": "https://github.com/openclaw/clickclack/pull/78",
+      "actor": "arcabotai",
+      "prAuthor": "steipete",
+      "outcome": "partially_incorporated",
+      "context": "Generic history helpers and typed progress were extracted. The Hermes-specific connector was declined.",
+      "provenanceText": "Contributor credit: this extracts the generic SDK value surfaced by @arcabotai in #78. The commit retains Cad's co-author credit; the Unreleased changelog thanks @arcabotai.",
+      "landedCommits": [
+        {
+          "sha": "064a46fc73e11dff15cc2af03e631a28b42ddef1",
+          "author": {
+            "name": "Cad from Arca",
+            "email": "cad@arcabot.ai"
+          }
+        }
+      ]
+    },
+    {
+      "project": "Hermes Agent",
+      "pullRequest": 139854,
+      "url": "https://github.com/NousResearch/hermes-agent/pull/139854",
+      "mergedAt": "2026-10-16T21:21:40Z",
+      "implementationCommit": "d589981249093ce1cd0e87e94b9aa98e593c54dd",
+      "mergeCommit": "837213a0548ea5088dda4499c8adb090f9be63b6",
+      "credit": "commit author",
+      "originPullRequest": "https://github.com/NousResearch/hermes-agent/pull/138681",
+      "actor": "arcabotai",
+      "prAuthor": "teknium1",
+      "outcome": "incorporated",
+      "provenanceText": "Salvages #138681 (@arcabotai), cherry-picked with authorship",
+      "landedCommits": [
+        {
+          "sha": "d589981249093ce1cd0e87e94b9aa98e593c54dd",
+          "author": {
+            "name": "arcabotai",
+            "email": "261107832+arcabotai@users.noreply.github.com"
+          }
+        }
+      ],
+      "context": "Preserved Arca-authored implementation; maintainer follow-ups and other batch changes are not claimed as Arca work."
+    },
+    {
+      "project": "Hermes Agent",
+      "pullRequest": 140249,
+      "url": "https://github.com/NousResearch/hermes-agent/pull/140249",
+      "mergedAt": "2026-10-17T17:31:17Z",
+      "implementationCommit": "0c8d4b7363c930b8291b13686995a3c34d34814c",
+      "mergeCommit": "43b6acbe37c5d631d2fd3238fabb6ac2226bcd5b",
+      "credit": "commit author",
+      "originPullRequest": "https://github.com/NousResearch/hermes-agent/pull/139394",
+      "actor": "arcabotai",
+      "prAuthor": "unsupportedpastels",
+      "outcome": "incorporated",
+      "provenanceText": "@arcabotai: #139394 (RT-29 gateway/CLI/contract change, cherry-picked with authorship)",
+      "landedCommits": [
+        {
+          "sha": "0c8d4b7363c930b8291b13686995a3c34d34814c",
+          "author": {
+            "name": "arcabotai",
+            "email": "261107832+arcabotai@users.noreply.github.com"
+          }
+        }
+      ],
+      "context": "Preserved Arca-authored implementation; maintainer follow-ups and other batch changes are not claimed as Arca work."
+    },
+    {
+      "project": "Hermes Agent",
+      "pullRequest": 140984,
+      "url": "https://github.com/NousResearch/hermes-agent/pull/140984",
+      "mergedAt": "2026-10-18T08:56:10Z",
+      "implementationCommit": "ec2fe8c43e3b0a7343656aa2ba453d8d4182544f",
+      "mergeCommit": "afb53eb3330c68f61f4f0a2ee2c733ed54a37a86",
+      "credit": "commit author",
+      "originPullRequest": "https://github.com/NousResearch/hermes-agent/pull/140461",
+      "actor": "arcabotai",
+      "prAuthor": "teknium1",
+      "outcome": "incorporated",
+      "provenanceText": "- **Gateway, cron, MCP serve, ACP, tui_gateway and force-reload never prompt.** `register_from_config(..., interactive=False)` is now the default. A hook that isn't allowlisted and wasn't opted in (`--accept-hooks`, `HERMES_ACCEPT_HOOKS`, `hooks_auto_accept`) is declined without reading stdin (salvaged from #140461 by @arcabotai).",
+      "landedCommits": [
+        {
+          "sha": "ec2fe8c43e3b0a7343656aa2ba453d8d4182544f",
+          "author": {
+            "name": "arcabotai",
+            "email": "261107832+arcabotai@users.noreply.github.com"
+          }
+        },
+        {
+          "sha": "06786549f4d0e8ce7a9050059471a7f5a87909fd",
+          "author": {
+            "name": "arcabotai",
+            "email": "261107832+arcabotai@users.noreply.github.com"
+          }
+        },
+        {
+          "sha": "ea30fe31dbafc685a4cffdb842acf9fea39ff679",
+          "author": {
+            "name": "arcabotai",
+            "email": "261107832+arcabotai@users.noreply.github.com"
+          }
+        }
+      ],
+      "context": "Preserved Arca-authored implementation; maintainer follow-ups and other batch changes are not claimed as Arca work."
+    },
+    {
+      "project": "elizaOS",
+      "pullRequest": 18538,
+      "url": "https://github.com/elizaOS/eliza/pull/18538",
+      "originPullRequest": "https://github.com/elizaOS/eliza/pull/18503",
+      "actor": "felirami",
+      "prAuthor": "lalalune",
+      "mergedAt": "2026-08-12T05:26:10Z",
+      "implementationCommit": "8065081b0690f6763a68c7918bdb09c3c14276e0",
+      "mergeCommit": "8065081b0690f6763a68c7918bdb09c3c14276e0",
+      "credit": "co-author",
+      "outcome": "incorporated",
+      "provenanceText": "All commits from #18503 by @felirami are preserved in this branch's history; this PR adds only the `origin/develop` merge that resolves the conflict with #18339.",
+      "landedCommits": [
+        {
+          "sha": "8065081b0690f6763a68c7918bdb09c3c14276e0",
+          "author": {
+            "name": "felirami",
+            "email": "felirami@users.noreply.github.com"
+          }
+        }
+      ],
+      "context": "Historical contribution with felirami co-author credit; replacement includes maintainer rework, not every original line unchanged."
+    },
+    {
+      "project": "elizaOS",
+      "pullRequest": 18818,
+      "url": "https://github.com/elizaOS/eliza/pull/18818",
+      "originPullRequest": "https://github.com/elizaOS/eliza/pull/18522",
+      "actor": "felirami",
+      "prAuthor": "lalalune",
+      "mergedAt": "2026-08-12T23:07:33Z",
+      "implementationCommit": "fdcd2d0f73fd7b1699205d193ac8300fc54cb49c",
+      "mergeCommit": "fdcd2d0f73fd7b1699205d193ac8300fc54cb49c",
+      "credit": "co-author",
+      "outcome": "incorporated",
+      "provenanceText": "Supersedes #18522 because its contributor branch does not permit maintainer updates.",
+      "landedCommits": [
+        {
+          "sha": "fdcd2d0f73fd7b1699205d193ac8300fc54cb49c",
+          "author": {
+            "name": "felirami",
+            "email": "felirami@users.noreply.github.com"
+          }
+        }
+      ],
+      "context": "Historical contribution with felirami co-author credit; replacement includes maintainer rework, not every original line unchanged."
     }
   ],
   "activityFeed": {
@@ -308,5 +534,37 @@
   "organization": {
     "login": "arcacomputer",
     "url": "https://github.com/arcacomputer"
-  }
+  },
+  "manuallyIntegratedContributions": [
+    {
+      "project": "OpenSSL",
+      "title": "doc: add missing const to PEM write SYNOPSIS",
+      "url": "https://github.com/openssl/openssl/pull/32422",
+      "originPullRequest": "https://github.com/openssl/openssl/pull/32422",
+      "actor": "felirami",
+      "credit": "commit author",
+      "integratedAt": "2026-09-04T17:37:17Z",
+      "context": "One contribution integrated into master and backported to openssl-4.0; original PR remains closed without a GitHub merge.",
+      "landedCommits": [
+        {
+          "sha": "4ddd1002cd41750ee644478a84306be2c59d775a",
+          "author": {
+            "name": "Luis Felipe Abarca",
+            "email": "lf@arca.computer"
+          },
+          "branch": "master",
+          "targetCommit": "cc7357b2ad82c157d48525e2813bd600222fe25b"
+        },
+        {
+          "sha": "b9e34da583370a48cae42267e1191b961c095a5e",
+          "author": {
+            "name": "Luis Felipe Abarca",
+            "email": "lf@arca.computer"
+          },
+          "branch": "openssl-4.0",
+          "targetCommit": "cc3ea76857617d66668a262447f84086fd50930e"
+        }
+      ]
+    }
+  ]
 }

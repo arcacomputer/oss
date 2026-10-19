@@ -22,7 +22,7 @@ function timestamp(value: string): number {
 export function latestActivity(events: ActivityEvent[]): ActivityEvent[] {
   const latest = new Map<string, ActivityEvent>();
   for (const event of events) {
-    const key = canonicalUrl(event.url);
+    const key = `${event.type === "upstream_manual_integration" ? "integration:" : ""}${canonicalUrl(event.url)}`;
     const previous = latest.get(key);
     if (
       !previous ||
@@ -132,6 +132,7 @@ export function contributionSummary(
   return {
     mergedCount: merged.size,
     mergedCreditCount: credits.size,
+    manualIntegrationCount: new Set(events.filter((event) => event.type === "upstream_manual_integration" && event.state === "integrated").map((event) => canonicalUrl(event.evidence?.originPullRequest || event.url))).size,
     openCount: currentWork(events, ledgerPrs).length,
   };
 }

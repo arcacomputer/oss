@@ -14,6 +14,8 @@ export type ContributionProject = {
   openItems: ActivityEvent[];
   mergedItems: ActivityEvent[];
   creditItems: ActivityEvent[];
+  manualItems: ActivityEvent[];
+  incorporatedItems: ActivityEvent[];
   reviewedItems: ActivityEvent[];
   closedItems: ActivityEvent[];
   lastUpdated: string;
@@ -101,7 +103,7 @@ export function getContributionDirectory(
           event.actor,
           event.createdAt ?? event.occurredAt,
         )) &&
-      ["upstream_pr_state", "upstream_credit", "review_submitted"].includes(
+      ["upstream_pr_state", "upstream_credit", "upstream_manual_integration", "review_submitted"].includes(
         event.type,
       ),
   );
@@ -126,8 +128,10 @@ export function getContributionDirectory(
     (event) => event.state === "merged" && event.role === "author",
   );
   const closedItems = latestPrs.filter(
-    (event) => event.state === "closed",
+    (event) => event.state === "closed" && !event.contributionOutcome,
   );
+  const incorporatedItems = latestPrs.filter((event) => event.state === "closed" && event.contributionOutcome);
+  const manualItems = latestActivity(relevantEvents.filter((event) => event.type === "upstream_manual_integration" && event.state === "integrated"));
   const creditItems = latestActivity(
     relevantEvents.filter(
       (event) => event.type === "upstream_credit" && event.state === "merged",
@@ -174,6 +178,8 @@ export function getContributionDirectory(
       openItems: [],
       mergedItems: [],
       creditItems: [],
+      manualItems: [],
+      incorporatedItems: [],
       reviewedItems: [],
       closedItems: [],
       lastUpdated: "",
@@ -188,6 +194,8 @@ export function getContributionDirectory(
     openItems,
     mergedItems,
     creditItems,
+    manualItems,
+    incorporatedItems,
     reviewedItems,
     closedItems,
   };
@@ -234,6 +242,8 @@ export function getContributionDirectory(
       (project) =>
         project.mergedItems.length +
           project.creditItems.length +
+          project.manualItems.length +
+          project.incorporatedItems.length +
           project.reviewedItems.length +
           project.closedItems.length >
         0,

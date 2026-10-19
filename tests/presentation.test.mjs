@@ -96,6 +96,7 @@ test("a stale ledger cannot resurrect open PRs or override more recent verified 
   assert.deepEqual(contributionSummary(events, ledger), {
     mergedCount: 2,
     mergedCreditCount: 0,
+    manualIntegrationCount: 0,
     openCount: 1,
   });
 });
@@ -114,6 +115,7 @@ test("merge totals deduplicate PR receipts and ledger entries while separating u
   assert.deepEqual(contributionSummary(events, ledger), {
     mergedCount: 2,
     mergedCreditCount: 1,
+    manualIntegrationCount: 0,
     openCount: 1,
   });
 });

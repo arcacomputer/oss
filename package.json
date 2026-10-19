@@ -13,7 +13,7 @@
     "lint": "astro check",
     "check": "astro check && npm test && npm run test:activity",
     "build": "astro build && node scripts/check-built-site.mjs",
-    "test:activity": "node --test scripts/update-public-activity.test.mjs scripts/update-github-repositories.test.mjs scripts/update-openclaw-ledger.test.mjs",
+    "test:activity": "node --test scripts/update-public-activity.test.mjs scripts/contribution-outcomes.test.mjs scripts/update-github-repositories.test.mjs scripts/update-openclaw-ledger.test.mjs",
     "refresh:activity": "node scripts/update-public-activity.mjs && node scripts/update-github-repositories.mjs",
     "refresh:ledger": "node scripts/update-openclaw-ledger.mjs",
     "check:claims": "node scripts/check-public-claims.mjs",

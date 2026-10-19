@@ -112,6 +112,47 @@ function RepoMark({ project }: { project: ContributionProject }) {
     </span>
   );
 }
+function OutcomeStatus({ event }: { event: ActivityEvent }) {
+  const outcome = event.contributionOutcome;
+  if (event.type === "upstream_manual_integration" || outcome?.kind === "manually_integrated") {
+    return <span className="status status-merged status-outcome">Manually integrated upstream</span>;
+  }
+  if (!outcome) return <Status state={event.state} />;
+  const numbers = outcome.receipts.map((receipt) => `#${receipt.number}`).join("/");
+  const label = outcome.kind === "partially_incorporated"
+    ? `Partially incorporated via ${numbers}`
+    : `Incorporated via merged ${numbers}`;
+  return <span className="status status-merged status-outcome">{label}</span>;
+}
+function ReceiptEvidence({ event }: { event: ActivityEvent }) {
+  const outcome = event.contributionOutcome;
+  const receipts = outcome?.receipts ?? (event.evidence?.landedCommits ? [{
+    url: event.url,
+    number: event.number,
+    prAuthor: event.evidence.prAuthor,
+    landedCommits: event.evidence.landedCommits,
+  }] : []);
+  const context = outcome?.context || event.evidence?.context;
+  return (
+    <>
+      {outcome ? <span className="receipt-meta">Original PR: closed without merge</span> : null}
+      {receipts.map((receipt) => (
+        <span className="receipt-meta" key={receipt.url}>
+          {receipt.prAuthor ? (
+            <><a href={receipt.url}>Merged #{receipt.number}</a> · PR author @{receipt.prAuthor} · </>
+          ) : null}
+          {receipt.landedCommits.map((commit) => (
+            <span key={`${commit.sha}:${commit.branch || ""}`}>
+              <a href={`https://github.com/${event.repository}/commit/${commit.sha}`}>{commit.sha.slice(0, 8)}</a>{" "}
+              · {commit.author.name}{commit.branch ? ` · ${commit.branch}` : ""}{" "}
+            </span>
+          ))}
+        </span>
+      ))}
+      {context ? <span className="receipt-meta">{context}</span> : null}
+    </>
+  );
+}
 function Receipt({ event }: { event: ActivityEvent }) {
   return (
     <li className="receipt">
@@ -121,8 +162,9 @@ function Receipt({ event }: { event: ActivityEvent }) {
           #{event.number} · @{event.actor} · {event.role} ·{" "}
           {day(event.occurredAt)}
         </span>
+        <ReceiptEvidence event={event} />
       </div>
-      <Status state={event.state} />
+      <OutcomeStatus event={event} />
     </li>
   );
 }
@@ -212,7 +254,9 @@ function HistoryProject({ project }: { project: ContributionProject }) {
   const credits = project.creditItems.length;
   const reviews = project.reviewedItems.length;
   const closed = project.closedItems.length;
-  const accepted = merged > 0 || credits > 0;
+  const manual = project.manualItems.length;
+  const incorporated = project.incorporatedItems.length;
+  const accepted = merged > 0 || credits > 0 || manual > 0;
   const historyReceipts = project.allReceipts.filter(
     (event) => event.state !== "open",
   );
@@ -244,6 +288,8 @@ function HistoryProject({ project }: { project: ContributionProject }) {
             ? "Merged contributions"
             : credits
               ? "Credited merges"
+              : manual
+                ? "Manually integrated upstream"
               : reviews
                 ? "Code review"
                 : "Closed proposals"}
@@ -274,6 +320,8 @@ function HistoryProject({ project }: { project: ContributionProject }) {
             {reviews === 1 ? "review" : "reviews"}
           </span>
         ) : null}
+        {manual > 0 ? <span><strong>{manual}</strong> manually integrated contribution{manual === 1 ? "" : "s"}</span> : null}
+        {incorporated > 0 ? <span><strong>{incorporated}</strong> incorporated origin{incorporated === 1 ? "" : "s"} · original PR{incorporated === 1 ? "" : "s"} closed</span> : null}
         {closed > 0 ? (
           <span>
             <strong>{closed}</strong> closed{" "}
@@ -335,7 +383,7 @@ export default function Home() {
     (a, b) => b.openItems.length - a.openItems.length,
   );
   const historyRank = (project: ContributionProject) =>
-    project.mergedItems.length + project.creditItems.length;
+    project.mergedItems.length + project.creditItems.length + project.manualItems.length;
   const pastProjects = [...directory.past].sort(
     (a, b) =>
       Number(historyRank(b) > 0) - Number(historyRank(a) > 0) ||
@@ -653,12 +701,13 @@ export default function Home() {
                   {summary.mergedCreditCount}
                   <small>additional credited merges</small>
                 </strong>
+                <strong>{summary.manualIntegrationCount}<small>manually integrated contribution{summary.manualIntegrationCount === 1 ? "" : "s"}</small></strong>
               </div>
             </div>
             <div className="history-guide">
               <span>
                 <i className="legend-dot legend-merged" />
-                <strong>Merged</strong> Accepted upstream
+                <strong>Merged / incorporated</strong> Accepted with linked evidence
               </span>
               <span>
                 <i className="legend-dot legend-review" />
@@ -666,7 +715,7 @@ export default function Home() {
               </span>
               <span>
                 <i className="legend-dot legend-closed" />
-                <strong>Closed</strong> Proposal without a merge
+                <strong>Closed</strong> Original PR not merged; incorporation labelled separately
               </span>
             </div>
             <div
@@ -681,7 +730,7 @@ export default function Home() {
               >
                 {[
                   ["all", "All projects"],
-                  ["accepted", "With merged work"],
+                  ["accepted", "With accepted work"],
                   ["review", "With reviews"],
                   ["closed", "With closed proposals"],
                 ].map(([value, label]) => (
@@ -720,7 +769,7 @@ export default function Home() {
             <p className="section-note">
               Counts reflect the linked records in this index.
               Maintainer-incorporated credit is kept separate from directly
-              authored merges.
+              authored merges and manual integrations. Backports do not add contributions.
             </p>
           </section>
         </section>
@@ -820,8 +869,9 @@ export default function Home() {
                           <span className="receipt-meta">
                             @{event.actor} · {event.role}
                           </span>
+                          <ReceiptEvidence event={event} />
                         </div>
-                        <Status state={event.state} />
+                        <OutcomeStatus event={event} />
                       </div>
                     </li>
                   ))}
