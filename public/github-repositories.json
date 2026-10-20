@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-20T04:51:50Z",
+  "checkedAt": "2026-10-20T11:37:03Z",
   "sources": [
     {
       "login": "felirami",
@@ -15,7 +15,7 @@
     {
       "login": "arcacomputer",
       "type": "organization",
-      "publicRepositoryCount": 14
+      "publicRepositoryCount": 15
     }
   ],
   "repositories": [
@@ -900,6 +900,20 @@
       "createdAt": "2026-02-12T04:43:40Z",
       "license": null,
       "licenseUrl": null
+    },
+    {
+      "name": "cafe-compute-kit",
+      "repository": "arcacomputer/cafe-compute-kit",
+      "url": "https://github.com/arcacomputer/cafe-compute-kit",
+      "owner": "arcacomputer",
+      "description": "Reusable bilingual event websites, slides, feedback and private code distribution for community organizers.",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-10-20T07:19:02Z",
+      "license": "MIT",
+      "licenseUrl": "https://api.github.com/licenses/mit"
     },
     {
       "name": "clueside",
