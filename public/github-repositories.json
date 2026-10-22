@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-22T04:45:54Z",
+  "checkedAt": "2026-10-22T11:53:08Z",
   "sources": [
     {
       "login": "felirami",
@@ -10,12 +10,12 @@
     {
       "login": "arcabotai",
       "type": "user",
-      "publicRepositoryCount": 61
+      "publicRepositoryCount": 60
     },
     {
       "login": "arcacomputer",
       "type": "organization",
-      "publicRepositoryCount": 15
+      "publicRepositoryCount": 16
     }
   ],
   "repositories": [
@@ -480,20 +480,6 @@
       "createdAt": "2026-07-30T10:25:43Z",
       "license": "MIT",
       "licenseUrl": "https://api.github.com/licenses/mit"
-    },
-    {
-      "name": "hypersnap-web",
-      "repository": "arcabotai/hypersnap-web",
-      "url": "https://github.com/arcabotai/hypersnap-web",
-      "owner": "arcabotai",
-      "description": "Quorum browser client for Hypersnap with browser-local Farcaster signing, by Arca",
-      "visibility": "public",
-      "fork": true,
-      "archived": false,
-      "defaultBranch": "main",
-      "createdAt": "2026-10-19T07:01:45Z",
-      "license": "AGPL-3.0",
-      "licenseUrl": "https://api.github.com/licenses/agpl-3.0"
     },
     {
       "name": "hypersnapdoctor",
@@ -998,6 +984,20 @@
       "createdAt": "2026-08-27T12:12:37Z",
       "license": null,
       "licenseUrl": null
+    },
+    {
+      "name": "opencaster",
+      "repository": "arcacomputer/opencaster",
+      "url": "https://github.com/arcacomputer/opencaster",
+      "owner": "arcacomputer",
+      "description": "Opencaster — an open source client for everyone. Powered by Arca Computer. Runs on Hypersnap.",
+      "visibility": "public",
+      "fork": true,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-10-19T07:01:45Z",
+      "license": "AGPL-3.0",
+      "licenseUrl": "https://api.github.com/licenses/agpl-3.0"
     },
     {
       "name": "openclaw-concentrateai",

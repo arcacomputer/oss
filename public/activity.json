@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T04:45:52Z",
-  "checkedAt": "2026-10-22T04:45:52Z",
+  "generatedAt": "2026-10-22T11:53:03Z",
+  "checkedAt": "2026-10-22T11:53:03Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,48 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:142996:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 142996,
+      "title": "fix(agent): drop an over-window usage anchor the local estimate contradicts",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/142996",
+      "occurredAt": "2026-10-22T10:00:10Z",
+      "createdAt": "2026-10-22T10:00:10Z",
+      "updatedAt": "2026-10-22T10:09:12Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "57bf22a0c2a6d214df4181a6915a87e799e0215a",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:139430:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 139430,
+      "title": "fix(matrix): don't require mautrix[encryption] deps when E2EE is off",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/139430",
+      "occurredAt": "2026-10-22T09:18:27Z",
+      "createdAt": "2026-10-15T20:35:53Z",
+      "updatedAt": "2026-10-22T09:18:27Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "19519e8d5ea24081efa914ef44434348f04d7765",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:141617:open",
       "type": "upstream_pr_state",
