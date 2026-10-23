@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-22T21:36:21Z",
+  "checkedAt": "2026-10-23T04:49:46Z",
   "sources": [
     {
       "login": "felirami",
@@ -15,7 +15,7 @@
     {
       "login": "arcacomputer",
       "type": "organization",
-      "publicRepositoryCount": 16
+      "publicRepositoryCount": 17
     }
   ],
   "repositories": [
@@ -956,6 +956,20 @@
       "createdAt": "2026-08-26T22:00:14Z",
       "license": "MIT",
       "licenseUrl": "https://api.github.com/licenses/mit"
+    },
+    {
+      "name": "hypersnap-v2",
+      "repository": "arcacomputer/hypersnap-v2",
+      "url": "https://github.com/arcacomputer/hypersnap-v2",
+      "owner": "arcacomputer",
+      "description": "Hypersnap v2: a lighter, Hypersnap-compatible Farcaster node that can run on Cloudflare or a home PC",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-10-23T03:29:50Z",
+      "license": null,
+      "licenseUrl": null
     },
     {
       "name": "hypersnapweb",

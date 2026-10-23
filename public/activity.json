@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T11:53:03Z",
-  "checkedAt": "2026-10-22T21:36:18Z",
+  "generatedAt": "2026-10-23T04:49:43Z",
+  "checkedAt": "2026-10-23T04:49:43Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,48 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:143304:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 143304,
+      "title": "fix(auth): refresh an expiring pool entry before an unmatched-identity rotation hands it out",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/143304",
+      "occurredAt": "2026-10-22T23:47:27Z",
+      "createdAt": "2026-10-22T23:47:27Z",
+      "updatedAt": "2026-10-22T23:51:44Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "7cb85b29e26a8fa78681465aa0fc14c7dab8f51e",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:141617:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 141617,
+      "title": "fix(compression): a system-only head's compaction opens on a user turn",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/141617",
+      "occurredAt": "2026-10-22T23:42:01Z",
+      "createdAt": "2026-10-19T15:23:43Z",
+      "updatedAt": "2026-10-22T23:42:01Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "15cb2f35bf32bf55715fb60256ea0d06dcae5ea3",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:142996:open",
       "type": "upstream_pr_state",
