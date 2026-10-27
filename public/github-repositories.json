@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-27T05:05:26Z",
+  "checkedAt": "2026-10-27T12:12:26Z",
   "sources": [
     {
       "login": "felirami",
@@ -1020,7 +1020,7 @@
       "owner": "arcacomputer",
       "description": "Opencaster — an open source client for everyone. Powered by Arca Computer. Runs on Hypersnap.",
       "visibility": "public",
-      "fork": true,
+      "fork": false,
       "archived": false,
       "defaultBranch": "main",
       "createdAt": "2026-10-19T07:01:45Z",

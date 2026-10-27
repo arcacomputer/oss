@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T05:05:22Z",
-  "checkedAt": "2026-10-27T05:05:22Z",
+  "generatedAt": "2026-10-27T12:12:22Z",
+  "checkedAt": "2026-10-27T12:12:22Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,48 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:145435:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 145435,
+      "title": "fix(cli): charge the owed source-completion tail before it runs",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/145435",
+      "occurredAt": "2026-10-27T07:51:44Z",
+      "createdAt": "2026-10-27T07:51:44Z",
+      "updatedAt": "2026-10-27T07:56:41Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "064fea0f9e117c72d0fc0a19b7c181e6850c8a50",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:142996:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 142996,
+      "title": "fix(agent): drop an over-window usage anchor the local estimate contradicts",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/142996",
+      "occurredAt": "2026-10-27T07:51:35Z",
+      "createdAt": "2026-10-22T10:00:10Z",
+      "updatedAt": "2026-10-27T07:51:35Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "57bf22a0c2a6d214df4181a6915a87e799e0215a",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:arf0nz0/hypersnap_stuff:4:merged",
       "type": "upstream_pr_state",
