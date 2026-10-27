@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-24T11:00:26Z",
-  "checkedAt": "2026-10-26T22:40:45Z",
+  "generatedAt": "2026-10-27T05:05:22Z",
+  "checkedAt": "2026-10-27T05:05:22Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,48 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:arf0nz0/hypersnap_stuff:4:merged",
+      "type": "upstream_pr_state",
+      "project": "hypersnap_stuff",
+      "repository": "arf0nz0/hypersnap_stuff",
+      "number": 4,
+      "title": "Correct Opencaster primary node and fallback",
+      "summary": "Merged upstream",
+      "url": "https://github.com/arf0nz0/hypersnap_stuff/pull/4",
+      "occurredAt": "2026-10-27T04:02:48Z",
+      "createdAt": "2026-10-27T03:37:24Z",
+      "updatedAt": "2026-10-27T04:02:48Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "merged",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "8baab2f0996289274610d0dca0f3e9430ba1ed04",
+        "mergeCommit": "5014802de40c1ca7682c5d3d7e2fcb4a252f3498"
+      }
+    },
+    {
+      "id": "github:pr:arf0nz0/hypersnap_stuff:2:merged",
+      "type": "upstream_pr_state",
+      "project": "hypersnap_stuff",
+      "repository": "arf0nz0/hypersnap_stuff",
+      "number": 2,
+      "title": "Add Opencaster with licensing and infrastructure details",
+      "summary": "Merged upstream",
+      "url": "https://github.com/arf0nz0/hypersnap_stuff/pull/2",
+      "occurredAt": "2026-10-27T03:27:24Z",
+      "createdAt": "2026-10-27T02:53:16Z",
+      "updatedAt": "2026-10-27T03:27:24Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "merged",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "12b147f164bfcf607eaed05f1aefd52ed3f1bdb5",
+        "mergeCommit": "c91dde0c7f6e6f12942889d4d2bb2168e8a0e446"
+      }
+    },
     {
       "id": "github:pr:openclaw/openclaw:123321:closed",
       "type": "upstream_pr_state",

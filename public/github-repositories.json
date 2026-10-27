@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-10-26T22:40:48Z",
+  "checkedAt": "2026-10-27T05:05:26Z",
   "sources": [
     {
       "login": "felirami",
@@ -10,7 +10,7 @@
     {
       "login": "arcabotai",
       "type": "user",
-      "publicRepositoryCount": 60
+      "publicRepositoryCount": 61
     },
     {
       "login": "arcacomputer",
@@ -480,6 +480,20 @@
       "createdAt": "2026-07-30T10:25:43Z",
       "license": "MIT",
       "licenseUrl": "https://api.github.com/licenses/mit"
+    },
+    {
+      "name": "hypersnap_stuff",
+      "repository": "arcabotai/hypersnap_stuff",
+      "url": "https://github.com/arcabotai/hypersnap_stuff",
+      "owner": "arcabotai",
+      "description": "Stuff related to hypersnap",
+      "visibility": "public",
+      "fork": true,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-10-27T02:53:11Z",
+      "license": null,
+      "licenseUrl": null
     },
     {
       "name": "hypersnapdoctor",
