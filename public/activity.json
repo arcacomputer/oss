@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T12:12:22Z",
-  "checkedAt": "2026-10-29T22:46:09Z",
+  "generatedAt": "2026-10-30T05:49:34Z",
+  "checkedAt": "2026-10-30T05:49:34Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -38,7 +38,7 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/145435",
       "occurredAt": "2026-10-27T07:51:44Z",
       "createdAt": "2026-10-27T07:51:44Z",
-      "updatedAt": "2026-10-27T07:56:41Z",
+      "updatedAt": "2026-10-30T01:46:20Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
