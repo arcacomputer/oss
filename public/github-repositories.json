@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-02T06:02:36Z",
+  "checkedAt": "2026-11-02T15:53:14Z",
   "sources": [
     {
       "login": "felirami",
@@ -10,7 +10,7 @@
     {
       "login": "arcabotai",
       "type": "user",
-      "publicRepositoryCount": 61
+      "publicRepositoryCount": 62
     },
     {
       "login": "arcacomputer",
@@ -354,6 +354,20 @@
       "createdAt": "2026-03-08T16:32:15Z",
       "license": null,
       "licenseUrl": null
+    },
+    {
+      "name": "dsh-superagent-prototype",
+      "repository": "arcabotai/dsh-superagent-prototype",
+      "url": "https://github.com/arcabotai/dsh-superagent-prototype",
+      "owner": "arcabotai",
+      "description": "Towards a More Autonomous Agent System",
+      "visibility": "public",
+      "fork": true,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-11-02T09:14:37Z",
+      "license": "MIT",
+      "licenseUrl": "https://api.github.com/licenses/mit"
     },
     {
       "name": "duckdb",
