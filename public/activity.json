@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-30T05:49:34Z",
-  "checkedAt": "2026-11-03T00:58:40Z",
+  "generatedAt": "2026-11-03T14:14:49Z",
+  "checkedAt": "2026-11-03T14:14:49Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,48 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:148421:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 148421,
+      "title": "fix(skills): pdf --flatten no longer overwrites a combo field's flags",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/148421",
+      "occurredAt": "2026-11-03T09:15:39Z",
+      "createdAt": "2026-11-03T09:15:39Z",
+      "updatedAt": "2026-11-03T09:15:39Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "62d8c86bd219c67eaafbf3be246bd06d661dc185",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:143304:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 143304,
+      "title": "fix(auth): refresh an expiring pool entry before an unmatched-identity rotation hands it out",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/143304",
+      "occurredAt": "2026-11-03T09:15:33Z",
+      "createdAt": "2026-10-22T23:47:27Z",
+      "updatedAt": "2026-11-03T09:15:33Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "7cb85b29e26a8fa78681465aa0fc14c7dab8f51e",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:145435:open",
       "type": "upstream_pr_state",
