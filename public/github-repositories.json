@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-04T19:46:11Z",
+  "checkedAt": "2026-11-05T06:46:28Z",
   "sources": [
     {
       "login": "felirami",
@@ -10,7 +10,7 @@
     {
       "login": "arcabotai",
       "type": "user",
-      "publicRepositoryCount": 62
+      "publicRepositoryCount": 64
     },
     {
       "login": "arcacomputer",
@@ -496,6 +496,20 @@
       "licenseUrl": "https://api.github.com/licenses/mit"
     },
     {
+      "name": "hermes-ros",
+      "repository": "arcabotai/hermes-ros",
+      "url": "https://github.com/arcabotai/hermes-ros",
+      "owner": "arcabotai",
+      "description": "Hermes Agent plugin: drive and observe ROS robots over rosbridge, with a safety interlock and a built-in mock robot",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-11-05T05:29:22Z",
+      "license": "MIT",
+      "licenseUrl": "https://api.github.com/licenses/mit"
+    },
+    {
       "name": "hypersnap_stuff",
       "repository": "arcabotai/hypersnap_stuff",
       "url": "https://github.com/arcabotai/hypersnap_stuff",
@@ -522,6 +536,20 @@
       "createdAt": "2026-05-23T14:13:40Z",
       "license": "MIT",
       "licenseUrl": "https://api.github.com/licenses/mit"
+    },
+    {
+      "name": "issue-scout",
+      "repository": "arcabotai/issue-scout",
+      "url": "https://github.com/arcabotai/issue-scout",
+      "owner": "arcabotai",
+      "description": null,
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-11-05T01:08:52Z",
+      "license": null,
+      "licenseUrl": null
     },
     {
       "name": "jax",

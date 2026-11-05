@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-03T23:24:08Z",
-  "checkedAt": "2026-11-04T19:46:06Z",
+  "generatedAt": "2026-11-05T06:46:23Z",
+  "checkedAt": "2026-11-05T06:46:23Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,90 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:149313:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 149313,
+      "title": "feat(plugin-catalog): add hermes-ros (drive ROS / ROS 2 robots behind a safety interlock)",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/149313",
+      "occurredAt": "2026-11-05T06:05:21Z",
+      "createdAt": "2026-11-05T06:05:21Z",
+      "updatedAt": "2026-11-05T06:18:18Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "61e81c258c72e7e1e86cce8c30522d0546fa04ff",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:140351:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 140351,
+      "title": "fix(kanban): refuse specify/decompose write-back when the prompt truncates the body",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/140351",
+      "occurredAt": "2026-11-05T06:04:37Z",
+      "createdAt": "2026-10-17T06:54:17Z",
+      "updatedAt": "2026-11-05T06:04:37Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "516d1b04791a4da9eb4316c702bd62b9185d58e1",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:149172:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 149172,
+      "title": "fix(gateway): end non-retryable API-error echo burn loop",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/149172",
+      "occurredAt": "2026-11-05T00:41:52Z",
+      "createdAt": "2026-11-05T00:41:52Z",
+      "updatedAt": "2026-11-05T00:41:52Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "88c94429834a2fbafb9e3b0d1c065f08476c378d",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:148421:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 148421,
+      "title": "fix(skills): pdf --flatten no longer overwrites a combo field's flags",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/148421",
+      "occurredAt": "2026-11-05T00:41:33Z",
+      "createdAt": "2026-11-03T09:15:39Z",
+      "updatedAt": "2026-11-05T00:41:33Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "62d8c86bd219c67eaafbf3be246bd06d661dc185",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:148421:open",
       "type": "upstream_pr_state",
