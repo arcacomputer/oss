@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-05T06:46:23Z",
-  "checkedAt": "2026-11-05T06:46:23Z",
+  "generatedAt": "2026-11-05T19:57:40Z",
+  "checkedAt": "2026-11-05T19:57:40Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,27 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:149313:merged",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 149313,
+      "title": "feat(plugin-catalog): add hermes-ros (drive ROS / ROS 2 robots behind a safety interlock)",
+      "summary": "Merged upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/149313",
+      "occurredAt": "2026-11-05T19:44:30Z",
+      "createdAt": "2026-11-05T06:05:21Z",
+      "updatedAt": "2026-11-05T19:44:31Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "merged",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "68a1d8c1d5c2a5e5064a95ffa8844b3e0671bfd9",
+        "mergeCommit": "07bd60325f314a2674ded32222c3a8f4dea20533"
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:149313:open",
       "type": "upstream_pr_state",
