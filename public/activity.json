@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T06:46:09Z",
-  "checkedAt": "2026-11-06T06:46:09Z",
+  "generatedAt": "2026-11-06T19:25:17Z",
+  "checkedAt": "2026-11-06T19:25:17Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -28,6 +28,48 @@
   },
   "events": [
     {
+      "id": "github:pr:NousResearch/hermes-agent:149939:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 149939,
+      "title": "feat(plugins): add hermes-camera-watch to the catalog",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/149939",
+      "occurredAt": "2026-11-06T08:23:32Z",
+      "createdAt": "2026-11-06T08:23:32Z",
+      "updatedAt": "2026-11-06T08:23:32Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "a7c3cebc4b1280cf5cde3a5b086a02f26af02c52",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:140351:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 140351,
+      "title": "fix(kanban): refuse specify/decompose write-back when the prompt truncates the body",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/140351",
+      "occurredAt": "2026-11-06T08:11:41Z",
+      "createdAt": "2026-10-17T06:54:17Z",
+      "updatedAt": "2026-11-06T08:11:41Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "96e771925778821a996d871dbab733022c616bc9",
+        "mergeCommit": null
+      }
+    },
+    {
       "id": "github:pr:NousResearch/hermes-agent:149313:merged",
       "type": "upstream_pr_state",
       "project": "hermes-agent",
@@ -38,7 +80,7 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/149313",
       "occurredAt": "2026-11-05T19:44:30Z",
       "createdAt": "2026-11-05T06:05:21Z",
-      "updatedAt": "2026-11-05T20:13:54Z",
+      "updatedAt": "2026-11-06T16:18:52Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "merged",
@@ -70,27 +112,6 @@
       }
     },
     {
-      "id": "github:pr:NousResearch/hermes-agent:140351:closed",
-      "type": "upstream_pr_state",
-      "project": "hermes-agent",
-      "repository": "NousResearch/hermes-agent",
-      "number": 140351,
-      "title": "fix(kanban): refuse specify/decompose write-back when the prompt truncates the body",
-      "summary": "Closed upstream without merge",
-      "url": "https://github.com/NousResearch/hermes-agent/pull/140351",
-      "occurredAt": "2026-11-05T06:04:37Z",
-      "createdAt": "2026-10-17T06:54:17Z",
-      "updatedAt": "2026-11-05T06:04:37Z",
-      "actor": "arcabotai",
-      "role": "author",
-      "state": "closed",
-      "evidence": {
-        "author": "arcabotai",
-        "headSha": "516d1b04791a4da9eb4316c702bd62b9185d58e1",
-        "mergeCommit": null
-      }
-    },
-    {
       "id": "github:pr:NousResearch/hermes-agent:149172:open",
       "type": "upstream_pr_state",
       "project": "hermes-agent",
@@ -101,7 +122,7 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/149172",
       "occurredAt": "2026-11-05T00:41:52Z",
       "createdAt": "2026-11-05T00:41:52Z",
-      "updatedAt": "2026-11-05T00:41:52Z",
+      "updatedAt": "2026-11-06T15:38:42Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
