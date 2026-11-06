@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-05T19:57:45Z",
+  "checkedAt": "2026-11-06T06:46:13Z",
   "sources": [
     {
       "login": "felirami",
@@ -10,7 +10,7 @@
     {
       "login": "arcabotai",
       "type": "user",
-      "publicRepositoryCount": 64
+      "publicRepositoryCount": 65
     },
     {
       "login": "arcacomputer",
@@ -492,6 +492,20 @@
       "archived": false,
       "defaultBranch": "main",
       "createdAt": "2026-07-30T10:25:43Z",
+      "license": "MIT",
+      "licenseUrl": "https://api.github.com/licenses/mit"
+    },
+    {
+      "name": "hermes-camera-watch",
+      "repository": "arcabotai/hermes-camera-watch",
+      "url": "https://github.com/arcabotai/hermes-camera-watch",
+      "owner": "arcabotai",
+      "description": "Hermes Agent plugin: watch a camera you own and alert with a photo when something happens",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-11-06T04:55:49Z",
       "license": "MIT",
       "licenseUrl": "https://api.github.com/licenses/mit"
     },

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-05T19:57:40Z",
-  "checkedAt": "2026-11-05T19:57:40Z",
+  "generatedAt": "2026-11-06T06:46:09Z",
+  "checkedAt": "2026-11-06T06:46:09Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -38,7 +38,7 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/149313",
       "occurredAt": "2026-11-05T19:44:30Z",
       "createdAt": "2026-11-05T06:05:21Z",
-      "updatedAt": "2026-11-05T19:44:31Z",
+      "updatedAt": "2026-11-05T20:13:54Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "merged",
@@ -752,13 +752,13 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/140351",
       "occurredAt": "2026-10-17T06:54:17Z",
       "createdAt": "2026-10-17T06:54:17Z",
-      "updatedAt": "2026-10-17T10:18:50Z",
+      "updatedAt": "2026-11-05T20:39:57Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "516d1b04791a4da9eb4316c702bd62b9185d58e1",
+        "headSha": "96e771925778821a996d871dbab733022c616bc9",
         "mergeCommit": null
       }
     },
