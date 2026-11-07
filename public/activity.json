@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-06T19:25:17Z",
-  "checkedAt": "2026-11-06T19:25:17Z",
+  "generatedAt": "2026-11-07T05:58:39Z",
+  "checkedAt": "2026-11-07T05:58:39Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,48 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:150275:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 150275,
+      "title": "fix(cli): state DB verify lock≠corrupt + snapshot-scoped restore",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/150275",
+      "occurredAt": "2026-11-06T20:38:42Z",
+      "createdAt": "2026-11-06T20:38:42Z",
+      "updatedAt": "2026-11-06T20:38:42Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "e75bc8d6a503dc7f8cdf901ef74998c55c077a17",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:149939:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 149939,
+      "title": "feat(plugins): add hermes-camera-watch to the catalog",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/149939",
+      "occurredAt": "2026-11-06T20:38:34Z",
+      "createdAt": "2026-11-06T08:23:32Z",
+      "updatedAt": "2026-11-06T20:38:35Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "a7c3cebc4b1280cf5cde3a5b086a02f26af02c52",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:149939:open",
       "type": "upstream_pr_state",
