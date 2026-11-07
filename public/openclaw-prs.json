@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-07T07:44:08Z",
-  "checkedAt": "2026-11-07T07:44:08Z",
+  "generatedAt": "2026-11-07T15:05:20Z",
+  "checkedAt": "2026-11-07T15:05:20Z",
   "source": "https://github.com/openclaw/openclaw",
-  "upstreamGeneratedAt": "2026-10-24T11:09:55+00:00",
+  "upstreamGeneratedAt": "2026-11-07T13:11:23+00:00",
   "authors": [
     {
       "login": "arcabotai",
@@ -16,6 +16,25 @@
     }
   ],
   "pullRequests": [
+    {
+      "number": 194540,
+      "author": "arcabotai",
+      "identityRole": "Arca agent identity",
+      "title": "fix: worker turns fail before inference when web search is offered",
+      "url": "https://github.com/openclaw/openclaw/pull/194540",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-11-07T07:48:47Z",
+      "updatedAt": "2026-11-07T10:45:14Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "c0f05cda9568aeffb7ec7ccecbff25039a54fb59",
+      "baseSha": "e235339a0fb7b4f01269e03fccf9507c8a853545",
+      "mergeCommit": null,
+      "ratingLabel": null,
+      "statusLabel": null,
+      "arca": {}
+    },
     {
       "number": 150660,
       "author": "felirami",
