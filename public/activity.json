@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-07T21:51:09Z",
-  "checkedAt": "2026-11-08T13:25:05Z",
+  "generatedAt": "2026-11-08T22:05:37Z",
+  "checkedAt": "2026-11-08T22:05:37Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -28,6 +28,27 @@
   },
   "events": [
     {
+      "id": "github:pr:openclaw/openclaw:195358:open",
+      "type": "upstream_pr_state",
+      "project": "openclaw",
+      "repository": "openclaw/openclaw",
+      "number": 195358,
+      "title": "fix: queued follow-up goes unanswered after a delayed /stop or /status",
+      "summary": "Opened upstream",
+      "url": "https://github.com/openclaw/openclaw/pull/195358",
+      "occurredAt": "2026-11-08T19:07:26Z",
+      "createdAt": "2026-11-08T19:07:26Z",
+      "updatedAt": "2026-11-08T20:44:41Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "e418fb5221cd3e99c5d9502986236ca41688d631",
+        "mergeCommit": null
+      }
+    },
+    {
       "id": "github:pr:openclaw/openclaw:194540:open",
       "type": "upstream_pr_state",
       "project": "openclaw",
@@ -38,7 +59,7 @@
       "url": "https://github.com/openclaw/openclaw/pull/194540",
       "occurredAt": "2026-11-07T07:48:47Z",
       "createdAt": "2026-11-07T07:48:47Z",
-      "updatedAt": "2026-11-07T21:25:29Z",
+      "updatedAt": "2026-11-08T18:48:08Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
