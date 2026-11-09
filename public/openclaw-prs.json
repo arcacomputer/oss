@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-08T21:20:41Z",
-  "checkedAt": "2026-11-08T21:20:41Z",
+  "generatedAt": "2026-11-09T01:11:13Z",
+  "checkedAt": "2026-11-09T01:11:13Z",
   "source": "https://github.com/openclaw/openclaw",
-  "upstreamGeneratedAt": "2026-11-07T21:56:19+00:00",
+  "upstreamGeneratedAt": "2026-11-08T22:12:28+00:00",
   "authors": [
     {
       "login": "arcabotai",
@@ -16,6 +16,25 @@
     }
   ],
   "pullRequests": [
+    {
+      "number": 195358,
+      "author": "arcabotai",
+      "identityRole": "Arca agent identity",
+      "title": "fix: queued follow-up goes unanswered after a delayed /stop or /status",
+      "url": "https://github.com/openclaw/openclaw/pull/195358",
+      "state": "open",
+      "draft": false,
+      "createdAt": "2026-11-08T19:07:26Z",
+      "updatedAt": "2026-11-08T22:10:31Z",
+      "closedAt": null,
+      "mergedAt": null,
+      "headSha": "08e8a771e04e5d248aaaea75665e453e55075b14",
+      "baseSha": "5d36e64316935ccec7b847e489214381087ed8a8",
+      "mergeCommit": null,
+      "ratingLabel": "🦐 gold shrimp",
+      "statusLabel": "⏳ waiting on maintainer",
+      "arca": {}
+    },
     {
       "number": 194540,
       "author": "arcabotai",
@@ -31,8 +50,8 @@
       "headSha": "93130ca8261361ab5140678e4c19c4be41706a6c",
       "baseSha": "4cedec0f47a5fbd24046e9a3cfe73fe92bee116e",
       "mergeCommit": null,
-      "ratingLabel": null,
-      "statusLabel": null,
+      "ratingLabel": "🐚 platinum hermit",
+      "statusLabel": "👀 ready for maintainer look",
       "arca": {}
     },
     {
