@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T06:28:23Z",
-  "checkedAt": "2026-11-09T06:28:23Z",
+  "generatedAt": "2026-11-09T22:22:17Z",
+  "checkedAt": "2026-11-09T22:22:17Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,69 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:openclaw/openclaw:196215:open",
+      "type": "upstream_pr_state",
+      "project": "openclaw",
+      "repository": "openclaw/openclaw",
+      "number": 196215,
+      "title": "fix(gateway): release agent databases removed by config reload",
+      "summary": "Opened upstream",
+      "url": "https://github.com/openclaw/openclaw/pull/196215",
+      "occurredAt": "2026-11-09T19:35:05Z",
+      "createdAt": "2026-11-09T19:35:05Z",
+      "updatedAt": "2026-11-09T22:20:21Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "3c420cb84e28b6aabf92069c360c13065e221b12",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:openclaw/openclaw:196089:open",
+      "type": "upstream_pr_state",
+      "project": "openclaw",
+      "repository": "openclaw/openclaw",
+      "number": 196089,
+      "title": "fix: conversation listing with thousands of Slack conversations blocks the Gateway main thread",
+      "summary": "Opened upstream",
+      "url": "https://github.com/openclaw/openclaw/pull/196089",
+      "occurredAt": "2026-11-09T15:59:19Z",
+      "createdAt": "2026-11-09T15:59:19Z",
+      "updatedAt": "2026-11-09T20:17:21Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "fc8428edde3a21401eaf84b2dfadfed23bbc009e",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:openclaw/openclaw:195900:open",
+      "type": "upstream_pr_state",
+      "project": "openclaw",
+      "repository": "openclaw/openclaw",
+      "number": 195900,
+      "title": "fix: config reload with more than 128 agents floods clients with skills.changed events",
+      "summary": "Opened upstream",
+      "url": "https://github.com/openclaw/openclaw/pull/195900",
+      "occurredAt": "2026-11-09T10:27:05Z",
+      "createdAt": "2026-11-09T10:27:05Z",
+      "updatedAt": "2026-11-09T10:43:02Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "bfa260bc37374cfb6cda2310a3fe0153839b0b06",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:openclaw/openclaw:194540:merged",
       "type": "upstream_pr_state",
@@ -59,13 +122,13 @@
       "url": "https://github.com/openclaw/openclaw/pull/195358",
       "occurredAt": "2026-11-08T19:07:26Z",
       "createdAt": "2026-11-08T19:07:26Z",
-      "updatedAt": "2026-11-08T22:10:31Z",
+      "updatedAt": "2026-11-09T22:10:23Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "08e8a771e04e5d248aaaea75665e453e55075b14",
+        "headSha": "dffb68ab5740946e8b52ddbc78067346fd003df4",
         "mergeCommit": null
       }
     },
@@ -101,13 +164,13 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/150275",
       "occurredAt": "2026-11-06T20:38:42Z",
       "createdAt": "2026-11-06T20:38:42Z",
-      "updatedAt": "2026-11-07T18:41:04Z",
+      "updatedAt": "2026-11-09T17:48:39Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "7b0807659d197684dced52deb5b794962b3aab5a",
+        "headSha": "ab735994f6bd61323dbcec48323cfe36a396c40d",
         "mergeCommit": null
       }
     },
@@ -1161,7 +1224,7 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/137658",
       "occurredAt": "2026-10-13T06:33:16Z",
       "createdAt": "2026-10-13T06:33:16Z",
-      "updatedAt": "2026-10-14T21:57:56Z",
+      "updatedAt": "2026-11-09T22:15:25Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
