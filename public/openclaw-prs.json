@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-10T02:53:41Z",
-  "checkedAt": "2026-11-10T02:53:41Z",
+  "generatedAt": "2026-11-10T11:42:02Z",
+  "checkedAt": "2026-11-10T11:42:02Z",
   "source": "https://github.com/openclaw/openclaw",
-  "upstreamGeneratedAt": "2026-11-09T22:27:34+00:00",
+  "upstreamGeneratedAt": "2026-11-10T07:26:03+00:00",
   "authors": [
     {
       "login": "arcabotai",
@@ -44,7 +44,7 @@
       "state": "open",
       "draft": false,
       "createdAt": "2026-11-09T15:59:19Z",
-      "updatedAt": "2026-11-09T20:17:21Z",
+      "updatedAt": "2026-11-10T10:03:41Z",
       "closedAt": null,
       "mergedAt": null,
       "headSha": "fc8428edde3a21401eaf84b2dfadfed23bbc009e",
@@ -63,7 +63,7 @@
       "state": "open",
       "draft": false,
       "createdAt": "2026-11-09T10:27:05Z",
-      "updatedAt": "2026-11-09T10:43:02Z",
+      "updatedAt": "2026-11-10T04:55:17Z",
       "closedAt": null,
       "mergedAt": null,
       "headSha": "bfa260bc37374cfb6cda2310a3fe0153839b0b06",
@@ -88,8 +88,8 @@
       "headSha": "dffb68ab5740946e8b52ddbc78067346fd003df4",
       "baseSha": "d7f88abfaacfab0cecdf064c98853bf6be3ea3b1",
       "mergeCommit": null,
-      "ratingLabel": null,
-      "statusLabel": null,
+      "ratingLabel": "🦐 gold shrimp",
+      "statusLabel": "📣 needs proof",
       "arca": {}
     },
     {
