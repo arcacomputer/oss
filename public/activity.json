@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-10T07:18:17Z",
-  "checkedAt": "2026-11-10T07:18:17Z",
+  "generatedAt": "2026-11-10T19:44:24Z",
+  "checkedAt": "2026-11-10T19:44:24Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -28,6 +28,27 @@
   },
   "events": [
     {
+      "id": "github:pr:openclaw/openclaw:196773:open",
+      "type": "upstream_pr_state",
+      "project": "openclaw",
+      "repository": "openclaw/openclaw",
+      "number": 196773,
+      "title": "fix(state): Gateway startup defers healthy agents behind two slow schema readers",
+      "summary": "Opened upstream",
+      "url": "https://github.com/openclaw/openclaw/pull/196773",
+      "occurredAt": "2026-11-10T17:34:13Z",
+      "createdAt": "2026-11-10T17:34:13Z",
+      "updatedAt": "2026-11-10T17:53:31Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "61a8f83f27dc1743d426c6ac13a2f895396f6c79",
+        "mergeCommit": null
+      }
+    },
+    {
       "id": "github:pr:openclaw/openclaw:196215:open",
       "type": "upstream_pr_state",
       "project": "openclaw",
@@ -38,7 +59,7 @@
       "url": "https://github.com/openclaw/openclaw/pull/196215",
       "occurredAt": "2026-11-09T19:35:05Z",
       "createdAt": "2026-11-09T19:35:05Z",
-      "updatedAt": "2026-11-10T00:53:18Z",
+      "updatedAt": "2026-11-10T14:57:42Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
@@ -59,7 +80,7 @@
       "url": "https://github.com/openclaw/openclaw/pull/196089",
       "occurredAt": "2026-11-09T15:59:19Z",
       "createdAt": "2026-11-09T15:59:19Z",
-      "updatedAt": "2026-11-09T20:17:21Z",
+      "updatedAt": "2026-11-10T10:03:41Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
@@ -290,7 +311,7 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/149172",
       "occurredAt": "2026-11-05T00:41:52Z",
       "createdAt": "2026-11-05T00:41:52Z",
-      "updatedAt": "2026-11-10T03:22:28Z",
+      "updatedAt": "2026-11-10T07:46:42Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
@@ -374,13 +395,13 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/145435",
       "occurredAt": "2026-10-27T07:51:44Z",
       "createdAt": "2026-10-27T07:51:44Z",
-      "updatedAt": "2026-11-10T07:02:07Z",
+      "updatedAt": "2026-11-10T07:31:23Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "064fea0f9e117c72d0fc0a19b7c181e6850c8a50",
+        "headSha": "b675ebbc430ad4288cc6ff0d4cd0a1d2e50e0325",
         "mergeCommit": null
       }
     },
@@ -1113,13 +1134,13 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/138489",
       "occurredAt": "2026-10-14T16:32:14Z",
       "createdAt": "2026-10-14T16:32:14Z",
-      "updatedAt": "2026-10-18T07:48:07Z",
+      "updatedAt": "2026-11-10T09:17:43Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "e25d6ae782149d070076e82eee2e69f67ed2e3da",
+        "headSha": "27511cbcb65973297bb06612fb8f11f6d0c67a65",
         "mergeCommit": null
       }
     },
