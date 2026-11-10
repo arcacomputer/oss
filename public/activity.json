@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-09T22:22:17Z",
-  "checkedAt": "2026-11-09T22:22:17Z",
+  "generatedAt": "2026-11-10T07:18:17Z",
+  "checkedAt": "2026-11-10T07:18:17Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -38,13 +38,13 @@
       "url": "https://github.com/openclaw/openclaw/pull/196215",
       "occurredAt": "2026-11-09T19:35:05Z",
       "createdAt": "2026-11-09T19:35:05Z",
-      "updatedAt": "2026-11-09T22:20:21Z",
+      "updatedAt": "2026-11-10T00:53:18Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "3c420cb84e28b6aabf92069c360c13065e221b12",
+        "headSha": "fa4932c2b6ac323222682ecf1273d92ddd22453a",
         "mergeCommit": null
       }
     },
@@ -80,7 +80,7 @@
       "url": "https://github.com/openclaw/openclaw/pull/195900",
       "occurredAt": "2026-11-09T10:27:05Z",
       "createdAt": "2026-11-09T10:27:05Z",
-      "updatedAt": "2026-11-09T10:43:02Z",
+      "updatedAt": "2026-11-10T04:55:17Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
@@ -122,7 +122,7 @@
       "url": "https://github.com/openclaw/openclaw/pull/195358",
       "occurredAt": "2026-11-08T19:07:26Z",
       "createdAt": "2026-11-08T19:07:26Z",
-      "updatedAt": "2026-11-09T22:10:23Z",
+      "updatedAt": "2026-11-09T22:54:53Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
@@ -164,13 +164,13 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/150275",
       "occurredAt": "2026-11-06T20:38:42Z",
       "createdAt": "2026-11-06T20:38:42Z",
-      "updatedAt": "2026-11-09T17:48:39Z",
+      "updatedAt": "2026-11-09T22:48:12Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "ab735994f6bd61323dbcec48323cfe36a396c40d",
+        "headSha": "c5866c61c0d96c33348e59ce99eed8daac6f712b",
         "mergeCommit": null
       }
     },
@@ -290,13 +290,13 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/149172",
       "occurredAt": "2026-11-05T00:41:52Z",
       "createdAt": "2026-11-05T00:41:52Z",
-      "updatedAt": "2026-11-06T15:38:42Z",
+      "updatedAt": "2026-11-10T03:22:28Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "88c94429834a2fbafb9e3b0d1c065f08476c378d",
+        "headSha": "b1da0fd69c1e53f5792eb21589fd3f0c05230135",
         "mergeCommit": null
       }
     },
@@ -374,7 +374,7 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/145435",
       "occurredAt": "2026-10-27T07:51:44Z",
       "createdAt": "2026-10-27T07:51:44Z",
-      "updatedAt": "2026-10-30T01:46:20Z",
+      "updatedAt": "2026-11-10T07:02:07Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
