@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-11T16:33:22Z",
-  "checkedAt": "2026-11-11T16:33:22Z",
+  "generatedAt": "2026-11-11T23:00:28Z",
+  "checkedAt": "2026-11-11T23:00:28Z",
   "source": "https://github.com/openclaw/openclaw",
-  "upstreamGeneratedAt": "2026-11-11T06:36:04+00:00",
+  "upstreamGeneratedAt": "2026-11-11T19:40:36+00:00",
   "authors": [
     {
       "login": "arcabotai",
@@ -31,7 +31,7 @@
       "headSha": "6f31ca28fa29229ed2cb6d6d95cca4145d264e63",
       "baseSha": "c1cf9390ac356d96815dde3f6e10903602b149bd",
       "mergeCommit": null,
-      "ratingLabel": "🧂 unranked krab",
+      "ratingLabel": "🦐 gold shrimp",
       "statusLabel": "📣 needs proof",
       "arca": {}
     },
@@ -50,8 +50,8 @@
       "headSha": "416ef5ca4d2e10c1b25325b221dd0b9faac28273",
       "baseSha": "c1cf9390ac356d96815dde3f6e10903602b149bd",
       "mergeCommit": null,
-      "ratingLabel": null,
-      "statusLabel": null,
+      "ratingLabel": "🦪 silver shellfish",
+      "statusLabel": "⏳ waiting on author",
       "arca": {}
     },
     {
