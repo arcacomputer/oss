@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-11T06:21:06Z",
+  "checkedAt": "2026-11-11T19:36:14Z",
   "sources": [
     {
       "login": "felirami",
@@ -10,7 +10,7 @@
     {
       "login": "arcabotai",
       "type": "user",
-      "publicRepositoryCount": 65
+      "publicRepositoryCount": 66
     },
     {
       "login": "arcacomputer",
@@ -506,6 +506,20 @@
       "archived": false,
       "defaultBranch": "main",
       "createdAt": "2026-11-06T04:55:49Z",
+      "license": "MIT",
+      "licenseUrl": "https://api.github.com/licenses/mit"
+    },
+    {
+      "name": "hermes-microduck",
+      "repository": "arcabotai/hermes-microduck",
+      "url": "https://github.com/arcabotai/hermes-microduck",
+      "owner": "arcabotai",
+      "description": "Hermes Agent plugin: drive Pollen Robotics' Microduck (real RL policies in MuJoCo) behind a safety interlock",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-11-11T10:58:26Z",
       "license": "MIT",
       "licenseUrl": "https://api.github.com/licenses/mit"
     },

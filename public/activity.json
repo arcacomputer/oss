@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T06:21:02Z",
-  "checkedAt": "2026-11-11T06:21:02Z",
+  "generatedAt": "2026-11-11T19:36:09Z",
+  "checkedAt": "2026-11-11T19:36:09Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -28,6 +28,48 @@
   },
   "events": [
     {
+      "id": "github:pr:NousResearch/hermes-agent:153668:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 153668,
+      "title": "fix(gateway): apply Feishu sender admission to reaction events",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/153668",
+      "occurredAt": "2026-11-11T17:09:10Z",
+      "createdAt": "2026-11-11T17:09:10Z",
+      "updatedAt": "2026-11-11T17:11:02Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "933b0ad42087f39316a0373a28368c6e2bbe4b8b",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:137658:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 137658,
+      "title": "fix(compression): keep a user turn merged after a todo snapshot (#137652)",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/137658",
+      "occurredAt": "2026-11-11T17:09:04Z",
+      "createdAt": "2026-10-13T06:33:16Z",
+      "updatedAt": "2026-11-11T17:09:04Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "f13f27b5673a76d11147e0b853a1094e1cc90cbd",
+        "mergeCommit": null
+      }
+    },
+    {
       "id": "github:pr:openclaw/openclaw:196773:open",
       "type": "upstream_pr_state",
       "project": "openclaw",
@@ -38,13 +80,13 @@
       "url": "https://github.com/openclaw/openclaw/pull/196773",
       "occurredAt": "2026-11-10T17:34:13Z",
       "createdAt": "2026-11-10T17:34:13Z",
-      "updatedAt": "2026-11-10T17:53:31Z",
+      "updatedAt": "2026-11-11T11:41:46Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "61a8f83f27dc1743d426c6ac13a2f895396f6c79",
+        "headSha": "6f31ca28fa29229ed2cb6d6d95cca4145d264e63",
         "mergeCommit": null
       }
     },
@@ -59,13 +101,13 @@
       "url": "https://github.com/openclaw/openclaw/pull/196215",
       "occurredAt": "2026-11-09T19:35:05Z",
       "createdAt": "2026-11-09T19:35:05Z",
-      "updatedAt": "2026-11-11T01:55:14Z",
+      "updatedAt": "2026-11-11T11:40:00Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "50802f690f067319cab325237d7d74948787454b",
+        "headSha": "416ef5ca4d2e10c1b25325b221dd0b9faac28273",
         "mergeCommit": null
       }
     },
