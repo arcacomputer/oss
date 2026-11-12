@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-11T19:36:14Z",
+  "checkedAt": "2026-11-12T07:10:41Z",
   "sources": [
     {
       "login": "felirami",
@@ -10,7 +10,7 @@
     {
       "login": "arcabotai",
       "type": "user",
-      "publicRepositoryCount": 66
+      "publicRepositoryCount": 67
     },
     {
       "login": "arcacomputer",
@@ -520,6 +520,20 @@
       "archived": false,
       "defaultBranch": "main",
       "createdAt": "2026-11-11T10:58:26Z",
+      "license": "MIT",
+      "licenseUrl": "https://api.github.com/licenses/mit"
+    },
+    {
+      "name": "hermes-robots",
+      "repository": "arcabotai/hermes-robots",
+      "url": "https://github.com/arcabotai/hermes-robots",
+      "owner": "arcabotai",
+      "description": "One Hermes Agent plugin for robots: Microduck (MuJoCo + RL policies), ROS 2 (TurtleBot3/Gazebo) and a mock behind one shared safety interlock",
+      "visibility": "public",
+      "fork": false,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-11-11T23:59:11Z",
       "license": "MIT",
       "licenseUrl": "https://api.github.com/licenses/mit"
     },

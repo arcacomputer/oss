@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-11T19:36:09Z",
-  "checkedAt": "2026-11-11T19:36:09Z",
+  "generatedAt": "2026-11-12T07:10:36Z",
+  "checkedAt": "2026-11-12T07:10:36Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,48 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:153910:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 153910,
+      "title": "feat(plugin-catalog): add hermes-microduck (drive Pollen's Microduck in MuJoCo behind a safety interlock)",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/153910",
+      "occurredAt": "2026-11-11T20:34:44Z",
+      "createdAt": "2026-11-11T20:34:44Z",
+      "updatedAt": "2026-11-11T20:37:44Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "948893012f4c9e59f22027be71c6cdcf04e17984",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:145435:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 145435,
+      "title": "fix(cli): charge the owed source-completion tail before it runs",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/145435",
+      "occurredAt": "2026-11-11T20:33:50Z",
+      "createdAt": "2026-10-27T07:51:44Z",
+      "updatedAt": "2026-11-11T20:33:51Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "b675ebbc430ad4288cc6ff0d4cd0a1d2e50e0325",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:153668:open",
       "type": "upstream_pr_state",
@@ -80,7 +122,7 @@
       "url": "https://github.com/openclaw/openclaw/pull/196773",
       "occurredAt": "2026-11-10T17:34:13Z",
       "createdAt": "2026-11-10T17:34:13Z",
-      "updatedAt": "2026-11-11T11:41:46Z",
+      "updatedAt": "2026-11-12T06:03:40Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
