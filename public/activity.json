@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-12T07:10:36Z",
-  "checkedAt": "2026-11-12T07:10:36Z",
+  "generatedAt": "2026-11-12T19:55:29Z",
+  "checkedAt": "2026-11-12T19:55:29Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,27 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:153910:merged",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 153910,
+      "title": "feat(plugin-catalog): add hermes-microduck (drive Pollen's Microduck in MuJoCo behind a safety interlock)",
+      "summary": "Merged upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/153910",
+      "occurredAt": "2026-11-12T10:52:50Z",
+      "createdAt": "2026-11-11T20:34:44Z",
+      "updatedAt": "2026-11-12T10:52:50Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "merged",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "948893012f4c9e59f22027be71c6cdcf04e17984",
+        "mergeCommit": "a5e898a0f3f9a97a1cdc7139c333bdef1a69c342"
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:153910:open",
       "type": "upstream_pr_state",
@@ -479,7 +500,7 @@
       "url": "https://github.com/NousResearch/hermes-agent/pull/145435",
       "occurredAt": "2026-10-27T07:51:44Z",
       "createdAt": "2026-10-27T07:51:44Z",
-      "updatedAt": "2026-11-10T07:31:23Z",
+      "updatedAt": "2026-11-12T11:14:22Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
