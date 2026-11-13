@@ -41,56 +41,6 @@ if (projectControls) {
       updateProjects();
     });
 }
-const historyControls = document.querySelector<HTMLElement>(
-  "[data-history-controls]",
-);
-if (historyControls) {
-  historyControls.hidden = false;
-  const input = historyControls.querySelector<HTMLInputElement>(
-    "[data-history-search]",
-  )!;
-  const buttons = [
-    ...historyControls.querySelectorAll<HTMLButtonElement>(
-      "[data-history-filter]",
-    ),
-  ];
-  const projects = [
-    ...document.querySelectorAll<HTMLElement>("[data-history-kind]"),
-  ];
-  let category = "all";
-  function updateHistory() {
-    const query = input.value.trim().toLowerCase();
-    let shown = 0;
-    for (const project of projects) {
-      project.hidden = !(
-        (category === "all" ||
-          project.dataset.historyKind!.split(" ").includes(category)) &&
-        project.dataset.historyName!.toLowerCase().includes(query)
-      );
-      if (!project.hidden) shown++;
-    }
-    const kindLabels: Record<string, string> = {
-      all: "past work",
-      accepted: "merged or credited work",
-      review: "code reviews",
-      closed: "closed proposals",
-    };
-    document.querySelector("[data-history-count]")!.textContent =
-      `Showing ${shown} of ${projects.length} projects with ${kindLabels[category]}. Projects can also have work in progress.`;
-    document.querySelector<HTMLElement>("[data-history-empty]")!.hidden =
-      shown > 0;
-  }
-  input.addEventListener("input", updateHistory);
-  buttons.forEach((button) =>
-    button.addEventListener("click", () => {
-      category = button.dataset.historyFilter!;
-      buttons.forEach((item) =>
-        item.setAttribute("aria-pressed", String(item === button)),
-      );
-      updateHistory();
-    }),
-  );
-}
 const activityControls = document.querySelector<HTMLElement>(
   "[data-activity-controls]",
 );
@@ -163,7 +113,7 @@ document.addEventListener("keydown", (event) => {
 const links = [
   ...document.querySelectorAll<HTMLAnchorElement>("[data-section-link]"),
 ];
-const sections = ["projects", "contributions"]
+const sections = ["projects", "contributions", "records"]
   .map((id) => document.getElementById(id))
   .filter((section): section is HTMLElement => section !== null);
 const visible = new Set<string>();

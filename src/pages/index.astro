@@ -1,9 +1,22 @@
 ---
+import '@/src/styles/contribution-explorer.css';
 import BaseLayout from '@/src/layouts/BaseLayout.astro';
 import Home from '@/src/react-pages/Home';
+import ContributionExplorer from '@/src/components/ContributionExplorer';
+import { getActivityFeed, getOpenClawLedger, supportPrograms, trackingIdentities, trackingSince } from '@/lib/data';
+import { getContributionDirectory } from '@/lib/contributions';
+import { projectExplorerRecords } from '@/lib/contribution-explorer.mjs';
+
+const directory = getContributionDirectory(
+  getActivityFeed().events, getOpenClawLedger().pullRequests, supportPrograms,
+  { authors: trackingIdentities.map(identity => identity.login), since: trackingSince },
+);
+const records = projectExplorerRecords(directory.past);
 ---
 <BaseLayout>
-  <Home />
+  <Home>
+    <ContributionExplorer slot="explorer" records={records} client:load />
+  </Home>
   <script>
     import '@/src/scripts/interactions';
   </script>

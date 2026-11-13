@@ -1,6 +1,6 @@
 # Arca OSS — Historical Visual Exploration
 
-> Superseded by the editorial refresh described in [DESIGN.md](DESIGN.md). The source-map artwork and dark hero described below are retained as historical context.
+> Superseded by the current production design described in [DESIGN.md](DESIGN.md). The source-map artwork and prior dark hero described below are retained as historical context, not instructions for the current minimal-cyberpunk redesign.
 
 **Scope:** Graphics lead deliverable only. No application code changes.  
 **Audience for this doc:** Frontend engineer integrating the hero source-map field.

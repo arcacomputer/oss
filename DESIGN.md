@@ -1,33 +1,76 @@
-# Arca OSS design
+# Arca OSS — source index
 
-The site helps visitors understand what Arca builds, where it contributes, and what has been delivered. Lead with concrete work; let readers inspect the underlying records as they need them.
+## Approved direction
 
-## Visual direction
+The owner's latest direction supersedes the earlier paper / forest / serif design: redesign the whole website with a minimal cyberpunk character. This is a single dark visual system, not a theme toggle or another override layer. The motif is the actual source index: numbered sections, repository identities, dated evidence, source links, and precise outcome labels. No fake terminals, animated status lights, invented metrics, ornamental code, gradients, or external font services.
 
-An editorial directory with a clear hierarchy: warm paper (`#f6f5ef`), forest green (`#173b2f`), fine rules, and generous space. Lime (`#d5f478`) is a small accent. Self-hosted DM Sans handles interface and body text; Georgia italic gives the main headline a human accent.
+### Product brief
 
-Use direct labels, visible button boundaries, and real project identity. A forest overview introduces two navigation paths; white project panels on paper and sage sections distinguish software Arca makes from external OSS contributions. Keep body descriptions at 16–18px, primary actions at 15px with 44–48px targets, and supporting labels at least 13px. Avoid repeated arrows, decorative terminals, invented diagrams, and ornamental project artwork.
+- **Reader:** a developer, potential collaborator, or maintainer evaluating Arca's open-source work.
+- **Job:** find useful software or an upstream contribution, understand Arca's actual role, and inspect its public evidence.
+- **Success:** software and contribution paths are explicit from the first screen; records are inspectable without JavaScript; filters help locate receipts without changing their meaning.
+- **Feeling:** technical, independent, direct. Architectural structure instead of decorative cards.
+- **Primary paths:** Software we make → project repository; Projects we contribute to → current work or past outcomes → original records.
+- **Edge paths:** empty search → reset or current work; no JavaScript → complete static project/evidence directory and native disclosures; long repository names / outcome labels → wrap, never truncate evidence.
 
-## Information architecture
+## Visual system
 
-- Explain Arca's open-source work immediately.
-- Give visitors two explicit routes in the opening: Software we make (`#projects`) and Projects we contribute to (`#contributions`). Preserve the same distinction in mobile destination buttons.
-- Show licensed software Arca makes in a visible directory with search, category filters, purpose, lifecycle, license, and a clear View project button. Include tools, Ardea Knowledge Steward, and OpenChina. Put Headlong Agent Findings, the OpenClaw contribution ledger, the TUI field fix, and this index in a compact Public records resource list, preserving their underlying project evidence.
-- Within Projects we contribute to, group current open contributions by upstream project and explain the contribution area before exposing individual PR titles. Show current open PR counts and a visible expansion control.
-- Follow current work with a searchable past-contributions directory under the same destination. Show accepted work first, with authored merges, credited merges, reviews, and closed proposals kept distinct. A project may have several kinds of history and also current work. Apply the February 12, 2026 cutoff consistently, including curated receipts; the 2023 SlimeVR contribution is outside this scope.
-- Place all GitHub tracking sources and the full repository inventory in Public records. Cover currently public repositories owned by `felirami`, `arcabotai`, and `arcacomputer`, including repositories created before the contribution cutoff. Label forks, archives, and detected licenses explicitly. Public personal repositories do not automatically belong in Software we make.
-- Keep the full activity feed and OpenClaw ledger accessible through Public records without making them the first reading task.
+| Token | Value | Use |
+| --- | --- | --- |
+| `--bg` | `#080c14` | Near-black document and hero |
+| `--surface` | `#0e1522` | Navy software grid, contribution section, tracking and disclosures |
+| `--raised` | `#151f30` | Hover surfaces and status backgrounds |
+| `--text` | `#edf4ff` | Cool-white primary text |
+| `--muted` | `#a4b3c9` | Descriptions, metadata and secondary text |
+| `--signal` | `#57e6ff` | Electric cyan, primary actions, focus, source links |
+| `--violet` | `#c2adff` | Research labels and review status |
+| `--success` | `#c3ee92` | Accepted / released outcomes only |
+| `--warning` | `#f2cf8d` | Prerelease status |
+| `--closed` | `#d1a9b4` | Closed-without-merge status |
+| `--line` | `#2b3b51` | Noninteractive architectural rules |
+| `--control-line` | `#647993` | Visible native/control boundaries |
 
-## Evidence and interaction
+Every text color above clears 4.5:1 against all three dark surfaces in the dependency-free contract test. Status always has a literal label: color does not establish authorship, acceptance, or completeness. Small white repository-logo tiles intentionally preserve upstream logos; they are identity assets, not light document panels.
 
-Render content at build time. Native disclosures keep detailed contribution records usable without JavaScript, with visible plus/minus indicators. Search, filters, active-section navigation, and incremental activity reveal use a small progressive-enhancement script. Project listings remain visible by default.
+Self-hosted DM Sans is the only webfont. Bold geometric headings, tight but readable tracking, and system monospace metadata replace editorial serif/italic styling. Nothing loads from a font CDN. No animation is introduced.
 
-Authored upstream PRs come from public external repositories for `felirami` and `arcabotai`, with PR creation dates on or after February 12, 2026. Exclude repositories owned by either user or `arcacomputer` from upstream work. Reviews and coauthor credits are selected verified receipts; do not imply comprehensive review discovery.
+## Composition
 
-Counts come from committed evidence, with visible `checkedAt` freshness dates. The activity refresh also updates `public/github-repositories.json`; paginated collection must not silently truncate the record, and the activity snapshot has no 200-event cap. Resolve historical PR transitions before showing open work; reconcile the newer OpenClaw ledger. Keep directly authored merges and credited maintainer merges separate. Reviews alone do not establish an open PR. Preserve explicit licenses, lifecycle labels, and upstream attribution.
+- A thin, fixed-height masthead and native mobile menu replace the soft garden-like navigation. Public records is now a first-class navigation destination.
+- The opening is an unboxed, ruled two-column composition: a large three-line **Built here. / Improved / upstream.** headline and a compact source index. The counts shown beside software and contributions remain derived from the existing data. The records route uses a resource label, not an invented count.
+- Main sections use sequential metadata labels, strong sans-serif headings, and fine rules. All existing destination IDs and factual section names remain intact.
+- Software becomes a contiguous grid with shared dividers, license metadata, explicit lifecycle labels, and native project-proof disclosures. No shadows, rounded garden cards, or decorative accent strips.
+- Current upstream work is visibly separated from past outcomes. Current proposals keep their upstream-review caveat. Past projects form dense two-column ruled entries rather than floating cards; source receipts stay expandable in the document.
+- Public records uses resource rows, a source-tracking panel, and technical disclosure headers. Inventory rows, activity, and the full OpenClaw ledger use the same palette and type system.
+- The SDK explorer shares those tokens: search group, clear action, search/reset buttons, native selects, result status, project-total caveat, and empty state. No model, URL/history, focus-management, or filter logic changes.
+- About/footer continue the structure rather than switching to an unrelated theme. The error route inherits the same dark system.
 
-The main GitHub and site-source links point to `https://github.com/arcacomputer/oss`. Individual project links retain their canonical repositories across Arca's organizations and contributor identities.
+### Mobile composition
 
-## Responsive and accessibility behavior
+At 900px the full navigation becomes a native disclosure with 46px control and readable destination rows. At 600px, hero text and source index stack; primary hero actions remain available side by side; software/history grids become single-column; current work returns to a single-column reading order. Status explanations, snapshot freshness, history totals, and evidence legends remain visible on mobile rather than disappearing. Tables/ledger-like rows wrap their metadata; long receipts remain readable. Input text is 16px to avoid mobile browser zoom.
 
-Use a compact mobile navigation disclosure with an accessible GitHub link. Preserve visible keyboard focus, reduced-motion support, search labels, and live result counts. Stack project and ecosystem lists on narrow screens and keep secondary details expandable.
+## Interaction and evidence invariants
+
+Content is rendered at build time. Native details/summary controls provide plus/minus affordances without JavaScript. `[hidden]` remains authoritative for progressive enhancement. Visible cyan keyboard focus, native select menus, explicit labels, polite result announcements, reduced-motion and forced-color support remain part of the system. Scripts and SDK behavior are not replaced with visual imitations.
+
+- Licensed software Arca makes is separate from reports and from other teams' upstream software. Public personal repositories do not automatically become Arca software.
+- Contribution history uses the existing February 12, 2026 cutoff, canonical identities and evidence. The 2023 SlimeVR contribution remains outside this scope.
+- Preserve authored merges, additional credited merges, submitted reviews, manual upstream integration, incorporated origins, and closed-without-merge proposals as separate facts. An incorporated origin is not an authored merge. An open PR is not a delivered result. Backports do not add contributions.
+- Preserve the dated snapshot/freshness caveats. Do not imply streaming, real-time status, comprehensive review discovery, or affiliation with an upstream project.
+- Tracking covers `felirami`, `arcabotai`, and `arcacomputer`; public repository inventory includes currently public repositories of any age with fork/archive/license labels.
+- Keep all original receipts, attribution/context text, JSON download links, activity and ledger records, and source repositories. No public data is modified by the redesign.
+- Canonical site source remains `https://github.com/arcacomputer/oss`.
+
+## Social identity
+
+`public/og.svg` is a crisp static 1200×630 composition with the same headline, source-index rules, palette, and Arca mark. It contains no frozen mutable project/PR/merge counts. `public/icon.svg` uses a near-black cut-corner boundary and cyan signal bar. The layout declares dark browser chrome and descriptive OG/Twitter alt text; canonical URLs and document title remain unchanged. The production `og.png` must be regenerated from this SVG by the release owner.
+
+## Verification and release handoff
+
+Focused command: `node --test tests/cyberpunk-design-contract.test.mjs`.
+
+The test was exercised RED → GREEN for palette/contrast, source-index structural preservation, and social/browser-chrome identity. It checks all seven text/status colors across three surfaces, original destination IDs, static evidence/disclosure presence, absence of legacy palette/serif tokens, OG dimensions and static copy, and matching dark metadata. SVG XML and whitespace/diff checks are also lightweight local checks.
+
+These source checks do not claim browser layout, hydration, axe, full build, or production verification. The parent release owner runs the full check/build/test gates, regenerates OG PNG, inspects desktop and narrow mobile screenshots, checks no-JS evidence, native controls, empty/reset/history/focus behavior, and verifies deployment. No installs, servers, commits, push, or cloud mutations belong to this implementation handoff.
+
+**Intentional visual-copy contract change:** the old hero `Tools we build.` / `Software we improve.` is replaced by `Built here.` / `Improved` / `upstream.`. `THE PUBLIC RECORD` remains, now prefixed `03 /`. The title and factual section headings remain unchanged. Existing contrast tests that parse light-theme literal colors must resolve the new CSS tokens instead.

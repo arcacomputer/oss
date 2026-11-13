@@ -17,7 +17,7 @@ async function moduleFor(path) {
     }
   }
   for (const match of [...source.matchAll(/from "(@\/[^\"]+|\.\/presentation)"/g)]) {
-    const dependency = match[1] === './presentation' ? 'lib/presentation.ts' : `${match[1].slice(2)}${match[1].includes('/Home') || match[1].includes('/GitHubTracking') ? '.tsx' : '.ts'}`;
+    const dependency = match[1] === './presentation' ? 'lib/presentation.ts' : match[1].endsWith('.mjs') ? match[1].slice(2) : `${match[1].slice(2)}${match[1].includes('/Home') || match[1].includes('/GitHubTracking') ? '.tsx' : '.ts'}`;
     source = source.replaceAll(`from "${match[1]}"`, `from "${await moduleFor(dependency)}"`);
   }
   let output = ts.transpileModule(source, { compilerOptions: { module:ts.ModuleKind.ESNext, target:ts.ScriptTarget.ES2022, jsx:ts.JsxEmit.ReactJSX } }).outputText;
@@ -30,7 +30,7 @@ const awaitedJson = {};
 for (const name of ['activity.json','openclaw-prs.json','oss.json','github-repositories.json']) awaitedJson[name] = await read(`public/${name}`);
 const { default: Home } = await import(await moduleFor('src/react-pages/Home.tsx'));
 const html = renderToStaticMarkup(React.createElement(Home));
-const rows = [...html.matchAll(/<li class="receipt">([\s\S]*?)<\/li>/g)].map(m=>m[1]);
+const rows = [...html.matchAll(/<li class="receipt"[^>]*>([\s\S]*?)<\/li>/g)].map(m=>m[1]);
 const row = url => rows.find(r=>r.includes(`href="${url}"`));
 
 test('visible origin rows show incorporation, linked replacement authors, landed authors and secondary closed status', () => {

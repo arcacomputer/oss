@@ -267,7 +267,8 @@ test("incorporated origins and manual receipts stay distinct from failed proposa
   assert.equal(openssl.manualItems[0].evidence.landedCommits.length, 2);
   const { contributionSummary } = await import(presentationUrl);
   const summary = contributionSummary([...feed.events, ...feed.events], []);
-  assert.equal(summary.mergedCount, 26);
+  const authoredMergeUrls = new Set(projects.flatMap((project) => project.mergedItems.map((item) => item.url)));
+  assert.equal(summary.mergedCount, authoredMergeUrls.size, "deduplication tracks the current authored merge receipts, not a frozen snapshot count");
   assert.equal(summary.mergedCreditCount, 8);
   assert.equal(summary.manualIntegrationCount, 1);
   assert.equal(directory.active.find((p) => p.repository === "apache/kafka").openItems[0].number, 23195);
@@ -298,8 +299,12 @@ test("committed snapshots expose in-scope upstream projects without legacy curat
   assert.ok(!directory.past.some((item) => item.name === "SlimeVR CheeseCake"));
   assert.ok(directory.active.some((item) => item.repository === "apache/kafka"));
   assert.ok(directory.past.some((item) => item.repository === "huggingface/tokenizers"));
-  const mergedCount = directory.past.reduce((total, project) => total + project.mergedItems.length, 0);
-  assert.equal(mergedCount, 26, "only actual authored merged PR receipts count; curated labels and credits add no synthetic merges");
+  const mergedReceipts = directory.past.flatMap((project) => project.mergedItems);
+  const mergedUrls = mergedReceipts.map((item) => item.url);
+  assert.equal(new Set(mergedUrls).size, mergedUrls.length, "authored merge receipts are unique across projects");
+  assert.ok(mergedReceipts.every((item) => item.type === "upstream_pr_state" && item.role === "author" && item.state === "merged"), "curated labels, reviews and upstream credits never count as authored merges");
+  const { contributionSummary } = await import(presentationUrl);
+  assert.equal(mergedReceipts.length, contributionSummary(feed.events, ledger.pullRequests).mergedCount, "directory and summary agree as the verified snapshots grow");
   const clickClack = directory.past.find((item) => item.name === "ClickClack");
   assert.equal(clickClack.mergedItems.length, 0);
   assert.equal(clickClack.creditItems.length, 2);

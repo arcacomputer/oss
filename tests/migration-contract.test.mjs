@@ -25,7 +25,8 @@ test('preserves the single-page rendering and public assets', () => {
   assert.ok(existsSync(join(root, 'src/pages/index.astro')));
   assert.match(read('src/layouts/BaseLayout.astro'), /Arca OSS — Tools, contributions &amp; open-source work/);
   const css = read('src/styles/global.css');
-  assert.match(css, /font-family:\s*Arial,\s*Helvetica,\s*sans-serif/);
+  assert.match(css, /--sans:\s*"DM Sans",\s*Arial,\s*Helvetica,\s*sans-serif/);
+  assert.match(css, /src:\s*url\("\/fonts\/dm-sans-latin\.woff2"\)/);
   for (const asset of ['activity.json', 'oss.json', 'llms.txt', 'robots.txt', 'sitemap.xml', 'og.png']) {
     assert.ok(existsSync(join(root, 'public', asset)), `${asset} must remain public`);
   }
@@ -62,8 +63,10 @@ test('keeps accessible mobile navigation and expandable public records', () => {
   assert.match(home, /className="section-return"/);
   assert.match(home, /id="past-work"/);
   assert.match(home, /id="current-work"/);
-  assert.match(css, /\.mobile-section-nav summary[^}]*min-height:\s*44px/s);
-  assert.match(css, /\.ledger-more\s*>\s*summary[^}]*min-height:\s*66px/s);
+  const navigationHeight = css.match(/\.mobile-section-nav\s*(?:>\s*)?summary[^}]*min-height:\s*(\d+)px/s)?.[1];
+  const ledgerHeight = css.match(/\.ledger-more\s*>\s*summary[^}]*min-height:\s*(\d+)px/s)?.[1];
+  assert.ok(Number(navigationHeight) >= 44, 'mobile navigation retains its minimum touch target');
+  assert.ok(Number(ledgerHeight) >= 66, 'ledger disclosure retains its larger touch target');
 });
 
 test('deploys exact main commits to Cloudflare without resyncing domains', () => {

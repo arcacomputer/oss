@@ -1,4 +1,6 @@
+import type { ReactNode } from "react";
 import type { ActivityEvent, OwnedProject } from "@/lib/data";
+import { safeEvidenceUrl } from "@/lib/contribution-explorer.mjs";
 import {
   getActivityFeed,
   getOpenClawLedger,
@@ -36,7 +38,7 @@ function Mark() {
   return (
     <svg viewBox="0 0 64 64" fill="none" aria-hidden="true">
       <path d="M10 51 26 13h12l16 38H40l-8-22-8 22Z" fill="currentColor" />
-      <path d="M24 39h16v7H24Z" fill="var(--lime)" />
+      <path d="M24 39h16v7H24Z" fill="var(--signal)" />
     </svg>
   );
 }
@@ -139,11 +141,11 @@ function ReceiptEvidence({ event }: { event: ActivityEvent }) {
       {receipts.map((receipt) => (
         <span className="receipt-meta" key={receipt.url}>
           {receipt.prAuthor ? (
-            <><a href={receipt.url}>Merged #{receipt.number}</a> · PR author @{receipt.prAuthor} · </>
+            <><a href={safeEvidenceUrl(receipt.url)}>Merged #{receipt.number}</a> · PR author @{receipt.prAuthor} · </>
           ) : null}
           {receipt.landedCommits.map((commit) => (
             <span key={`${commit.sha}:${commit.branch || ""}`}>
-              <a href={`https://github.com/${event.repository}/commit/${commit.sha}`}>{commit.sha.slice(0, 8)}</a>{" "}
+              <a href={safeEvidenceUrl(`https://github.com/${event.repository}/commit/${commit.sha}`)}>{commit.sha.slice(0, 8)}</a>{" "}
               · {commit.author.name}{commit.branch ? ` · ${commit.branch}` : ""}{" "}
             </span>
           ))}
@@ -155,9 +157,9 @@ function ReceiptEvidence({ event }: { event: ActivityEvent }) {
 }
 function Receipt({ event }: { event: ActivityEvent }) {
   return (
-    <li className="receipt">
+    <li className="receipt" data-explorer-record={event.id}>
       <div>
-        <a href={event.url}>{event.title}</a>
+        <a href={safeEvidenceUrl(event.url)}>{event.title}</a>
         <span className="receipt-meta">
           #{event.number} · @{event.actor} · {event.role} ·{" "}
           {day(event.occurredAt)}
@@ -273,6 +275,7 @@ function HistoryProject({ project }: { project: ContributionProject }) {
     <article
       className="history-project"
       data-history-kind={kinds}
+      data-explorer-project={project.repository}
       data-history-name={`${project.name} ${project.repository} ${project.description}`}
     >
       <div className="history-project-top">
@@ -301,6 +304,7 @@ function HistoryProject({ project }: { project: ContributionProject }) {
             ? `Proposed changes: ${project.closedItems[0].title.replace(/^(fix|docs|feat|chore|improve)(\([^)]*\))?:\s*/i, "")}.`
             : project.description)}
       </p>
+      <p className="explorer-project-totals" data-explorer-project-totals hidden>Project totals below include all past records, before filters.</p>
       <div className="history-facts">
         {merged > 0 ? (
           <span>
@@ -333,7 +337,7 @@ function HistoryProject({ project }: { project: ContributionProject }) {
       <details className="history-records">
         <summary>
           View contribution records{" "}
-          <span>{historyReceipts.length + additionalEvidence.length}</span>
+          <span data-explorer-receipt-count>{historyReceipts.length + additionalEvidence.length}</span>
         </summary>
         <div>
           <ul>
@@ -345,7 +349,7 @@ function HistoryProject({ project }: { project: ContributionProject }) {
             <div className="curated-records">
               <h5>Selected public evidence</h5>
               {additionalEvidence.map((item) => (
-                <a key={item.url} href={item.url}>
+                <a key={item.url} href={safeEvidenceUrl(item.url)}>
                   {item.label}
                 </a>
               ))}
@@ -363,7 +367,7 @@ function HistoryProject({ project }: { project: ContributionProject }) {
   );
 }
 
-export default function Home() {
+export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
   const feed = getActivityFeed();
   const ledger = getOpenClawLedger();
   const summary = contributionSummary(feed.events, ledger.pullRequests);
@@ -430,6 +434,9 @@ export default function Home() {
       <a href="#contributions" data-section-link="contributions">
         Projects we contribute to
       </a>
+      <a href="#records" data-section-link="records">
+        Public records
+      </a>
     </>
   );
   return (
@@ -477,16 +484,16 @@ export default function Home() {
             <div className="hero-copy" id="content" tabIndex={-1}>
               <p className="eyebrow">ARCA / OPEN-SOURCE WORK</p>
               <h1 id="hero-title">
-                Tools we build.
-                <br />
-                <em>Software we improve.</em>
+                <span className="hero-line">Built here.</span>{" "}
+                <span className="hero-line">Improved</span>{" "}
+                <span className="hero-line-signal hero-line">upstream.</span>
               </h1>
               <p className="hero-description">
                 Explore software built by Arca and our contributions to
                 open-source projects maintained by other teams.
               </p>
               <div className="hero-actions">
-                <a className="button button-lime" href="#projects">
+                <a className="button button-signal" href="#projects">
                   Explore our software
                 </a>
                 <a className="button button-hero-outline" href="#contributions">
@@ -499,7 +506,7 @@ export default function Home() {
               className="explore-panel"
               aria-label="Explore our open-source work"
             >
-              <h2>Find your way around</h2>
+              <h2>Source index / Explore the work</h2>
               <a href="#projects">
                 <span className="route-icon">
                   <Icon kind="code" />
@@ -525,6 +532,16 @@ export default function Home() {
                 </span>
                 <span className="route-count">{contributionProjectCount}</span>
               </a>
+              <a href="#records">
+                <span className="route-icon">
+                  <Icon kind="search" />
+                </span>
+                <span>
+                  <strong>Public records</strong>
+                  <small>Reports, investigations, and the evidence behind the work.</small>
+                </span>
+                <span className="route-count route-label">JSON</span>
+              </a>
               <p>Every project and contribution links to its public source.</p>
             </nav>
           </div>
@@ -547,7 +564,7 @@ export default function Home() {
         >
           <div className="section-heading">
             <div>
-              <p className="eyebrow">BUILT & PUBLISHED BY ARCA</p>
+              <p className="eyebrow">01 / BUILT & PUBLISHED BY ARCA</p>
               <h2 id="projects-title">Software we make</h2>
               <p>
                 Open-source tools, infrastructure, and software prototypes built
@@ -617,7 +634,7 @@ export default function Home() {
             <div className="section-heading">
               <div>
                 <p className="eyebrow">
-                  CONTRIBUTIONS TO OTHER OPEN-SOURCE PROJECTS
+                  02 / CONTRIBUTIONS TO OTHER OPEN-SOURCE PROJECTS
                 </p>
                 <h2 id="contributions-title">Projects we contribute to</h2>
                 <p>
@@ -718,42 +735,7 @@ export default function Home() {
                 <strong>Closed</strong> Original PR not merged; incorporation labelled separately
               </span>
             </div>
-            <div
-              className="directory-toolbar history-toolbar"
-              data-history-controls
-              hidden
-            >
-              <div
-                className="filter-buttons"
-                role="group"
-                aria-label="Filter past contributions"
-              >
-                {[
-                  ["all", "All projects"],
-                  ["accepted", "With accepted work"],
-                  ["review", "With reviews"],
-                  ["closed", "With closed proposals"],
-                ].map(([value, label]) => (
-                  <button
-                    type="button"
-                    key={value}
-                    data-history-filter={value}
-                    aria-pressed={value === "all"}
-                  >
-                    {label}
-                  </button>
-                ))}
-              </div>
-              <label className="search-box">
-                <Icon kind="search" />
-                <span className="sr-only">Search past contributions</span>
-                <input
-                  type="search"
-                  placeholder="Find an OSS project…"
-                  data-history-search
-                />
-              </label>
-            </div>
+            {explorer}
             <p className="result-count" data-history-count aria-live="polite">
               {directory.past.length} projects with past work. Projects can also
               have work in progress.
@@ -781,7 +763,7 @@ export default function Home() {
           <div className="container">
             <div className="records-heading">
               <div>
-                <p className="eyebrow">THE PUBLIC RECORD</p>
+                <p className="eyebrow">03 / THE PUBLIC RECORD</p>
                 <h2 id="records-title">Public records</h2>
                 <p>
                   Reports, investigations, and the evidence behind our work.
@@ -933,11 +915,11 @@ export default function Home() {
         <section className="about-section" id="about">
           <div className="container about-layout">
             <div>
-              <p className="eyebrow">ABOUT ARCA</p>
+              <p className="eyebrow">04 / ABOUT ARCA</p>
               <h2>
                 Independent builders.
                 <br />
-                <em>Work you can inspect.</em>
+                <span>Work you can inspect.</span>
               </h2>
             </div>
             <div>
@@ -952,7 +934,7 @@ export default function Home() {
                 improve it.
               </p>
               <div className="about-actions">
-                <a className="button button-lime" href="https://arcabot.ai">
+                <a className="button button-signal" href="https://arcabot.ai">
                   About Arca
                 </a>
                 <a className="button button-hero-outline" href={SITE_SOURCE}>
