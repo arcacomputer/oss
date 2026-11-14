@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-14T18:01:52Z",
+  "checkedAt": "2026-11-14T22:24:30Z",
   "sources": [
     {
       "login": "felirami",
       "type": "user",
-      "publicRepositoryCount": 79
+      "publicRepositoryCount": 80
     },
     {
       "login": "arcabotai",
@@ -1614,6 +1614,20 @@
       "createdAt": "2022-01-29T15:04:18Z",
       "license": null,
       "licenseUrl": null
+    },
+    {
+      "name": "hypersnap",
+      "repository": "felirami/hypersnap",
+      "url": "https://github.com/felirami/hypersnap",
+      "owner": "felirami",
+      "description": "Snapchain, made hyperdimensional",
+      "visibility": "public",
+      "fork": true,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-11-14T21:26:51Z",
+      "license": "GPL-3.0",
+      "licenseUrl": "https://api.github.com/licenses/gpl-3.0"
     },
     {
       "name": "hypersnap-farcaster",
