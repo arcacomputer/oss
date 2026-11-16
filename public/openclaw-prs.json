@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-11-16T11:59:21Z",
-  "checkedAt": "2026-11-16T11:59:21Z",
+  "generatedAt": "2026-11-16T22:28:40Z",
+  "checkedAt": "2026-11-16T22:28:40Z",
   "source": "https://github.com/openclaw/openclaw",
-  "upstreamGeneratedAt": "2026-11-16T06:40:56+00:00",
+  "upstreamGeneratedAt": "2026-11-16T22:13:12+00:00",
   "authors": [
     {
       "login": "arcabotai",
@@ -44,7 +44,7 @@
       "state": "open",
       "draft": false,
       "createdAt": "2026-11-09T19:35:05Z",
-      "updatedAt": "2026-11-11T11:40:00Z",
+      "updatedAt": "2026-11-16T20:11:15Z",
       "closedAt": null,
       "mergedAt": null,
       "headSha": "416ef5ca4d2e10c1b25325b221dd0b9faac28273",
