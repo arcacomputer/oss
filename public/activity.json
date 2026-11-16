@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-14T06:23:09Z",
-  "checkedAt": "2026-11-15T18:51:35Z",
+  "generatedAt": "2026-11-16T06:29:31Z",
+  "checkedAt": "2026-11-16T06:29:31Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -248,7 +248,7 @@
       "url": "https://github.com/openclaw/openclaw/pull/195358",
       "occurredAt": "2026-11-08T19:07:26Z",
       "createdAt": "2026-11-08T19:07:26Z",
-      "updatedAt": "2026-11-09T22:54:53Z",
+      "updatedAt": "2026-11-15T19:43:53Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
