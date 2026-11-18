@@ -7,18 +7,18 @@
   src: url("/fonts/dm-sans-latin.woff2") format("woff2");
 }
 :root {
-  --bg: #080c14;
-  --surface: #111820;
-  --raised: #1b2530;
-  --text: #f1f3f3;
-  --muted: #b2bdc7;
-  --signal: #57e6ff;
+  --bg: #101c1a;
+  --surface: #192823;
+  --raised: #253630;
+  --text: #f5f0df;
+  --muted: #bdc9bf;
+  --signal: #ffc489;
   --violet: #c2adff;
   --success: #c3ee92;
   --warning: #f2cf8d;
   --closed: #d1a9b4;
-  --line: #35404b;
-  --control-line: #647993;
+  --line: #41534b;
+  --control-line: #77887b;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   --sans: "DM Sans", Arial, Helvetica, sans-serif;
   font-family: var(--sans);
@@ -104,7 +104,7 @@ p a:hover, .repo-text-link:hover, .curated-records a:hover { color: var(--signal
 .filter-buttons button:hover { color: var(--text); border-color: var(--signal); }
 .filter-buttons button[aria-pressed="true"] { background: var(--signal); color: var(--bg); border-color: var(--signal); }
 
-/* Masthead and featured contribution */
+/* Site masthead */
 .site-header {
   position: sticky;
   top: 0;
@@ -120,58 +120,12 @@ p a:hover, .repo-text-link:hover, .curated-records a:hover { color: var(--signal
 .header-github { min-height: 44px; gap: 9px; padding: 8px 14px; font-size: 15px; }
 .mobile-section-nav { display: none; }
 
-.hero-surface { padding-block: clamp(38px, 5.6vw, 84px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5.3vw, 80px); align-items: center; }
-.hero-copy { min-width: 0; }
-.hero-copy h1 { font-weight: 500; font-size: clamp(49px, 5.9vw, 82px); letter-spacing: -.057em; line-height: .99; }
-.hero-copy h1 span { display: block; }
-.hero-description { margin-top: 24px; max-width: 42ch; color: var(--muted); font-size: clamp(17px, 1.55vw, 21px); line-height: 1.55; }
-.hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 24px; margin-top: 30px; }
-.hero-actions .button { padding-inline: 21px; background: var(--text); color: var(--bg); border-color: var(--text); }
-.hero-actions .button:hover { background: var(--signal); border-color: var(--signal); }
-.text-action { display: inline-flex; align-items: center; min-height: 46px; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: var(--control-line); font-weight: 500; }
-.text-action:hover { color: var(--signal); text-decoration-color: currentColor; }
-/* The opening story links the original implementation to its upstream merge. */
-.featured-contribution {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(24px, 3.4vw, 50px);
-  border-radius: 5px;
-  background: #dbe5e6;
-  color: #17272c;
-}
-.featured-source { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; align-items: baseline; border-bottom: 1px solid #99acb0; padding-bottom: 15px; }
-.featured-source span { font-size: 17px; font-weight: 650; }
-.featured-source time { color: #40565c; font: 400 14px/1.5 var(--mono); }
-.featured-contribution h2 { font-size: clamp(27px, 3.1vw, 43px); line-height: 1.08; letter-spacing: -.045em; font-weight: 550; margin-top: 22px; }
-.featured-contribution > p { margin-block: 15px 12px; color: #344b50; font-size: 17px; line-height: 1.6; }
-.featured-links, .archive-intro nav { display: flex; flex-wrap: wrap; gap: 0 22px; }
-.featured-links a, .archive-intro nav a, .record-shortcuts nav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 5px; }
-.featured-links a { color: #203c43; font-size: 15px; font-weight: 600; }
-.featured-links a:hover { text-decoration-thickness: 2px; }
-.featured-contribution :focus-visible { outline-color: #124e60; }
-.hero-surface:not(:has(.featured-contribution)) { grid-template-columns: 1fr; }
-.selection-section { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.85fr); gap: clamp(28px, 6vw, 90px); align-items: start; padding-block: clamp(36px, 4vw, 60px); border-top: 1px solid var(--line); }
-.selection-heading h2, .record-shortcuts h2 { font-size: clamp(28px, 3vw, 40px); font-weight: 550; letter-spacing: -.055em; }
-.selection-heading p, .record-shortcuts p { margin-top: 12px; font-size: 17px; line-height: 1.65; color: var(--muted); }
-.selected-work li, .built-software li { padding-block: 18px; border-bottom: 1px solid var(--line); }
-.selected-work li:first-child, .built-software li:first-child { padding-top: 0; }
-.selected-work li:last-child, .built-software li:last-child { border-bottom: 0; padding-bottom: 0; }
-.project-label { color: var(--muted); font-size: 15px; }
-.selected-work h3, .built-software h3 { margin-block: 4px; font-size: clamp(20px, 1.82vw, 25px); line-height: 1.3; font-weight: 550; letter-spacing: -.028em; text-wrap: pretty; }
-.selected-work h3 a, .built-software h3 a, .record-shortcuts h2 a { text-decoration: underline; text-decoration-color: var(--control-line); text-decoration-thickness: 1px; text-underline-offset: 5px; }
-.selected-work h3 a:hover, .built-software h3 a:hover, .record-shortcuts a:hover, .archive-intro a:hover { color: var(--signal); }
-.work-source { display: flex; flex-wrap: wrap; gap: 2px 18px; margin-top: 7px; font: 400 14px/1.65 var(--mono); color: var(--muted); }
-.built-section { background: var(--surface); border-block: 1px solid var(--line); }
-.built-section .selection-section { border: 0; }
-.built-software p { max-width: 60ch; margin-block: 8px; font-size: 17px; color: var(--muted); }
-.record-shortcuts { display: flex; align-items: start; justify-content: space-between; gap: 30px; padding-block: 42px; }
-.record-shortcuts nav { display: grid; grid-template-columns: repeat(2, auto); gap: 0 22px; font-size: 15px; }
 .archive-intro { padding-block: clamp(34px, 4.5vw, 64px); }
 .archive-intro h1 { font-size: clamp(40px, 5vw, 65px); font-weight: 550; letter-spacing: -.055em; }
 .archive-intro p { max-width: 64ch; margin-block: 14px; font-size: 18px; color: var(--muted); }
-.archive-intro nav a { color: var(--text); text-decoration-color: var(--control-line); }
+.archive-intro nav { display: flex; flex-wrap: wrap; gap: 0 22px; }
+.archive-intro nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--text); text-decoration: underline; text-underline-offset: 5px; text-decoration-color: var(--control-line); }
+.archive-intro a:hover { color: var(--signal); }
 
 /* Software directory */
 .section { padding-block: clamp(44px, 5.7vw, 80px); }
@@ -355,22 +309,8 @@ p a:hover, .repo-text-link:hover, .curated-records a:hover { color: var(--signal
   .mobile-section-nav > summary::-webkit-details-marker { display: none; }
   .site-header .mobile-section-nav nav { position: absolute; top: 100%; left: 0; right: 0; padding: 10px 5vw 16px; background: var(--surface); border-block: 1px solid var(--line); display: flex; flex-direction: column; align-items: stretch; gap: 0; margin: 0; }
   .site-header .mobile-section-nav nav a { min-height: 48px; padding-inline: 8px; }
-  .hero-surface { gap: 28px; }
-  .hero-actions { gap: 4px 16px; }
 }
 @media (max-width: 650px) {
-  .hero-surface { grid-template-columns: minmax(0, 1fr); padding-block: 34px 26px; gap: 26px; }
-  .hero-copy h1 { font-size: clamp(41px, 9.7vw, 64px); }
-  .selection-section { grid-template-columns: minmax(0, 1fr); gap: 22px; }
-  .record-shortcuts { display: block; }
-  .record-shortcuts nav { margin-top: 16px; justify-content: start; }
-  .featured-contribution h2 { margin-top: 15px; }
-  .featured-contribution > p { margin-block: 12px 4px; }
-  .featured-contribution { padding: 22px; }
-  .featured-source { padding-bottom: 10px; }
-  .hero-copy h1 span { display: inline; }
-  .hero-description { margin-top: 15px; }
-  .hero-actions { margin-top: 16px; gap: 8px 18px; }
   .section-heading, .records-heading { display: block; margin-bottom: 22px; }
   .section-heading p, .records-heading p { font-size: 16px; }
   .section-total { display: block; margin-top: 12px; }
@@ -421,7 +361,6 @@ p a:hover, .repo-text-link:hover, .curated-records a:hover { color: var(--signal
 @media (max-width: 370px) {
   .header-inner { gap: 6px; }
   .mobile-section-nav > summary { padding-inline: 6px; }
-  .featured-source { display: grid; gap: 2px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

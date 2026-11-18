@@ -17,6 +17,14 @@ assert.ok(positions.every((offset, index) => offset >= 0 && (!index || offset > 
   'Selected contributions appear before company software and the public record');
 assert.ok(!home.includes('data-explorer-record'), 'The complete archive lives on its own page');
 assert.ok(!home.includes('astro-island'), 'The editorial homepage works without hydration');
+const profileChoices = home.match(/<input[^>]*name="ssh-example"[^>]*>/g) ?? [];
+for (const value of ['same', 'mapped']) {
+  assert.ok(profileChoices.some(input => input.includes(`value="${value}"`)), `Missing profile comparison choice ${value}`);
+}
+for (const asset of ['santiago-720.webp', 'santiago-1440.webp', 'fonts/instrument-serif-italic-latin.woff2']) {
+  assert.ok(existsSync(new URL(asset, dist)), `Missing showcase asset ${asset}`);
+}
+for (const asset of ['santiago-720.webp', 'santiago-1440.webp']) assert.ok(home.includes(`/${asset}`));
 for (const marker of ['Public records', 'data-explorer-record', 'data-project-category', 'id="ledger"', 'id="activity"', 'id="repository-inventory"']) {
   assert.ok(records.includes(marker), `Missing public archive marker ${marker}`);
 }
