@@ -1,8 +1,8 @@
-# Arca OSS — source index
+# Arca Computer, Inc. — Open Source
 
 ## Direction
 
-Arca’s directory uses a dark canvas, a working example from its software catalogue, and links to original upstream work. The homepage leads with what the team makes in Santiago.
+The homepage leads with the work our Santiago team contributes to other open-source projects. Each featured change links to its upstream pull request.
 
 ### Product brief
 
@@ -10,7 +10,7 @@ Arca’s directory uses a dark canvas, a working example from its software catal
 - **Job:** find useful software or an upstream contribution, understand Arca's actual role, and inspect its public evidence.
 - **Success:** software and contribution paths are explicit from the first screen; records are inspectable without JavaScript; filters help locate receipts without changing their meaning.
 - **Feeling:** technical, independent, direct. Architectural structure instead of decorative cards.
-- **Primary paths:** Software we make → project repository; Projects we contribute to → current work or past outcomes → original records.
+- Visitors can go from an open or merged upstream change to the original pull request, from a company project to its repository, or from Public records to the searchable archive.
 - **Edge paths:** empty search → reset or current work; no JavaScript → complete static project/evidence directory and native disclosures; long repository names / outcome labels → wrap, never truncate evidence.
 
 ## Visual system
@@ -36,11 +36,9 @@ Self-hosted DM Sans is the only webfont. Bold geometric headings, tight but read
 
 ## Composition
 
-The homepage pairs the introduction with a native radio switch between the OrthoVoxel model and its three original pixel drawings. The model illustration uses the voxels returned by the project's reconstruction engine. The source drawings and model were generated from the built-in demo at the pinned revision. Its MIT license is included in `public/orthovoxel/LICENSE.txt`. [OrthoVoxel Studio source](https://github.com/felirami/orthovoxel-studio/tree/7cae5a3e640302fa9ef735b453fd4b7a0f4952b1)
+The masthead and footer use the plain company name, Arca Computer, Inc. The homepage opens with a credited contribution to Hermes Desktop and links both the original proposal and the maintainer's merge. Selected pull requests follow, grouped by their current GitHub state, then software the company built.
 
-The most recent directly authored upstream merge links to the original pull request. Software rows show each project's purpose and status, with its license and Arca's role in Details. Current upstream rows lead with a real open pull request. Past work has search, optional filters, and the original records grouped by repository.
-
-On narrow screens, the model and software descriptions stack, and the masthead becomes a native Menu disclosure. Controls keep their labels, and long repository names and pull request titles wrap.
+The homepage selections live in `lib/catalog.ts`. Editors select substantive changes by repository and pull request number. The tracked directory supplies their state, actor, and original URL. The full search, software inventory, attribution details, and original records are available at `/records/`. Existing filtered homepage bookmarks lead to the archive.
 
 ## Interaction and evidence invariants
 
@@ -51,13 +49,13 @@ Content is rendered at build time. Native details/summary controls provide plus/
 - Preserve authored merges, additional credited merges, submitted reviews, manual upstream integration, incorporated origins, and closed-without-merge proposals as separate facts. An incorporated origin is not an authored merge. An open PR is not a delivered result. Backports do not add contributions.
 - Preserve the dated snapshot/freshness caveats. Do not imply streaming, real-time status, comprehensive review discovery, or affiliation with an upstream project.
 - Tracking covers `felirami`, `arcabotai`, and `arcacomputer`; public repository inventory includes currently public repositories of any age with fork/archive/license labels.
-- Keep all original receipts, attribution/context text, JSON download links, activity and ledger records, and source repositories. No public data is modified by the redesign.
+- Keep all original receipts, attribution/context text, JSON download links, activity and ledger records, and source repositories. The showcase selection does not filter the public archive.
 - Canonical site source remains `https://github.com/arcacomputer/oss`.
 
 ## Social identity
 
-The 1200 × 630 social image uses the homepage title and the front, right, and top drawings from the same OrthoVoxel demo. The PNG is rendered from `public/og.svg`.
+The social image uses the company name and the homepage title. Its text-only cover is rendered from `public/og.svg`. The site uses an empty favicon until the company adopts a logo.
 
 ## Verification
 
-Run `npm run check` and `npm run build`. The static build checks include the sample assets and the evidence feeds. In a browser, check the model switch, software search, contribution filters, and expandable records at desktop and phone widths.
+Run `npm run check` and `npm run build`. Browser checks cover the contribution links, mobile menu, canonical archive, filtered bookmarks, and keyboard-accessible records.

@@ -139,6 +139,17 @@ export type OpenClawLedger = {
 
 export const ownedProjects: OwnedProject[] = [
   {
+    name: "Opencaster",
+    repository: "arcacomputer/opencaster",
+    url: "https://github.com/arcacomputer/opencaster",
+    role: "maintainer",
+    kind: "social client",
+    license: "AGPL-3.0",
+    status: "maintained",
+    description: "A social client for Hypersnap. Read conversations, build custom feeds, and publish from the browser.",
+    proof: "The web client, offline signing companion, gateway, and shared protocol packages are available in the company repository.",
+  },
+  {
     name: "ClawFix",
     repository: "arcabotai/clawfix",
     url: "https://github.com/arcabotai/clawfix",

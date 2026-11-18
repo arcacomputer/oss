@@ -1,0 +1,21 @@
+---
+import '@/src/styles/contribution-explorer.css';
+import BaseLayout from '@/src/layouts/BaseLayout.astro';
+import Records from '@/src/react-pages/Records';
+import ContributionExplorer from '@/src/components/ContributionExplorer';
+import { getTrackedDirectory } from '@/lib/site-directory';
+import { projectExplorerRecords } from '@/lib/contribution-explorer.mjs';
+import { companyName } from '@/lib/site';
+
+const directory = getTrackedDirectory();
+const records = projectExplorerRecords(directory.past);
+---
+<BaseLayout title={`Public records | ${companyName}`} path="/records/"
+  description="Search the full record of upstream pull requests, reviews, credited work, and software repositories.">
+  <Records directory={directory}>
+    <ContributionExplorer slot="explorer" records={records} client:load />
+  </Records>
+  <script>
+    import '@/src/scripts/interactions';
+  </script>
+</BaseLayout>

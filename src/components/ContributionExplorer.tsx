@@ -128,7 +128,7 @@ export default function ContributionExplorer({ records }: { records: ExplorerRec
                 {Object.entries(explorerOutcomes).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
               </select>
             </label>
-            <label htmlFor="contribution-role">Arca’s role
+            <label htmlFor="contribution-role">Our role
               <select id="contribution-role" value={state.role}
                 onChange={event => apply({ ...state, q: draft, role: event.target.value })}>
                 <option value="all">All roles</option>

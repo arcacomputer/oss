@@ -36,37 +36,32 @@ test('dark signal palette keeps small text WCAG AA on every panel', () => {
   assert.doesNotMatch(css + explorer, /#(?:f6f6f0|f6f5ef|173b2f|d5f478)\b|Georgia|Times New Roman|--(?:paper|forest|sage)\b/i);
 });
 
-test('homepage presents a real project with a keyboard-operable demo and keeps static evidence reachable', () => {
+test('selected work and the full archive retain distinct static destinations', () => {
   const home = read('src/react-pages/Home.tsx');
-  assert.match(home, /<h1 id="hero-title">Open source <span>at Arca\.<\/span><\/h1>/);
-  assert.match(home, /type="radio" name="studio-view" value="model" defaultChecked/);
-  assert.match(home, /type="radio" name="studio-view" value="drawings"/);
-  assert.ok(home.includes('src="/orthovoxel/model.webp"'));
-  assert.ok(home.includes('safeEvidenceUrl(latestMerge.url)'));
-  assert.doesNotMatch(home, /<em>|button-lime|var\(--lime\)/);
+  const archive = read('src/react-pages/Records.tsx');
+  const chrome = read('src/components/SiteChrome.tsx');
   for (const id of ['content', 'projects', 'contributions', 'current-work', 'past-work', 'records', 'activity', 'ledger', 'about']) {
-    assert.ok(home.includes(`id="${id}"`), `Missing original destination #${id}`);
+    assert.ok((home + chrome).includes(`id="${id}"`), `Missing original destination #${id}`);
   }
-  assert.match(home, /href="#records" data-section-link="records"/);
-  assert.match(read('src/scripts/interactions.ts'), /const sections = \["projects", "contributions", "records"\]/);
-  assert.match(home, /<details className="history-records">/);
-  assert.match(home, /<ReceiptEvidence event=\{event\} \/>/);
-  assert.match(home, /\{explorer\}/);
-  assert.match(home, /<noscript>/);
+  assert.ok(home.includes('selectedContributions') && home.includes('selectedSoftware'));
+  assert.match(chrome, /href="\/records\/"/);
+  assert.match(archive, /<details className="history-records">/);
+  assert.match(archive, /<ReceiptEvidence event=\{event\} \/>/);
+  assert.match(archive, /\{explorer\}/);
+  assert.match(archive, /<noscript>/);
 });
 
-test('social assets and browser chrome share the source-index identity', () => {
+test('the site identifies the company by name in the masthead and social artwork', () => {
   const og = read('public/og.svg');
-  const icon = read('public/icon.svg');
   const layout = read('src/layouts/BaseLayout.astro');
-  assert.ok(og.includes('width="1200" height="630"'), 'OG uses the real social-card canvas');
-  for (const svg of [og, icon]) {
-    assert.ok(svg.includes(token('bg')), 'Asset shares the document background');
-    assert.ok(svg.includes(token('signal')), 'Asset shares the signal color');
-    assert.ok(!/Georgia|#173b2f|#f6f5ef|#d5f478|<animate|<script|https?:\/\/(?!www\.w3\.org)/i.test(svg), 'No legacy palette, external dependencies or motion');
-  }
-  assert.ok(og.includes('Open source') && og.includes('at Arca.'), 'OG matches the visible hero');
-  assert.ok(!/\b\d+ (projects|PRs|merges|contributions)\b/.test(og), 'No frozen mutable counts');
-  assert.ok(layout.includes('name="theme-color" content="#080c14"'), 'Browser chrome is dark');
-  assert.ok(layout.includes('name="color-scheme" content="dark"'), 'Native document controls are dark');
+  const chrome = read('src/components/SiteChrome.tsx');
+  assert.ok(og.includes('width="1200" height="630"'));
+  assert.ok(og.includes(token('bg')) && og.includes(token('signal')));
+  assert.ok(og.includes('Arca Computer, Inc.') && og.includes('Open-source contributions'));
+  assert.doesNotMatch(og, /<path|<image|<animate|<script/);
+  assert.doesNotMatch(chrome, /<svg|<img|<Mark/);
+  assert.ok(layout.includes('href="data:,"'));
+  assert.ok(!/\b\d+ (projects|PRs|merges|contributions)\b/.test(og));
+  assert.ok(layout.includes('name="theme-color" content="#080c14"'));
+  assert.ok(layout.includes('name="color-scheme" content="dark"'));
 });
