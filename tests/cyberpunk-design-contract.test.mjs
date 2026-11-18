@@ -36,10 +36,13 @@ test('dark signal palette keeps small text WCAG AA on every panel', () => {
   assert.doesNotMatch(css + explorer, /#(?:f6f6f0|f6f5ef|173b2f|d5f478)\b|Georgia|Times New Roman|--(?:paper|forest|sage)\b/i);
 });
 
-test('source-index opening is structural, preserving the static evidence path', () => {
+test('homepage presents a real project with a keyboard-operable demo and keeps static evidence reachable', () => {
   const home = read('src/react-pages/Home.tsx');
-  assert.match(home, /className="hero-line-signal hero-line"/);
-  assert.match(home, /<span className="hero-line">Built here\.<\/span>/);
+  assert.match(home, /<h1 id="hero-title">Open source <span>at Arca\.<\/span><\/h1>/);
+  assert.match(home, /type="radio" name="studio-view" value="model" defaultChecked/);
+  assert.match(home, /type="radio" name="studio-view" value="drawings"/);
+  assert.ok(home.includes('src="/orthovoxel/model.webp"'));
+  assert.ok(home.includes('safeEvidenceUrl(latestMerge.url)'));
   assert.doesNotMatch(home, /<em>|button-lime|var\(--lime\)/);
   for (const id of ['content', 'projects', 'contributions', 'current-work', 'past-work', 'records', 'activity', 'ledger', 'about']) {
     assert.ok(home.includes(`id="${id}"`), `Missing original destination #${id}`);
@@ -62,7 +65,7 @@ test('social assets and browser chrome share the source-index identity', () => {
     assert.ok(svg.includes(token('signal')), 'Asset shares the signal color');
     assert.ok(!/Georgia|#173b2f|#f6f5ef|#d5f478|<animate|<script|https?:\/\/(?!www\.w3\.org)/i.test(svg), 'No legacy palette, external dependencies or motion');
   }
-  assert.ok(og.includes('Built here.') && og.includes('upstream.'), 'OG matches the visible hero');
+  assert.ok(og.includes('Open source') && og.includes('at Arca.'), 'OG matches the visible hero');
   assert.ok(!/\b\d+ (projects|PRs|merges|contributions)\b/.test(og), 'No frozen mutable counts');
   assert.ok(layout.includes('name="theme-color" content="#080c14"'), 'Browser chrome is dark');
   assert.ok(layout.includes('name="color-scheme" content="dark"'), 'Native document controls are dark');

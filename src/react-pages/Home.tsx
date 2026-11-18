@@ -12,7 +12,6 @@ import {
 } from "@/lib/data";
 import {
   contributionSummary,
-  currentWork,
   latestActivity,
 } from "@/lib/presentation";
 import {
@@ -42,44 +41,53 @@ function Mark() {
     </svg>
   );
 }
-function Icon({ kind }: { kind: "code" | "branch" | "check" | "search" }) {
+function Icon({ kind }: { kind: "code" | "search" }) {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.6"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {kind === "code" ? (
-        <>
-          <path d="m7 7-5 5 5 5m10-10 5 5-5 5M14 4l-4 16" />
-        </>
-      ) : kind === "branch" ? (
-        <>
-          <circle cx="6" cy="5" r="2" />
-          <circle cx="18" cy="5" r="2" />
-          <circle cx="6" cy="19" r="2" />
-          <path d="M6 7v10m12-10v2a5 5 0 0 1-5 5H6" />
-        </>
-      ) : kind === "check" ? (
-        <>
-          <rect x="3" y="3" width="18" height="18" rx="4" />
-          <path d="m7 12 3 3 7-7" />
-        </>
-      ) : (
-        <>
-          <circle cx="10.5" cy="10.5" r="6.5" />
-          <path d="m16 16 5 5" />
-        </>
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {kind === "code" ? <path d="m7 7-5 5 5 5m10-10 5 5-5 5M14 4l-4 16" /> : (
+        <><circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" /></>
       )}
     </svg>
   );
 }
+
+function StudioSample({ project }: { project: OwnedProject }) {
+  return (
+    <figure className="studio-sample">
+      <fieldset className="sample-board">
+        <legend className="sr-only">OrthoVoxel Studio demo view</legend>
+        <div className="sample-switch">
+          <label>
+            <input type="radio" name="studio-view" value="model" defaultChecked />
+            <span>3D model</span>
+          </label>
+          <label>
+            <input type="radio" name="studio-view" value="drawings" />
+            <span>Source drawings</span>
+          </label>
+        </div>
+        <div className="sample-model">
+          <img src="/orthovoxel/model.webp" width="1000" height="595" fetchPriority="high"
+            alt="Isometric view of the demo model, an orange block with a stepped gold roof and dark windows." />
+        </div>
+        <div className="sample-drawings">
+          {["Front", "Right", "Top"].map((side) => (
+            <div key={side}>
+              <img src={`/orthovoxel/${side.toLowerCase()}.png`} width="32" height="32" alt={`${side} pixel drawing of the demo model`} />
+              <span>{side}</span>
+            </div>
+          ))}
+        </div>
+      </fieldset>
+      <figcaption>
+        <a href={project.url}>{project.name}</a>
+        <span>One voxel model from three pixel drawings.</span>
+      </figcaption>
+    </figure>
+  );
+}
+
 function day(iso: string) {
   return new Date(iso).toLocaleDateString("en-US", {
     month: "short",
@@ -170,87 +178,59 @@ function Receipt({ event }: { event: ActivityEvent }) {
     </li>
   );
 }
-function activeDescription(project: ContributionProject) {
-  if (project.repository === "NousResearch/hermes-agent")
-    return "Improving the reliability of agent workflows, remote access, and integrations.";
-  if (project.repository === "openclaw/openclaw")
-    return "Improving streaming messages so text stays visible in Feishu replies.";
-  if (project.repository === "block/buzz")
-    return "Making ACP startup failures easier to diagnose, alongside upstream code review.";
-  return project.description;
+function pullRequestTitle(title: string) {
+  // The receipt retains the original title, including any conventional commit prefix.
+  return title.replace(/^(?:feat|fix|docs|chore|refactor|test|build|ci|perf|style)(?:\([^)]+\))?!?:\s+/i, "");
 }
+
 function CurrentProject({ project }: { project: ContributionProject }) {
+  const latest = project.openItems[0];
+  if (!latest) return null;
   return (
-    <article className="current-card">
-      <div className="current-card-top">
+    <article className="current-project">
+      <div className="current-project-name">
         <RepoMark project={project} />
-        <span className="status status-open">In progress</span>
+        <h4><a href={project.url}>{project.name}</a></h4>
       </div>
-      <h4>{project.name}</h4>
-      <p>{activeDescription(project)}</p>
-      <div className="current-card-count">
-        <strong>{project.openItems.length}</strong> open{" "}
-        {project.openItems.length === 1 ? "pull request" : "pull requests"}
+      <div className="current-project-work">
+        <a className="current-pr" href={safeEvidenceUrl(latest.url)}>{pullRequestTitle(latest.title)}</a>
+        <span className="receipt-meta">#{latest.number} · @{latest.actor} · {day(latest.occurredAt)}</span>
       </div>
       <details className="project-receipts">
         <summary>
-          View open pull requests <span>{project.openItems.length}</span>
+          {project.openItems.length} open {project.openItems.length === 1 ? "PR" : "PRs"}
+          <span className="sr-only"> for {project.name}</span>
         </summary>
-        <ul>
-          {project.openItems.map((event) => (
-            <Receipt key={event.id} event={event} />
-          ))}
-        </ul>
+        <ul>{project.openItems.map((event) => <Receipt key={event.id} event={event} />)}</ul>
       </details>
-      <a className="repo-text-link" href={project.url}>
-        Visit {project.name} on GitHub
-      </a>
     </article>
   );
 }
-function ProjectCard({ project }: { project: OwnedProject }) {
+
+function SoftwareProject({ project }: { project: OwnedProject }) {
   const category = projectCategories[project.name] ?? "tools";
+  const description = projectDescriptions[project.name] ?? project.description;
+  const status = projectStatusLabels[project.name] ?? project.status;
   return (
-    <article
-      className={`tool-card tool-card-${category}`}
-      data-project-category={category}
-      data-project-name={`${project.name} ${project.description} ${project.kind}`}
-    >
-      <div className="tool-topline">
-        <span className="tool-category">
-          {category === "research"
-            ? "Research & prototypes"
-            : category === "records"
-              ? "Public records"
-              : project.kind}
-        </span>
-        <span className="license">{project.license}</span>
+    <article className="software-project" data-project-category={category}
+      data-project-name={`${project.name} ${project.kind} ${description} ${project.description} ${status}`}>
+      <div className="software-name">
+        <h3><a href={project.url}>{project.name}</a></h3>
+        <span>{project.kind} · {status}</span>
       </div>
-      <h3>{project.name}</h3>
-      <p>{projectDescriptions[project.name] ?? project.description}</p>
-      <div className="tool-status">
-        <span className="dot" />
-        {projectStatusLabels[project.name] ?? project.status}
-      </div>
-      <div className="tool-actions">
-        <a
-          className="button button-secondary"
-          href={project.url}
-          aria-label={`View ${project.name} project`}
-        >
-          View project
-        </a>
-        <details className="project-proof">
-          <summary aria-label={`About ${project.name}`}>
-            About this project
-          </summary>
+      <p>{description}</p>
+      <details className="project-proof">
+        <summary>Details<span className="sr-only"> for {project.name}</span></summary>
+        <div className="software-details">
           <p>{project.proof}</p>
-          <p>Arca’s role: {project.role}.</p>
-        </details>
-      </div>
+          <p>{project.license} license · Arca is the {project.role}</p>
+          <a href={project.url}>Open repository on GitHub</a>
+        </div>
+      </details>
     </article>
   );
 }
+
 function HistoryProject({ project }: { project: ContributionProject }) {
   const merged = project.mergedItems.length;
   const credits = project.creditItems.length;
@@ -371,7 +351,6 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
   const feed = getActivityFeed();
   const ledger = getOpenClawLedger();
   const summary = contributionSummary(feed.events, ledger.pullRequests);
-  const work = currentWork(feed.events, ledger.pullRequests);
   const activity = latestActivity(feed.events);
   const directory = getContributionDirectory(
     feed.events,
@@ -386,6 +365,7 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
   const activeProjects = [...directory.active].sort(
     (a, b) => b.openItems.length - a.openItems.length,
   );
+  const openCount = activeProjects.reduce((total, project) => total + project.openItems.length, 0);
   const historyRank = (project: ContributionProject) =>
     project.mergedItems.length + project.creditItems.length + project.manualItems.length;
   const pastProjects = [...directory.past].sort(
@@ -405,11 +385,9 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
   const recordProjects = ownedProjects.filter(
     (project) => projectCategories[project.name] === "records",
   );
-  const contributionProjectCount = new Set(
-    [...directory.active, ...directory.past].map(
-      (project) => project.repository,
-    ),
-  ).size;
+  const studio = softwareProjects.find((project) => project.repository === "felirami/orthovoxel-studio");
+  const latestMerge = pastProjects.flatMap((project) => project.mergedItems)
+    .sort((a, b) => b.occurredAt.localeCompare(a.occurredAt))[0];
   const recordActions: Record<string, string> = {
     "Headlong Agent Findings": "Read findings",
     "OpenClaw Contributions": "Open contribution ledger",
@@ -429,10 +407,10 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
   const nav = (
     <>
       <a href="#projects" data-section-link="projects">
-        Software we make
+        Software
       </a>
       <a href="#contributions" data-section-link="contributions">
-        Projects we contribute to
+        Contributions
       </a>
       <a href="#records" data-section-link="records">
         Public records
@@ -461,12 +439,11 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
             href={SITE_SOURCE}
             aria-label="Arca OSS source on GitHub"
           >
-            Site source
+            <Icon kind="code" /> GitHub
           </a>
           <details className="mobile-section-nav">
-            <summary aria-label="Open navigation">
-              <span />
-              <span />
+            <summary>
+              Menu
             </summary>
             <nav aria-label="Mobile navigation">
               {nav}
@@ -482,81 +459,28 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
         >
           <div className="hero-surface">
             <div className="hero-copy" id="content" tabIndex={-1}>
-              <p className="eyebrow">ARCA / OPEN-SOURCE WORK</p>
-              <h1 id="hero-title">
-                <span className="hero-line">Built here.</span>{" "}
-                <span className="hero-line">Improved</span>{" "}
-                <span className="hero-line-signal hero-line">upstream.</span>
-              </h1>
+              <h1 id="hero-title">Open source <span>at Arca.</span></h1>
               <p className="hero-description">
-                Explore software built by Arca and our contributions to
-                open-source projects maintained by other teams.
+                We’re a small team in Santiago, Chile. We make tools for pixel artists and node operators, and send patches to the open-source projects we use.
               </p>
               <div className="hero-actions">
-                <a className="button button-signal" href="#projects">
-                  Explore our software
-                </a>
-                <a className="button button-hero-outline" href="#contributions">
-                  Explore contributions
-                </a>
+                <a className="button button-primary" href="#projects">Browse software</a>
+                <a className="text-action" href="#contributions">View contributions</a>
               </div>
-              <p className="hero-note">Independent team · Santiago, Chile</p>
             </div>
-            <nav
-              className="explore-panel"
-              aria-label="Explore our open-source work"
-            >
-              <h2>Source index / Explore the work</h2>
-              <a href="#projects">
-                <span className="route-icon">
-                  <Icon kind="code" />
-                </span>
-                <span>
-                  <strong>Software we make</strong>
-                  <small>
-                    Tools, infrastructure, and software prototypes built by
-                    Arca.
-                  </small>
-                </span>
-                <span className="route-count">{softwareProjects.length}</span>
-              </a>
-              <a href="#contributions">
-                <span className="route-icon">
-                  <Icon kind="branch" />
-                </span>
-                <span>
-                  <strong>Projects we contribute to</strong>
-                  <small>
-                    Fixes, features, and reviews for other teams’ OSS.
-                  </small>
-                </span>
-                <span className="route-count">{contributionProjectCount}</span>
-              </a>
-              <a href="#records">
-                <span className="route-icon">
-                  <Icon kind="search" />
-                </span>
-                <span>
-                  <strong>Public records</strong>
-                  <small>Reports, investigations, and the evidence behind the work.</small>
-                </span>
-                <span className="route-count route-label">JSON</span>
-              </a>
-              <p>Every project and contribution links to its public source.</p>
-            </nav>
+            {studio && <StudioSample project={studio} />}
           </div>
+          {latestMerge && (
+            <aside className="recent-merge" aria-label="Recent upstream contribution">
+              <span className="recent-label">Recently merged</span>
+              <div>
+                <a href={safeEvidenceUrl(latestMerge.url)}>{pullRequestTitle(latestMerge.title)}</a>
+                <span className="recent-source">{latestMerge.repository} #{latestMerge.number}</span>
+              </div>
+              <time dateTime={latestMerge.occurredAt}>{day(latestMerge.occurredAt)}</time>
+            </aside>
+          )}
         </section>
-        <div className="snapshot-bar container">
-          <span>
-            <span className="dot" />
-            Public, verifiable work
-          </span>
-          <p>
-            Activity checked {day(feed.checkedAt || feed.generatedAt)} ·
-            OpenClaw checked {day(ledger.generatedAt)}
-          </p>
-          <a href="#records">View the full record</a>
-        </div>
         <section
           className="section tools-section container"
           id="projects"
@@ -564,16 +488,9 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
         >
           <div className="section-heading">
             <div>
-              <p className="eyebrow">01 / BUILT & PUBLISHED BY ARCA</p>
               <h2 id="projects-title">Software we make</h2>
-              <p>
-                Open-source tools, infrastructure, and software prototypes built
-                and published by Arca.
-              </p>
+              <p>Tools, libraries, and experiments we publish. The source code for each project is on GitHub.</p>
             </div>
-            <span className="section-total">
-              {softwareProjects.length} licensed software projects
-            </span>
           </div>
           <div className="directory-toolbar" data-project-controls hidden>
             <div
@@ -583,8 +500,8 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
             >
               {[
                 ["all", "All projects"],
-                ["tools", "Tools & infrastructure"],
-                ["research", "Research & prototypes"],
+                ["tools", "Tools"],
+                ["research", "Research"],
               ].map(([value, label]) => (
                 <button
                   type="button"
@@ -601,7 +518,7 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
               <span className="sr-only">Search our software</span>
               <input
                 type="search"
-                placeholder="Find software…"
+                placeholder="Search software…"
                 data-project-search
               />
             </label>
@@ -610,20 +527,15 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
             <p className="result-count" data-project-count aria-live="polite">
               Showing all {softwareProjects.length} software projects
             </p>
-            <div className="tool-grid">
+            <div className="software-list">
               {sortedProjects.map((project) => (
-                <ProjectCard key={project.repository} project={project} />
+                <SoftwareProject key={project.repository} project={project} />
               ))}
             </div>
             <p className="filter-empty" data-project-empty hidden>
               No matching projects. Try a different name or category.
             </p>
           </div>
-          <p className="section-note">
-            Every software project listed here has an explicit open-source
-            license. Prototypes and previews are labelled. Our reports and
-            investigations are in <a href="#records">Public records</a>.
-          </p>
         </section>
         <section
           className="contributions-section"
@@ -633,25 +545,18 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
           <div className="contributions-intro container">
             <div className="section-heading">
               <div>
-                <p className="eyebrow">
-                  02 / CONTRIBUTIONS TO OTHER OPEN-SOURCE PROJECTS
-                </p>
                 <h2 id="contributions-title">Projects we contribute to</h2>
-                <p>
-                  Fixes, features, and code reviews we contribute to software
-                  maintained by other teams. Follow work in progress or explore
-                  the results of past contributions.
-                </p>
+                <p>Pull requests and code reviews we’ve sent to other open-source teams.</p>
               </div>
             </div>
             <nav
               className="contribution-navigation"
               aria-label="Contribution status"
             >
-              <a className="button button-primary" href="#current-work">
-                In progress <span>{work.length} open PRs</span>
+              <a className="work-jump" href="#current-work">
+                In progress <span>{openCount} open {openCount === 1 ? "PR" : "PRs"}</span>
               </a>
-              <a className="button button-secondary" href="#past-work">
+              <a className="work-jump" href="#past-work">
                 Past contributions <span>{directory.past.length} projects</span>
               </a>
             </nav>
@@ -664,35 +569,20 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
             <div className="container">
               <div className="section-heading">
                 <div>
-                  <p className="eyebrow">
-                    <span className="dot" />
-                    UPSTREAM / IN PROGRESS
-                  </p>
                   <h3 id="current-title">In progress</h3>
-                  <p>
-                    Open pull requests, grouped by the project they improve.
-                    Upstream maintainers review and decide what lands.
-                  </p>
+                  <p>The latest open pull request in each project is linked below.</p>
                 </div>
                 <span className="section-total">
-                  {work.length} open PRs · {directory.active.length} projects
+                  Activity checked {day(feed.checkedAt || feed.generatedAt)}<br />
+                  OpenClaw checked {day(ledger.generatedAt)}
                 </span>
               </div>
-              <div className="current-grid">
+              <div className="current-list">
                 {activeProjects.map((project) => (
                   <CurrentProject key={project.repository} project={project} />
                 ))}
               </div>
-              <div className="current-footnote">
-                <p>
-                  <strong>Open for upstream review.</strong> A pull request is
-                  open in our dated snapshots. Open its public record to check
-                  the latest upstream status.
-                </p>
-                <a className="button button-secondary" href="#past-work">
-                  See past contributions
-                </a>
-              </div>
+              {!activeProjects.length && <p className="filter-empty">There are no open pull requests in the latest snapshot.</p>}
             </div>
           </section>
           <section
@@ -702,17 +592,15 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
           >
             <div className="section-heading">
               <div>
-                <p className="eyebrow">UPSTREAM / PAST WORK</p>
                 <h3 id="history-title">Past contributions</h3>
                 <p>
-                  Changes that landed, code we reviewed, and proposals we made.
-                  Each result is labelled.
+                  Browse merged changes, reviews, and closed proposals. Open a project’s records to see who did the work and what landed.
                 </p>
               </div>
               <div className="history-totals">
                 <strong>
                   {summary.mergedCount}
-                  <small>authored merges in snapshots</small>
+                  <small>authored pull requests merged</small>
                 </strong>
                 <strong>
                   {summary.mergedCreditCount}
@@ -720,20 +608,6 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
                 </strong>
                 <strong>{summary.manualIntegrationCount}<small>manually integrated contribution{summary.manualIntegrationCount === 1 ? "" : "s"}</small></strong>
               </div>
-            </div>
-            <div className="history-guide">
-              <span>
-                <i className="legend-dot legend-merged" />
-                <strong>Merged / incorporated</strong> Accepted with linked evidence
-              </span>
-              <span>
-                <i className="legend-dot legend-review" />
-                <strong>Reviewed / credited</strong> Role stated in the record
-              </span>
-              <span>
-                <i className="legend-dot legend-closed" />
-                <strong>Closed</strong> Original PR not merged; incorporation labelled separately
-              </span>
             </div>
             {explorer}
             <p className="result-count" data-history-count aria-live="polite">
@@ -763,12 +637,9 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
           <div className="container">
             <div className="records-heading">
               <div>
-                <p className="eyebrow">03 / THE PUBLIC RECORD</p>
                 <h2 id="records-title">Public records</h2>
                 <p>
-                  Reports, investigations, and the evidence behind our work.
-                  Inspect the sources and see how our GitHub activity is
-                  tracked.
+                  Read our published investigations, download the activity data, or check which GitHub accounts we track.
                 </p>
               </div>
               <div className="record-downloads">
@@ -915,27 +786,14 @@ export default function Home({ explorer }: { explorer?: ReactNode } = {}) {
         <section className="about-section" id="about">
           <div className="container about-layout">
             <div>
-              <p className="eyebrow">04 / ABOUT ARCA</p>
-              <h2>
-                Independent builders.
-                <br />
-                <span>Work you can inspect.</span>
-              </h2>
+              <h2>About Arca</h2>
             </div>
             <div>
-              <p>
-                We’re a small team in Santiago, Chile. We make practical tools,
-                contribute to the software we depend on, and publish our
-                findings.
-              </p>
-              <p>
-                For every project here, we show our role, its status, and the
-                public source. Use the code, follow a contribution, or help
-                improve it.
-              </p>
+              <p>We’re an independent team in Santiago, Chile. If you use one of our tools,
+                found a bug, or have a correction to this index, we’d like to hear from you.</p>
               <div className="about-actions">
                 <a className="button button-signal" href="https://arcabot.ai">
-                  About Arca
+                  Visit Arca
                 </a>
                 <a className="button button-hero-outline" href={SITE_SOURCE}>
                   Improve this site

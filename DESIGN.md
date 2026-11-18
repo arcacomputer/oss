@@ -1,8 +1,8 @@
 # Arca OSS — source index
 
-## Approved direction
+## Direction
 
-The owner's latest direction supersedes the earlier paper / forest / serif design: redesign the whole website with a minimal cyberpunk character. This is a single dark visual system, not a theme toggle or another override layer. The motif is the actual source index: numbered sections, repository identities, dated evidence, source links, and precise outcome labels. No fake terminals, animated status lights, invented metrics, ornamental code, gradients, or external font services.
+Arca’s directory uses a dark canvas, a working example from its software catalogue, and links to original upstream work. The homepage leads with what the team makes in Santiago.
 
 ### Product brief
 
@@ -18,16 +18,16 @@ The owner's latest direction supersedes the earlier paper / forest / serif desig
 | Token | Value | Use |
 | --- | --- | --- |
 | `--bg` | `#080c14` | Near-black document and hero |
-| `--surface` | `#0e1522` | Navy software grid, contribution section, tracking and disclosures |
-| `--raised` | `#151f30` | Hover surfaces and status backgrounds |
-| `--text` | `#edf4ff` | Cool-white primary text |
-| `--muted` | `#a4b3c9` | Descriptions, metadata and secondary text |
+| `--surface` | `#111820` | Charcoal controls, contribution section, tracking and disclosures |
+| `--raised` | `#1b2530` | Hover surfaces and status backgrounds |
+| `--text` | `#f1f3f3` | Cool-white primary text |
+| `--muted` | `#b2bdc7` | Descriptions, metadata and secondary text |
 | `--signal` | `#57e6ff` | Electric cyan, primary actions, focus, source links |
-| `--violet` | `#c2adff` | Research labels and review status |
+| `--violet` | `#c2adff` | Review status |
 | `--success` | `#c3ee92` | Accepted / released outcomes only |
 | `--warning` | `#f2cf8d` | Prerelease status |
 | `--closed` | `#d1a9b4` | Closed-without-merge status |
-| `--line` | `#2b3b51` | Noninteractive architectural rules |
+| `--line` | `#35404b` | Noninteractive architectural rules |
 | `--control-line` | `#647993` | Visible native/control boundaries |
 
 Every text color above clears 4.5:1 against all three dark surfaces in the dependency-free contract test. Status always has a literal label: color does not establish authorship, acceptance, or completeness. Small white repository-logo tiles intentionally preserve upstream logos; they are identity assets, not light document panels.
@@ -36,18 +36,11 @@ Self-hosted DM Sans is the only webfont. Bold geometric headings, tight but read
 
 ## Composition
 
-- A thin, fixed-height masthead and native mobile menu replace the soft garden-like navigation. Public records is now a first-class navigation destination.
-- The opening is an unboxed, ruled two-column composition: a large three-line **Built here. / Improved / upstream.** headline and a compact source index. The counts shown beside software and contributions remain derived from the existing data. The records route uses a resource label, not an invented count.
-- Main sections use sequential metadata labels, strong sans-serif headings, and fine rules. All existing destination IDs and factual section names remain intact.
-- Software becomes a contiguous grid with shared dividers, license metadata, explicit lifecycle labels, and native project-proof disclosures. No shadows, rounded garden cards, or decorative accent strips.
-- Current upstream work is visibly separated from past outcomes. Current proposals keep their upstream-review caveat. Past projects form dense two-column ruled entries rather than floating cards; source receipts stay expandable in the document.
-- Public records uses resource rows, a source-tracking panel, and technical disclosure headers. Inventory rows, activity, and the full OpenClaw ledger use the same palette and type system.
-- The SDK explorer shares those tokens: search group, clear action, search/reset buttons, native selects, result status, project-total caveat, and empty state. No model, URL/history, focus-management, or filter logic changes.
-- About/footer continue the structure rather than switching to an unrelated theme. The error route inherits the same dark system.
+The homepage pairs the introduction with a native radio switch between the OrthoVoxel model and its three original pixel drawings. The model illustration uses the voxels returned by the project's reconstruction engine. The source drawings and model were generated from the built-in demo at the pinned revision. Its MIT license is included in `public/orthovoxel/LICENSE.txt`. [OrthoVoxel Studio source](https://github.com/felirami/orthovoxel-studio/tree/7cae5a3e640302fa9ef735b453fd4b7a0f4952b1)
 
-### Mobile composition
+The most recent directly authored upstream merge links to the original pull request. Software rows show each project's purpose and status, with its license and Arca's role in Details. Current upstream rows lead with a real open pull request. Past work has search, optional filters, and the original records grouped by repository.
 
-At 900px the full navigation becomes a native disclosure with 46px control and readable destination rows. At 600px, hero text and source index stack; primary hero actions remain available side by side; software/history grids become single-column; current work returns to a single-column reading order. Status explanations, snapshot freshness, history totals, and evidence legends remain visible on mobile rather than disappearing. Tables/ledger-like rows wrap their metadata; long receipts remain readable. Input text is 16px to avoid mobile browser zoom.
+On narrow screens, the model and software descriptions stack, and the masthead becomes a native Menu disclosure. Controls keep their labels, and long repository names and pull request titles wrap.
 
 ## Interaction and evidence invariants
 
@@ -63,14 +56,8 @@ Content is rendered at build time. Native details/summary controls provide plus/
 
 ## Social identity
 
-`public/og.svg` is a crisp static 1200×630 composition with the same headline, source-index rules, palette, and Arca mark. It contains no frozen mutable project/PR/merge counts. `public/icon.svg` uses a near-black cut-corner boundary and cyan signal bar. The layout declares dark browser chrome and descriptive OG/Twitter alt text; canonical URLs and document title remain unchanged. The production `og.png` must be regenerated from this SVG by the release owner.
+The 1200 × 630 social image uses the homepage title and the front, right, and top drawings from the same OrthoVoxel demo. The PNG is rendered from `public/og.svg`.
 
-## Verification and release handoff
+## Verification
 
-Focused command: `node --test tests/cyberpunk-design-contract.test.mjs`.
-
-The test was exercised RED → GREEN for palette/contrast, source-index structural preservation, and social/browser-chrome identity. It checks all seven text/status colors across three surfaces, original destination IDs, static evidence/disclosure presence, absence of legacy palette/serif tokens, OG dimensions and static copy, and matching dark metadata. SVG XML and whitespace/diff checks are also lightweight local checks.
-
-These source checks do not claim browser layout, hydration, axe, full build, or production verification. The parent release owner runs the full check/build/test gates, regenerates OG PNG, inspects desktop and narrow mobile screenshots, checks no-JS evidence, native controls, empty/reset/history/focus behavior, and verifies deployment. No installs, servers, commits, push, or cloud mutations belong to this implementation handoff.
-
-**Intentional visual-copy contract change:** the old hero `Tools we build.` / `Software we improve.` is replaced by `Built here.` / `Improved` / `upstream.`. `THE PUBLIC RECORD` remains, now prefixed `03 /`. The title and factual section headings remain unchanged. Existing contrast tests that parse light-theme literal colors must resolve the new CSS tokens instead.
+Run `npm run check` and `npm run build`. The static build checks include the sample assets and the evidence feeds. In a browser, check the model switch, software search, contribution filters, and expandable records at desktop and phone widths.
