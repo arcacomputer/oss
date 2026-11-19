@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-17T20:55:47Z",
-  "checkedAt": "2026-11-18T07:28:38Z",
+  "generatedAt": "2026-11-19T07:26:10Z",
+  "checkedAt": "2026-11-19T07:26:10Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,69 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:openclaw/openclaw:195358:closed",
+      "type": "upstream_pr_state",
+      "project": "openclaw",
+      "repository": "openclaw/openclaw",
+      "number": 195358,
+      "title": "fix: queued follow-up goes unanswered after a delayed /stop or /status",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/openclaw/openclaw/pull/195358",
+      "occurredAt": "2026-11-18T16:30:33Z",
+      "createdAt": "2026-11-08T19:07:26Z",
+      "updatedAt": "2026-11-18T16:30:33Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "dffb68ab5740946e8b52ddbc78067346fd003df4",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:157326:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 157326,
+      "title": "fix(gateway): a generic s6-overlay container uses normal startup, not Hermes's s6 slots (GW-35, salvage #143022)",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/157326",
+      "occurredAt": "2026-11-18T09:23:36Z",
+      "createdAt": "2026-11-18T09:23:36Z",
+      "updatedAt": "2026-11-18T09:30:41Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "63708ee201d24cfa4c30a1d9c48909dfe65d1ec6",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:145435:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 145435,
+      "title": "fix(cli): charge the owed source-completion tail before it runs",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/145435",
+      "occurredAt": "2026-11-18T09:01:53Z",
+      "createdAt": "2026-10-27T07:51:44Z",
+      "updatedAt": "2026-11-18T09:01:53Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "b675ebbc430ad4288cc6ff0d4cd0a1d2e50e0325",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:NousResearch/hermes-agent:153910:merged",
       "type": "upstream_pr_state",
@@ -66,27 +129,6 @@
       "evidence": {
         "author": "arcabotai",
         "headSha": "948893012f4c9e59f22027be71c6cdcf04e17984",
-        "mergeCommit": null
-      }
-    },
-    {
-      "id": "github:pr:NousResearch/hermes-agent:145435:closed",
-      "type": "upstream_pr_state",
-      "project": "hermes-agent",
-      "repository": "NousResearch/hermes-agent",
-      "number": 145435,
-      "title": "fix(cli): charge the owed source-completion tail before it runs",
-      "summary": "Closed upstream without merge",
-      "url": "https://github.com/NousResearch/hermes-agent/pull/145435",
-      "occurredAt": "2026-11-11T20:33:50Z",
-      "createdAt": "2026-10-27T07:51:44Z",
-      "updatedAt": "2026-11-11T20:33:51Z",
-      "actor": "arcabotai",
-      "role": "author",
-      "state": "closed",
-      "evidence": {
-        "author": "arcabotai",
-        "headSha": "b675ebbc430ad4288cc6ff0d4cd0a1d2e50e0325",
         "mergeCommit": null
       }
     },
@@ -143,13 +185,13 @@
       "url": "https://github.com/openclaw/openclaw/pull/196773",
       "occurredAt": "2026-11-10T17:34:13Z",
       "createdAt": "2026-11-10T17:34:13Z",
-      "updatedAt": "2026-11-17T18:02:25Z",
+      "updatedAt": "2026-11-18T18:22:31Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "6f31ca28fa29229ed2cb6d6d95cca4145d264e63",
+        "headSha": "2ae086ac175080c34e7e3e25187c1a38901b58ea",
         "mergeCommit": null
       }
     },
@@ -164,13 +206,13 @@
       "url": "https://github.com/openclaw/openclaw/pull/196215",
       "occurredAt": "2026-11-09T19:35:05Z",
       "createdAt": "2026-11-09T19:35:05Z",
-      "updatedAt": "2026-11-16T20:11:15Z",
+      "updatedAt": "2026-11-18T20:36:01Z",
       "actor": "arcabotai",
       "role": "author",
       "state": "open",
       "evidence": {
         "author": "arcabotai",
-        "headSha": "416ef5ca4d2e10c1b25325b221dd0b9faac28273",
+        "headSha": "94730b89bdcb92e8285c395908d6e8ec28fab18e",
         "mergeCommit": null
       }
     },
