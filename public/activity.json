@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-19T20:38:07Z",
-  "checkedAt": "2026-11-19T20:38:07Z",
+  "generatedAt": "2026-11-20T07:16:16Z",
+  "checkedAt": "2026-11-20T07:16:16Z",
   "cadence": "every 6 hours",
   "source": {
     "identities": [
@@ -27,6 +27,90 @@
     }
   },
   "events": [
+    {
+      "id": "github:pr:NousResearch/hermes-agent:158126:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 158126,
+      "title": "fix(gateway): wait out ensure's own service stop and name the right fix for a stale unit",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/158126",
+      "occurredAt": "2026-11-20T06:03:51Z",
+      "createdAt": "2026-11-20T06:03:51Z",
+      "updatedAt": "2026-11-20T06:07:14Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "25dbf98b8a0c3610591694f199ecc258d17e32ba",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:153668:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 153668,
+      "title": "fix(gateway): apply Feishu sender admission to reaction events",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/153668",
+      "occurredAt": "2026-11-20T06:03:32Z",
+      "createdAt": "2026-11-11T17:09:10Z",
+      "updatedAt": "2026-11-20T06:03:32Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "933b0ad42087f39316a0373a28368c6e2bbe4b8b",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:158110:open",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 158110,
+      "title": "fix(update): a locked state.db is never rolled back to an old snapshot",
+      "summary": "Opened upstream",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/158110",
+      "occurredAt": "2026-11-20T04:52:26Z",
+      "createdAt": "2026-11-20T04:52:26Z",
+      "updatedAt": "2026-11-20T05:49:40Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "open",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "c3560e81c55763219d893290d8732db5c742d03c",
+        "mergeCommit": null
+      }
+    },
+    {
+      "id": "github:pr:NousResearch/hermes-agent:150275:closed",
+      "type": "upstream_pr_state",
+      "project": "hermes-agent",
+      "repository": "NousResearch/hermes-agent",
+      "number": 150275,
+      "title": "fix(cli): state DB verify lock≠corrupt + snapshot-scoped restore",
+      "summary": "Closed upstream without merge",
+      "url": "https://github.com/NousResearch/hermes-agent/pull/150275",
+      "occurredAt": "2026-11-20T04:52:21Z",
+      "createdAt": "2026-11-06T20:38:42Z",
+      "updatedAt": "2026-11-20T04:52:39Z",
+      "actor": "arcabotai",
+      "role": "author",
+      "state": "closed",
+      "evidence": {
+        "author": "arcabotai",
+        "headSha": "b107e1d3fafc44c8c38795a5c70016e583c55e68",
+        "mergeCommit": null
+      }
+    },
     {
       "id": "github:pr:openclaw/openclaw:195358:closed",
       "type": "upstream_pr_state",
