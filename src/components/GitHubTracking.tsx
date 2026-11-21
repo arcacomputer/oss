@@ -119,10 +119,9 @@ export function RepositoryInventory({
       </summary>
       <div className="repository-inventory-body">
         <p>
-          This inventory is discovered from GitHub. Detected licenses, forks,
-          and archived repositories are labelled separately from the curated
-          Arca projects above. The contribution cutoff applies to PR history;
-          this inventory covers currently public repositories of any age.
+          This inventory covers public repositories of any age under the three
+          tracked accounts. Each entry shows the license GitHub detected and
+          whether the repository is a fork or has been archived.
         </p>
         <a className="tracking-query" href="/github-repositories.json">
           Download the repository snapshot

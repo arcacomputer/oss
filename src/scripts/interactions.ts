@@ -1,3 +1,17 @@
+// Older bookmarks used the homepage for the full archive and its search results.
+function followArchiveBookmark() {
+  const url = new URL(window.location.href);
+  if (url.pathname !== "/") return;
+  const archiveAnchor = ["#ledger", "#activity", "#repository-inventory"].includes(url.hash);
+  const hasFilters = ["ce-q", "ce-project", "ce-outcome", "ce-role"].some(key => url.searchParams.has(key));
+  if (!archiveAnchor && !hasFilters) return;
+  url.pathname = "/records/";
+  if (!archiveAnchor) url.hash = "past-work";
+  window.location.replace(url.href);
+}
+followArchiveBookmark();
+window.addEventListener("hashchange", followArchiveBookmark);
+
 // Keep every project available in the static HTML; enhance only the controls.
 const projectControls = document.querySelector<HTMLElement>(
   "[data-project-controls]",
@@ -113,7 +127,7 @@ document.addEventListener("keydown", (event) => {
 const links = [
   ...document.querySelectorAll<HTMLAnchorElement>("[data-section-link]"),
 ];
-const sections = ["projects", "contributions", "records"]
+const sections = ["contributions", "projects"]
   .map((id) => document.getElementById(id))
   .filter((section): section is HTMLElement => section !== null);
 const visible = new Set<string>();

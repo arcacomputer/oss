@@ -6,7 +6,7 @@
 Visitors should find a past upstream receipt by project, outcome, role or text, then inspect its original public evidence. Enhance the existing past-work directory, not a second feed. Keep forest-green/paper, editorial rules, DM Sans and native disclosures. Real receipt titles and attribution are the motif; no decorative metrics.
 
 ## Flow and states
-- Entry: `#past-work`, all static projects/receipts readable; search controls appear only after hydration.
+- Entry: `/records/#past-work`, all static projects/receipts readable; search controls appear only after hydration.
 - Search → apply (Enter or Search); project/outcome/role selections apply immediately. Count means matching records, not extra contributions. Open work stays at `#current-work`.
 - Empty → explain filters and offer Reset. Reset focuses search. Clear search returns focus through SDK InputClear.
 - Share → ordinary selectable permalink, preserving unrelated query parameters and hash. Back/forward restores applied controls/results. Invalid values fall back to All; malformed percent encoding is tolerated.
@@ -14,7 +14,7 @@ Visitors should find a past upstream receipt by project, outcome, role or text, 
 - Filtering never moves focus while editing. If history navigation hides the focused evidence, return focus to search. Disclosures remain native keyboard controls.
 
 ## Integration intent
-One controls-only React island mounted through an Astro slot into the SSR-only Home. Existing server-rendered project/evidence nodes remain authoritative. The island receives a compact projection of `getContributionDirectory(...).past`; it never discovers, merges or upgrades evidence. Existing static anchors, SEO, no-index policy and Cloudflare deployment remain unchanged.
+One controls-only React island mounted through an Astro slot into the statically rendered records page. Existing server-rendered project/evidence nodes remain authoritative. The island receives a compact projection of `getContributionDirectory(...).past`; it never discovers, merges or upgrades evidence. Existing static anchors, SEO, no-index policy and Cloudflare deployment remain unchanged.
 
 ## Verified scope and SDK
 - Baseline from `git rev-parse HEAD`: `6eeb5b80a9a4dee6d8ba58a9b202352bd73d0c3b`; branch `cad/oss-ui-sdk-preview-20261112`.
@@ -41,8 +41,8 @@ Final rerun after integration: **5 tests passed, 0 failed**, exit 0. `git diff -
 - `package.json` — SDK/type pins (lockfile intentionally left to remote install).
 - `lib/contribution-explorer.mjs` — pure display projection, filtering, URL parse/serialization and safe evidence hrefs.
 - `src/components/ContributionExplorer.tsx` — one controls-only island, status/empty/reset/share states and progressive DOM enhancement.
-- `src/pages/index.astro` — normalized projection, named-slot island and scoped stylesheet integration.
-- `src/react-pages/Home.tsx` — replace old toolbar slot, stable evidence/project hooks, safe receipt links, explicit unfiltered project totals.
+- `src/pages/records.astro` — normalized projection, named-slot island and scoped stylesheet integration.
+- `src/react-pages/Records.tsx` — replace old toolbar slot, stable evidence/project hooks, safe receipt links, explicit unfiltered project totals.
 - `src/scripts/interactions.ts` — remove only the superseded past-directory enhancer; software/activity/navigation enhancement remains.
 - `src/styles/contribution-explorer.css` — paper/forest finding aid, native controls, mobile layouts; inherits existing focus/reduced-motion rules.
 - `tests/contribution-explorer.test.mjs` — focused dependency-free behavior tests.

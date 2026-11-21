@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '@/src/layouts/BaseLayout.astro';
+import { companyName } from '@/lib/site';
 ---
-<BaseLayout>
+<BaseLayout title={`Page not found | ${companyName}`}>
   <main class="not-found">
-    <a class="not-found-brand" href="/" aria-label="Arca OSS home">Arca OSS</a>
+    <a class="company-name" href="/">{companyName}</a>
     <p class="eyebrow">404 / PAGE NOT FOUND</p>
-    <h1>This page took a <em>wrong turn.</em></h1>
-    <p>Find your way back to our tools, contributions, and work in the open.</p>
-    <a class="button" href="/">Back to Arca OSS</a>
+    <h1>Page not found</h1>
+    <p>The homepage lists our open-source contributions and the software we built.</p>
+    <a class="button" href="/">Back to the homepage</a>
   </main>
 </BaseLayout>

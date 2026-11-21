@@ -1,6 +1,7 @@
 export type ProjectCategory = "tools" | "research" | "records";
 
 export const projectCategories: Record<string, ProjectCategory> = {
+  Opencaster: "tools",
   ClawFix: "tools",
   "Hypersnap Doctor": "tools",
   A3Stack: "tools",
@@ -72,7 +73,7 @@ export const contributionDescriptions: Record<string, string> = {
   "openclaw/crabbox":
     "Sandbox lifecycle rules, labels that preserve document content, and correct filesystem paths.",
   "openclaw/clickclack":
-    "Integration history helpers and typed agent progress events, merged by upstream maintainers with co-author credit for Arca's implementation work.",
+    "Integration history helpers and typed agent progress events, merged by upstream maintainers with co-author credit for our implementation work.",
   "farcasterorg/hypersnap":
     "Independent operator tools for diagnostics and safe repair, plus an upstream review covering security and correctness.",
   "block/buzz":
@@ -87,3 +88,17 @@ export const contributionOutcomeLabels: Record<string, string> = {
   "openclaw/crabbox": "Merged sandbox lifecycle and filesystem fixes",
   "openclaw/clickclack": "Two merged capabilities with co-author credit",
 };
+
+// Highlight specific contributions. Their current state and source always come from the tracked directory.
+export const selectedContributions = [
+  { repository: "openclaw/openclaw", number: 196089, title: "Keep the gateway responsive while listing thousands of Slack conversations" },
+  { repository: "NousResearch/hermes-agent", number: 150275, title: "Distinguish a locked database from a corrupt one during recovery" },
+  { repository: "openclaw/openclaw", number: 194540, title: "Let agents run on remote workers when web search is available" },
+  { repository: "elizaOS/eliza", number: 18523, title: "Use one Google sign-in callback across LifeOps and Settings" },
+];
+
+export const selectedSoftware = [
+  "arcacomputer/opencaster",
+  "arcabotai/clawfix",
+  "arcabotai/a3stack",
+];

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "name": "Arca OSS",
+  "name": "Arca Computer, Inc. — Open Source",
   "canonical": "https://oss.arcabot.ai",
   "source": "https://github.com/arcacomputer/oss",
   "policy": {
@@ -32,6 +32,13 @@
     "arcacomputer"
   ],
   "projects": [
+    {
+      "name": "Opencaster",
+      "repository": "https://github.com/arcacomputer/opencaster",
+      "role": "maintainer",
+      "license": "AGPL-3.0",
+      "status": "maintained"
+    },
     {
       "name": "ClawFix",
       "repository": "https://github.com/arcabotai/clawfix",
@@ -532,6 +539,7 @@
     "repositoryScope": "current public repositories owned by the two accounts and organization"
   },
   "organization": {
+    "name": "Arca Computer, Inc.",
     "login": "arcacomputer",
     "url": "https://github.com/arcacomputer"
   },

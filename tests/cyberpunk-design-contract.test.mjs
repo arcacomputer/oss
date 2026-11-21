@@ -4,9 +4,9 @@ import { readFileSync } from 'node:fs';
 
 const read = path => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 const css = read('src/styles/global.css');
-const explorer = read('src/styles/contribution-explorer.css');
+const showcase = read('src/styles/showcase.css');
 const token = name => {
-  const match = css.match(new RegExp(`--${name}:\\s*(#[0-9a-f]{6})`, 'i'));
+  const match = (css + showcase).match(new RegExp(`--${name}:\\s*(#[0-9a-f]{6})`, 'i'));
   assert.ok(match, `Missing literal color token --${name}`);
   return match[1];
 };
@@ -22,9 +22,7 @@ const contrast = (a, b) => {
   return (high + 0.05) / (low + 0.05);
 };
 
-test('dark signal palette keeps small text WCAG AA on every panel', () => {
-  assert.equal(token('bg'), '#080c14');
-  assert.equal(token('signal'), '#57e6ff');
+test('text clears WCAG AA on dark records and light showcase sections', () => {
   for (const foreground of ['text', 'muted', 'signal', 'violet', 'success', 'warning', 'closed']) {
     for (const surface of ['bg', 'surface', 'raised']) {
       const ratio = contrast(token(foreground), token(surface));
@@ -32,38 +30,38 @@ test('dark signal palette keeps small text WCAG AA on every panel', () => {
     }
   }
   assert.ok(contrast(token('bg'), token('signal')) >= 4.5);
+  for (const foreground of ['print', 'print-muted']) {
+    assert.ok(contrast(token(foreground), token('sheet')) >= 4.5);
+  }
   assert.match(css, /color-scheme:\s*dark/);
-  assert.doesNotMatch(css + explorer, /#(?:f6f6f0|f6f5ef|173b2f|d5f478)\b|Georgia|Times New Roman|--(?:paper|forest|sage)\b/i);
 });
 
-test('source-index opening is structural, preserving the static evidence path', () => {
+test('selected work and the full archive retain distinct static destinations', () => {
   const home = read('src/react-pages/Home.tsx');
-  assert.match(home, /className="hero-line-signal hero-line"/);
-  assert.match(home, /<span className="hero-line">Built here\.<\/span>/);
-  assert.doesNotMatch(home, /<em>|button-lime|var\(--lime\)/);
+  const archive = read('src/react-pages/Records.tsx');
+  const chrome = read('src/components/SiteChrome.tsx');
   for (const id of ['content', 'projects', 'contributions', 'current-work', 'past-work', 'records', 'activity', 'ledger', 'about']) {
-    assert.ok(home.includes(`id="${id}"`), `Missing original destination #${id}`);
+    assert.ok((home + chrome).includes(`id="${id}"`), `Missing original destination #${id}`);
   }
-  assert.match(home, /href="#records" data-section-link="records"/);
-  assert.match(read('src/scripts/interactions.ts'), /const sections = \["projects", "contributions", "records"\]/);
-  assert.match(home, /<details className="history-records">/);
-  assert.match(home, /<ReceiptEvidence event=\{event\} \/>/);
-  assert.match(home, /\{explorer\}/);
-  assert.match(home, /<noscript>/);
+  assert.ok(home.includes('selectedContributions') && home.includes('selectedSoftware'));
+  assert.match(chrome, /href="\/records\/"/);
+  assert.match(archive, /<details className="history-records">/);
+  assert.match(archive, /<ReceiptEvidence event=\{event\} \/>/);
+  assert.match(archive, /\{explorer\}/);
+  assert.match(archive, /<noscript>/);
 });
 
-test('social assets and browser chrome share the source-index identity', () => {
+test('the site identifies the company by name in the masthead and social artwork', () => {
   const og = read('public/og.svg');
-  const icon = read('public/icon.svg');
   const layout = read('src/layouts/BaseLayout.astro');
-  assert.ok(og.includes('width="1200" height="630"'), 'OG uses the real social-card canvas');
-  for (const svg of [og, icon]) {
-    assert.ok(svg.includes(token('bg')), 'Asset shares the document background');
-    assert.ok(svg.includes(token('signal')), 'Asset shares the signal color');
-    assert.ok(!/Georgia|#173b2f|#f6f5ef|#d5f478|<animate|<script|https?:\/\/(?!www\.w3\.org)/i.test(svg), 'No legacy palette, external dependencies or motion');
-  }
-  assert.ok(og.includes('Built here.') && og.includes('upstream.'), 'OG matches the visible hero');
-  assert.ok(!/\b\d+ (projects|PRs|merges|contributions)\b/.test(og), 'No frozen mutable counts');
-  assert.ok(layout.includes('name="theme-color" content="#080c14"'), 'Browser chrome is dark');
-  assert.ok(layout.includes('name="color-scheme" content="dark"'), 'Native document controls are dark');
+  const chrome = read('src/components/SiteChrome.tsx');
+  assert.ok(og.includes('width="1200" height="630"'));
+  assert.ok(og.includes(token('bg')) && og.includes(token('signal')));
+  assert.ok(og.includes('Arca Computer, Inc.') && og.includes('Open-source contributions'));
+  assert.doesNotMatch(og, /<path|<image|<animate|<script/);
+  assert.doesNotMatch(chrome, /<svg|<img|<Mark/);
+  assert.ok(layout.includes('href="data:,"'));
+  assert.ok(!/\b\d+ (projects|PRs|merges|contributions)\b/.test(og));
+  assert.ok(layout.includes(`name="theme-color" content="${token('bg')}"`));
+  assert.ok(layout.includes('name="color-scheme" content="dark"'));
 });

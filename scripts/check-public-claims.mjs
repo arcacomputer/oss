@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { validateContributionClaims } from "./contribution-claims.mjs";
 
 const licensed = [
+  { repository: "arcacomputer/opencaster", spdx: "AGPL-3.0" },
   { repository: "arcabotai/clawfix", spdx: "MIT" },
   { repository: "arcabotai/hypersnapdoctor", spdx: "MIT" },
   { repository: "arcabotai/a3stack", spdx: "MIT" },

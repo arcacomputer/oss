@@ -21,9 +21,10 @@ test('uses Astro static output and Cloudflare Workers Static Assets', () => {
   assert.equal(wrangler.assets.run_worker_first, true);
 });
 
-test('preserves the single-page rendering and public assets', () => {
+test('renders the showcase and public archive as static pages', () => {
   assert.ok(existsSync(join(root, 'src/pages/index.astro')));
-  assert.match(read('src/layouts/BaseLayout.astro'), /Arca OSS — Tools, contributions &amp; open-source work/);
+  assert.ok(existsSync(join(root, 'src/pages/records.astro')));
+  assert.ok(read('lib/site.ts').includes('Arca Computer, Inc.'));
   const css = read('src/styles/global.css');
   assert.match(css, /--sans:\s*"DM Sans",\s*Arial,\s*Helvetica,\s*sans-serif/);
   assert.match(css, /src:\s*url\("\/fonts\/dm-sans-latin\.woff2"\)/);
@@ -55,14 +56,15 @@ test('prevents Cloudflare beacon injection without weakening CSP', async () => {
 });
 
 test('keeps accessible mobile navigation and expandable public records', () => {
-  const home = read('src/react-pages/Home.tsx');
+  const records = read('src/react-pages/Records.tsx');
+  const chrome = read('src/components/SiteChrome.tsx');
   const css = read('src/styles/global.css');
-  assert.match(home, /<details className="mobile-section-nav"/);
-  assert.match(home, /ledger\.pullRequests\.slice\(\s*0,\s*LEDGER_INITIAL_LIMIT\s*,?\s*\)/);
-  assert.match(home, /<details className="ledger-more"/);
-  assert.match(home, /className="section-return"/);
-  assert.match(home, /id="past-work"/);
-  assert.match(home, /id="current-work"/);
+  assert.match(chrome, /<details className="mobile-section-nav"/);
+  assert.match(records, /ledger\.pullRequests\.slice\(\s*0,\s*LEDGER_INITIAL_LIMIT\s*,?\s*\)/);
+  assert.match(records, /<details className="ledger-more"/);
+  assert.match(chrome, /className="section-return"/);
+  assert.match(records, /id="past-work"/);
+  assert.match(records, /id="current-work"/);
   const navigationHeight = css.match(/\.mobile-section-nav\s*(?:>\s*)?summary[^}]*min-height:\s*(\d+)px/s)?.[1];
   const ledgerHeight = css.match(/\.ledger-more\s*>\s*summary[^}]*min-height:\s*(\d+)px/s)?.[1];
   assert.ok(Number(navigationHeight) >= 44, 'mobile navigation retains its minimum touch target');
@@ -89,4 +91,21 @@ test('scheduled receipt refreshes dispatch a production deploy when data changes
     assert.match(workflow, /changed=true/);
     assert.match(workflow, /gh workflow run deploy-cloudflare\.yml --ref main/);
   }
+});
+
+test('serves the public records page with its query parameters on Cloudflare', async () => {
+  const { default: worker } = await import('../src/worker.mjs');
+  const seen = [];
+  const env = { ASSETS: { fetch(request) {
+    seen.push(new URL(request.url));
+    return new Response('records', { headers: { 'Content-Type': 'text/html' } });
+  } } };
+  const redirect = await worker.fetch(new Request('https://oss.arcabot.ai/records?ce-role=author'), env);
+  assert.equal(redirect.status, 308);
+  assert.equal(redirect.headers.get('location'), 'https://oss.arcabot.ai/records/?ce-role=author');
+  const response = await worker.fetch(new Request(redirect.headers.get('location')), env);
+  assert.equal(await response.text(), 'records');
+  assert.equal(seen[0].pathname, '/records/index.html');
+  assert.equal(seen[0].search, '?ce-role=author');
+  assert.match(response.headers.get('cache-control'), /no-transform/);
 });
