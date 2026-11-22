@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "checkedAt": "2026-11-21T19:16:13Z",
+  "checkedAt": "2026-11-22T06:48:03Z",
   "sources": [
     {
       "login": "felirami",
       "type": "user",
-      "publicRepositoryCount": 80
+      "publicRepositoryCount": 81
     },
     {
       "login": "arcabotai",
@@ -1306,6 +1306,20 @@
       "createdAt": "2026-06-10T09:56:52Z",
       "license": null,
       "licenseUrl": null
+    },
+    {
+      "name": "cerebras-video-demos",
+      "repository": "felirami/cerebras-video-demos",
+      "url": "https://github.com/felirami/cerebras-video-demos",
+      "owner": "felirami",
+      "description": "Make on-brand Cerebras demo videos (Cerebras vs GPU side by side) from a storyboard or an agent's run. Kimi K3.1 Pro hackathon kit.",
+      "visibility": "public",
+      "fork": true,
+      "archived": false,
+      "defaultBranch": "main",
+      "createdAt": "2026-11-21T19:19:31Z",
+      "license": "Apache-2.0",
+      "licenseUrl": "https://api.github.com/licenses/apache-2.0"
     },
     {
       "name": "chatgpt-bj",
