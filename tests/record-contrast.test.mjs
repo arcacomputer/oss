@@ -17,8 +17,7 @@ test('small public-record label clears WCAG AA against its section background', 
     return token ? css.match(new RegExp(`${token}:\\s*(#[\\da-f]{6})`, 'i'))?.[1] : undefined;
   };
   const foreground = resolveHex(
-    css.match(/\.records-heading \.eyebrow\s*\{[^}]*color:\s*([^;]+)/i)?.[1]?.trim()
-    || css.match(/\.eyebrow\s*\{[^}]*color:\s*([^;]+)/i)?.[1]?.trim(),
+    css.match(/\.record-project-meta\s*\{[^}]*color:\s*([^;]+)/i)?.[1]?.trim(),
   );
   const background = resolveHex(css.match(/\.records-section\s*\{[^}]*background:\s*([^;]+)/i)?.[1]?.trim());
   assert.ok(foreground && background, 'record label and background resolve to explicit color tokens');

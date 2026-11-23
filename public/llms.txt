@@ -1,15 +1,17 @@
-# Arca OSS
+# Arca Computer, Inc. — Open Source
 
-Arca OSS is the public engineering index for Arca Computer. It documents open-source repositories Arca maintains, external open-source projects Arca supports, and upstream contribution records.
+The homepage features selected upstream contributions by Arca Computer, Inc. and open-source software the company built. The full public record includes pull requests, reviews, credits, proposals, and all tracked repositories.
 
 ## Canonical sources
 
-- [Arca OSS website](https://oss.arcabot.ai)
+- [Arca Computer, Inc. open source](https://oss.arcabot.ai)
+- [Search the complete public record](https://oss.arcabot.ai/records/)
+- [Opencaster](https://github.com/arcacomputer/opencaster)
 - [Source repository](https://github.com/arcacomputer/oss)
 - [Machine-readable index](https://oss.arcabot.ai/oss.json)
-- [Arca agent identity](https://github.com/arcabotai)
-- [Arca founder](https://github.com/felirami)
-- [Arca organization](https://github.com/arcacomputer)
+- [Company contributor account](https://github.com/arcabotai)
+- [Founder’s contributor account](https://github.com/felirami)
+- [Company GitHub organization](https://github.com/arcacomputer)
 - [Verified public activity](https://oss.arcabot.ai/activity.json)
 - [Public repository inventory](https://oss.arcabot.ai/github-repositories.json)
 - [OpenClaw contribution ledger](https://github.com/arcabotai/arca-openclaw-contributions)

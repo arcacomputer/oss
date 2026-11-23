@@ -24,6 +24,7 @@ export default function ContributionExplorer({ records }: { records: ExplorerRec
   const filtered = Object.keys(emptyExplorerState).some(
     key => state[key as keyof ExplorerState] !== emptyExplorerState[key as keyof ExplorerState],
   );
+  const activeFilterCount = [state.project, state.outcome, state.role].filter(value => value !== "all").length;
   const focusSearch = () => form.current?.querySelector<HTMLInputElement>("input")?.focus();
 
   useEffect(() => {
@@ -57,8 +58,9 @@ export default function ContributionExplorer({ records }: { records: ExplorerRec
       const count = card.querySelector<HTMLElement>("[data-explorer-receipt-count]");
       if (count) {
         count.dataset.originalCount ??= count.textContent || "";
+        const matching = matches.filter(record => record.project === card.dataset.explorerProject).length;
         count.textContent = filtered
-          ? `${matches.filter(record => record.project === card.dataset.explorerProject).length} matching records`
+          ? `${matching} matching ${matching === 1 ? "record" : "records"}`
           : count.dataset.originalCount;
       }
       // Additional curated links are context, not independently counted receipts.
@@ -88,13 +90,6 @@ export default function ContributionExplorer({ records }: { records: ExplorerRec
 
   return (
     <div className="contribution-explorer" hidden={!ready}>
-      <div className="explorer-heading">
-        <div>
-          <p className="eyebrow">FIND THE RECEIPT</p>
-          <h4>Explore past contributions</h4>
-        </div>
-        <a className="explorer-share" href={shareUrl}>Link to these results</a>
-      </div>
       <form ref={form} onSubmit={event => { event.preventDefault(); apply({ ...state, q: draft }); }}>
         <div className="explorer-search-row">
           <div className="explorer-search-field">
@@ -112,37 +107,43 @@ export default function ContributionExplorer({ records }: { records: ExplorerRec
           </div>
           <Button type="submit" className="button button-primary">Search records</Button>
         </div>
-        <p id="explorer-search-help" className="explorer-help">Press Enter or Search records to apply text. Filters apply immediately.</p>
-        <div className="explorer-filters">
-          <label htmlFor="contribution-project">Project
-            <select id="contribution-project" value={state.project}
-              onChange={event => apply({ ...state, q: draft, project: event.target.value })}>
-              <option value="all">All projects</option>
-              {projects.map(([repository, name]) => <option key={repository} value={repository}>{name}</option>)}
-            </select>
-          </label>
-          <label htmlFor="contribution-outcome">Outcome
-            <select id="contribution-outcome" value={state.outcome}
-              onChange={event => apply({ ...state, q: draft, outcome: event.target.value })}>
-              <option value="all">All outcomes</option>
-              {Object.entries(explorerOutcomes).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-            </select>
-          </label>
-          <label htmlFor="contribution-role">Arca’s role
-            <select id="contribution-role" value={state.role}
-              onChange={event => apply({ ...state, q: draft, role: event.target.value })}>
-              <option value="all">All roles</option>
-              {Object.entries(explorerRoles).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-            </select>
-          </label>
-          <Button type="button" className="button button-secondary explorer-reset" onClick={reset}>Reset filters</Button>
-        </div>
+        <p id="explorer-search-help" className="explorer-help">Press Enter to search. Project, outcome, and role filters apply immediately.</p>
+        <details className="explorer-options">
+          <summary>
+            Filter records
+            <span>{activeFilterCount ? `${activeFilterCount} active` : "Project, outcome, or role"}</span>
+          </summary>
+          <div className="explorer-filters">
+            <label htmlFor="contribution-project">Project
+              <select id="contribution-project" value={state.project}
+                onChange={event => apply({ ...state, q: draft, project: event.target.value })}>
+                <option value="all">All projects</option>
+                {projects.map(([repository, name]) => <option key={repository} value={repository}>{name}</option>)}
+              </select>
+            </label>
+            <label htmlFor="contribution-outcome">Outcome
+              <select id="contribution-outcome" value={state.outcome}
+                onChange={event => apply({ ...state, q: draft, outcome: event.target.value })}>
+                <option value="all">All outcomes</option>
+                {Object.entries(explorerOutcomes).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+              </select>
+            </label>
+            <label htmlFor="contribution-role">Our role
+              <select id="contribution-role" value={state.role}
+                onChange={event => apply({ ...state, q: draft, role: event.target.value })}>
+                <option value="all">All roles</option>
+                {Object.entries(explorerRoles).map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+              </select>
+            </label>
+            <Button type="button" className="button button-secondary explorer-reset" onClick={reset}>Reset filters</Button>
+          </div>
+        </details>
       </form>
       <div className="explorer-result-bar">
         <p role="status" aria-live="polite" aria-atomic="true">
           <strong>{matches.length}</strong> of {records.length} records · {projectCount} {projectCount === 1 ? "project" : "projects"}
         </p>
-        <span>Records are evidence, not additional contributions.</span>
+        <a className="explorer-share" href={`${shareUrl.split("#")[0]}#past-work`}>Link to these results</a>
       </div>
       {matches.length === 0 ? (
         <div className="explorer-empty">

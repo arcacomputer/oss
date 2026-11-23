@@ -10,9 +10,13 @@ function preserveHtml(response) {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.pathname === '/') {
+    if (url.pathname === '/records') {
+      url.pathname = '/records/';
+      return Response.redirect(url, 308);
+    }
+    if (url.pathname === '/' || url.pathname === '/records/') {
       const assetUrl = new URL(url);
-      assetUrl.pathname = '/index.html';
+      assetUrl.pathname += 'index.html';
       return preserveHtml(await env.ASSETS.fetch(new Request(assetUrl, request)));
     }
     return preserveHtml(await env.ASSETS.fetch(request));

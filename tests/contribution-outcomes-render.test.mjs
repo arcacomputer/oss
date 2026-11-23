@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import test from 'node:test';
+import { existsSync } from 'node:fs';
 import ts from 'typescript';
 import React from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
@@ -17,7 +18,10 @@ async function moduleFor(path) {
     }
   }
   for (const match of [...source.matchAll(/from "(@\/[^\"]+|\.\/presentation)"/g)]) {
-    const dependency = match[1] === './presentation' ? 'lib/presentation.ts' : match[1].endsWith('.mjs') ? match[1].slice(2) : `${match[1].slice(2)}${match[1].includes('/Home') || match[1].includes('/GitHubTracking') ? '.tsx' : '.ts'}`;
+    const base = match[1] === './presentation' ? 'lib/presentation' : match[1].slice(2);
+    const dependency = base.endsWith('.mjs') ? base : [`${base}.ts`, `${base}.tsx`]
+      .find(candidate => existsSync(new URL(`../${candidate}`, import.meta.url)));
+    assert.ok(dependency, `Cannot resolve ${match[1]}`);
     source = source.replaceAll(`from "${match[1]}"`, `from "${await moduleFor(dependency)}"`);
   }
   let output = ts.transpileModule(source, { compilerOptions: { module:ts.ModuleKind.ESNext, target:ts.ScriptTarget.ES2022, jsx:ts.JsxEmit.ReactJSX } }).outputText;
@@ -28,8 +32,8 @@ async function moduleFor(path) {
 }
 const awaitedJson = {};
 for (const name of ['activity.json','openclaw-prs.json','oss.json','github-repositories.json']) awaitedJson[name] = await read(`public/${name}`);
-const { default: Home } = await import(await moduleFor('src/react-pages/Home.tsx'));
-const html = renderToStaticMarkup(React.createElement(Home));
+const { default: Records } = await import(await moduleFor('src/react-pages/Records.tsx'));
+const html = renderToStaticMarkup(React.createElement(Records));
 const rows = [...html.matchAll(/<li class="receipt"[^>]*>([\s\S]*?)<\/li>/g)].map(m=>m[1]);
 const row = url => rows.find(r=>r.includes(`href="${url}"`));
 

@@ -1,32 +1,42 @@
 ---
 import '@/src/styles/global.css';
+import { companyName } from '@/lib/site';
+
+interface Props { title?: string; path?: string; description?: string; }
+const {
+  title = `Open-source contributions | ${companyName}`,
+  path = '/',
+  description = 'Selected upstream contributions from Arca Computer, Inc., followed by the open-source software we built.',
+} = Astro.props;
+const canonical = path === '/' ? 'https://oss.arcabot.ai' : new URL(path, Astro.site).href;
+const socialImageAlt = 'Arca Computer, Inc. — Open-source contributions and selected software.';
 ---
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <meta name="theme-color" content="#080c14" />
+    <meta name="theme-color" content="#101c1a" />
     <meta name="color-scheme" content="dark" />
-    <title>Arca OSS — Tools, contributions &amp; open-source work</title>
-    <meta name="description" content="Explore open-source software built by Arca and our verified contributions to other projects, with current work, past results, and public evidence." />
-    <link rel="canonical" href="https://oss.arcabot.ai" />
-    <link rel="icon" href="/icon.svg" sizes="any" type="image/svg+xml" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="data:," />
     <link rel="alternate" type="application/json" href="https://oss.arcabot.ai/oss.json" />
-    <meta property="og:title" content="Arca OSS — Tools, contributions &amp; open-source work" />
-    <meta property="og:description" content="Arca builds open-source tools for developers and operators, contributes fixes upstream, and publishes practical research." />
-    <meta property="og:url" content="https://oss.arcabot.ai" />
-    <meta property="og:site_name" content="Arca OSS" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={companyName} />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://oss.arcabot.ai/og.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Arca OSS — Built here. Improved upstream. Software, contributions, public records." />
+    <meta property="og:image:alt" content={socialImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Arca OSS — Tools, contributions &amp; open-source work" />
-    <meta name="twitter:description" content="Arca builds open-source tools for developers and operators, contributes fixes upstream, and publishes practical research." />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="https://oss.arcabot.ai/og.png" />
-    <meta name="twitter:image:alt" content="Arca OSS — Built here. Improved upstream. Software, contributions, public records." />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
   </head>
   <body><slot /></body>
 </html>
